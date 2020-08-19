@@ -22,27 +22,20 @@ function Login() {
     const imageHeight = new Animated.Value(IMAGE_HEIGHT)
 
     useEffect(() => {
-        if(Platform.OS === 'ios'){
-            Keyboard.addListener('keyboardWillShow', keyboardWillShow);
-            Keyboard.addListener('keyboardWillHide', keyboardWillHide);
+        const typeOfPlatform = Platform.OS === 'ios'
+        const typeOfShow = typeOfPlatform ?  'keyboardWillShow' : 'keyboardDidShow'
+        const typeOfHide = typeOfPlatform ? 'keyboardWillHide' : 'keyboardDidHide'
+
+            Keyboard.addListener(typeOfShow, keyboardWillShow);
+            Keyboard.addListener(typeOfHide, keyboardWillHide);
 
             return () => {
-                 Keyboard.removeListener('keyboardWillShow', keyboardWillShow);
-                 Keyboard.removeListener('keyboardWillHide', keyboardWillHide);
-            } 
-        }else{
-            Keyboard.addListener('keyboardDidShow', keyboardWillShow);
-            Keyboard.addListener('keyboardDidHide', keyboardWillHide);
-
-            return () => {
-                 Keyboard.removeListener('keyboardDidShow', keyboardWillShow);
-                 Keyboard.removeListener('keyboardDidHide', keyboardWillHide);
-            } 
-        }
+                 Keyboard.removeListener(typeOfShow, keyboardWillShow);
+                 Keyboard.removeListener(typeOfHide, keyboardWillHide);
+            }
     }, [])
 
     const keyboardWillShow = (event) => {
-        console.log('Opened')
         Animated.timing(imageHeight, {
           duration: event.duration,
           toValue: IMAGE_HEIGHT_SMALL,
@@ -51,7 +44,6 @@ function Login() {
       };
     
     const keyboardWillHide = (event) => {
-        console.log('Closed')
         Animated.timing(imageHeight, {
           duration: event.duration,
           toValue: IMAGE_HEIGHT,
@@ -65,10 +57,10 @@ function Login() {
 
     return(
         <Container>
-                <Animated.Image
-                    source={require('../../assets/Cko_logo.png')}
-                    style={{height: imageHeight , width: 200 }}
-                />
+            <Animated.Image
+                source={require('../../assets/Cko_logo.png')}
+                style={{height: imageHeight , width: 200 }}
+            />
                 
             <Form>  
                 <FormInput
@@ -78,6 +70,7 @@ function Login() {
                     autoCorrect={false}
                     autoCapitalize="none"
                     returnKeyType="next"
+                    blurOnSubmit={false}
                     onChangeText={setEmail}
                     onSubmitEditing={() => passwordRef.current.focus()}
                     value={email}
@@ -97,6 +90,7 @@ function Login() {
                 <SubmitButton onPress={handleSubmit}>
                     Acessar
                 </SubmitButton>
+
             </Form>
 
             <SignLink>
