@@ -4,7 +4,7 @@ export const Container = styled.SafeAreaView`
     flex: 1;
     justify-content: space-around;
     align-items: center;
-    padding: 10px 45px;
+    padding: 10px 30px;
 `;
 
 export const TextTitle = styled.Text`
@@ -15,10 +15,10 @@ export const CustomView = styled.View`
     background: #303f9f;
     border-radius: 60px;
     height: 50px;
-    width: 100%;
+    width: 90%;
+    flex-direction: row;
     justify-content: center;
     align-items: center;
-    margin-top: 20px;
 `
 
 export const LoadingView = styled.View`
@@ -28,7 +28,6 @@ export const LoadingView = styled.View`
 
 export const ImageView = styled.View`
     height: 100px;
-    width: 100%;
     flex-direction: row;
     align-items: center;
     justify-content: center;
