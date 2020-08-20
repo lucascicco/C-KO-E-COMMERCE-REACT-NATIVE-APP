@@ -1,13 +1,6 @@
 [     
     {
       "id_uf": 1,
-      "sigla": "Estado",
-      "nome": "Selecione o estado",
-      "codigo": 12,
-      "id_pais": 1
-    },
-    {
-      "id_uf": 1,
       "sigla": "AC",
       "nome": "Acre",
       "codigo": 12,

@@ -1,7 +1,8 @@
 import React, { useRef, useState, useEffect } from 'react';
-import { Picker , Modal , View, Animated, Keyboard, Platform, StyleSheet} from 'react-native';
-import ButtonType2 from '../../components/ButtonType2';
+import { Animated, Keyboard, Platform, StyleSheet } from 'react-native';
 import BrazilianStates from '../../utils/BrazilStates.json';
+import PickerAndroid from '../../components/Picker/picker.android';
+import PickerIos from '../../components/Picker/picker.ios';
 
 import { 
     Container, 
@@ -118,7 +119,7 @@ function LocationPage(){
                          placeholder="País"
                          autoCorrect={true}
                          returnKeyType="next"
-                         style={{ width: '20%' }}
+                         style={{ width: '18%'}}
                          blurOnSubmit={false}
                          value={Country}
                          onChangeText={setCountry}
@@ -126,13 +127,33 @@ function LocationPage(){
                          editable={false}
                      />                         
 
-             
-                     <ButtonType2 
-                        text={Label}
-                        icon="select-arrows"
-                        style={{width: '27%', marginRight: 10}}
-                        onPress={() => setModalVisible(true)}
-                    />
+                    {Platform.OS === 'ios' ? (
+                            <PickerIos 
+                                text={Label}
+                                onPressButton={() => setModalVisible(true)}
+                                visible={modalVisible}
+                                data={BrazilianStates}
+                                selectedValue={State}
+                                onValueChange={itemValue => {
+                                    setState(itemValue)
+                                    setLabel(itemValue)
+                                }}
+                                onPressSubmit={
+                                    () => {
+                                        CityRef.current.focus()
+                                        setModalVisible(false)
+                                    }
+                                }
+                            />
+                    ) : (
+                            <PickerAndroid 
+                                data={BrazilianStates}
+                                selectedValue={State}
+                                onValueChange={itemValue => {
+                                    setState(itemValue)
+                                }}
+                            />
+                    )}
     
                      <FormInput
                          placeholder="Cidade"
@@ -201,42 +222,6 @@ function LocationPage(){
                     Pular
                 </SubmitButton>
             </Form>
-
-                
-            <Modal
-                animationType="slide"
-                visible={modalVisible}
-            >   
-                <View style={{ flex: 1, justifyContent: 'center', padding: '5%'}}>     
-                    <Picker
-                        selectedValue={State}
-                        mode="dialog"
-                        onValueChange={(itemValue, itemIndex) => {
-                                setState(itemValue)
-                                setLabel(itemValue)
-                            }}
-                        >  
-                        {
-                            BrazilianStates.map((item) => {
-                                return <Picker.Item 
-                                    label={item.nome} 
-                                    value={item.sigla}
-                                    key={item.sigla}
-                                />
-                            })
-                        }
-                    </Picker>  
-
-                    <SubmitButton onPress={() => {
-                        CityRef.current.focus()
-                        setModalVisible(false)
-                    }}>
-                        Selecionar
-                    </SubmitButton>
-                
-                </View>    
-            </Modal>
-
         </Container>
     )
 }
