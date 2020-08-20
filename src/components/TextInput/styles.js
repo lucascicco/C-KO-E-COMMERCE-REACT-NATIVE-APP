@@ -14,6 +14,6 @@ export const TextInputType1 = styled.TextInput.attrs({
 })`
   flex: 1;
   color: #fff;
-  font-size: 15px;
+  font-size: 18px;
   margin-left: 10px;
 `;

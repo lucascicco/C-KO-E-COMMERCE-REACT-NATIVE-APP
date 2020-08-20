@@ -7,6 +7,12 @@ export const Container = styled.View`
 `;
 
 
+export const MainContainer = styled.View`
+    width: 29%;
+    margin-right: 10px;
+`
+
+
 export const ContainerAndroid = styled.View`
     width: 29%;
     background: #546e7a;

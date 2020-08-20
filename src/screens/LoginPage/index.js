@@ -95,7 +95,7 @@ function Login() {
 
             <SignLink>
                 <SignLinkText>
-                    <Strong> Primeiro acesso? </Strong> Clique aqui
+                    <Strong>Primeiro acesso? </Strong> Clique aqui
                 </SignLinkText>
             </SignLink>
 

@@ -1,12 +1,12 @@
 import React from 'react';
 import { Picker, Modal, View } from 'react-native';
-import { Container } from './styles';
+import { MainContainer, Container } from './styles';
 import ButtonType2 from '../../components/ButtonType2';
 import Button from '../ButtonType1';
 
 function PickerCustom({data, visible, onPressSubmit, onPressButton, text, ...rest}){
     return(
-        <View style={{ width:'27%', marginRight: 10}}>
+        <MainContainer>
             <ButtonType2 
                 onPress={onPressButton}
                 text={text}
@@ -43,7 +43,7 @@ function PickerCustom({data, visible, onPressSubmit, onPressButton, text, ...res
                  </Container>    
             </Modal>
 
-        </View>
+        </MainContainer>
     )
 }
 

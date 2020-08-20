@@ -20,12 +20,13 @@ function LocationPage(){
     const AdNumberRef = useRef()
     const PostcodeRef = useRef()
 
+    const typeOfPlatform = Platform.OS === 'ios'
 
     const IconSize = new Animated.Value(70) 
     const ViewSize = new Animated.Value(100)
     const TextSize = new Animated.Value(35)
 
-    const [Country, setCountry] = useState('Brasil')
+    const [Country, setCountry] = useState('BR')
     const [State, setState] = useState('')
     const [City, setCity] = useState('')
     const [Neighborhood, setNeighborhood] = useState('')
@@ -41,7 +42,6 @@ function LocationPage(){
     }
 
     useEffect(() => {
-        const typeOfPlatform = Platform.OS === 'ios'
         const typeOfShow = typeOfPlatform ?  'keyboardWillShow' : 'keyboardDidShow'
         const typeOfHide = typeOfPlatform ? 'keyboardWillHide' : 'keyboardDidHide'
 
@@ -127,7 +127,7 @@ function LocationPage(){
                          editable={false}
                      />                         
 
-                    {Platform.OS === 'ios' ? (
+                    {typeOfPlatform ? (
                             <PickerIos 
                                 text={Label}
                                 onPressButton={() => setModalVisible(true)}
@@ -181,6 +181,7 @@ function LocationPage(){
                     />
                     <FormInput
                         placeholder="CEP"
+                        keyboardType="number-pad"
                         returnKeyType="next"
                         style={{ width: '47%'}}
                         blurOnSubmit={false}
