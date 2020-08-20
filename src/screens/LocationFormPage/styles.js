@@ -48,15 +48,3 @@ export const Strong = styled.Text`
 
 export const IMAGE_HEIGHT = 200
 export const IMAGE_HEIGHT_SMALL = 100
-
-export const TitleView = styled.View`
-    height: 100px;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
-`
-export const TextTitle = styled.Text`
-    font-size: 35px;
-    color: black;
-    font-weight: bold;
-`
