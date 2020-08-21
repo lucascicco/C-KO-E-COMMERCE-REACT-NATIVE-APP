@@ -3,6 +3,8 @@ import { Animated, Keyboard, Platform, StyleSheet } from 'react-native';
 import BrazilianStates from '../../utils/BrazilStates.json';
 import PickerAndroid from '../../components/Picker/picker.android';
 import PickerIos from '../../components/Picker/picker.ios';
+import InputMask from '../../components/TextInputMasked';
+
 
 import { 
     Container, 
@@ -21,6 +23,7 @@ function LocationPage(){
     const PostcodeRef = useRef()
 
     const typeOfPlatform = Platform.OS === 'ios'
+    const typeOfkeyboardType = typeOfPlatform ? 'numbers-and-punctuation' : 'numeric'
 
     const IconSize = new Animated.Value(70) 
     const ViewSize = new Animated.Value(100)
@@ -39,6 +42,18 @@ function LocationPage(){
 
     const handleSubmit = () => {
         Keyboard.dismiss()
+    }
+
+    const onChange_onlyText = (text, callback) => {
+        if (/^[a-zA-Z]+$/.test(text) || text === "") {
+            callback(text);
+        }
+    };
+
+    const onChange_onlyNumber = (text, callback) => {
+        if (/^[0-9]+$/.test(text) || text === ""){
+            callback(text);
+        }
     }
 
     useEffect(() => {
@@ -157,11 +172,12 @@ function LocationPage(){
     
                      <FormInput
                          placeholder="Cidade"
+                         maxLength={20}
                          returnKeyType="next"
                          style={{ width: '47%'}}
                          blurOnSubmit={false}
                          value={City}
-                         onChangeText={setCity}
+                         onChangeText={text => onChange_onlyText(text, setCity)}
                          ref={CityRef}
                          onSubmitEditing={() => NeighborhoodRef.current.focus()}
                      />
@@ -171,46 +187,55 @@ function LocationPage(){
                 <MultiInput>
                     <FormInput
                         placeholder="Bairro"
+                        maxLength={30}
                         returnKeyType="next"
                         style={{ width: '50%'}}
                         blurOnSubmit={false}
                         value={Neighborhood}
-                        onChangeText={setNeighborhood}
+                        onChangeText={text => onChange_onlyText(text, setNeighborhood)}
                         ref={NeighborhoodRef}
                         onSubmitEditing={() => AddressRef.current.focus()}
                     />
-                    <FormInput
+
+                    <InputMask
                         placeholder="CEP"
-                        keyboardType="number-pad"
                         returnKeyType="next"
                         style={{ width: '47%'}}
                         blurOnSubmit={false}
-                        value={Address}
-                        onChangeText={setAddress}
-                        ref={AddressRef}
-                        onSubmitEditing={() => AdNumberRef.current.focus()}
+                        keyboardType={typeOfkeyboardType}
+                        value={Postcode}
+                        onChangeText={setPostcode}
+                        ref={PostcodeRef}
+                        onSubmitEditing={() => AddressRef.current.focus()}
+                        type={'zip-code'}
                     />
+                    
                 </MultiInput>
             
                 <MultiInput>
+                
                    <FormInput
-                        placeholder="Endereço"
+                        placeholder="Rua, avenida, estrada..."
+                        maxLength={70}
                         returnKeyType="next"
                         style={{ width: '75%'}}
                         blurOnSubmit={false}
-                        value={AdNumber}
-                        onChangeText={setAdNumber}
-                        ref={AdNumberRef}
-                        onSubmitEditing={() => PostcodeRef.current.focus()}
+                        value={Address}
+                        onChangeText={text => onChange_onlyText(text, setAddress)}
+                        ref={AddressRef}
+                        onSubmitEditing={() => AdNumberRef.current.focus()}
                    />
+
                    <FormInput
                         placeholder="Nº"
-                        returnKeyType="next"
+                        maxLength={5}
+                        returnKeyType="send"
+                        keyboardType={typeOfkeyboardType}
                         style={{ width: '22%' }}
                         blurOnSubmit={false}
-                        value={Postcode}
-                        ref={PostcodeRef}
-                        onChangeText={setPostcode}
+                        value={AdNumber}
+                        ref={AdNumberRef}
+                        onChangeText={number => onChange_onlyNumber(number, setAdNumber)}
                         onSubmitEditing={handleSubmit}
                    />
                 </MultiInput>

@@ -2,20 +2,22 @@ import React, { forwardRef } from 'react';
 import { MaterialIcons } from '@expo/vector-icons';
 import { StyleSheet } from 'react-native';
 import PropTypes from 'prop-types';
-import { TextInputMask } from 'react-native-masked-text';
+import { TextInputMask } from 'react-native-masked-text'
 
 import { Container } from './styles';
 
-function Input({ style, icon, ...rest }, ref) {
+function Input({ type, options, style, icon, ...rest }, ref) {
   return (
     <Container style={style}>
       {icon && <MaterialIcons name={icon} size={23} color="#fff" />}
 
       <TextInputMask 
-        {...rest}
-        ref={ref} 
-        style={styles.TextInput}
-        placeholderTextColor="#FFF"
+            {...rest}
+            ref={ref} 
+            style={styles.TextInput}
+            placeholderTextColor="#FFF"
+            type={type}
+            options={options}
       />
       
     </Container>
