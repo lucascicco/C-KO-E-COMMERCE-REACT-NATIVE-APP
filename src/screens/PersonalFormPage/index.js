@@ -1,8 +1,9 @@
 import React, { useRef, useState, useEffect } from 'react';
 import { Animated, Keyboard, Platform, StyleSheet } from 'react-native';
-import BrazilianStates from '../../utils/BrazilStates.json';
 import PickerAndroid from '../../components/Picker/picker.android';
 import PickerIos from '../../components/Picker/picker.ios';
+import MaskedInput from '../../components/TextInputMasked';
+import GenderJSON from '../../utils/Gender.json';
 
 import { 
     Container, 
@@ -12,30 +13,27 @@ import {
     MultiInput
 } from './styles';
 
-function LocationPage(){
-    const StateRef = useRef()
-    const CityRef = useRef()
-    const NeighborhoodRef = useRef()
-    const AddressRef = useRef()
-    const AdNumberRef = useRef()
-    const PostcodeRef = useRef()
+function PersonalInformation(){
+    const GenderRef = useRef()
+    const PersonalIDRef = useRef()
+    const CellphoneRef = useRef()
+    const ProfessionRef = useRef()
 
     const typeOfPlatform = Platform.OS === 'ios'
+    const typeOfkeyboardType = typeOfPlatform ? 'numbers-and-punctuation' : 'numeric'
 
     const IconSize = new Animated.Value(70) 
     const ViewSize = new Animated.Value(100)
     const TextSize = new Animated.Value(35)
 
-    const [Country, setCountry] = useState('BR')
-    const [State, setState] = useState('')
-    const [City, setCity] = useState('')
-    const [Neighborhood, setNeighborhood] = useState('')
-    const [Address, setAddress] = useState('')
-    const [AdNumber, setAdNumber] = useState('')
-    const [Postcode, setPostcode] = useState('')
-
+    const [Birthday, setBirthday] = useState('')
+    const [Gender, setGender] = useState('')
+    const [PersonalID, setPersonalID] = useState('')
+    const [Cellphone, setCellphone] = useState('')
+    const [Profession, setProfession] = useState('')
+    
     const [modalVisible, setModalVisible] = useState(false)
-    const [Label, setLabel] = useState('Estado')
+    const [LabelGender, setLabelGender] = useState('Sexo')
 
     const handleSubmit = () => {
         Keyboard.dismiss()
@@ -45,13 +43,14 @@ function LocationPage(){
         const typeOfShow = typeOfPlatform ?  'keyboardWillShow' : 'keyboardDidShow'
         const typeOfHide = typeOfPlatform ? 'keyboardWillHide' : 'keyboardDidHide'
 
-            Keyboard.addListener(typeOfShow, keyboardWillShow);
-            Keyboard.addListener(typeOfHide, keyboardWillHide);
+            Keyboard.addListener(typeOfShow, keyboardWillShow)
+            Keyboard.addListener(typeOfHide, keyboardWillHide)
 
             return () => {
-                 Keyboard.removeListener(typeOfShow, keyboardWillShow);
-                 Keyboard.removeListener(typeOfHide, keyboardWillHide);
+                 Keyboard.removeListener(typeOfShow, keyboardWillShow)
+                 Keyboard.removeListener(typeOfHide, keyboardWillHide)
             }
+
     }, [])
     
     const keyboardWillShow = (event) => {
@@ -100,7 +99,7 @@ function LocationPage(){
                 style={[styles.TitleView, { height: ViewSize }]}
             >
                 <Animated.Image 
-                    source={require('../../assets/Geolocation_icon.png')}
+                    source={require('../../assets/Information_Icon.png')}
                     style={[styles.IconView, { height: IconSize}]}
                     resizeMode="contain"
                 />    
@@ -108,110 +107,80 @@ function LocationPage(){
                 <Animated.Text 
                     style={[styles.TextTitle, { fontSize: TextSize }]}
                 >
-                    Localização
+                    Informações
                 </Animated.Text>
 
             </Animated.View>
         
             <Form>  
                 <MultiInput>
-                    <FormInput
-                         placeholder="País"
-                         autoCorrect={true}
-                         returnKeyType="next"
-                         style={{ width: '18%'}}
-                         blurOnSubmit={false}
-                         value={Country}
-                         onChangeText={setCountry}
-                         onSubmitEditing={() => StateRef.current.focus()}
-                         editable={false}
-                     />                         
-
                     {typeOfPlatform ? (
-                            <PickerIos 
-                                text={Label}
-                                onPressButton={() => setModalVisible(true)}
-                                visible={modalVisible}
-                                data={BrazilianStates}
-                                selectedValue={State}
-                                onValueChange={itemValue => {
-                                    setState(itemValue)
-                                    setLabel(itemValue)
-                                }}
-                                onPressSubmit={
-                                    () => {
-                                        CityRef.current.focus()
-                                        setModalVisible(false)
-                                    }
+                        <PickerIos 
+                            text={LabelGender}
+                            onPressButton={() => setModalVisible(true)}
+                            visible={modalVisible}
+                            data={GenderJSON}
+                            selectedValue={Gender}
+                            onValueChange={itemValue => {
+                                setGender(itemValue)
+                                setLabelGender(itemValue)
+                            }}
+                            onPressSubmit={
+                                () => {
+                                    PersonalIDRef.current.focus()
+                                    setModalVisible(false)
                                 }
-                            />
+                            }
+                        />
                     ) : (
                             <PickerAndroid 
-                                data={BrazilianStates}
-                                selectedValue={State}
+                                data={GenderJSON}
+                                selectedValue={Gender}
                                 onValueChange={itemValue => {
-                                    setState(itemValue)
+                                    setGender(itemValue)
                                 }}
                             />
-                    )}
-    
-                     <FormInput
-                         placeholder="Cidade"
-                         returnKeyType="next"
-                         style={{ width: '47%'}}
-                         blurOnSubmit={false}
-                         value={City}
-                         onChangeText={setCity}
-                         ref={CityRef}
-                         onSubmitEditing={() => NeighborhoodRef.current.focus()}
-                     />
-                    
+                    )}       
                 </MultiInput>
 
                 <MultiInput>
-                    <FormInput
-                        placeholder="Bairro"
+                    <MaskedInput
+                        type={'cpf'}
+                        placeholder="CPF"
+                        keyboardType={typeOfkeyboardType}
                         returnKeyType="next"
                         style={{ width: '50%'}}
                         blurOnSubmit={false}
-                        value={Neighborhood}
-                        onChangeText={setNeighborhood}
-                        ref={NeighborhoodRef}
-                        onSubmitEditing={() => AddressRef.current.focus()}
+                        value={PersonalID}
+                        onChangeText={setPersonalID}
+                        ref={PersonalIDRef}
+                        onSubmitEditing={() => CellphoneRef.current.focus()}
                     />
-                    <FormInput
-                        placeholder="CEP"
-                        keyboardType="number-pad"
+
+                    <MaskedInput
+                        type={'cel-phone'}
+                        placeholder="Celular"
+                        keyboardType={typeOfkeyboardType}
                         returnKeyType="next"
                         style={{ width: '47%'}}
                         blurOnSubmit={false}
-                        value={Address}
-                        onChangeText={setAddress}
-                        ref={AddressRef}
-                        onSubmitEditing={() => AdNumberRef.current.focus()}
+                        value={Cellphone}
+                        onChangeText={setCellphone}
+                        ref={CellphoneRef}
+                        onSubmitEditing={() => ProfessionRef.current.focus()}
                     />
                 </MultiInput>
             
                 <MultiInput>
                    <FormInput
                         placeholder="Endereço"
-                        returnKeyType="next"
-                        style={{ width: '75%'}}
+                        returnKeyType="send"
+                        style={{ width: '100%'}}
                         blurOnSubmit={false}
-                        value={AdNumber}
-                        onChangeText={setAdNumber}
-                        ref={AdNumberRef}
-                        onSubmitEditing={() => PostcodeRef.current.focus()}
-                   />
-                   <FormInput
-                        placeholder="Nº"
-                        returnKeyType="next"
-                        style={{ width: '22%' }}
-                        blurOnSubmit={false}
-                        value={Postcode}
-                        ref={PostcodeRef}
-                        onChangeText={setPostcode}
-                        onSubmitEditing={handleSubmit}
+                        value={Profession}
+                        onChangeText={setProfession}
+                        ref={ProfessionRef}
+                        onSubmitEditing={() => console.log('Done')}
                    />
                 </MultiInput>
 
@@ -243,4 +212,4 @@ const styles = StyleSheet.create({
     }
 }) 
 
-export default LocationPage
+export default PersonalInformation
