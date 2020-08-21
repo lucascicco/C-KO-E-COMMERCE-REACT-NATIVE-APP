@@ -14,10 +14,10 @@ import {
 } from './styles';
 
 function PersonalInformation(){
-    const GenderRef = useRef()
-    const PersonalIDRef = useRef()
-    const CellphoneRef = useRef()
-    const ProfessionRef = useRef()
+    let GenderRef 
+    let PersonalIDRef 
+    let CellphoneRef 
+    let ProfessionRef 
 
     const typeOfPlatform = Platform.OS === 'ios'
     const typeOfkeyboardType = typeOfPlatform ? 'numbers-and-punctuation' : 'numeric'
@@ -127,7 +127,7 @@ function PersonalInformation(){
                             }}
                             onPressSubmit={
                                 () => {
-                                    PersonalIDRef.current.focus()
+                                    PersonalIDRef.getElement().focus()
                                     setModalVisible(false)
                                 }
                             }
@@ -153,8 +153,8 @@ function PersonalInformation(){
                         blurOnSubmit={false}
                         value={PersonalID}
                         onChangeText={setPersonalID}
-                        ref={PersonalIDRef}
-                        onSubmitEditing={() => CellphoneRef.current.focus()}
+                        ref={(ref) => PersonalIDRef = ref}
+                        onSubmitEditing={() => CellphoneRef.getElement().focus()}
                     />
 
                     <MaskedInput
@@ -166,8 +166,8 @@ function PersonalInformation(){
                         blurOnSubmit={false}
                         value={Cellphone}
                         onChangeText={setCellphone}
-                        ref={CellphoneRef}
-                        onSubmitEditing={() => ProfessionRef.current.focus()}
+                        ref={(ref) => CellphoneRef = ref}
+                        onSubmitEditing={() => ProfessionRef.getElement().focus()}
                     />
                 </MultiInput>
             
@@ -179,7 +179,7 @@ function PersonalInformation(){
                         blurOnSubmit={false}
                         value={Profession}
                         onChangeText={setProfession}
-                        ref={ProfessionRef}
+                        ref={(ref) => ProfessionRef = ref}
                         onSubmitEditing={() => console.log('Done')}
                    />
                 </MultiInput>

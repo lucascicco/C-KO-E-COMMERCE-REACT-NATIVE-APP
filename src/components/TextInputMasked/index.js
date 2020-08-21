@@ -13,7 +13,7 @@ function Input({ type, options, style, icon, ...rest }, ref) {
 
       <TextInputMask 
             {...rest}
-            ref={ref} 
+            ref={ref}
             style={styles.TextInput}
             placeholderTextColor="#FFF"
             type={type}

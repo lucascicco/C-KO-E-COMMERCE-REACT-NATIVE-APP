@@ -20,7 +20,7 @@ function LocationPage(){
     const NeighborhoodRef = useRef()
     const AddressRef = useRef()
     const AdNumberRef = useRef()
-    const PostcodeRef = useRef()
+    let PostcodeRef
 
     const typeOfPlatform = Platform.OS === 'ios'
     const typeOfkeyboardType = typeOfPlatform ? 'numbers-and-punctuation' : 'numeric'
@@ -194,7 +194,7 @@ function LocationPage(){
                         value={Neighborhood}
                         onChangeText={text => onChange_onlyText(text, setNeighborhood)}
                         ref={NeighborhoodRef}
-                        onSubmitEditing={() => AddressRef.current.focus()}
+                        onSubmitEditing={() => PostcodeRef.getElement().focus()}
                     />
 
                     <InputMask
@@ -205,7 +205,7 @@ function LocationPage(){
                         keyboardType={typeOfkeyboardType}
                         value={Postcode}
                         onChangeText={setPostcode}
-                        ref={PostcodeRef}
+                        ref={(ref) => PostcodeRef = ref}
                         onSubmitEditing={() => AddressRef.current.focus()}
                         type={'zip-code'}
                     />
