@@ -8,12 +8,3 @@ export const Container = styled.View`
   flex-direction: row;
   align-items: center;
 `;
-
-export const TextInputType1 = styled.TextInput.attrs({
-  placeholderTextColor: '#FFF',
-})`
-  flex: 1;
-  color: #fff;
-  font-size: 18px;
-  margin-left: 7px;
-`;
