@@ -5,7 +5,7 @@ import PickerAndroid from '../../components/Picker/picker.android';
 import PickerIos from '../../components/Picker/picker.ios';
 import InputMask from '../../components/TextInputMasked';
 import { onChange_onlyText, onChange_onlyNumber } from '../../utils/RestrictInputs';
-
+import { ImageResizingEventTwo } from '../../utils/KeyboardsEvents';
 
 import { 
     Container, 
@@ -49,55 +49,15 @@ function LocationPage(){
         const typeOfShow = typeOfPlatform ?  'keyboardWillShow' : 'keyboardDidShow'
         const typeOfHide = typeOfPlatform ? 'keyboardWillHide' : 'keyboardDidHide'
 
-            Keyboard.addListener(typeOfShow, keyboardWillShow);
-            Keyboard.addListener(typeOfHide, keyboardWillHide);
+            Keyboard.addListener(typeOfShow, ImageResizingEventTwo('show', IconSize, ViewSize, TextSize));
+            Keyboard.addListener(typeOfHide, ImageResizingEventTwo('hide', IconSize, ViewSize, TextSize));
 
             return () => {
-                 Keyboard.removeListener(typeOfShow, keyboardWillShow);
-                 Keyboard.removeListener(typeOfHide, keyboardWillHide);
+                 Keyboard.removeListener(typeOfShow, ImageResizingEventTwo('show', IconSize, ViewSize, TextSize));
+                 Keyboard.removeListener(typeOfHide, ImageResizingEventTwo('hide', IconSize, ViewSize, TextSize));
             }
     }, [])
     
-    const keyboardWillShow = (event) => {
-        Animated.timing(IconSize, {
-          duration: event.duration,
-          toValue: 40,
-          useNativeDriver: false
-        }).start();
-
-        Animated.timing(ViewSize, {
-            duration: event.duration,
-            toValue: 50,
-            useNativeDriver: false
-          }).start();
-
-        Animated.timing(TextSize, {
-          duration: event.duration,
-          toValue: 30,
-          useNativeDriver: false
-        }).start();
-      };
-    
-    const keyboardWillHide = (event) => {
-        Animated.timing(IconSize, {
-          duration: event.duration,
-          toValue: 70,
-          useNativeDriver: false
-        }).start();
-
-        Animated.timing(ViewSize, {
-            duration: event.duration,
-            toValue: 100,
-            useNativeDriver: false
-          }).start();
-
-        Animated.timing(TextSize, {
-          duration: event.duration,
-          toValue: 35,
-          useNativeDriver: false
-        }).start();
-      };
-
     return(
         <Container>
             <Animated.View 

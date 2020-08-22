@@ -1,6 +1,7 @@
 import React, { useRef, useState, useEffect } from 'react';
 import { Animated, Keyboard, Platform } from 'react-native';
-import { onChange_onlyText, onChange_onlyNumber } from '../../utils/RestrictInputs';
+import { onChange_onlyText } from '../../utils/RestrictInputs';
+import { ImageResizingEventOne } from '../../utils/KeyboardsEvents';
 
 import { 
     Container, 
@@ -32,30 +33,14 @@ function CreateAccount() {
         const typeOfShow = typeOfPlatform ?  'keyboardWillShow' : 'keyboardDidShow'
         const typeOfHide = typeOfPlatform ? 'keyboardWillHide' : 'keyboardDidHide'
 
-            Keyboard.addListener(typeOfShow, keyboardWillShow);
-            Keyboard.addListener(typeOfHide, keyboardWillHide);
+            Keyboard.addListener(typeOfShow, ImageResizingEventOne(imageHeight, 0));
+            Keyboard.addListener(typeOfHide, ImageResizingEventOne(imageHeight, IMAGE_HEIGHT));
 
             return () => {
-                 Keyboard.removeListener(typeOfShow, keyboardWillShow);
-                 Keyboard.removeListener(typeOfHide, keyboardWillHide);
+                 Keyboard.removeListener(typeOfShow, ImageResizingEventOne(imageHeight, 0));
+                 Keyboard.removeListener(typeOfHide, ImageResizingEventOne(imageHeight, IMAGE_HEIGHT));
             }
     }, [])
-
-    const keyboardWillShow = (event) => {
-        Animated.timing(imageHeight, {
-          duration: event.duration,
-          toValue: 0,
-          useNativeDriver: false
-        }).start();
-      };
-    
-    const keyboardWillHide = (event) => {
-        Animated.timing(imageHeight, {
-          duration: event.duration,
-          toValue: IMAGE_HEIGHT,
-          useNativeDriver: false
-        }).start();
-      };
 
     const handleSubmit = () => {
         console.log('handle was pressed!')

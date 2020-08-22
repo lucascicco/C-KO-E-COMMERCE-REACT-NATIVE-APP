@@ -1,6 +1,6 @@
 import React, { useRef, useState, useEffect } from 'react';
 import { Animated, Keyboard, Platform } from 'react-native';
-import { KeyBoardEventType1 } from '../../utils/KeyboardsEvents';
+import { ImageResizingEventOne } from '../../utils/KeyboardsEvents';
 
 import { 
     Container, 
@@ -27,12 +27,12 @@ function Login() {
         const typeOfShow = typeOfPlatform ?  'keyboardWillShow' : 'keyboardDidShow'
         const typeOfHide = typeOfPlatform ? 'keyboardWillHide' : 'keyboardDidHide'
 
-            Keyboard.addListener(typeOfShow, KeyBoardEventType1(imageHeight, IMAGE_HEIGHT_SMALL));
-            Keyboard.addListener(typeOfHide, KeyBoardEventType1(imageHeight, IMAGE_HEIGHT));
+            Keyboard.addListener(typeOfShow, ImageResizingEventOne(imageHeight, IMAGE_HEIGHT_SMALL));
+            Keyboard.addListener(typeOfHide, ImageResizingEventOne(imageHeight, IMAGE_HEIGHT));
 
             return () => {
-                 Keyboard.removeListener(typeOfShow, KeyBoardEventType1(imageHeight, IMAGE_HEIGHT_SMALL));
-                 Keyboard.removeListener(typeOfHide, KeyBoardEventType1(imageHeight, IMAGE_HEIGHT));
+                 Keyboard.removeListener(typeOfShow, ImageResizingEventOne(imageHeight, IMAGE_HEIGHT_SMALL));
+                 Keyboard.removeListener(typeOfHide, ImageResizingEventOne(imageHeight, IMAGE_HEIGHT));
             }
     }, [])
 
