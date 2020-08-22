@@ -4,6 +4,7 @@ import PickerAndroid from '../../components/Picker/picker.android';
 import PickerIos from '../../components/Picker/picker.ios';
 import MaskedInput from '../../components/TextInputMasked';
 import GenderJSON from '../../utils/Gender.json';
+import DatePicker from '../../components/DataPicker';
 
 import { 
     Container, 
@@ -14,7 +15,6 @@ import {
 } from './styles';
 
 function PersonalInformation(){
-    let GenderRef 
     let PersonalIDRef 
     let CellphoneRef 
     let ProfessionRef 
@@ -26,7 +26,7 @@ function PersonalInformation(){
     const ViewSize = new Animated.Value(100)
     const TextSize = new Animated.Value(35)
 
-    const [Birthday, setBirthday] = useState('')
+    const [Birthday, setBirthday] = useState(new Date())
     const [Gender, setGender] = useState('')
     const [PersonalID, setPersonalID] = useState('')
     const [Cellphone, setCellphone] = useState('')
@@ -114,8 +114,16 @@ function PersonalInformation(){
         
             <Form>  
                 <MultiInput>
+
+                    <DatePicker 
+                        date={Birthday}
+                        onChange={(event, date) => setBirthday(date)}
+                    />
+
                     {typeOfPlatform ? (
                         <PickerIos 
+                            label="Selecione o gênero"
+                            value="Gênero"
                             text={LabelGender}
                             onPressButton={() => setModalVisible(true)}
                             visible={modalVisible}

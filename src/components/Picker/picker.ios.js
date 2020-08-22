@@ -1,10 +1,10 @@
 import React from 'react';
-import { Picker, Modal, View } from 'react-native';
+import { Picker, Modal } from 'react-native';
 import { MainContainer, Container } from './styles';
 import ButtonType2 from '../../components/ButtonType2';
 import Button from '../ButtonType1';
 
-function PickerCustom({data, visible, onPressSubmit, onPressButton, text, ...rest}){
+function PickerCustom({label, value, data, visible, onPressSubmit, onPressButton, text, ...rest}){
     return(
         <MainContainer>
             <ButtonType2 
@@ -22,8 +22,8 @@ function PickerCustom({data, visible, onPressSubmit, onPressButton, text, ...res
                      {...rest}
                          >  
                          <Picker.Item 
-                            label="Selecione o Estado"
-                            value="Estado"
+                            label={label}
+                            value={value}
                         />
                         
                          {

@@ -26,31 +26,25 @@ function Login() {
         const typeOfShow = typeOfPlatform ?  'keyboardWillShow' : 'keyboardDidShow'
         const typeOfHide = typeOfPlatform ? 'keyboardWillHide' : 'keyboardDidHide'
 
-            Keyboard.addListener(typeOfShow, keyboardWillShow);
-            Keyboard.addListener(typeOfHide, keyboardWillHide);
+            Keyboard.addListener(typeOfShow, KeyBoardEventType1(IMAGE_HEIGHT_SMALL));
+            Keyboard.addListener(typeOfHide, KeyBoardEventType1(IMAGE_HEIGHT));
 
             return () => {
-                 Keyboard.removeListener(typeOfShow, keyboardWillShow);
-                 Keyboard.removeListener(typeOfHide, keyboardWillHide);
+                 Keyboard.removeListener(typeOfShow, KeyBoardEventType1(IMAGE_HEIGHT_SMALL));
+                 Keyboard.removeListener(typeOfHide, KeyBoardEventType1(IMAGE_HEIGHT));
             }
     }, [])
 
-    const keyboardWillShow = (event) => {
-        Animated.timing(imageHeight, {
-          duration: event.duration,
-          toValue: IMAGE_HEIGHT_SMALL,
-          useNativeDriver: false
-        }).start();
-      };
+    const KeyBoardEventType1 = (endValue) => {
+        return (event) => {
+                Animated.timing(imageHeight, {
+                duration: event.duration,
+                toValue: endValue,
+                useNativeDriver: false
+            }).start();
+        }
+    }
     
-    const keyboardWillHide = (event) => {
-        Animated.timing(imageHeight, {
-          duration: event.duration,
-          toValue: IMAGE_HEIGHT,
-          useNativeDriver: false
-        }).start();
-      };
-
     const handleSubmit = () => {
         console.log('handle was pressed!')
     }
@@ -68,6 +62,7 @@ function Login() {
                     placeholder="Email"
                     keyboardType="email-address"
                     autoCorrect={false}
+                    maxLength={70}
                     autoCapitalize="none"
                     returnKeyType="next"
                     blurOnSubmit={false}
@@ -80,6 +75,7 @@ function Login() {
                     icon="lock-outline"
                     secureTextEntry
                     placeholder="Senha"
+                    maxLength={15}
                     returnkKeyType="send"
                     onChangeText={setPassword}
                     onSubmitEditing={handleSubmit}

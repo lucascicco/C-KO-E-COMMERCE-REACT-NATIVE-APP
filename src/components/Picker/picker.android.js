@@ -2,7 +2,7 @@ import React from 'react';
 import { Picker } from 'react-native';
 import { ContainerAndroid } from './styles';
 
-function PickerCustom({data, visible, onPress, ...rest}){
+function PickerCustom({data, ...rest}){
     return(
         <ContainerAndroid>     
             <Picker

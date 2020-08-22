@@ -4,6 +4,7 @@ import BrazilianStates from '../../utils/BrazilStates.json';
 import PickerAndroid from '../../components/Picker/picker.android';
 import PickerIos from '../../components/Picker/picker.ios';
 import InputMask from '../../components/TextInputMasked';
+import { onChange_onlyText, onChange_onlyNumber } from '../../utils/RestrictInputs';
 
 
 import { 
@@ -42,18 +43,6 @@ function LocationPage(){
 
     const handleSubmit = () => {
         Keyboard.dismiss()
-    }
-
-    const onChange_onlyText = (text, callback) => {
-        if (/^[a-zA-Z]+$/.test(text) || text === "") {
-            callback(text);
-        }
-    };
-
-    const onChange_onlyNumber = (text, callback) => {
-        if (/^[0-9]+$/.test(text) || text === ""){
-            callback(text);
-        }
     }
 
     useEffect(() => {
@@ -144,6 +133,8 @@ function LocationPage(){
 
                     {typeOfPlatform ? (
                             <PickerIos 
+                                label="Selecione o estado"
+                                value="Estado"
                                 text={Label}
                                 onPressButton={() => setModalVisible(true)}
                                 visible={modalVisible}

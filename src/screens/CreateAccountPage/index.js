@@ -1,5 +1,6 @@
 import React, { useRef, useState, useEffect } from 'react';
 import { Animated, Keyboard, Platform } from 'react-native';
+import { onChange_onlyText, onChange_onlyNumber } from '../../utils/RestrictInputs';
 
 import { 
     Container, 
@@ -73,7 +74,8 @@ function CreateAccount() {
                     placeholder="Nome completo"
                     returnkKeyType="next"
                     autoCorrect={false}
-                    onChangeText={setName}
+                    onChangeText={text => onChange_onlyText(text, setName)}
+                    maxLength={50}
                     blurOnSubmit={false}
                     onSubmitEditing={() => emailRef.current.focus()}
                     value={name}
@@ -84,6 +86,7 @@ function CreateAccount() {
                     placeholder="Email"
                     keyboardType="email-address"
                     autoCorrect={false}
+                    maxLength={70}
                     autoCapitalize="none"
                     returnKeyType="next"
                     onChangeText={setEmail}
@@ -97,6 +100,7 @@ function CreateAccount() {
                     icon="lock-outline"
                     secureTextEntry
                     placeholder="Senha"
+                    maxLength={15}
                     returnkKeyType="next"
                     onChangeText={setPassword}
                     onSubmitEditing={() => secondPasswordRef.current.focus()}
@@ -110,6 +114,7 @@ function CreateAccount() {
                     icon="lock-outline"
                     secureTextEntry
                     placeholder="Confirmar senha"
+                    maxLength={15}
                     returnkKeyType="send"
                     onChangeText={setSecondPassword}
                     onSubmitEditing={handleSubmit}
