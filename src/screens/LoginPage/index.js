@@ -1,5 +1,6 @@
 import React, { useRef, useState, useEffect } from 'react';
 import { Animated, Keyboard, Platform } from 'react-native';
+import { KeyBoardEventType1 } from '../../utils/KeyboardsEvents';
 
 import { 
     Container, 
@@ -26,25 +27,16 @@ function Login() {
         const typeOfShow = typeOfPlatform ?  'keyboardWillShow' : 'keyboardDidShow'
         const typeOfHide = typeOfPlatform ? 'keyboardWillHide' : 'keyboardDidHide'
 
-            Keyboard.addListener(typeOfShow, KeyBoardEventType1(IMAGE_HEIGHT_SMALL));
-            Keyboard.addListener(typeOfHide, KeyBoardEventType1(IMAGE_HEIGHT));
+            Keyboard.addListener(typeOfShow, KeyBoardEventType1(imageHeight, IMAGE_HEIGHT_SMALL));
+            Keyboard.addListener(typeOfHide, KeyBoardEventType1(imageHeight, IMAGE_HEIGHT));
 
             return () => {
-                 Keyboard.removeListener(typeOfShow, KeyBoardEventType1(IMAGE_HEIGHT_SMALL));
-                 Keyboard.removeListener(typeOfHide, KeyBoardEventType1(IMAGE_HEIGHT));
+                 Keyboard.removeListener(typeOfShow, KeyBoardEventType1(imageHeight, IMAGE_HEIGHT_SMALL));
+                 Keyboard.removeListener(typeOfHide, KeyBoardEventType1(imageHeight, IMAGE_HEIGHT));
             }
     }, [])
 
-    const KeyBoardEventType1 = (endValue) => {
-        return (event) => {
-                Animated.timing(imageHeight, {
-                duration: event.duration,
-                toValue: endValue,
-                useNativeDriver: false
-            }).start();
-        }
-    }
-    
+
     const handleSubmit = () => {
         console.log('handle was pressed!')
     }
