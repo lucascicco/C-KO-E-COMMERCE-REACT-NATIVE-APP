@@ -2,20 +2,20 @@ import React from 'react';
 import { Picker } from 'react-native';
 import { ContainerAndroid } from './styles';
 
-function PickerCustom({data, ...rest}){
+function PickerCustom({style, data, ...rest}){
     return(
-        <ContainerAndroid>     
+        <ContainerAndroid style={style}>     
             <Picker
                 {...rest}
                 style={{ color: '#fff' }}
                 >  
                 {
-                    data.map((item) => {
-                        const labelName = `${item.sigla} - ${item.nome}`
+                    data.map((item, index) => {
+                        const labelName = `${item.sigla || index + 1} - ${item.nome}`
                         return <Picker.Item 
                             label={labelName}
-                            value={item.sigla}
-                            key={item.sigla}
+                            value={item.sigla || item.nome}
+                            key={item.sigla || index + 1}
                         />
                     })
                 }

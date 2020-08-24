@@ -4,7 +4,9 @@ import PickerAndroid from '../../components/Picker/picker.android';
 import PickerIos from '../../components/Picker/picker.ios';
 import MaskedInput from '../../components/TextInputMasked';
 import GenderJSON from '../../utils/Gender.json';
+import ProfessionJSON from '../../utils/Profession.json';
 import DatePicker from '../../components/DataPicker';
+import { ImageResizingEventTwo } from '../../utils/KeyboardsEvents';
 
 import { 
     Container, 
@@ -17,7 +19,7 @@ import {
 function PersonalInformation(){
     let PersonalIDRef 
     let CellphoneRef 
-    let ProfessionRef 
+    const ProfessionRef = useRef();
 
     const typeOfPlatform = Platform.OS === 'ios'
     const typeOfkeyboardType = typeOfPlatform ? 'numbers-and-punctuation' : 'numeric'
@@ -34,65 +36,24 @@ function PersonalInformation(){
     
     const [modalVisible, setModalVisible] = useState(false)
     const [LabelGender, setLabelGender] = useState('Sexo')
+    const [LabelProfession, setLabelProfession] = useState('Profissão')
 
     const handleSubmit = () => {
         Keyboard.dismiss()
     }
-
     useEffect(() => {
         const typeOfShow = typeOfPlatform ?  'keyboardWillShow' : 'keyboardDidShow'
         const typeOfHide = typeOfPlatform ? 'keyboardWillHide' : 'keyboardDidHide'
 
-            Keyboard.addListener(typeOfShow, keyboardWillShow)
-            Keyboard.addListener(typeOfHide, keyboardWillHide)
+            Keyboard.addListener(typeOfShow, ImageResizingEventTwo('show', IconSize, ViewSize, TextSize));
+            Keyboard.addListener(typeOfHide, ImageResizingEventTwo('hide', IconSize, ViewSize, TextSize));
 
             return () => {
-                 Keyboard.removeListener(typeOfShow, keyboardWillShow)
-                 Keyboard.removeListener(typeOfHide, keyboardWillHide)
+                 Keyboard.removeListener(typeOfShow, ImageResizingEventTwo('show', IconSize, ViewSize, TextSize));
+                 Keyboard.removeListener(typeOfHide, ImageResizingEventTwo('hide', IconSize, ViewSize, TextSize));
             }
-
     }, [])
     
-    const keyboardWillShow = (event) => {
-        Animated.timing(IconSize, {
-          duration: event.duration,
-          toValue: 40,
-          useNativeDriver: false
-        }).start();
-
-        Animated.timing(ViewSize, {
-            duration: event.duration,
-            toValue: 50,
-            useNativeDriver: false
-          }).start();
-
-        Animated.timing(TextSize, {
-          duration: event.duration,
-          toValue: 30,
-          useNativeDriver: false
-        }).start();
-      };
-    
-    const keyboardWillHide = (event) => {
-        Animated.timing(IconSize, {
-          duration: event.duration,
-          toValue: 70,
-          useNativeDriver: false
-        }).start();
-
-        Animated.timing(ViewSize, {
-            duration: event.duration,
-            toValue: 100,
-            useNativeDriver: false
-          }).start();
-
-        Animated.timing(TextSize, {
-          duration: event.duration,
-          toValue: 35,
-          useNativeDriver: false
-        }).start();
-      };
-
     return(
         <Container>
             <Animated.View 
@@ -124,21 +85,15 @@ function PersonalInformation(){
                         <PickerIos 
                             label="Selecione o gênero"
                             value="Gênero"
+                            style={{ width: '40%'}}
                             text={LabelGender}
-                            onPressButton={() => setModalVisible(true)}
-                            visible={modalVisible}
                             data={GenderJSON}
                             selectedValue={Gender}
                             onValueChange={itemValue => {
                                 setGender(itemValue)
                                 setLabelGender(itemValue)
                             }}
-                            onPressSubmit={
-                                () => {
-                                    PersonalIDRef.getElement().focus()
-                                    setModalVisible(false)
-                                }
-                            }
+                            onPressSubmit={() => PersonalIDRef.getElement().focus()}
                         />
                     ) : (
                             <PickerAndroid 
@@ -157,7 +112,7 @@ function PersonalInformation(){
                         placeholder="CPF"
                         keyboardType={typeOfkeyboardType}
                         returnKeyType="next"
-                        style={{ width: '50%'}}
+                        style={{ width: '50%', marginRight: 10}}
                         blurOnSubmit={false}
                         value={PersonalID}
                         onChangeText={setPersonalID}
@@ -175,29 +130,38 @@ function PersonalInformation(){
                         value={Cellphone}
                         onChangeText={setCellphone}
                         ref={(ref) => CellphoneRef = ref}
-                        onSubmitEditing={() => ProfessionRef.getElement().focus()}
+                        onSubmitEditing={() => ProfessionRef.current.focus()}
                     />
                 </MultiInput>
             
                 <MultiInput>
-                   <FormInput
-                        placeholder="Endereço"
-                        returnKeyType="send"
-                        style={{ width: '100%'}}
-                        blurOnSubmit={false}
-                        value={Profession}
-                        onChangeText={setProfession}
-                        ref={(ref) => ProfessionRef = ref}
-                        onSubmitEditing={() => console.log('Done')}
-                   />
+                {typeOfPlatform ? (
+                        <PickerIos 
+                            label="Selecione a profissão"
+                            value="Profissão"
+                            style={{ width: '100%'}}
+                            text={LabelProfession}
+                            data={ProfessionJSON}
+                            selectedValue={Profession}
+                            onValueChange={itemValue => {
+                                setProfession(itemValue)
+                                setLabelProfession(itemValue)
+                            }}
+                        />
+                        ) : (
+                        <PickerAndroid 
+                            style={{ width: '100%'}}
+                            data={ProfessionJSON}
+                            selectedValue={Profession}
+                            onValueChange={itemValue => {
+                                setProfession(itemValue)
+                            }}
+                        />
+                    )}       
                 </MultiInput>
 
                 <SubmitButton onPress={handleSubmit}>
                     Próximo
-                </SubmitButton>
-
-                <SubmitButton>
-                    Pular
                 </SubmitButton>
             </Form>
         </Container>

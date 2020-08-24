@@ -6,7 +6,7 @@ import Icon from 'react-native-vector-icons/MaterialIcons';
 import PropTypes from 'prop-types';
 import Button from '../ButtonType1';
 
-import { Container, DateButton, DateText, Picker } from './styles';
+import { Container, DateButton, DateText, Picker , PickerTitle} from './styles';
 
 export default function DateInput({ date, onChange }) {
   const [opened, setOpened] = useState(false);
@@ -27,6 +27,8 @@ export default function DateInput({ date, onChange }) {
             visible={opened}
         >
             <Picker>
+                <PickerTitle>Data de nascimento</PickerTitle>
+                
                 <DateTimePicker
                   value={date}
                   onChange={onChange}

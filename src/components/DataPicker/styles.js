@@ -2,6 +2,7 @@ import styled from 'styled-components/native';
 
 export const Container = styled.View`
   margin-right: 10px;
+  width: 57%;
 `;
 
 export const DateButton = styled.TouchableOpacity`
@@ -21,7 +22,14 @@ export const DateText = styled.Text`
 
 export const Picker = styled.View`
     flex: 1;
-    padding: 5%;
     justify-content: center;
+    padding: 5%;
+    border: 5px solid red;
 `;
 
+export const PickerTitle = styled.Text`
+    font-size: 35px;
+    font-weight: bold;
+    text-align: center;
+    margin-bottom: 10px;
+`

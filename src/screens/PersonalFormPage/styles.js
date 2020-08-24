@@ -21,10 +21,10 @@ export const Form = styled.View`
 
 export const MultiInput = styled.View`
     flex-direction: row;
+    margin-bottom: 10px;
 `
 
 export const FormInput = styled(Input)`
-    margin-bottom: 10px;
     margin-right: 10px;
     padding: 0 5px;
 `;

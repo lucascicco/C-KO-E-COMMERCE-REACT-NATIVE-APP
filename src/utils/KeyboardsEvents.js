@@ -50,7 +50,6 @@ export const ImageResizingEventTwo = (type, IconSize, ViewSize, TextSize) => {
                 toValue: 35,
                 useNativeDriver: false
               }).start()
-            
         };
    }
 
