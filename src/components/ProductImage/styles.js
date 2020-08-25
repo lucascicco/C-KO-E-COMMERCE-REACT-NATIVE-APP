@@ -1,8 +1,8 @@
 import styled from 'styled-components/native';
 
 export const Container = styled.View`
-  width: 200px;
-  height: 170px;
+  width: 210px;
+  height: 175px;
   justify-content: center;
   background: #546e7a;
   border: 1px solid black;

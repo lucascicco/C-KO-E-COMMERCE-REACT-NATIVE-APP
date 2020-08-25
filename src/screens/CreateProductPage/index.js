@@ -1,4 +1,4 @@
-import React, {useState, useRef } from 'react';
+import React, {useState, useRef, useEffect } from 'react';
 import { Platform } from 'react-native';
 import { onChange_onlyText, onChange_onlyNumber } from '../../utils/RestrictInputs';
 import PickerAndroid from '../../components/Picker/picker.android';
@@ -6,6 +6,9 @@ import PickerIos from '../../components/Picker/picker.ios';
 import MaskedInput from '../../components/TextInputMasked';
 import ProductImage from '../../components/ProductImage';
 import CategoriesJSON from '../../utils/Categorias.json'
+import * as ImagePicker from 'expo-image-picker';
+import Constants from 'expo-constants';
+import * as Permissions from 'expo-permissions';
 
 import { 
     Container, 
@@ -32,10 +35,43 @@ function CreateProductPage(){
     const [Price, setPrice] = useState()
     const [CategoryLabel, setCategoryLabel] = useState('Categoria do produto')
     
+    useEffect(() => {
+        getPermissionAsync();
+    }, [])
+
+    getPermissionAsync = async () => {
+        if (Constants.platform.ios) {
+          const { status } = await Permissions.askAsync(Permissions.CAMERA_ROLL);
+          if (status !== 'granted') {
+            alert('Sorry, we need camera roll permissions to make this work!');
+          }
+        }
+    };
+
+    const HandleChoosePhoto = async  () => {
+        try {
+            let result = await ImagePicker.launchImageLibraryAsync({
+              mediaTypes: ImagePicker.MediaTypeOptions.Images,
+              allowsEditing: true,
+              aspect: [4, 3],
+              quality: 1,
+            });
+
+            if (!result.cancelled) {
+                setProductImage(result.uri)
+            }
+          } catch (E) {
+            console.log(E);
+          }
+    };
+
+
     return(
         <Container>
             <ProductImage 
                 style={{ borderWidth: 5, borderColor: 'red'}}
+                onPress={HandleChoosePhoto}
+                uri={ProductPicture}
             />
 
             <Form>
@@ -87,6 +123,7 @@ function CreateProductPage(){
                     <FormInput
                         placeholder="Quantidade"
                         maxLength={5}
+                        keyboardType={typeOfkeyboardType}
                         returnKeyType="next"
                         style={{ width: '50%'}}
                         blurOnSubmit={false}
@@ -118,6 +155,9 @@ function CreateProductPage(){
                     onSubmitEditing={() => console.log('WORKING ON IT!')}
                 />
                 
+                <SubmitButton onPress={() => console.log('WORKING ON IT!')}>
+                    Criar produto
+                </SubmitButton>
             </Form>
         </Container>
     )

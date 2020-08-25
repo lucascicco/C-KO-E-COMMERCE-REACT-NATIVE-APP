@@ -2,9 +2,9 @@ import React from 'react';
 import { Image, TouchableHighlight, StyleSheet } from 'react-native';
 import { Container, ChooseText } from './styles';
 
-function ProductImage({ uri }){
+function ProductImage({onPress, uri }){
     return(
-        <TouchableHighlight onPress={() => console.log('ProductImage was pressed')}>
+        <TouchableHighlight onPress={onPress}>
             <Container>
             {uri ?  (
                 <Image 
@@ -26,8 +26,8 @@ function ProductImage({ uri }){
 
 const styles = StyleSheet.create({
     imageConf: {
-        borderWidth: 5, 
-        borderColor: 'red'
+        height: 170,
+        borderRadius: 5
     }
 })
 
