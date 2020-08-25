@@ -11,7 +11,6 @@ import { ImageResizingEventTwo } from '../../utils/KeyboardsEvents';
 import { 
     Container, 
     Form,
-    FormInput,
     SubmitButton,
     MultiInput
 } from './styles';
@@ -31,7 +30,7 @@ function PersonalInformation(){
     const [Birthday, setBirthday] = useState(new Date())
     const [Gender, setGender] = useState('')
     const [PersonalID, setPersonalID] = useState('')
-    const [Cellphone, setCellphone] = useState('')
+    const [Cellphone, setCellphone] = useState('')  
     const [Profession, setProfession] = useState('')
     
     const [modalVisible, setModalVisible] = useState(false)
@@ -41,6 +40,7 @@ function PersonalInformation(){
     const handleSubmit = () => {
         Keyboard.dismiss()
     }
+
     useEffect(() => {
         const typeOfShow = typeOfPlatform ?  'keyboardWillShow' : 'keyboardDidShow'
         const typeOfHide = typeOfPlatform ? 'keyboardWillHide' : 'keyboardDidHide'
@@ -98,6 +98,7 @@ function PersonalInformation(){
                     ) : (
                             <PickerAndroid 
                                 data={GenderJSON}
+                                style={{ width: '40%'}}
                                 selectedValue={Gender}
                                 onValueChange={itemValue => {
                                     setGender(itemValue)

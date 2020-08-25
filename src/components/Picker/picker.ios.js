@@ -32,7 +32,7 @@ function PickerCustom({style, styleButton, label, value, data, onPressSubmit, te
                          {
                              data.map((item, index) => {
                                  return <Picker.Item 
-                                     label={item.nome} 
+                                     label={item.nome}  
                                      value={item.sigla || item.nome}
                                      key={item.sigla || index + 1}
                                  />
