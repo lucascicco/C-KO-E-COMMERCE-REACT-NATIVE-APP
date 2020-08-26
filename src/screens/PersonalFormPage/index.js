@@ -33,7 +33,6 @@ function PersonalInformation(){
     const [Cellphone, setCellphone] = useState('')  
     const [Profession, setProfession] = useState('')
     
-    const [modalVisible, setModalVisible] = useState(false)
     const [LabelGender, setLabelGender] = useState('Sexo')
     const [LabelProfession, setLabelProfession] = useState('Profissão')
 

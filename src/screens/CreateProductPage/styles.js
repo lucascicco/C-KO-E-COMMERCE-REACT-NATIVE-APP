@@ -12,6 +12,7 @@ export const Container = styled.KeyboardAvoidingView.attrs({
     justify-content: center;
     align-items: center;
     padding: 0 15px;
+    margin-top: 10px;
 `;
 
 export const Form = styled.View`
@@ -30,7 +31,7 @@ export const FormInput = styled(Input)`
 `;
 
 export const SubmitButton = styled(Button)`
-  margin-top: 20px;
+  margin-top: 0px;
 `;
 
 export const SignLink = styled.TouchableOpacity`
@@ -45,6 +46,17 @@ export const SignLinkText = styled.Text`
 export const Strong = styled.Text`
   font-weight: bold;
 `;
+
+export const DescriptionForm = styled.TextInput.attrs({
+  placeholderTextColor: '#FFF',
+})`
+  font-size: 20px;
+  background: #546e7a;
+  border-radius: 4px;
+  padding: 10px;
+  color: #FFF;
+  margin-bottom: 10px;
+`
 
 export const IMAGE_HEIGHT = 200
 export const IMAGE_HEIGHT_SMALL = 100

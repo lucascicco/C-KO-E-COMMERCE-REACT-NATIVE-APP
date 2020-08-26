@@ -56,3 +56,43 @@ export const ImageResizingEventTwo = (type, IconSize, ViewSize, TextSize) => {
 }
 
 
+export const ImageResizingEventThree = (type, height, width, font) => {
+  if(type === 'show'){
+      return (event) => {
+        Animated.timing(height, {
+          duration: event.duration,
+          toValue: 100,
+          useNativeDriver: false
+        }).start();
+        Animated.timing(width, {
+          duration: event.duration,
+          toValue: 125,
+          useNativeDriver: false
+        }).start();
+        Animated.timing(font, {
+          duration: event.duration,
+          toValue: 17,
+          useNativeDriver: false
+        }).start();
+      }
+  }else{
+      return (event) => {
+        Animated.timing(height, {
+          duration: event.duration,
+          toValue: 175,
+          useNativeDriver: false
+        }).start();
+        Animated.timing(width, {
+          duration: event.duration,
+          toValue: 210,
+          useNativeDriver: false
+        }).start();
+        Animated.timing(font, {
+          duration: event.duration,
+          toValue: 22,
+          useNativeDriver: false
+        }).start();
+      }
+  }
+  
+}

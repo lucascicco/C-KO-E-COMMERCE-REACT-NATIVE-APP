@@ -1,5 +1,5 @@
 import React, {useState, useRef, useEffect } from 'react';
-import { Platform } from 'react-native';
+import { Animated, Keyboard, Platform, TouchableWithoutFeedback  } from 'react-native';
 import { onChange_onlyText, onChange_onlyNumber } from '../../utils/RestrictInputs';
 import PickerAndroid from '../../components/Picker/picker.android';
 import PickerIos from '../../components/Picker/picker.ios';
@@ -9,13 +9,16 @@ import CategoriesJSON from '../../utils/Categorias.json'
 import * as ImagePicker from 'expo-image-picker';
 import Constants from 'expo-constants';
 import * as Permissions from 'expo-permissions';
+import { ImageResizingEventThree } from '../../utils/KeyboardsEvents';
+
 
 import { 
     Container, 
     Form,
     FormInput,
     SubmitButton,
-    MultiInput
+    MultiInput,
+    DescriptionForm
 } from './styles';
 
 function CreateProductPage(){
@@ -33,10 +36,25 @@ function CreateProductPage(){
     const [Quantity, setQuantity] = useState()
     const [Description, setDescription] = useState()
     const [Price, setPrice] = useState()
-    const [CategoryLabel, setCategoryLabel] = useState('Categoria do produto')
+    const [CategoryLabel, setCategoryLabel] = useState('Categoria')
+    
+    const ViewHeight = new Animated.Value(175);
+    const ViewWidth = new Animated.Value(210);
+    const FontSize = new Animated.Value(22);
     
     useEffect(() => {
-        getPermissionAsync();
+        getPermissionAsync()
+
+        const typeOfShow = typeOfPlatform ?  'keyboardWillShow' : 'keyboardDidShow'
+        const typeOfHide = typeOfPlatform ? 'keyboardWillHide' : 'keyboardDidHide'
+
+            Keyboard.addListener(typeOfShow, ImageResizingEventThree('show', ViewHeight, ViewWidth, FontSize));
+            Keyboard.addListener(typeOfHide, ImageResizingEventThree('hide', ViewHeight, ViewWidth, FontSize));
+
+            return () => {
+                 Keyboard.removeListener(typeOfShow, ImageResizingEventThree('show', ViewHeight, ViewWidth, FontSize));
+                 Keyboard.removeListener(typeOfHide, ImageResizingEventThree('hide', ViewHeight, ViewWidth, FontSize));
+            }
     }, [])
 
     getPermissionAsync = async () => {
@@ -67,99 +85,100 @@ function CreateProductPage(){
 
 
     return(
-        <Container>
-            <ProductImage 
-                style={{ borderWidth: 5, borderColor: 'red'}}
-                onPress={HandleChoosePhoto}
-                uri={ProductPicture}
-            />
+        <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+            <Container>
+               <ProductImage 
+                   Height={ViewHeight}
+                   Width={ViewWidth}
+                   FontSize={FontSize}
+                   onPress={HandleChoosePhoto}
+                   uri={ProductPicture}
+               />
 
-            <Form>
-                <FormInput
-                    placeholder="Nome do produto"
-                    maxLength={30}
-                    returnKeyType="next"
-                    style={{ width: '100%', marginBottom: 10}}
-                    blurOnSubmit={false}
-                    value={ProductName}
-                    onChangeText={text => onChange_onlyText(text, setProductName)}
-                    ref={ProductNameRef}
-                    onSubmitEditing={() => PriceRef.getElement().focus()}
-                />
+               <Form>
+                   <FormInput
+                       placeholder="Nome do produto"
+                       maxLength={30}
+                       returnKeyType="next"
+                       style={{ width: '100%', marginBottom: 10}}
+                       blurOnSubmit={false}
+                       value={ProductName}
+                       onChangeText={text => onChange_onlyText(text, setProductName)}
+                       ref={ProductNameRef}
+                       onSubmitEditing={() => PriceRef.getElement().focus()}
+                   />
 
-                {typeOfPlatform ? (
-                    <PickerIos 
-                        label="Selecione a categoria"
-                        value="Categoria"
-                        style={{ width: '100%', marginBottom: 10}}
-                        text={CategoryLabel}
-                        data={CategoriesJSON}
-                        selectedValue={Category}
-                            onValueChange={itemValue => {
-                                setCategory(itemValue)
-                                setCategoryLabel(itemValue)
-                            }}
-                        onPressSubmit={() => PriceRef.getElement().focus()}
+                   {typeOfPlatform ? (
+                       <PickerIos 
+                           label="Selecione a categoria"
+                           value="Categoria"
+                           style={{ width: '100%', marginBottom: 10}}
+                           text={CategoryLabel}
+                           data={CategoriesJSON}
+                           selectedValue={Category}
+                               onValueChange={itemValue => {
+                                   setCategory(itemValue)
+                                   setCategoryLabel(itemValue)
+                               }}
+                           onPressSubmit={() => PriceRef.getElement().focus()}
+                       />
+                   ) : ( 
+                       <PickerAndroid 
+                           style={{ width: '100%', marginBottom: 10}}
+                           data={CategoriesJSON}
+                           selectedValue={Category}
+                           onValueChange={itemValue => {
+                               setCategory(itemValue)
+                           }}
+                       />
+                   )}
+
+                        
+                   <DescriptionForm
+                        multiline={true}
+                        autoCorrect={true}
+                        numberOfLines={4}
+                        value={Description}
+                        onChangeText={description => setDescription(description)}
+                        placeholder="Descrição"
+                        maxLength={350}
+                        ref={DescriptionRef}
+                        maxHeight={70}
                     />
-                ) : ( 
-                    <PickerAndroid 
+                       
+                   <MultiInput>
+                       <MaskedInput
+                           type="money"
+                           placeholder="Preço"
+                           returnKeyType="next"
+                           style={{ width: '47%', marginRight: 10}}
+                           blurOnSubmit={false}
+                           value={Price}
+                           onChangeText={number => setPrice(number)}
+                           ref={ref => PriceRef = ref}
+                           onSubmitEditing={() => QuantityRef.current.focus()}
+                       />
 
-                    />
-                )}
-                
-                <MultiInput>
-                    <MaskedInput
-                        type="money"
-                        placeholder="Preço"
-                        returnKeyType="next"
-                        style={{ width: '47%', marginRight: 10}}
-                        blurOnSubmit={false}
-                        value={Price}
-                        onChangeText={number => setPrice(number)}
-                        ref={ref => PriceRef = ref}
-                        onSubmitEditing={() => QuantityRef.current.focus()}
-                    />
-
-                    <FormInput
-                        placeholder="Quantidade"
-                        maxLength={5}
-                        keyboardType={typeOfkeyboardType}
-                        returnKeyType="next"
-                        style={{ width: '50%'}}
-                        blurOnSubmit={false}
-                        value={Quantity}
-                        onChangeText={number => onChange_onlyNumber(number, setQuantity)}
-                        ref={QuantityRef}
-                        onSubmitEditing={() => DescriptionRef.current.focus()}
-                    />
-                </MultiInput>
-
-
-                <FormInput
-                    multiline={true}
-                    numberOfLines={3}
-                    autoCorrect={true}
-                    value={Description}
-                    onChangeText={description => setDescription(description)}
-                    placeholder="Descrição"
-                    maxLength={350}
-                    ref={DescriptionRef}
-                    style={{
-                        width: '100%',
-                        fontSize: 20,
-                        height: 100,
-                        padding: 5,
-                        borderRadius: 4
-                    }}
-                    returnKeyType="send"
-                    onSubmitEditing={() => console.log('WORKING ON IT!')}
-                />
-                
-                <SubmitButton onPress={() => console.log('WORKING ON IT!')}>
-                    Criar produto
-                </SubmitButton>
-            </Form>
-        </Container>
+                       <FormInput
+                           placeholder="Quantidade"
+                           maxLength={5}
+                           keyboardType={typeOfkeyboardType}
+                           returnKeyType="next"
+                           style={{ width: '50%'}}
+                           blurOnSubmit={false}
+                           value={Quantity}
+                           onChangeText={number => onChange_onlyNumber(number, setQuantity)}
+                           ref={QuantityRef}
+                           onSubmitEditing={() => console.log('WORKING ON IT!')}
+                       />
+                   </MultiInput>
+                       
+                   <SubmitButton onPress={() => console.log('WORKING ON IT!')}>
+                       Criar produto
+                   </SubmitButton>
+               </Form>
+            </Container>    
+        </TouchableWithoutFeedback>
     )
 }
 
