@@ -1,5 +1,5 @@
-import React, { useRef, useState, useEffect } from 'react';
-import { Keyboard, Platform, Image} from 'react-native';
+import React, { useState, useEffect } from 'react';
+import { Keyboard, Image} from 'react-native';
 import { CreditCardInput } from "react-native-credit-card-input";
 
 import { 
