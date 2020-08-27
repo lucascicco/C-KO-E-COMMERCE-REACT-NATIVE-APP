@@ -45,18 +45,18 @@ function PurchaseTotalPage(){
 
             <SliptView>
                 <NormalText>Total produto</NormalText>
-                <TotalBasic>TotalValor</TotalBasic>
+                <TotalBasic>R$ TotalValor</TotalBasic>
             </SliptView>
 
             
             <SliptView>
                 <NormalText>Frete</NormalText>
-                <TotalBasic>FreteValor</TotalBasic>
+                <TotalBasic>R$ FreteValor</TotalBasic>
             </SliptView>
 
             <SliptView>
                 <NormalText>Valor total</NormalText>
-                <TotalText>VALOR TOTAL</TotalText>
+                <TotalText>R$ VALOR TOTAL</TotalText>
             </SliptView>
 
             <PaymentTypeView>
@@ -102,7 +102,7 @@ function PurchaseTotalPage(){
             </PaymentTypeView>
 
             <SubmitButton>
-                Próximo
+                Continuar
             </SubmitButton>
         </Container>
     )

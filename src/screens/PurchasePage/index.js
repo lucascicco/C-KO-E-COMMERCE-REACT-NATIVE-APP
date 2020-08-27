@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Keyboard, Image} from 'react-native';
-import { CreditCardInput } from "react-native-credit-card-input";
+import { CreditCardInput } from '../../utils/react-native-credit-card';
 
 import { 
     Container, 
@@ -49,7 +49,7 @@ function PurchasePage(){
                     labels={{
                         number: 'NÚMERO DO CARTÃO',
                         expiry: 'VALIDADE',
-                        cvc: "CVC/CCV",
+                        cvc: "CCV",
                         name: 'NOME COMPLETO'
                     }}
                     labelStyle={{
