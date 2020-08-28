@@ -41,7 +41,8 @@ export const PriceText =  styled.Text`
 export const ProductImage = styled.Image`
     height: 150px;
     width: 150px;
-    border: 1px solid black;
+    border-color: black;
+    border-width: 1px;
     border-radius: 5px;
 `
 

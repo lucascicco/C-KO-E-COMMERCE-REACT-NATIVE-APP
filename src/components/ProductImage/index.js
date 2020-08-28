@@ -19,7 +19,7 @@ function ProductImage({onPress, uri, Height, Width, FontSize }){
                 >
                     Escolha uma imagem
                 </Animated.Text>
-            )}
+            )} 
             </Animated.View>
         </TouchableHighlight>
     )
