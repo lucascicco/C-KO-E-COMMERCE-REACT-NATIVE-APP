@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { useState } from 'react';
+import NumericInput from 'react-native-numeric-input';
 
 import { 
     Container,
@@ -15,11 +16,15 @@ import {
     RowView,
     DescriptionView,
     DescriptionText,
-    DescriptionScroll
+    DescriptionScroll,
+    CalculateButton,
+    DetailsTitle
 } from './styles';
 
 function ProductPage(){
-    
+    const [quantity, setQuantity] = useState(0)
+
+
     return(
         <Container>
 
@@ -31,11 +36,15 @@ function ProductPage(){
 
                     <FeaturesView>
                         <Details>
-                            <PriceText>R$ 1.000,00</PriceText>
-                            <DetailsText>Quantidade</DetailsText>
-                            <DetailsText>3</DetailsText>
-                            <DetailsText>Frete</DetailsText>
-                            <DetailsText>Calcular</DetailsText>
+                            <PriceText>R$ 10.000,00</PriceText>
+                            <DetailsTitle>Quantidade</DetailsTitle>
+                            <NumericInput 
+                                onChange={value => setQuantity(value)} 
+                                minValue={0}
+                                borderColor="black"    
+                            />
+                            <DetailsTitle>Frete estipulado</DetailsTitle>
+                            <DetailsText>R$ 10,00</DetailsText>
                         </Details>   
                     </FeaturesView>
                 </RowView>
@@ -47,13 +56,11 @@ function ProductPage(){
             </ProductView>
 
             <DescriptionView>
-                <DetailsText>Sobre o produto:</DetailsText>
+                <DetailsTitle>Sobre o produto</DetailsTitle>
 
                 <DescriptionScroll>
                         <DescriptionText>
-                            AAAAAAAAAAAAAAAAAAAAAAAA
-                            AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
-                        
+                            TESTING AREAS
                         </DescriptionText>
                 </DescriptionScroll>
             </DescriptionView>

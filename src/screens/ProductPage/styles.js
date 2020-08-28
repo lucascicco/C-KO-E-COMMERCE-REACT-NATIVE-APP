@@ -1,15 +1,16 @@
 import styled from 'styled-components/native';
+
 import Button from '../../components/ButtonType1';
+import Input from '../../components/TextInput';
 
 export const Container = styled.SafeAreaView`
     flex: 1;
     justify-content: center;
     align-items: center;
-    padding: 0 30px;
+    padding: 0 15px;
 `;
 
 export const ProductView = styled.View`
-    width: 90%
     justify-content: space-between;
     align-items: stretch;
     margin-bottom: 15px;
@@ -23,38 +24,52 @@ export const ProductTitle = styled.Text`
 `
 
 export const DetailsText = styled.Text`
-    font-size: 20px;
-    text-align: center;
+    font-size: 17px;
+`
+
+export const DetailsTitle = styled.Text`
+    font-size: 17px;
+    font-weight: bold;
+    margin: 3px;
 `
 
 export const PriceText =  styled.Text`
-    font-size: 25px;
+    font-size: 22px;
     font-weight: bold;
 `
 
 export const ProductImage = styled.Image`
-    height: 170px;
-    width: 170px;
+    height: 150px;
+    width: 150px;
     border: 1px solid black;
     border-radius: 5px;
 `
 
 export const Details = styled.View`
-    border: 1px solid black;
+    align-items: center;
 `
+
 
 export const FeaturesView = styled.View`
     flex-direction: column;
-    width: 45%;
-    border: 1px solid black;
+    width: 50%;
 `
 export const RowView = styled.View`
     flex-direction:row;
     justify-content: space-between;
+    align-items: center;
 `
 
 export const SubmitButton = styled(Button)`
-    margin-top: 20px;
+    margin-top: 10px;
+`;
+
+export const CalculateButton = styled(Button)`
+
+`
+
+export const QuantityInput = styled(Input)`
+  margin-bottom: 10px;
 `;
 
 
@@ -71,11 +86,15 @@ export const TotalBasic = styled.Text`
 export const DescriptionView = styled.View`
     border: 1px solid black;
     height: 30%;
-    width: 90%;
+    width: 100%;
+    padding: 10px;
+    border-radius: 2px;
 `
 
-export const DescriptionScroll = styled.ScrollView``
+export const DescriptionScroll = styled.ScrollView`
+    margin-top: 5px;
+`
 
 export const DescriptionText = styled.Text`
-    font-size: 16px;
+    font-size: 15px;
 `
