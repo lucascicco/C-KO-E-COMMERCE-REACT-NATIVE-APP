@@ -1,6 +1,7 @@
 import React, { useRef, useState, useEffect } from 'react';
 import { Animated, Keyboard, Platform } from 'react-native';
 import { ImageResizingEventOne } from '../../utils/KeyboardsEvents';
+import Background from '../../components/Background2'
 
 import { 
     Container, 
@@ -42,52 +43,54 @@ function Login() {
     }
 
     return(
-        <Container>
-            <Animated.Image
-                source={require('../../assets/Cko_logo.png')}
-                style={{height: imageHeight , width: 200 }}
-            />
-                
-            <Form>  
-                <FormInput
-                    icon="mail-outline"
-                    placeholder="Email"
-                    keyboardType="email-address"
-                    autoCorrect={false}
-                    maxLength={70}
-                    autoCapitalize="none"
-                    returnKeyType="next"
-                    blurOnSubmit={false}
-                    onChangeText={setEmail}
-                    onSubmitEditing={() => passwordRef.current.focus()}
-                    value={email}
-                />
-                
-                <FormInput
-                    icon="lock-outline"
-                    secureTextEntry
-                    placeholder="Senha"
-                    maxLength={15}
-                    returnkKeyType="send"
-                    onChangeText={setPassword}
-                    onSubmitEditing={handleSubmit}
-                    ref={passwordRef}
-                    value={password}
+        <Background>
+            <Container>
+                <Animated.Image
+                    source={require('../../assets/Cko_logo.png')}
+                    style={{height: imageHeight , width: 200 }}
                 />
 
-                <SubmitButton onPress={handleSubmit}>
-                    Acessar
-                </SubmitButton>
+                <Form>  
+                    <FormInput
+                        icon="mail-outline"
+                        placeholder="Email"
+                        keyboardType="email-address"
+                        autoCorrect={false}
+                        maxLength={70}
+                        autoCapitalize="none"
+                        returnKeyType="next"
+                        blurOnSubmit={false}
+                        onChangeText={setEmail}
+                        onSubmitEditing={() => passwordRef.current.focus()}
+                        value={email}
+                    />
 
-            </Form>
+                    <FormInput
+                        icon="lock-outline"
+                        secureTextEntry
+                        placeholder="Senha"
+                        maxLength={15}
+                        returnkKeyType="send"
+                        onChangeText={setPassword}
+                        onSubmitEditing={handleSubmit}
+                        ref={passwordRef}
+                        value={password}
+                    />
 
-            <SignLink>
-                <SignLinkText>
-                    <Strong>Primeiro acesso? </Strong> Clique aqui
-                </SignLinkText>
-            </SignLink>
+                    <SubmitButton style={{ background: '#283593'}} onPress={handleSubmit}>
+                        Acessar
+                    </SubmitButton>
 
-        </Container>
+                </Form>
+
+                <SignLink>
+                    <SignLinkText>
+                        <Strong>Primeiro acesso? </Strong> Clique aqui
+                    </SignLinkText>
+                </SignLink>
+
+            </Container>
+        </Background>
     )
 }
 

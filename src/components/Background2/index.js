@@ -2,9 +2,9 @@ import { LinearGradient } from 'expo-linear-gradient';
 import styled from 'styled-components/native';
 
 export default styled(LinearGradient).attrs({
-    colors: ['#673ab7', '#7e57c2'],
+    colors: ['#FFF', '#5c6bc0'],
     useAngle: true,
-    angle: 120,
+    angle: 100,
     angleCenter: { x: 0.5, y: 0.5 },
   })
   `

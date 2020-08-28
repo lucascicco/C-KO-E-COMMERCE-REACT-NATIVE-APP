@@ -49,8 +49,8 @@ function PurchaseTotalPage(){
                                 <TextDetails>R$ 10.000,00</TextDetails>
                                
                                 <TextIndent>
-                                    <NormalText>Quantidade</NormalText>
-                                    <TextDetails>3</TextDetails>
+                                    <NormalText>Quantidade:</NormalText>
+                                    <TextDetails style={{marginLeft: 5}}>3</TextDetails>
                                 </TextIndent>           
                             </BasicView>   
 
@@ -74,17 +74,17 @@ function PurchaseTotalPage(){
 
                     <SliptView>
                         <NormalText>Total produto</NormalText>
-                        <TotalBasic>R$ TotalValor</TotalBasic>
+                        <TotalBasic>R$ 100</TotalBasic>
                     </SliptView>
 
                     <SliptView>
                         <NormalText>Frete</NormalText>
-                        <TotalBasic>R$ FreteValor</TotalBasic>
+                        <TotalBasic>R$ 100</TotalBasic>
                     </SliptView>
 
                     <SliptView>
                         <NormalText>Valor total</NormalText>
-                        <TotalText>R$ VALOR TOTAL</TotalText>
+                        <TotalText>R$ 100</TotalText>
                     </SliptView>
 
                     <PaymentTypeView>

@@ -7,12 +7,12 @@ import Button from '../../components/ButtonType1';
 
 export const Container = styled.KeyboardAvoidingView.attrs({
     enabled: Platform.OS === 'ios',
-    behavior: 'height'
+    behavior: 'padding'
   })`
     flex: 1;
     justify-content: center;
     align-items: center;
-    padding: 0 30px;
+    padding: 25px 30px;
 `;
 
 export const Form = styled.View`
@@ -26,15 +26,17 @@ export const FormInput = styled(Input)`
 
 export const SubmitButton = styled(Button)`
   margin-top: 20px;
+  background: ${props => props.style.background}
 `;
+
 
 export const SignLink = styled.TouchableOpacity`
   margin-top: 20px;
 `;
 
 export const SignLinkText = styled.Text`
-  color: #0d47a1;
-  font-size: 16px;
+  color: #FFF;
+  font-size: 18px;
 `;
 
 export const Strong = styled.Text`

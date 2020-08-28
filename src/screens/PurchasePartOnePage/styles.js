@@ -8,13 +8,13 @@ export const Container = styled.View`
 
 export const TextTitle = styled.Text`
     font-size: 27px;
-    font-family: playfair;
-    color: #FFF;
+    font-family: playfair-bold;
+    color: #ede7f6;
+    margin-bottom: 10px;
 `
 
 export const NormalText = styled.Text`
     font-size: 20px;
-
     color: #FFF;
     font-family: playfair;
 `
@@ -22,14 +22,12 @@ export const NormalText = styled.Text`
 export const TotalText = styled.Text`
     font-weight: bold;
     font-size: 22px;
-    color: #FFF
-    font-family: raleway;
+    font-family: raleway-bold;
 `
 
 export const TotalBasic = styled.Text`
     font-size: 22px;
     font-style: italic;
-    color: #FFF
     font-family: raleway;
 `
 
@@ -45,7 +43,7 @@ export const SliptView = styled.View`
     flex-direction: row;
     align-items: center;
     justify-content: space-between;
-    border-bottom-color: #FFF;
+    border-bottom-color: black;
     border-bottom-width: 1px;
     border-style: solid;
     padding: 10px;
@@ -53,13 +51,12 @@ export const SliptView = styled.View`
 
 export const FeaturesView = styled.View`
     flex-direction: column;
-    justify-content: space-between;
     width: 67%;
 `
 export const PaymentTypeView = styled.View`
     flex-direction: column;
     justify-content: space-between;
-    padding: 10px;
+    padding: 5px;
 `
 
 export const SubmitButton = styled(Button)`
@@ -118,7 +115,6 @@ export const ChangeButton = styled.View`
 
 export const ButtonText = styled.Text`
     font-size: 25px;
-    font-weight: bold;
     color: #FFF;
     font-family: ostrich;
 `

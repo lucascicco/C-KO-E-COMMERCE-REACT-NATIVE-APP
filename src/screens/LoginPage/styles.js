@@ -26,6 +26,7 @@ export const FormInput = styled(Input)`
 
 export const SubmitButton = styled(Button)`
   margin-top: 20px;
+  background: ${props => props.style.background}
 `;
 
 export const SignLink = styled.TouchableOpacity`
@@ -33,8 +34,8 @@ export const SignLink = styled.TouchableOpacity`
 `;
 
 export const SignLinkText = styled.Text`
-  color: #0d47a1;
-  font-size: 16px;
+  color: #FFF;
+  font-size: 18px;
 `;
 
 export const Strong = styled.Text`
