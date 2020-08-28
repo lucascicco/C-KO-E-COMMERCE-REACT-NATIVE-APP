@@ -53,9 +53,10 @@ export default class CCInput extends Component {
     additionalInputProps: {},
   };
 
-  componentWillReceiveProps = newProps => {
+
+  componentWillReceiveProps = (nextProps) => {
     const { status, value, onBecomeEmpty, onBecomeValid, field } = this.props;
-    const { status: newStatus, value: newValue } = newProps;
+    const { status: newStatus, value: newValue } = nextProps;
 
     if (value !== "" && newValue === "") onBecomeEmpty(field);
     if (status !== "valid" && newStatus === "valid") onBecomeValid(field);

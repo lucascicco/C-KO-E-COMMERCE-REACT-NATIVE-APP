@@ -1,7 +1,7 @@
 import valid from "card-validator";
-import pick from "lodash.pick";
-import values from "lodash.values";
-import every from "lodash.every";
+import { pick } from "lodash";
+import { values } from "lodash";
+import { every } from "lodash";
 
 const toStatus = validation => {
   return validation.isValid ? "valid" :

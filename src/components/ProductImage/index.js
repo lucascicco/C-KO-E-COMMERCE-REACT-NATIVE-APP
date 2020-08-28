@@ -8,7 +8,7 @@ function ProductImage({onPress, uri, Height, Width, FontSize }){
             <Animated.View style={[styles.Container, { height: Height, width: Width }]}> 
             {uri ? (
                 <Animated.Image
-                   style={{ height: Height}}
+                   style={{ flex: 1}} //Flex 1 resize the image size according to the view.
                    source={{
                        uri: uri,
                    }}
