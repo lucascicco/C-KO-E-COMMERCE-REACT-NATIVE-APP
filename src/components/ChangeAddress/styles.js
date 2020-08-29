@@ -1,4 +1,5 @@
 import styled from 'styled-components/native';
+import ButtonType1 from '../ButtonType1';
 
 export const Container = styled.KeyboardAvoidingView.attrs({
     enabled: Platform.OS === 'ios',
@@ -6,7 +7,7 @@ export const Container = styled.KeyboardAvoidingView.attrs({
   })`
     flex: 1;
     align-items: center;
-    padding: 30px 30px;
+    padding: 30px 20px;
 `;
 
 export const BoxAddresses = styled.View`
@@ -33,12 +34,14 @@ export const ButtonView = styled.View`
 export const ButtonText = styled.Text`
     font-size: 20px;
     font-family: playfair;
+    text-aling: center;
 `
 
 export const AddressText = styled.Text`
     font-size: 16px;
     font-family: playfair-bold;
     margin-bottom: 5px;
+    width: 80%;
 `
 export const BasicText = styled.Text.attrs({
     numberOfLines: 1
@@ -64,5 +67,13 @@ export const RadioView = styled.View`
 `
 
 export const AddressView = styled.View`
-    flex-direction: flex-column
+    flex:1;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    border: 1px solid red;
 `
+
+export const FormView = styled.View``
+
+export const SubmitBottom = styled(ButtonType1)``

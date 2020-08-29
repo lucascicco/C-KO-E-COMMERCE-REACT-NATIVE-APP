@@ -32,7 +32,7 @@ import {
 function PurchaseTotalPage(){
     const [payment, setPayment] = useState('creditcard');
     const [visible, setVisibility] = useState(false)
-    
+
     const handleModalVisibilty = () => {
         setVisibility(!visible)
     }
