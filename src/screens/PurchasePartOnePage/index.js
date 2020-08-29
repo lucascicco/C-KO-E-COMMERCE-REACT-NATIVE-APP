@@ -1,8 +1,8 @@
 import React , {useState }from 'react';
 import { RadioButton } from 'react-native-paper';
 import { FontAwesome } from '@expo/vector-icons'; 
-import { TouchableOpacity } from 'react-native';
-import { setCustomText } from 'react-native-global-props';
+import { TouchableOpacity, Modal} from 'react-native';
+import ChangeAddressView from '../../components/ChangeAddress';
 
 import Background from '../../components/Background'
 
@@ -32,6 +32,11 @@ import {
 
 function PurchaseTotalPage(){
     const [payment, setPayment] = useState('creditcard');
+    const [visible, setVisibility] = useState(false)
+    
+    const handleModalVisibilty = () => {
+        setVisibility(!visible)
+    }
 
     return(
         <Background>
@@ -64,7 +69,7 @@ function PurchaseTotalPage(){
                             <SmallText>07096-080 Rua Ronaldo</SmallText>    
                         </AddressView>
 
-                        <TouchableOpacity onPress={() => console.log('Open the modal')}>
+                        <TouchableOpacity onPress={handleModalVisibilty}>
                             <ChangeButton>
                                 <ButtonText>Trocar</ButtonText>
                             </ChangeButton>
@@ -133,7 +138,16 @@ function PurchaseTotalPage(){
                 <SubmitButton>Continuar</SubmitButton>
 
             </Container>
+
+            <Modal
+                visible={visible}
+                animationType="slide"
+            >   
+                <ChangeAddressView />
+            </Modal>
         </Background>
+
+    
     )
 }
 

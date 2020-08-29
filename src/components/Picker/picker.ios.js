@@ -24,11 +24,11 @@ function PickerCustom({style, styleButton, label, value, data, onPressSubmit, te
                      <Picker
                         {...rest}
                         itemStyle={{
-                         fontFamily: 'raleway',
-                         color: '#FFF',
-                         fontSize: 25,
-                         height: 300
-                     }}
+                            fontFamily: 'raleway',
+                            color: '#FFF',
+                            fontSize: 25,
+                            height: 300
+                        }}
                          >  
                          <Picker.Item 
                             label={label}

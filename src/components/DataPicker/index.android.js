@@ -19,7 +19,7 @@ export default function DateInput({ date, onChange }) {
         <Container>
           <DateButton onPress={() => setOpened(!opened)}>
             <Icon name="event" color="#fff" size={20} />
-            <DateText>{TextOnScreen}</DateText>
+            <DateText style={{fontFamily: dateFormatted === CurrentData ? 'raleway' : undefined}}>{TextOnScreen}</DateText>
           </DateButton>
 
 

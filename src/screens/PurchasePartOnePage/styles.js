@@ -6,7 +6,9 @@ export const Container = styled.View`
     padding: 7% 15px;
 `;
 
-export const TextTitle = styled.Text`
+export const TextTitle = styled.Text.attrs({
+    numberOfLines: 1
+})`
     font-size: 27px;
     font-family: playfair-bold;
     color: #ede7f6;
