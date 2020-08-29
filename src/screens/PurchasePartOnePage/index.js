@@ -3,7 +3,6 @@ import { RadioButton } from 'react-native-paper';
 import { FontAwesome } from '@expo/vector-icons'; 
 import { TouchableOpacity, Modal} from 'react-native';
 import ChangeAddressView from '../../components/ChangeAddress';
-
 import Background from '../../components/Background'
 
 import {
@@ -48,7 +47,7 @@ function PurchaseTotalPage(){
                         />
 
                         <FeaturesView>
-                            <TextTitle numberOfLines={1}>Nome do produto</TextTitle>
+                            <TextTitle>Nome do produto</TextTitle>
 
                             <BasicView>
                                 <TextDetails>R$ 10.000,00</TextDetails>
@@ -143,11 +142,9 @@ function PurchaseTotalPage(){
                 visible={visible}
                 animationType="slide"
             >   
-                <ChangeAddressView />
+                <ChangeAddressView onPressOne={() => setVisibility(!visible)}/>
             </Modal>
         </Background>
-
-    
     )
 }
 

@@ -1,6 +1,8 @@
-import React from 'react';
-import { TouchableOpacity } from 'react-native';
+import React, { useState } from 'react';
 import { AntDesign } from '@expo/vector-icons'; 
+import LocationForm from '../LocationForm';
+import { RadioButton } from 'react-native-paper';
+import { FontAwesome } from '@expo/vector-icons'; 
 
 import {
     Container,
@@ -10,32 +12,52 @@ import {
     ButtonView,
     ButtonText,
     BasicText,
-    TouchableButton
+    TouchableButton,
+    RadioView,
+    TouchableButton2
 } from './styles';
 
-function ChangeAddress(){
+function ChangeAddress({ onPressOne }){
+    const [FormVisible, setVisibleForm] = useState(false);
+    const [Address, setAddress] = useState('mainAddress');
+
     return(
         <Container>
+            <TouchableButton2 onPress={onPressOne}>
+                <FontAwesome name="times" size={45} color="black" />
+            </TouchableButton2>
+
             <BoxAddresses>
-                <TouchableButton>
+                <TouchableButton onPress={() =>  setAddress('mainAddress')}>
                     <BoxAddress>
-                        <AddressText>Endereço principal</AddressText>
+                        <RadioView>
+                            <RadioButton
+                                color="black"
+                                value="mainAddress"
+                                status={ Address === 'mainAddress' ? 'checked' : 'unchecked'}
+                            />
+                            <AddressText>Endereço principal</AddressText>
+                        </RadioView>
+
                         <BasicText>Guaruhos - SP</BasicText>
                         <BasicText>Bairro</BasicText>
-                        <BasicText>070960-080</BasicText>
-                        <BasicText>Rua ..........adsadsasadsa.</BasicText>
-                        <BasicText>N° ...........</BasicText>
+                        <BasicText>CEP</BasicText>
+                        <BasicText>Rua</BasicText>
+                        <BasicText>N°</BasicText>
                     </BoxAddress>
                 </TouchableButton>
 
-                <TouchableButton>
+                <TouchableButton onPress={() => setVisibleForm(true)}>
                     <ButtonView>
                         <AntDesign name="pluscircleo" size={60} color="black" />
                         <ButtonText>Adicionar endereço</ButtonText>
                     </ButtonView>
                 </TouchableButton>
-
             </BoxAddresses>
+
+            {FormVisible && (
+                <LocationForm />
+            )}
         </Container>
     )
 }

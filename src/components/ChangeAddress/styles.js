@@ -5,9 +5,8 @@ export const Container = styled.KeyboardAvoidingView.attrs({
     behavior: 'padding',
   })`
     flex: 1;
-    justify-content: center;
     align-items: center;
-    padding: 0 30px;
+    padding: 30px 30px;
 `;
 
 export const BoxAddresses = styled.View`
@@ -37,8 +36,9 @@ export const ButtonText = styled.Text`
 `
 
 export const AddressText = styled.Text`
-    font-size: 20px;
+    font-size: 16px;
     font-family: playfair-bold;
+    margin-bottom: 5px;
 `
 export const BasicText = styled.Text.attrs({
     numberOfLines: 1
@@ -51,4 +51,18 @@ export const BasicText = styled.Text.attrs({
 export const TouchableButton = styled.TouchableOpacity`
     flex:1;
 `
+export const TouchableButton2 = styled.TouchableOpacity`
+    flex-direction: row;
+    width: 100%;
+    justify-content: flex-end;
+    padding: 5px;
+`
 
+export const RadioView = styled.View`
+    flex-direction: row;
+    align-items: center;
+`
+
+export const AddressView = styled.View`
+    flex-direction: flex-column
+`
