@@ -16,4 +16,5 @@ export const TextInputType1 = styled.TextInput.attrs({
   color: #fff;
   font-size: 18px;
   margin-left: 7px;
+  font-family: raleway;
 `;

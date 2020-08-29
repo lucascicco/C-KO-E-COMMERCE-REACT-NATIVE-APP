@@ -1,5 +1,5 @@
 export const onChange_onlyText = (text, callback) => {
-    if (/^[a-zA-Z]+$/.test(text) || text === "") {
+    if (/^[a-zA-Z ]+$/.test(text) || text === "") {
         callback(text);
     }
 };

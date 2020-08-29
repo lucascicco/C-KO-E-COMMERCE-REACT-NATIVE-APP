@@ -7,6 +7,8 @@ import InputMask from '../../components/TextInputMasked';
 import { onChange_onlyText, onChange_onlyNumber } from '../../utils/RestrictInputs';
 import { ImageResizingEventTwo } from '../../utils/KeyboardsEvents';
 
+import Background from '../../components/Background2'
+
 import { 
     Container, 
     Form,
@@ -59,147 +61,149 @@ function LocationPage(){
     }, [])
     
     return(
-        <Container>
-            <Animated.View 
-                style={[styles.TitleView, { height: ViewSize }]}
-            >
-                <Animated.Image 
-                    source={require('../../assets/Geolocation_icon.png')}
-                    style={[styles.IconView, { height: IconSize}]}
-                    resizeMode="contain"
-                />    
+        <Background>
+            <Container>
+               <Animated.View 
+                   style={[styles.TitleView, { height: ViewSize }]}
+               >
+                   <Animated.Image 
+                       source={require('../../assets/Geolocation_icon.png')}
+                       style={[styles.IconView, { height: IconSize}]}
+                       resizeMode="contain"
+                   />    
 
-                <Animated.Text 
-                    style={[styles.TextTitle, { fontSize: TextSize }]}
-                >
-                    Localização
-                </Animated.Text>
+                   <Animated.Text 
+                       style={[styles.TextTitle, { fontSize: TextSize }]}
+                   >
+                       Localização
+                   </Animated.Text>
 
-            </Animated.View>
-        
-            <Form>  
-                <MultiInput>
-                    <FormInput
-                         placeholder="País"
-                         autoCorrect={true}
-                         returnKeyType="next"
-                         style={{ width: '18%'}}
-                         blurOnSubmit={false}
-                         value={Country}
-                         onChangeText={setCountry}
-                         onSubmitEditing={() => StateRef.current.focus()}
-                         editable={false}
-                     />                         
+               </Animated.View>
 
-                    {typeOfPlatform ? (
-                            <PickerIos 
-                                label="Selecione o estado"
-                                value="Estado"
-                                text={Label}
-                                onPressButton={() => setModalVisible(true)}
-                                visible={modalVisible}
-                                data={BrazilianStates}
-                                selectedValue={State}
-                                onValueChange={itemValue => {
-                                    setState(itemValue)
-                                    setLabel(itemValue)
-                                }}
-                                onPressSubmit={
-                                    () => {
-                                        CityRef.current.focus()
-                                        setModalVisible(false)
-                                    }
-                                }
-                            />
-                    ) : (
-                            <PickerAndroid 
-                                data={BrazilianStates}
-                                selectedValue={State}
-                                onValueChange={itemValue => {
-                                    setState(itemValue)
-                                }}
-                            />
-                    )}
-    
-                     <FormInput
-                         placeholder="Cidade"
-                         maxLength={20}
-                         returnKeyType="next"
-                         style={{ width: '47%'}}
-                         blurOnSubmit={false}
-                         value={City}
-                         onChangeText={text => onChange_onlyText(text, setCity)}
-                         ref={CityRef}
-                         onSubmitEditing={() => NeighborhoodRef.current.focus()}
-                     />
-                    
-                </MultiInput>
+               <Form>  
+                   <MultiInput>
+                       <FormInput
+                            placeholder="País"
+                            autoCorrect={true}
+                            returnKeyType="next"
+                            style={{ width: '18%'}}
+                            blurOnSubmit={false}
+                            value={Country}
+                            onChangeText={setCountry}
+                            onSubmitEditing={() => StateRef.current.focus()}
+                            editable={false}
+                        />                         
 
-                <MultiInput>
-                    <FormInput
-                        placeholder="Bairro"
-                        maxLength={30}
-                        returnKeyType="next"
-                        style={{ width: '50%'}}
-                        blurOnSubmit={false}
-                        value={Neighborhood}
-                        onChangeText={text => onChange_onlyText(text, setNeighborhood)}
-                        ref={NeighborhoodRef}
-                        onSubmitEditing={() => PostcodeRef.getElement().focus()}
-                    />
+                       {typeOfPlatform ? (
+                               <PickerIos 
+                                   label="Selecione o estado"
+                                   value="Estado"
+                                   text={Label}
+                                   onPressButton={() => setModalVisible(true)}
+                                   visible={modalVisible}
+                                   data={BrazilianStates}
+                                   selectedValue={State}
+                                   onValueChange={itemValue => {
+                                       setState(itemValue)
+                                       setLabel(itemValue)
+                                   }}
+                                   onPressSubmit={
+                                       () => {
+                                           CityRef.current.focus()
+                                           setModalVisible(false)
+                                       }
+                                   }
+                               />
+                       ) : (
+                               <PickerAndroid 
+                                   data={BrazilianStates}
+                                   selectedValue={State}
+                                   onValueChange={itemValue => {
+                                       setState(itemValue)
+                                   }}
+                               />
+                       )}
 
-                    <InputMask
-                        placeholder="CEP"
-                        returnKeyType="next"
-                        style={{ width: '47%'}}
-                        blurOnSubmit={false}
-                        keyboardType={typeOfkeyboardType}
-                        value={Postcode}
-                        onChangeText={setPostcode}
-                        ref={(ref) => PostcodeRef = ref}
-                        onSubmitEditing={() => AddressRef.current.focus()}
-                        type={'zip-code'}
-                    />
-                    
-                </MultiInput>
-            
-                <MultiInput>
-                
-                   <FormInput
-                        placeholder="Rua, avenida, estrada..."
-                        maxLength={70}
-                        returnKeyType="next"
-                        style={{ width: '75%'}}
-                        blurOnSubmit={false}
-                        value={Address}
-                        onChangeText={text => onChange_onlyText(text, setAddress)}
-                        ref={AddressRef}
-                        onSubmitEditing={() => AdNumberRef.current.focus()}
-                   />
+                        <FormInput
+                            placeholder="Cidade"
+                            maxLength={20}
+                            returnKeyType="next"
+                            style={{ width: '47%'}}
+                            blurOnSubmit={false}
+                            value={City}
+                            onChangeText={text => onChange_onlyText(text, setCity)}
+                            ref={CityRef}
+                            onSubmitEditing={() => NeighborhoodRef.current.focus()}
+                        />
+                               
+                   </MultiInput>
 
-                   <FormInput
-                        placeholder="Nº"
-                        maxLength={5}
-                        returnKeyType="send"
-                        keyboardType={typeOfkeyboardType}
-                        style={{ width: '22%' }}
-                        blurOnSubmit={false}
-                        value={AdNumber}
-                        ref={AdNumberRef}
-                        onChangeText={number => onChange_onlyNumber(number, setAdNumber)}
-                        onSubmitEditing={handleSubmit}
-                   />
-                </MultiInput>
+                   <MultiInput>
+                       <FormInput
+                           placeholder="Bairro"
+                           maxLength={30}
+                           returnKeyType="next"
+                           style={{ width: '50%'}}
+                           blurOnSubmit={false}
+                           value={Neighborhood}
+                           onChangeText={text => onChange_onlyText(text, setNeighborhood)}
+                           ref={NeighborhoodRef}
+                           onSubmitEditing={() => PostcodeRef.getElement().focus()}
+                       />
 
-                <SubmitButton onPress={handleSubmit}>
-                    Próximo
-                </SubmitButton>
+                       <InputMask
+                           placeholder="CEP"
+                           returnKeyType="next"
+                           style={{ width: '47%'}}
+                           blurOnSubmit={false}
+                           keyboardType={typeOfkeyboardType}
+                           value={Postcode}
+                           onChangeText={setPostcode}
+                           ref={(ref) => PostcodeRef = ref}
+                           onSubmitEditing={() => AddressRef.current.focus()}
+                           type={'zip-code'}
+                       />
+                               
+                   </MultiInput>
+                               
+                   <MultiInput>
+                               
+                      <FormInput
+                           placeholder="Rua, avenida, estrada..."
+                           maxLength={70}
+                           returnKeyType="next"
+                           style={{ width: '75%'}}
+                           blurOnSubmit={false}
+                           value={Address}
+                           onChangeText={text => onChange_onlyText(text, setAddress)}
+                           ref={AddressRef}
+                           onSubmitEditing={() => AdNumberRef.current.focus()}
+                      />
 
-                <SubmitButton>
-                    Pular
-                </SubmitButton>
-            </Form>
-        </Container>
+                      <FormInput
+                           placeholder="Nº"
+                           maxLength={5}
+                           returnKeyType="send"
+                           keyboardType={typeOfkeyboardType}
+                           style={{ width: '22%' }}
+                           blurOnSubmit={false}
+                           value={AdNumber}
+                           ref={AdNumberRef}
+                           onChangeText={number => onChange_onlyNumber(number, setAdNumber)}
+                           onSubmitEditing={handleSubmit}
+                      />
+                   </MultiInput>
+
+                   <SubmitButton style={{ background: '#283593'}} onPress={handleSubmit}>
+                       Próximo
+                   </SubmitButton>
+
+                   <SubmitButton style={{ background: '#283593'}}>
+                       Pular
+                   </SubmitButton>
+               </Form>
+            </Container>
+        </Background>
     )
 }
 
@@ -211,7 +215,8 @@ const styles = StyleSheet.create({
     },
     TextTitle: {
         fontWeight: 'bold',
-        marginRight: 15
+        marginRight: 15,
+        fontFamily: 'playfair-bold'
     },
     IconView: {
         width: 100,

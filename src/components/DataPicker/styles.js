@@ -18,13 +18,13 @@ export const DateText = styled.Text`
   margin-left: 15px;
   font-size: 18px;
   color: #fff;
+  font-family: raleway;
 `;
 
 export const Picker = styled.View`
     flex: 1;
     justify-content: center;
     padding: 5%;
-    border: 5px solid red;
 `;
 
 export const PickerTitle = styled.Text`
@@ -32,4 +32,5 @@ export const PickerTitle = styled.Text`
     font-weight: bold;
     text-align: center;
     margin-bottom: 10px;
+    font-family: playfair-bold
 `

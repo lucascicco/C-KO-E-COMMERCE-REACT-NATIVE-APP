@@ -38,7 +38,7 @@ export default function DateInput({ date, onChange }) {
                   display="spinner"
                 />
 
-                <Button onPress={() => setOpened(!opened)}>
+                <Button style={{ background: '#283593'}} onPress={() => setOpened(!opened)}>
                     Selecionar
                 </Button>
             </Picker>

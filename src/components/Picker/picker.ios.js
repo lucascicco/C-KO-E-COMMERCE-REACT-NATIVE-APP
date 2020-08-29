@@ -40,12 +40,13 @@ function PickerCustom({style, styleButton, label, value, data, onPressSubmit, te
                          }
                      </Picker>  
  
-                     <Button onPress={() => {
+                     <Button style={{ background: '#283593'}} onPress={() => {
                             if(onPressSubmit) onPressSubmit()
                             setModalVisible(false)
                      }}>
                          Selecionar
                      </Button>
+                     
                  </Container>    
             </Modal>
 
