@@ -25,12 +25,13 @@ export const Picker = styled.View`
     flex: 1;
     justify-content: center;
     padding: 5%;
+    background: #7986cb;
 `;
 
 export const PickerTitle = styled.Text`
-    font-size: 35px;
+    font-size: 40px;
     font-weight: bold;
     text-align: center;
-    margin-bottom: 10px;
+    margin-bottom: 20px;
     font-family: playfair-bold
 `

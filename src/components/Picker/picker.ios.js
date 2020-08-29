@@ -22,7 +22,13 @@ function PickerCustom({style, styleButton, label, value, data, onPressSubmit, te
             >
                  <Container>     
                      <Picker
-                     {...rest}
+                        {...rest}
+                        itemStyle={{
+                         fontFamily: 'raleway',
+                         color: '#FFF',
+                         fontSize: 25,
+                         height: 300
+                     }}
                          >  
                          <Picker.Item 
                             label={label}
@@ -32,6 +38,7 @@ function PickerCustom({style, styleButton, label, value, data, onPressSubmit, te
                          {
                              data.map((item, index) => {
                                  return <Picker.Item 
+                                 font
                                      label={item.nome}  
                                      value={item.sigla || item.nome}
                                      key={item.sigla || index + 1}

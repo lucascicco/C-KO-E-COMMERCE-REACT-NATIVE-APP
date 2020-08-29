@@ -7,7 +7,7 @@ import InputMask from '../../components/TextInputMasked';
 import { onChange_onlyText, onChange_onlyNumber } from '../../utils/RestrictInputs';
 import { ImageResizingEventTwo } from '../../utils/KeyboardsEvents';
 
-import Background from '../../components/Background2'
+import Background from '../../components/Background2';
 
 import { 
     Container, 
