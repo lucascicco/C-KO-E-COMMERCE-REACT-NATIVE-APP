@@ -6,7 +6,7 @@ import { TextInputMask } from 'react-native-masked-text'
 
 import { Container } from './styles';
 
-function Input({ type, options, style, icon, ...rest }, ref) {
+function Input({ type, options, style, maskedStyle, icon, ...rest }, ref) {
   return (
     <Container style={style}>
       {icon && <MaterialIcons name={icon} size={23} color="#fff" />}
@@ -14,7 +14,7 @@ function Input({ type, options, style, icon, ...rest }, ref) {
       <TextInputMask 
             {...rest}
             ref={ref}
-            style={styles.TextInput}
+            style={[styles.TextInput, maskedStyle]}
             placeholderTextColor="#FFF"
             type={type}
             options={options}

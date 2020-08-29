@@ -24,7 +24,7 @@ function PersonalInformation(){
     const typeOfPlatform = Platform.OS === 'ios'
     const typeOfkeyboardType = typeOfPlatform ? 'numbers-and-punctuation' : 'numeric'
 
-    const IconSize = new Animated.Value(70) 
+    const IconSize = new Animated.Value(70)
     const ViewSize = new Animated.Value(100)
     const TextSize = new Animated.Value(35)
 
@@ -115,6 +115,7 @@ function PersonalInformation(){
                             keyboardType={typeOfkeyboardType}
                             returnKeyType="next"
                             style={{ width: '50%', marginRight: 10}}
+                            maskedStyle={{fontFamily: PersonalID ? null : 'raleway'}}
                             blurOnSubmit={false}
                             value={PersonalID}
                             onChangeText={setPersonalID}
@@ -128,11 +129,11 @@ function PersonalInformation(){
                             keyboardType={typeOfkeyboardType}
                             returnKeyType="next"
                             style={{ width: '47%'}}
+                            maskedStyle={{fontFamily: Cellphone ? null : 'raleway'}}
                             blurOnSubmit={false}
                             value={Cellphone}
                             onChangeText={setCellphone}
                             ref={(ref) => CellphoneRef = ref}
-                            onSubmitEditing={() => ProfessionRef.current.focus()}
                         />
                     </MultiInput>
                                 

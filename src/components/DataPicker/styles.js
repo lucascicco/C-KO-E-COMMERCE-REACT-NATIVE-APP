@@ -18,7 +18,7 @@ export const DateText = styled.Text`
   margin-left: 15px;
   font-size: 18px;
   color: #fff;
-  font-family: raleway;
+  font-family: ${props => props.style.fontFamily};
 `;
 
 export const Picker = styled.View`
