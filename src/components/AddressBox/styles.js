@@ -22,6 +22,7 @@ export const BasicText = styled.Text.attrs({
     font-size: 15px;
     font-family: raleway;
     margin: 2px;
+    color: #FFF
 `
 
 
@@ -30,4 +31,5 @@ export const AddressText = styled.Text`
     font-family: playfair-bold;
     margin-bottom: 5px;
     width: 80%;
+    color: #FFF
 `

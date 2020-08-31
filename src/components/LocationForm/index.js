@@ -14,7 +14,7 @@ import {
     SubmitBottom
 } from './styles';
 
-function LocationPage({ onClickSubmit }){
+function LocationPage({ onClickSubmit , xz}){
     const StateRef = useRef()
     const CityRef = useRef()
     const NeighborhoodRef = useRef()
@@ -160,7 +160,7 @@ function LocationPage({ onClickSubmit }){
                         value={AdNumber}
                         ref={AdNumberRef}
                         onChangeText={number => onChange_onlyNumber(number, setAdNumber)}
-                        onSubmitEditing={handleSubmit}
+                        onSubmitEditing={xz}
                    />
                 </MultiInput>
 
