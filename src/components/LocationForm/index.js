@@ -10,10 +10,11 @@ import {
     Container, 
     Form,
     FormInput,
-    MultiInput
+    MultiInput,
+    SubmitBottom
 } from './styles';
 
-function LocationPage(){
+function LocationPage({ onClickSubmit }){
     const StateRef = useRef()
     const CityRef = useRef()
     const NeighborhoodRef = useRef()
@@ -36,8 +37,17 @@ function LocationPage(){
     const [Label, setLabel] = useState('Estado')
     
     const handleSubmit = () => {
-        console.log('Finished')
+        onClickSubmit({
+            country: Country,
+            state: State,
+            city: City,
+            neighborhood: Neighborhood,
+            address: Address,
+            adNumber: AdNumber,
+            postcode: Postcode 
+        })
     }
+
     return(
         <Container>
             <Form>  
@@ -153,6 +163,10 @@ function LocationPage(){
                         onSubmitEditing={handleSubmit}
                    />
                 </MultiInput>
+
+                <SubmitBottom onPress={handleSubmit}>
+                    Alterar
+                </SubmitBottom>
             </Form>
         </Container>
     )

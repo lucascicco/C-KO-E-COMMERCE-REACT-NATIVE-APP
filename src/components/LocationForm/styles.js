@@ -28,10 +28,7 @@ export const FormInput = styled(Input)`
     padding: 0 5px;
 `;
 
-export const SubmitButton = styled(Button)`
-  margin-top: 20px;
-  background: ${props => props.style.background}
-`;
+export const SubmitBottom = styled(Button)``
 
 export const SignLink = styled.TouchableOpacity`
   margin-top: 20px;

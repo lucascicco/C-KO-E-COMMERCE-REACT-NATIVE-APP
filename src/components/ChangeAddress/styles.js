@@ -34,7 +34,7 @@ export const ButtonView = styled.View`
 export const ButtonText = styled.Text`
     font-size: 20px;
     font-family: playfair;
-    text-aling: center;
+    text-align: center;
 `
 
 export const AddressText = styled.Text`
