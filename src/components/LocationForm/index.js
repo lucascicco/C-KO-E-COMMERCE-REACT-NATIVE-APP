@@ -160,7 +160,7 @@ function LocationPage({ onClickSubmit , xz}){
                         value={AdNumber}
                         ref={AdNumberRef}
                         onChangeText={number => onChange_onlyNumber(number, setAdNumber)}
-                        onSubmitEditing={xz}
+                        onSubmitEditing={handleSubmit}
                    />
                 </MultiInput>
 

@@ -1,7 +1,7 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { AntDesign } from '@expo/vector-icons'; 
 import LocationForm from '../LocationForm';
-import { Animated, Dimensions } from 'react-native';
+import { Animated, Dimensions, Keyboard, Platform } from 'react-native';
 import AddressBox from '../AddressBox';
 import Background from '../Background'
 
@@ -21,6 +21,7 @@ function ChangeAddress({ onPressOne }){
     const [MainAddress, setMainAddresss] = useState(0);
     const heightWindow = Dimensions.get("window").height
     const [animation, setAnimation] = useState(new Animated.Value(heightWindow))
+    const [viewVisible, setViewVisible] = useState(true)
 
     const [Addresses, setAddresses] = useState([
         {
@@ -36,12 +37,12 @@ function ChangeAddress({ onPressOne }){
     const startAnimation = () => {
         Animated.timing(animation, {
             toValue: 0,
-            duration: 1500,
+            duration: 1250,
             useNativeDriver: true
         }).start()
     }
 
-    
+
     const HandleSubmit = (newAddress) => {
         //condição lógica de validação de dados
         if(Addresses.length > 1){
@@ -57,40 +58,45 @@ function ChangeAddress({ onPressOne }){
     return(  
         <Background>
             <Container>
-                <AddressView>
-                    <BoxAddresses>
-                        {Addresses.map((item, index) => {
-                           return <AddressBox 
-                                    item={item} 
-                                    onPress={() => setMainAddresss(index)}
-                                    MainAddress={MainAddress} 
-                                    value={index}
-                                />
-                        })}
-                    
-                        {Addresses.length === 1 && (
-                            <TouchableButton onPress={() => {
-                                setVisibleForm(true)
-                                startAnimation()
-                            }}>
-                                <ButtonView>
-                                    <AntDesign name="pluscircleo" size={60} color="black" />
-                                    <ButtonText>Adicionar endereço</ButtonText>
-                                </ButtonView>
-                            </TouchableButton>
-                        )}
-                    </BoxAddresses>
-                </AddressView>
+                {viewVisible && (
+                    <AddressView>
+                        <BoxAddresses>
+                            {Addresses.map((item, index) => {
+                               return <AddressBox 
+                                        item={item} 
+                                        onPress={() => setMainAddresss(index)}
+                                        MainAddress={MainAddress} 
+                                        value={index}
+
+                                        key={index}
+                                    />
+                            })}
+                        
+                            {Addresses.length === 1 && (
+                                <TouchableButton onPress={() => {
+                                    setVisibleForm(true)
+                                    startAnimation()
+                                    setViewVisible(false)
+                                }}>
+                                    <ButtonView>
+                                        <AntDesign name="pluscircleo" size={60} color="black" />
+                                        <ButtonText>Adicionar endereço</ButtonText>
+                                    </ButtonView>
+                                </TouchableButton>
+                            )}
+                        </BoxAddresses>
+                 </AddressView>
+                )}
                         
                 {FormVisible && (
                     <Animated.View style={{ transform: [{
                         translateY: animation
                     }]}}>
-                       <LocationForm onClickSubmit={HandleSubmit} xz={onPressOne}/>
-
-                       <SubmitBottom style={{ background: '#d32f2f'}} onPress={onPressOne}>
+                       <LocationForm onClickSubmit={HandleSubmit}/>
+                       
+                        <SubmitBottom style={{ background: '#d32f2f'}} onPress={onPressOne}>
                             Fechar
-                       </SubmitBottom>
+                        </SubmitBottom>
                     </Animated.View>
                 )}
             </Container>

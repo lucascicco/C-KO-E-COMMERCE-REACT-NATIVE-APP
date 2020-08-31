@@ -11,7 +11,7 @@ import {
 
 export default function AddressBox({value, onPress, MainAddress, item}) {
     const { city, state, postcode, address, adNumber, neighborhood } = item;
-    console.log(item)
+
     return (
       <TouchableButton onPress={onPress}>
           <BoxAddress>
@@ -20,6 +20,7 @@ export default function AddressBox({value, onPress, MainAddress, item}) {
                       color="black"
                       value={value}
                       status={ MainAddress === value ? 'checked' : 'unchecked'}
+    
                   />
                   <AddressText>{MainAddress === value ? 'Endereço Principal' : ''}</AddressText>
               </RadioView>

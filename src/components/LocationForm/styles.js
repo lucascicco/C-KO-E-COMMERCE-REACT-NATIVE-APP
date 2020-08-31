@@ -1,13 +1,9 @@
 import styled from 'styled-components/native';
-import { Platform } from 'react-native';
 
 import Input from '../../components/TextInput';
 import Button from '../../components/ButtonType1';
 
-export const Container = styled.KeyboardAvoidingView.attrs({
-    enabled: Platform.OS === 'ios',
-    behavior: 'padding',
-  })`
+export const Container = styled.View`
     justify-content: center;
     align-items: center;
 `;

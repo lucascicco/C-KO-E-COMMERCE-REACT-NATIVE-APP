@@ -1,7 +1,8 @@
 import React , {useState }from 'react';
 import { RadioButton } from 'react-native-paper';
 import { FontAwesome } from '@expo/vector-icons'; 
-import { TouchableOpacity, Modal} from 'react-native';
+import { TouchableOpacity} from 'react-native';
+import Modal from 'react-native-modal';
 import ChangeAddressView from '../../components/ChangeAddress';
 import Background from '../../components/Background'
 
@@ -139,8 +140,13 @@ function PurchaseTotalPage(){
             </Container>
 
             <Modal
-                visible={visible}
-                animationType="slide"
+                isVisible={visible}
+                animationIn="zoomIn"
+                animationOut="zoomOut"
+                animationInTiming={500}
+                animationOutTiming={500}
+                avoidKeyboard={false}
+                coverScreen={true}
             >   
                 <ChangeAddressView onPressOne={() => setVisibility(!visible)}/>
             </Modal>
