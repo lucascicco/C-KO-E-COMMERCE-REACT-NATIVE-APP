@@ -23,7 +23,8 @@ export const SecurityView = styled.View`
 
 export const SecurityText = styled.Text`
     font-size: 20px;
-    color: #455a64;
+    color: white;
+    font-family: raleway;
 `
 
 export const PaymentView = styled.View`

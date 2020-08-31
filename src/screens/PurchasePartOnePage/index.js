@@ -4,7 +4,7 @@ import { FontAwesome } from '@expo/vector-icons';
 import { TouchableOpacity} from 'react-native';
 import Modal from 'react-native-modal';
 import ChangeAddressView from '../../components/ChangeAddress';
-import Background from '../../components/Background'
+import Background from '../../components/Background';
 
 import {
     Container,

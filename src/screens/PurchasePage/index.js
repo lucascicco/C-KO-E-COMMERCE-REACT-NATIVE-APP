@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { Keyboard, Image} from 'react-native';
 import { CreditCardInput } from '../../utils/react-native-credit-card';
+import Background from '../../components/Background3';
+
 
 import { 
     Container, 
@@ -37,55 +39,57 @@ function PurchasePage(){
     }, [])
     
     return(
-        <Container>
-            <PaymentView>
-                <CreditCardInput
-                    autoFocus
-                    requiresName={true}
-                    requiresCVC={true}
-                    validColor="black"
-                    invalidColor="red"
-                    placeholderColor="darkgray"
-                    labels={{
-                        number: 'NÚMERO DO CARTÃO',
-                        expiry: 'VALIDADE',
-                        cvc: "CCV",
-                        name: 'NOME COMPLETO'
-                    }}
-                    labelStyle={{
-                        color: 'black',
-                        fontSize: 15
-                    }}
-                    inputStyle={{
-                        color: 'black',
-                        fontSize: 19
-                    }}
-                    placeholders={{
-                        name: "Nome completo",
-                        number: "1234 5678 1234 5678",
-                        expiry: "MM/YY",
-                        cvc: "CVC",
-                    }}
-                    allowScroll={true}
-                    onChange={setCardValues}   
-                />
-
-                <SubmitButton onPress={handleSubmit}>
-                    Realizar pagamento
-                </SubmitButton>
-            </PaymentView>
-
-            <SecurityView>
-                <Image 
-                    source={require('../../assets/security_icon.png')}
-                    style={{ height: 50, margin: 5}}
-                    resizeMode="contain"
-                />
-                <SecurityText>
-                    Seus dados estão protegidos
-                </SecurityText>
-            </SecurityView>
-        </Container>
+        <Background>
+            <Container>
+                <PaymentView>
+                    <CreditCardInput
+                        autoFocus
+                        requiresName={true}
+                        requiresCVC={true}
+                        validColor="black"
+                        invalidColor="red"
+                        placeholderColor="#37474f"
+                        labels={{
+                            number: 'NÚMERO DO CARTÃO',
+                            expiry: 'VALIDADE',
+                            cvc: "CCV",
+                            name: 'NOME COMPLETO'
+                        }}
+                        labelStyle={{
+                            color: 'white',
+                            fontSize: 15
+                        }}
+                        inputStyle={{
+                            color: 'black',
+                            fontSize: 19
+                        }}
+                        placeholders={{
+                            name: "Nome completo",
+                            number: "1234 5678 1234 5678",
+                            expiry: "MM/YY",
+                            cvc: "CVC",
+                        }}
+                        allowScroll={true}
+                        onChange={setCardValues}   
+                    />
+                    
+                    <SubmitButton onPress={handleSubmit}>
+                        Realizar pagamento
+                    </SubmitButton>
+                </PaymentView>
+                    
+                <SecurityView>
+                    <Image 
+                        source={require('../../assets/security_icon.png')}
+                        style={{ height: 50, margin: 5}}
+                        resizeMode="contain"
+                    />
+                    <SecurityText>
+                        Seus dados estão protegidos
+                    </SecurityText>
+                </SecurityView>
+            </Container>
+        </Background>
     )
 }
 
