@@ -4,8 +4,7 @@ import ProductList from '../../components/ItemsBox';
 import {
     Container,
     SearchInput,
-    ViewUp,
-    ViewDown
+    ViewUp
 } from './styles';
 
 const data = [
@@ -72,5 +71,19 @@ function HomePage(){
         </Container>
     )
 }
+
+const styles = StyleSheet.create({
+    ShadowConfig: {
+        shadowColor: "black",
+        shadowOffset: {
+        	width: 2,
+        	height: 8,
+        },
+        shadowOpacity: 0.65,
+        shadowRadius: 2.00,
+        elevation: 12
+    }
+})
+
 
 export default HomePage 

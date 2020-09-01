@@ -17,25 +17,28 @@ export const ProductView = styled.View`
 `
 
 export const ProductTitle = styled.Text`
-    font-weight: bold;
     font-size: 35px;
+    color: #FFF;
     margin-bottom: 10px;
     text-align: center;
+    font-family: playfair-bold;
 `
 
 export const DetailsText = styled.Text`
     font-size: 17px;
+    color: #FFF;
 `
 
 export const DetailsTitle = styled.Text`
-    font-size: 17px;
-    font-weight: bold;
+    font-size: 18px;
     margin: 3px;
+    font-family: raleway-bold;
 `
 
 export const PriceText =  styled.Text`
     font-size: 22px;
     font-weight: bold;
+    color: #FFF;
 `
 
 export const ProductImage = styled.Image`
@@ -85,11 +88,11 @@ export const TotalBasic = styled.Text`
 `
 
 export const DescriptionView = styled.View`
-    border: 1px solid black;
     height: 30%;
-    width: 100%;
+    width: 90%;
     padding: 10px;
-    border-radius: 2px;
+    border-radius: 5px;
+    background: #eceff1;
 `
 
 export const DescriptionScroll = styled.ScrollView`
