@@ -7,7 +7,6 @@ import {
 } from './styles'
 
 function ItemsBox({data}){
-    console.log(data)
     return(
         <Container>
             <FlatList

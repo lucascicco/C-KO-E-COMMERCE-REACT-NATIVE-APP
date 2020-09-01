@@ -4,6 +4,7 @@ import SearchInputText from '../../components/TextInput';
 export const Container = styled.View`
     flex: 1;
     padding: 30px 30px;
+    background: #3f51b5;
 `;
 
 export const SearchInput = styled(SearchInputText)`
