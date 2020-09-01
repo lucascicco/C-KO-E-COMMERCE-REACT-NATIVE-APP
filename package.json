@@ -12,6 +12,7 @@
     "@react-native-community/async-storage": "^1.11.0",
     "@react-native-community/datetimepicker": "2.4.0",
     "@react-native-community/masked-view": "^0.1.10",
+    "@react-native-community/picker": "1.6.0",
     "axios": "^0.19.2",
     "babel-plugin-root-import": "^6.5.0",
     "card-validator": "^8.1.0",

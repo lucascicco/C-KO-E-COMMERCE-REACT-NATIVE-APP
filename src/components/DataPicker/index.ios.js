@@ -1,5 +1,5 @@
 import React, { useState, useMemo } from 'react';
-import { Modal } from 'react-native';
+import Modal from 'react-native-modal';
 import DateTimePicker from '@react-native-community/datetimepicker';
 import { format } from 'date-fns';
 import Icon from 'react-native-vector-icons/MaterialIcons';
@@ -23,8 +23,13 @@ export default function DateInput({ date, onChange }) {
       </DateButton>
     
         <Modal
-            animationType="slide"
-            visible={opened}
+          isVisible={opened}
+          animationIn="zoomIn"
+          animationOut="zoomOut"
+          animationInTiming={500}
+          animationOutTiming={500}
+          avoidKeyboard={false}
+          coverScreen={true}
         >
             <Picker>
                 <PickerTitle>Data de nascimento</PickerTitle>

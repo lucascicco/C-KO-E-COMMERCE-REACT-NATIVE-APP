@@ -1,5 +1,6 @@
 import React , {useState} from 'react';
-import { Picker, Modal } from 'react-native';
+import { Picker } from 'react-native';
+import Modal from 'react-native-modal';
 import { MainContainer, Container } from './styles';
 import ButtonType2 from '../../components/ButtonType2';
 import Button from '../ButtonType1';
@@ -17,8 +18,13 @@ function PickerCustom({style, styleButton, label, value, data, onPressSubmit, te
             />
 
             <Modal
-                animationType="slide"
-                visible={modalVisible}
+                isVisible={modalVisible}
+                animationIn="zoomIn"
+                animationOut="zoomOut"
+                animationInTiming={500}
+                animationOutTiming={500}
+                avoidKeyboard={false}
+                coverScreen={true}
             >
                  <Container>     
                      <Picker
@@ -38,7 +44,6 @@ function PickerCustom({style, styleButton, label, value, data, onPressSubmit, te
                          {
                              data.map((item, index) => {
                                  return <Picker.Item 
-                                 font
                                      label={item.nome}  
                                      value={item.sigla || item.nome}
                                      key={item.sigla || index + 1}
