@@ -15,9 +15,10 @@ function ProductBox({uri, productName, productPrice}){
             <ProductImage
                 source={{ uri: 'https://homepages.cae.wisc.edu/~ece533/images/monarch.png'}}
             />
+            <PriceFont>R$ {productPrice}</PriceFont>
+            
             <TextView>
                 <TitleFont>{productName}</TitleFont>
-                <PriceFont>R$ {productPrice}</PriceFont>
             </TextView>
         </Container>
     )

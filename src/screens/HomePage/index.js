@@ -22,12 +22,12 @@ const data = [
         price: 2.500
     },
     {
-        productName: 'Cambio do motor hibrido 2031',
+        productName: 'Cambio do motor hibrido 2031 SSSSSSSSSSS',
         price: 2.500
     },
     {
         productName: 'Controle remoto',
-        price: 2.500
+        price: 2500
     },
     {
         productName: 'Caneta BIC',
@@ -64,9 +64,10 @@ function HomePage(){
                     onSubmitEditing={() => console.log('Sended')}
                 />
             </ViewUp>
-                    <ProductList 
-                        data={data}
-                    />
+
+            <ProductList 
+                data={data}
+            />
 
         </Container>
     )

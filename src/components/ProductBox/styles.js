@@ -14,14 +14,19 @@ export const Container = styled.TouchableOpacity`
     height: ${heightPercentage};
     border-radius: 3px;
 `
-export const TitleFont = styled.Text`
-    font-family: raleway-bold;
-    font-size: 15px;
+export const PriceFont = styled.Text`
+    margin-top: 3px;
+    font-weight: bold;
+    font-size: 18px;
     text-align: center;
 `
-export const PriceFont = styled.Text`
-    font-size: 15px;
-    font-weight: bold;
+export const TitleFont = styled.Text.attrs({
+    numberOfLines: 2
+})`
+    font-size: 14px;
+    color: #757575;
+    font-family: raleway-bold;
+    text-align: center;
 `
 
 export const ProductImage = styled.Image`
@@ -35,10 +40,8 @@ export const ProductImage = styled.Image`
 export const TextView = styled.View`
     align-items: center;
     justify-content: center;
-    height: 30%;
+    height: 20%;
 `
 
-export const PriceView = styled.View`
-
-`
+export const PriceView = styled.View``
 
