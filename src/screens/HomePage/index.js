@@ -20,7 +20,9 @@ import {
     LogoImage,
     TextTitle,
     ModalView,
-    SubmitButton
+    SubmitButton,
+    FilterText,
+    FilterView
 } from './styles';
 
 
@@ -72,7 +74,13 @@ function HomePage() {
                         <Octicons name="settings" size={35} color="white" onPress={() => setVisibility(!visible)}/>
                     </ButtonCategory> 
                 </ViewUp>
-                    
+                
+                <FilterView>
+                    {(categorySelected !== '' && categorySelected !== null) && 
+                    (<FilterText>Categoria filtrada: {categorySelected}</FilterText>)}
+                </FilterView>
+               
+
                 <ProductList 
                     data={data}
                 />

@@ -59,5 +59,13 @@ export const ModalView = styled.View`
 export const SubmitButton = styled(SubmitButtonComponent)`
     margin: 3px auto;
     width: 80%;
-    background: ${props => props.style.background}
+    background: ${props => props.style.background};
+`
+export const FilterText = styled.Text`
+    font-style: italic;
+    font-size: 14px;
+`
+export const FilterView = styled.View`
+    margin-top: 6px;
+    height: 23px;
 `
