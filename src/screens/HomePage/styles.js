@@ -1,11 +1,5 @@
 import styled from 'styled-components/native';
-import { Platform, Dimensions } from 'react-native';
-
 import SearchInputText from '../../components/TextInput';
-
-const { width, height } = Dimensions.get('window')
-const heightPercentage = height * 30 / 100
-const heightViewUp = heightPercentage.toString() + 'px';
 
 export const Container = styled.View`
     flex: 1;

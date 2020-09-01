@@ -7,12 +7,13 @@ import {
 } from './styles'
 
 function ItemsBox({data}){
+    console.log(data)
     return(
         <Container>
             <FlatList
                 showsHorizontalScrollIndicator={true}
                 data={data}
-                keyExtractor={item, index => index}
+                keyExtractor={item => item.productName}
                 numColumns={2}
                 renderItem={({ item }) => {
                     return(

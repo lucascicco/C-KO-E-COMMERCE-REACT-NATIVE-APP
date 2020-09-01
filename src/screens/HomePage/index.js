@@ -1,10 +1,43 @@
 import React, { useRef, useState, useEffect } from 'react';
+import ProductList from '../../components/ItemsBox';
 
 import {
     Container,
     SearchInput,
-    ViewUp
+    ViewUp,
+    ViewDown
 } from './styles';
+
+const data = [
+    {
+        productName: 'Alisador de cabelo',
+        price: 2.500
+    },
+    {
+        productName: 'Celular apple',
+        price: 2.500
+    },
+    {
+        productName: 'Vassoura',
+        price: 2.500
+    },
+    {
+        productName: 'Cambio do motor hibrido 2031',
+        price: 2.500
+    },
+    {
+        productName: 'Controle remoto',
+        price: 2.500
+    },
+    {
+        productName: 'Caneta BIC',
+        price: 2.500
+    },
+    {
+        productName: 'Alisador de cabelo',
+        price: 2.500
+    },
+]
 
 function HomePage(){
     const [search, setSearch] = useState('')
@@ -31,6 +64,10 @@ function HomePage(){
                     onSubmitEditing={() => console.log('Sended')}
                 />
             </ViewUp>
+                    <ProductList 
+                        data={data}
+                    />
+
         </Container>
     )
 }

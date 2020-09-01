@@ -5,17 +5,20 @@ import {
     TitleFont,
     PriceFont,
     ProductImage,
-    TextView
+    TextView,
+    TouchableOpacityView
 } from './styles'
 
 function ProductBox({uri, productName, productPrice}){
     return(
         <Container>
-            <ProductImage source={{ uri:  'https://images.wunderstock.com/Green-Grasses-Near-Water-at-Sunset_GA4wfdpcMdH1_800.jpeg'}}/>
+            <ProductImage
+                source={{ uri: 'https://homepages.cae.wisc.edu/~ece533/images/monarch.png'}}
+            />
 
             <TextView>
                 <TitleFont>{productName}</TitleFont>
-                <PriceFont>{productName}</PriceFont>
+                <PriceFont>{productPrice}</PriceFont>
             </TextView>
         </Container>
     )
