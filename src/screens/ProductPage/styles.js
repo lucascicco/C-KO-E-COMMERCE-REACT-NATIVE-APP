@@ -1,7 +1,10 @@
 import styled from 'styled-components/native';
+import { Platform }  from 'react-native'
 
 import Button from '../../components/ButtonType1';
 import Input from '../../components/TextInput';
+
+const widthPercentage = Platform.OS === 'ios' ? '90%' : '100%';
 
 export const Container = styled.SafeAreaView`
     flex: 1;
@@ -89,7 +92,7 @@ export const TotalBasic = styled.Text`
 
 export const DescriptionView = styled.View`
     height: 30%;
-    width: 90%;
+    width: ${widthPercentage};
     padding: 10px;
     border-radius: 5px;
     background: #eceff1;
