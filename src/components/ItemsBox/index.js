@@ -10,7 +10,6 @@ function ItemsBox({data}){
     return(
         <Container>
             <FlatList
-                showsHorizontalScrollIndicator={true}
                 data={data}
                 keyExtractor={item => item.productName}
                 numColumns={2}

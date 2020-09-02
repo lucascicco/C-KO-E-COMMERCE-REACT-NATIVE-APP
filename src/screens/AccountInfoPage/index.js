@@ -1,4 +1,8 @@
 import React, {useState, useEffect} from 'react';
+import TitleView from '../../components/MyProfilePagesComponents/TitleView';
+import ScrollViewX from '../../components/MyProfilePagesComponents/ScrollViewOptions';
+import AvatarView from '../../components/MyProfilePagesComponents/AvatarView';
+import Background from '../../components/Background4'
 
 import {
     Container
@@ -6,9 +10,15 @@ import {
 
 function MyProductsPage(){
     return (
-       <Container>
-       
-       </Container>
+       <Background>
+        <Container>
+            <TitleView>
+                Meu perfil
+            </TitleView>
+            <AvatarView />
+            <ScrollViewX/>
+         </Container>
+       </Background>
     )
 }
 

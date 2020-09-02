@@ -1,8 +1,7 @@
 import React, {useState, useRef, useEffect } from 'react';
 import { Animated, Keyboard, Platform, TouchableWithoutFeedback  } from 'react-native';
 import { onChange_onlyText, onChange_onlyNumber } from '../../utils/RestrictInputs';
-import PickerAndroid from '../../components/Picker/picker.android';
-import PickerIos from '../../components/Picker/picker.ios';
+import Picker from '../../components/Picker';
 import MaskedInput from '../../components/TextInputMasked';
 import ProductImage from '../../components/ProductImage';
 import Categorias from '../../utils/Categorias.js'
@@ -108,30 +107,19 @@ function CreateProductPage(){
                        onSubmitEditing={() => PriceRef.getElement().focus()}
                    />
 
-                   {typeOfPlatform ? (
-                       <PickerIos 
-                           label="Selecione a categoria"
-                           value="Categoria"
-                           style={{ width: '100%', marginBottom: 10}}
-                           text={CategoryLabel}
-                           data={Categorias}
-                           selectedValue={Category}
-                               onValueChange={itemValue => {
-                                   setCategory(itemValue)
-                                   setCategoryLabel(itemValue)
-                               }}
-                           onPressSubmit={() => PriceRef.getElement().focus()}
-                       />
-                   ) : ( 
-                       <PickerAndroid 
-                           style={{ width: '100%', marginBottom: 10}}
-                           data={Categorias}
-                           selectedValue={Category}
-                           onValueChange={itemValue => {
-                               setCategory(itemValue)
-                           }}
-                       />
-                   )}
+                    <Picker 
+                        label="Selecione a categoria"
+                        value="Categoria"
+                        style={{ width: '100%', marginBottom: 10}}
+                        text={CategoryLabel}
+                        data={Categorias}
+                        selectedValue={Category}
+                            onValueChange={itemValue => {
+                                setCategory(itemValue)
+                                setCategoryLabel(itemValue)
+                            }}
+                    />
+        
 
                         
                    <DescriptionForm
@@ -151,7 +139,13 @@ function CreateProductPage(){
                            type="money"
                            placeholder="Preço"
                            returnKeyType="next"
-                           style={{ width: '47%', marginRight: 10}}
+                           style={{ 
+                               width: '47%', 
+                               marginRight: 10,
+                            }}
+                            maskedStyle={{
+                                fontFamily: Price ? null : 'raleway'
+                            }}
                            blurOnSubmit={false}
                            value={Price}
                            onChangeText={number => setPrice(number)}

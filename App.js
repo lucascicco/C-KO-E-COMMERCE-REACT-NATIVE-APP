@@ -1,7 +1,7 @@
 import { StatusBar } from 'expo-status-bar';
 import React, { useState } from 'react';
 import LoginPage from './src/screens/LoginPage';
-import PAGE from './src/screens/AccountInfoPage';
+import PAGE from './src/screens/CreateProductPage';
 import * as Font from 'expo-font';
 import { AppLoading } from 'expo';
 

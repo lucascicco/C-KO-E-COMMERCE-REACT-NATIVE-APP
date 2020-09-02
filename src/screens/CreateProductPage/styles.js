@@ -56,6 +56,7 @@ export const DescriptionForm = styled.TextInput.attrs({
   padding: 10px;
   color: #FFF;
   margin-bottom: 10px;
+  font-family: raleway;
 `
 
 export const IMAGE_HEIGHT = 200

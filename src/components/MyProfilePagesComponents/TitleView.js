@@ -1,16 +1,14 @@
 import React from 'react';
 
 import {
-    container_one,
-    container_one_title
+    Container_one,
+    Container_one_title
 } from './styles';
 
-export default function FlatlistProducts({ children }) {
+export default function TitleView({ children }) {
     return (
-        <container_one>
-            <container_one_title>
-                {children}
-            </container_one_title>
-        </container_one>
+        <Container_one>
+            <Container_one_title>{children}</Container_one_title>
+        </Container_one>
     )
 };

@@ -6,12 +6,12 @@ import {
     ScrollView_Text
 } from './styles';
 
-export default function ScrollView_Item({Children, onPress}) {
+export default function ScrollView_Item({children, onPress}) {
     return (
         <ScrollViewItem onPress={onPress}>
             <ViewItem>
                 <ScrollView_Text>
-                    {Children}
+                    {children}
                 </ScrollView_Text>
             </ViewItem>
         </ScrollViewItem>
