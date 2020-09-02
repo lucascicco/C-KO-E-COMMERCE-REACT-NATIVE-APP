@@ -13,12 +13,13 @@ export default function DateInput({ date, onChange }) {
   const CurrentData = format(new Date(), 'dd/MM/yyyy')
   const dateFormatted = useMemo(() => format(date, 'dd/MM/yyyy'), [date])
   const TextOnScreen = dateFormatted === CurrentData ? 'Nascimento' : dateFormatted
-  
+  const FontFamilyStyle = dateFormatted === CurrentData ? 'raleway' : 'Helvetica'
+
   return (
     <Container>
       <DateButton onPress={() => setOpened(!opened)}>
         <Icon name="event" color="#fff" size={20} />
-        <DateText style={{fontFamily: dateFormatted === CurrentData ? 'raleway' : 'Helvetica'}}>{TextOnScreen}</DateText>
+        <DateText style={{fontFamily: FontFamilyStyle}}>{TextOnScreen}</DateText>
       </DateButton>
     
         <Modal
@@ -29,6 +30,7 @@ export default function DateInput({ date, onChange }) {
           animationOutTiming={500}
           avoidKeyboard={false}
           coverScreen={true}
+          onBackdropPress={() => setOpened(false)}
         >
             <Picker>
                 <DateTimePicker

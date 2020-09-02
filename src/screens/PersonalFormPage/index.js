@@ -76,9 +76,13 @@ function PersonalInformation(){
                 <Form>  
                     <MultiInput>
             
-                        <DatePicker 
+                        <DatePicker
                             date={Birthday}
-                            onChange={(event, date) => setBirthday(date)}
+                            onChange={(event, date) => {
+                                    if(date === undefined) setBirthday(new Date())
+                                    setBirthday(date)
+                                }
+                            }
                         />
             
      

@@ -2,31 +2,32 @@ import React, { useMemo, useState } from 'react';
 import DateTimePicker from '@react-native-community/datetimepicker';
 import { format } from 'date-fns';
 import Icon from 'react-native-vector-icons/MaterialIcons';
-import PropTypes from 'prop-types';
 
 import { Container, DateButton, DateText } from './styles';
 
 export default function DateInput({ date, onChange }) {
-    const [opened, setOpened] = useState(false);
+    const [showDatePicker , setShowDatePicker] = useState(false);
 
     const CurrentData = format(new Date(), 'dd/MM/yyyy')
-    const dateFormatted = useMemo(() => format(date, 'dd/MM/yyyy'), [date])
+    const dateFormatted = format(date, 'dd/MM/yyyy')
     const TextOnScreen = dateFormatted === CurrentData ? 'Nascimento' : dateFormatted
-  
-    console.log(date)
+    const FontFamilyStyle = dateFormatted === CurrentData ? 'raleway' : 'Roboto'
+
     return (
 
         <Container>
-          <DateButton onPress={() => setOpened(!opened)}>
+          <DateButton onPress={() => setShowDatePicker(!showDatePicker)}>
             <Icon name="event" color="#fff" size={20} />
-            <DateText style={{fontFamily: dateFormatted === CurrentData ? 'raleway' : undefined}}>{TextOnScreen}</DateText>
+            <DateText style={{fontFamily: FontFamilyStyle}}>{TextOnScreen}</DateText>
           </DateButton>
 
 
-          {opened && (
+          {showDatePicker && (
             <DateTimePicker
               value={date}
-              onChange={onChange}
+              onChange={(event, date) => {
+                onChange(event, date) //I need to fix this problem yet.
+              }}
               maximumDate={new Date()}
               mode="date"
               locale="pt"
@@ -39,7 +40,3 @@ export default function DateInput({ date, onChange }) {
   );
 }
 
-DateInput.propTypes = {
-  date: PropTypes.instanceOf(Date).isRequired,
-  onChange: PropTypes.func.isRequired,
-};
