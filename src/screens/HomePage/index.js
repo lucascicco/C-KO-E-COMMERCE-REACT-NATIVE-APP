@@ -2,12 +2,13 @@ import React, { useState, useEffect } from 'react';
 import ProductList from '../../components/ItemsBox';
 import { Octicons } from '@expo/vector-icons'; 
 import { MaterialCommunityIcons } from '@expo/vector-icons'; 
-import { StyleSheet, Platform } from 'react-native';
+import { StyleSheet } from 'react-native';
 import Background from '../../components/Background4'
 import Modal from 'react-native-modal';
 import Categorias from '../../utils/Categorias'
 import data from '../../utils/testing_data';
 import { Picker } from '@react-native-community/picker'
+
 
 import {
     Container,
@@ -20,9 +21,11 @@ import {
     LogoImage,
     TextTitle,
     ModalView,
-    SubmitButton,
     FilterText,
-    FilterView
+    FilterView,
+    TouchableButton,
+    ButtonView,
+    ButtonText
 } from './styles';
 
 
@@ -30,7 +33,13 @@ function HomePage() {
     const [search, setSearch] = useState('');
     const [categorySelected, setCategorySearch] = useState('');
     const [visible, setVisibility] = useState(false);
+    const [filter, setFilter] = useState('')
     
+    const HandleFilterSubmit  = () => {
+        setFilter(categorySelected)
+        setVisibility(!visible)
+    }
+
     return(
         <Background>
             <Container>
@@ -76,8 +85,8 @@ function HomePage() {
                 </ViewUp>
                 
                 <FilterView>
-                    {(categorySelected !== '' && categorySelected !== null) && 
-                    (<FilterText>Categoria filtrada: {categorySelected}</FilterText>)}
+                    {(filter !== '' && filter !== null) && 
+                    (<FilterText>Categoria filtrada: {filter}</FilterText>)}
                 </FilterView>
                
 
@@ -90,8 +99,10 @@ function HomePage() {
                      animationIn="zoomIn"
                      animationOut="zoomOut"
                      animationInTiming={500}
+                     animationOutTiming={500}
                      avoidKeyboard={false}
                      coverScreen={true}
+                     onBackdropPress={() => setVisibility(false)}
                  >
                      <ModalView>
                         <Picker
@@ -105,28 +116,29 @@ function HomePage() {
                            }}
                            mode="dropdown"
                            >
-                            {
-                                Platform.OS === 'ios' && (
-                                    <Picker.Item
-                                        label="Selecione uma categoria"
-                                        value={null}
-                                    /> 
-                                )
-                            }
-                            {
-                                Categorias.map((item, index) => {
-                                    return (
-                                        <Picker.Item 
-                                            label={item}
-                                            value={item}
-                                            key={item}
-                                        />
-                                    )
-                                })
-                            }
+                                <Picker.Item
+                                    label="Selecione uma categoria"
+                                    value={null}
+                                /> 
+
+                                {
+                                    Categorias.map((item, index) => {
+                                        return (
+                                            <Picker.Item 
+                                                label={item}
+                                                value={item}
+                                                key={item}
+                                            />
+                                        )
+                                    })
+                                }
                         </Picker>
 
-                         <SubmitButton style={{ background: '#283593'}} onPress={() => setVisibility(!visible)}>Filtrar</SubmitButton>
+                        <TouchableButton onPress={HandleFilterSubmit}>
+                            <ButtonView>
+                                <ButtonText>Filtrar</ButtonText>
+                            </ButtonView>
+                        </TouchableButton>
                      </ModalView> 
                 </Modal>
         

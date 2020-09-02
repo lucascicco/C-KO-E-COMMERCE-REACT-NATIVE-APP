@@ -69,3 +69,20 @@ export const FilterView = styled.View`
     margin-top: 6px;
     height: 23px;
 `
+
+export const TouchableButton = styled.TouchableOpacity``
+
+export const ButtonView = styled.View`
+    border-radius: 4px;
+    height: 46px;
+    align-items: center;
+    justify-content: center;
+    background: #283593;
+`
+
+export const ButtonText = styled.Text`
+    color: #fff;
+    font-size: 20px;
+    font-weight: bold;
+    font-family: raleway;
+`

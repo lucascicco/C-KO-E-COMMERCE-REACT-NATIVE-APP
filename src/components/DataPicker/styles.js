@@ -22,7 +22,6 @@ export const DateText = styled.Text`
 `;
 
 export const Picker = styled.View`
-    flex: 1;
     justify-content: center;
     padding: 5%;
     background: #7986cb;

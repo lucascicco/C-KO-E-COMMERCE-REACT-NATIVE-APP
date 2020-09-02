@@ -1,8 +1,7 @@
 import React, { useRef, useState, useEffect } from 'react';
 import {Platform} from 'react-native';
-import BrazilianStates from '../../utils/BrazilStates.json';
-import PickerAndroid from '../Picker/picker.android';
-import PickerIos from '../Picker/picker.ios';
+import BrazilianStates from '../../utils/BrazilStates.js';
+import Picker from '../../components/Picker';
 import InputMask from '../TextInputMasked';
 import { onChange_onlyText, onChange_onlyNumber } from '../../utils/RestrictInputs';
 
@@ -64,35 +63,17 @@ function LocationPage({ onClickSubmit , xz}){
                          editable={false}
                      />                         
 
-                    {typeOfPlatform ? (
-                            <PickerIos 
-                                label="Selecione o estado"
-                                value="Estado"
-                                text={Label}
-                                onPressButton={() => setModalVisible(true)}
-                                visible={modalVisible}
-                                data={BrazilianStates}
-                                selectedValue={State}
-                                onValueChange={itemValue => {
-                                    setState(itemValue)
-                                    setLabel(itemValue)
-                                }}
-                                onPressSubmit={
-                                    () => {
-                                        CityRef.current.focus()
-                                        setModalVisible(false)
-                                    }
-                                }
-                            />
-                    ) : (
-                            <PickerAndroid 
-                                data={BrazilianStates}
-                                selectedValue={State}
-                                onValueChange={itemValue => {
-                                    setState(itemValue)
-                                }}
-                            />
-                    )}
+                     <Picker 
+                        label="Selecione o estado"
+                        value="Estado"
+                        text={Label}
+                        data={BrazilianStates}
+                        selectedValue={State}
+                        onValueChange={itemValue => {
+                            setState(itemValue)
+                            setLabel(itemValue)
+                        }}
+                    />
                             
                      <FormInput
                          placeholder="Cidade"

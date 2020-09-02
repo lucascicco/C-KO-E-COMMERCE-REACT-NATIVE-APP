@@ -1,8 +1,8 @@
 import React from 'react';
-import { Picker } from 'react-native';
+import { Picker } from '@react-native-community/picker'
 import { ContainerAndroid } from './styles';
 
-function PickerCustom({style, data, ...rest}){
+function PickerCustomX({style, styleButton, label, value, data, onPressSubmit, text, ...rest}){
     return(
         <ContainerAndroid style={style}>     
             <Picker
@@ -12,9 +12,11 @@ function PickerCustom({style, data, ...rest}){
                 {
                     data.map((item, index) => {
                         const labelName = `${item.sigla || index + 1} - ${item.nome}`
+                        const labelInUse = item.nome ? labelName : `${item}`
+                        
                         return <Picker.Item 
-                            label={labelName}
-                            value={item.sigla || item.nome}
+                            label={labelInUse}
+                            value={item.sigla || item}
                             key={item.sigla || index + 1}
                         />
                     })
@@ -24,4 +26,4 @@ function PickerCustom({style, data, ...rest}){
     )
 }
 
-export default PickerCustom
+export default PickerCustomX

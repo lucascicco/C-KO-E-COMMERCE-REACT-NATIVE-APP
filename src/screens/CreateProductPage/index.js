@@ -5,7 +5,7 @@ import PickerAndroid from '../../components/Picker/picker.android';
 import PickerIos from '../../components/Picker/picker.ios';
 import MaskedInput from '../../components/TextInputMasked';
 import ProductImage from '../../components/ProductImage';
-import CategoriesJSON from '../../utils/Categorias.json'
+import Categorias from '../../utils/Categorias.js'
 import * as ImagePicker from 'expo-image-picker';
 import Constants from 'expo-constants';
 import * as Permissions from 'expo-permissions';
@@ -114,7 +114,7 @@ function CreateProductPage(){
                            value="Categoria"
                            style={{ width: '100%', marginBottom: 10}}
                            text={CategoryLabel}
-                           data={CategoriesJSON}
+                           data={Categorias}
                            selectedValue={Category}
                                onValueChange={itemValue => {
                                    setCategory(itemValue)
@@ -125,7 +125,7 @@ function CreateProductPage(){
                    ) : ( 
                        <PickerAndroid 
                            style={{ width: '100%', marginBottom: 10}}
-                           data={CategoriesJSON}
+                           data={Categorias}
                            selectedValue={Category}
                            onValueChange={itemValue => {
                                setCategory(itemValue)

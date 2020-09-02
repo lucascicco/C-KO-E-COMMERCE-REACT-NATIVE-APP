@@ -1,10 +1,9 @@
 import React, { useRef, useState, useEffect } from 'react';
 import { Animated, Keyboard, Platform, StyleSheet } from 'react-native';
-import PickerAndroid from '../../components/Picker/picker.android';
-import PickerIos from '../../components/Picker/picker.ios';
 import MaskedInput from '../../components/TextInputMasked';
-import GenderJSON from '../../utils/Gender.json';
-import ProfessionJSON from '../../utils/Profession.json';
+import GenderData from '../../utils/Gender.js';
+import Picker from '../../components/Picker';
+import ProfessionData from '../../utils/Profession.js';
 import DatePicker from '../../components/DataPicker';
 import { ImageResizingEventTwo } from '../../utils/KeyboardsEvents';
 import Background from '../../components/Background2'
@@ -82,30 +81,21 @@ function PersonalInformation(){
                             onChange={(event, date) => setBirthday(date)}
                         />
             
-                        {typeOfPlatform ? (
-                            <PickerIos 
-                                label="Selecione o gênero"
-                                value="Gênero"
-                                style={{ width: '40%'}}
-                                text={LabelGender}
-                                data={GenderJSON}
-                                selectedValue={Gender}
-                                onValueChange={itemValue => {
-                                    setGender(itemValue)
-                                    setLabelGender(itemValue)
-                                }}
-                                onPressSubmit={() => PersonalIDRef.getElement().focus()}
-                            />
-                        ) : (
-                                <PickerAndroid 
-                                    data={GenderJSON}
-                                    style={{ width: '40%'}}
-                                    selectedValue={Gender}
-                                    onValueChange={itemValue => {
-                                        setGender(itemValue)
-                                    }}
-                                />
-                        )}       
+     
+                        <Picker 
+                            label="Selecione o gênero"
+                            value="Gênero"
+                            style={{ width: '40%'}}
+                            text={LabelGender}
+                            data={GenderData}
+                            selectedValue={Gender}
+                            onValueChange={itemValue => {
+                                setGender(itemValue)
+                                setLabelGender(itemValue)
+                            }}
+                        />
+ 
+                     
                     </MultiInput>
                                 
                     <MultiInput>
@@ -138,29 +128,20 @@ function PersonalInformation(){
                     </MultiInput>
                                 
                     <MultiInput>
-                    {typeOfPlatform ? (
-                            <PickerIos 
-                                label="Selecione a profissão"
-                                value="Profissão"
-                                style={{ width: '100%'}}
-                                text={LabelProfession}
-                                data={ProfessionJSON}
-                                selectedValue={Profession}
-                                onValueChange={itemValue => {
-                                    setProfession(itemValue)
-                                    setLabelProfession(itemValue)
-                                }}
-                            />
-                            ) : (
-                            <PickerAndroid 
-                                style={{ width: '100%'}}
-                                data={ProfessionJSON}
-                                selectedValue={Profession}
-                                onValueChange={itemValue => {
-                                    setProfession(itemValue)
-                                }}
-                            />
-                        )}       
+                
+                    <Picker 
+                        label="Selecione a profissão"
+                        value="Profissão"
+                        style={{ width: '100%'}}
+                        text={LabelProfession}
+                        data={ProfessionData}
+                        selectedValue={Profession}
+                        onValueChange={itemValue => {
+                            setProfession(itemValue)
+                            setLabelProfession(itemValue)
+                        }}
+                    />
+                                   
                     </MultiInput>
                             
                     <SubmitButton style={{ background: '#283593'}} onPress={handleSubmit}>

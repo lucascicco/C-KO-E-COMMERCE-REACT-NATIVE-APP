@@ -1,11 +1,12 @@
 import React , {useState} from 'react';
-import { Picker } from 'react-native';
+import { Picker } from '@react-native-community/picker'
 import Modal from 'react-native-modal';
 import { MainContainer, Container } from './styles';
-import ButtonType2 from '../../components/ButtonType2';
+import ButtonType2 from '../ButtonType2';
 import Button from '../ButtonType1';
 
-function PickerCustom({style, styleButton, label, value, data, onPressSubmit, text, ...rest}){
+
+function PickerCustomY({style, styleButton, label, value, data, onPressSubmit, text, ...rest}){
     const [modalVisible, setModalVisible] = useState(false)
 
     return(
@@ -25,6 +26,7 @@ function PickerCustom({style, styleButton, label, value, data, onPressSubmit, te
                 animationOutTiming={500}
                 avoidKeyboard={false}
                 coverScreen={true}
+                onBackdropPress={() => setModalVisible(false)}
             >
                  <Container>     
                      <Picker
@@ -44,9 +46,9 @@ function PickerCustom({style, styleButton, label, value, data, onPressSubmit, te
                          {
                              data.map((item, index) => {
                                  return <Picker.Item 
-                                     label={item.nome}  
-                                     value={item.sigla || item.nome}
-                                     key={item.sigla || index + 1}
+                                     label={item.nome || item}  
+                                     value={item.sigla || item}
+                                     key={item.sigla || index}
                                  />
                              })
                          }
@@ -66,4 +68,4 @@ function PickerCustom({style, styleButton, label, value, data, onPressSubmit, te
     )
 }
 
-export default PickerCustom
+export default PickerCustomY
