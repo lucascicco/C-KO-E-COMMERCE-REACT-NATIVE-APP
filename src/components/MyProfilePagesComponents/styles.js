@@ -41,24 +41,19 @@ export const FlatList_View = styled.View`
 
 export const FlatList_Item = styled.View`
     flex-direction: row;
-    margin: 5px;
-    border: 1px solid #9e9e9e;
-    padding: 10px;
-    background: #FFF;
     align-items: center;
 `
 export const Product_Image = styled.Image`
-    height: 80px;
-    width: 80px;
+    height: 85px;
+    width: 85px;
     border-radius: 3px;
 `
 
 export const Flatlist_ViewTwo = styled.View`
     flex-direction: column;
-    margin-left: 10px;
+    margin-left: 8px;
     flex: 1;
     padding: 5px;
-    border-radius: 5px;
 `
 
 export const FlatList_Text = styled.Text`
@@ -69,8 +64,42 @@ export const FlatList_Title = styled.Text.attrs({
     numberOfLines: 1
 })`
     font-family: raleway-bold;
-    font-size: 18px;
-    margin-bottom: 10px;
+    font-size: 20px;
+    width: 68%;
+`
+
+export const Title_View_Row = styled.View`
+    flex-direction: row;
+    justify-content: space-between;
+    width: 100%;
+    border-bottom-width: 1px;
+    borderColor: black;
+    borderStyle: solid;
+    paddingBottom: 5px;
+`
+
+export const Code_View = styled.View`
+    flex-direction: column;
+    width: 30%;
+    align-items: center;
+`
+
+export const Code_Small = styled.Text`
+    font-size: 12px;
+    font-style: italic;
+`
+export const Code_Bigger = styled.Text`
+    font-size: 15px;
+`
+
+export const Item_View =  styled.View`
+    flex-direction: column;
+    margin: 5px;
+    border: 1px solid #9e9e9e;
+    padding: 10px;
+    background: #FFF;
+    align-items: center;
+    justify-content: space-between;
 `
 
 export const AvatarImage = styled.Image`
@@ -144,7 +173,7 @@ export const Button_One = styled.TouchableOpacity`
 export const Button_Text =  styled.Text`
     font-size: 16px;
 `
-export const Modal_View = styled.KeyboardAvoidingView`
+export const Modal_View = styled.View`
     background: #9e9e9e;
     padding: 15px;
     border-radius: 5px;
@@ -153,7 +182,7 @@ export const Modal_View = styled.KeyboardAvoidingView`
 export const Modal_label = styled.Text`
     font-size: 22px;
     font-weight: bold;
-    margin-bottom: 2px;
+    margin-bottom: 3px;
 `
 
 export const Modal_Text = styled.Text`
@@ -187,9 +216,10 @@ export const Email_Form = styled.TextInput.attrs({
     flex: 1;
     color: #FFF;
     font-family: raleway;
+    textAlignVertical: top;
 `
 export const Submit_Button = styled(Button)`
-    margin-top: 20px;
+    margin-top: 10px;
     background: ${props => props.style.background}
 `
 export const Email_Spacing = styled.View`
@@ -202,3 +232,7 @@ export const Email_Lenght = styled.View`
     flex-direction: row;
     justify-content: flex-end;
 `
+
+export const View_DimissKeyboard = styled.TouchableWithoutFeedback``
+
+export const View_ModalTouch = styled.View``

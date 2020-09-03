@@ -20,6 +20,7 @@ function MyProductsPage(){
                  data={data}
                  onPress={() => setVisibility(!visible)}
             />
+            
             <Modal
                 isVisible={visible}
                 animationIn="zoomIn"
