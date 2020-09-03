@@ -11,7 +11,8 @@ export const Container = styled.View`
 
 export const ChooseText = styled.Text`
     font-size: 22px;
-    color: #039be5;
+    font-family: raleway;
+    color: #FFF;
     margin: 15px;
     textAlign: center;
     font-weight: bold;

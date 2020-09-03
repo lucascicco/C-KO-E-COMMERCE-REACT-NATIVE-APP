@@ -66,7 +66,7 @@ export const ImageResizingEventThree = (type, height, width, font) => {
         }).start();
         Animated.timing(width, {
           duration: event.duration,
-          toValue: 125,
+          toValue: 100,
           useNativeDriver: false
         }).start();
         Animated.timing(font, {
@@ -84,7 +84,7 @@ export const ImageResizingEventThree = (type, height, width, font) => {
         }).start();
         Animated.timing(width, {
           duration: event.duration,
-          toValue: 210,
+          toValue: 175,
           useNativeDriver: false
         }).start();
         Animated.timing(font, {

@@ -2,15 +2,25 @@ import React from 'react';
 
 import {
     Avatar_View,
-    AvatarImage
+    AvatarImage,
+    Text_View,
+    Avatar_ImageView,
+    Alert_ImageView
 } from './styles';
 
-export default function AvatarView({ uri }) {
+export default function AvatarView({ uri, onPress}) {
     return (
         <Avatar_View>
-            <AvatarImage 
-            source={{ uri: 'https://homepages.cae.wisc.edu/~ece533/images/monarch.png'}}
-            />
+            <Avatar_ImageView onPress={onPress}>
+                {uri ? (
+                    <AvatarImage 
+                        source={{ uri: uri}}
+                    />
+                ) : (
+                    <Alert_ImageView>Adicione sua foto de perfil</Alert_ImageView>
+                )}
+            </Avatar_ImageView>
+            <Text_View>USERNAME</Text_View>
         </Avatar_View>
     );
 }

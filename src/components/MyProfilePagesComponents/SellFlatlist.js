@@ -1,22 +1,23 @@
 import React from 'react';
 import { FlatList } from 'react-native';
-import FlatListItem from './FlatListItem';
+import FlatListItem from './SellItem';
 
 import {
     FlatList_View
 } from './styles';
 
-export default function FlatlistProducts({data}) {
+export default function FlatlistProducts({data, onPress}) {
     return (
         <FlatList_View>
             <FlatList 
                 data={data}
-                keyExtractor={item => item.id}
+                keyExtractor={(item, index) => index}
                 numColumns={1}
                 renderItem={({ item }) => {
                     return(
                         <FlatListItem 
-                            title={item.name}
+                            title={item.productName}
+                            onPress={onPress}
                         />
                     )
                 }}

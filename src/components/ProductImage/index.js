@@ -12,6 +12,7 @@ function ProductImage({onPress, uri, Height, Width, FontSize }){
                    source={{
                        uri: uri,
                    }}
+                   resizeMode="contain"
                />
             ) : (
                 <Animated.Text
@@ -34,10 +35,11 @@ const styles = StyleSheet.create({
         borderRadius: 5
     },
     ChooseText: {
-        color: '#039be5',
+        color: '#FFF',
         margin: 15,
         textAlign: 'center',
-        fontWeight: 'bold'
+        fontWeight: 'bold',
+        fontFamily: 'raleway'
     }
 })
 

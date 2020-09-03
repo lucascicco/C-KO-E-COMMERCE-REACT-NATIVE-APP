@@ -7,7 +7,9 @@ import {
 
 export default function ScrollViewOptions() {
     return (
-        <ScrollView_one>
+        <ScrollView_one contentContainerStyle={{
+            paddingVertical: 20
+        }}>
             <ScrollViewItem>Alterar dados cadastrais</ScrollViewItem>
             <ScrollViewItem>Alterar dados pessoais </ScrollViewItem>
             <ScrollViewItem>Alterar localização</ScrollViewItem>

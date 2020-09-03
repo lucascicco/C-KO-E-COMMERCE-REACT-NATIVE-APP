@@ -9,7 +9,7 @@ import * as ImagePicker from 'expo-image-picker';
 import Constants from 'expo-constants';
 import * as Permissions from 'expo-permissions';
 import { ImageResizingEventThree } from '../../utils/KeyboardsEvents';
-
+import Background from '../../components/Background2'
 
 import { 
     Container, 
@@ -38,7 +38,7 @@ function CreateProductPage(){
     const [CategoryLabel, setCategoryLabel] = useState('Categoria')
     
     const ViewHeight = new Animated.Value(175);
-    const ViewWidth = new Animated.Value(210);
+    const ViewWidth = new Animated.Value(175);
     const FontSize = new Animated.Value(22);
     
     useEffect(() => {
@@ -85,93 +85,96 @@ function CreateProductPage(){
 
     return(
         <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
-            <Container>
-               <ProductImage 
-                   Height={ViewHeight}
-                   Width={ViewWidth}
-                   FontSize={FontSize}
-                   onPress={HandleChoosePhoto}
-                   uri={ProductPicture}
-               />
-
-               <Form>
-                   <FormInput
-                       placeholder="Nome do produto"
-                       maxLength={30}
-                       returnKeyType="next"
-                       style={{ width: '100%', marginBottom: 10}}
-                       blurOnSubmit={false}
-                       value={ProductName}
-                       onChangeText={text => onChange_onlyText(text, setProductName)}
-                       ref={ProductNameRef}
-                       onSubmitEditing={() => PriceRef.getElement().focus()}
+            <Background>
+                <Container>
+                   <ProductImage 
+                       Height={ViewHeight}
+                       Width={ViewWidth}
+                       FontSize={FontSize}
+                       onPress={HandleChoosePhoto}
+                       uri={ProductPicture}
                    />
 
-                    <Picker 
-                        label="Selecione a categoria"
-                        value="Categoria"
-                        style={{ width: '100%', marginBottom: 10}}
-                        text={CategoryLabel}
-                        data={Categorias}
-                        selectedValue={Category}
-                            onValueChange={itemValue => {
-                                setCategory(itemValue)
-                                setCategoryLabel(itemValue)
-                            }}
-                    />
-        
-
-                        
-                   <DescriptionForm
-                        multiline={true}
-                        autoCorrect={true}
-                        numberOfLines={4}
-                        value={Description}
-                        onChangeText={description => setDescription(description)}
-                        placeholder="Descrição"
-                        maxLength={350}
-                        ref={DescriptionRef}
-                        maxHeight={70}
-                    />
-                       
-                   <MultiInput>
-                       <MaskedInput
-                           type="money"
-                           placeholder="Preço"
-                           returnKeyType="next"
-                           style={{ 
-                               width: '47%', 
-                               marginRight: 10,
-                            }}
-                            maskedStyle={{
-                                fontFamily: Price ? null : 'raleway'
-                            }}
-                           blurOnSubmit={false}
-                           value={Price}
-                           onChangeText={number => setPrice(number)}
-                           ref={ref => PriceRef = ref}
-                           onSubmitEditing={() => QuantityRef.current.focus()}
-                       />
-
+                   <Form>
                        <FormInput
-                           placeholder="Quantidade"
-                           maxLength={5}
-                           keyboardType={typeOfkeyboardType}
+                           placeholder="Nome do produto"
+                           maxLength={30}
                            returnKeyType="next"
-                           style={{ width: '50%'}}
+                           style={{ width: '100%', marginBottom: 10}}
                            blurOnSubmit={false}
-                           value={Quantity}
-                           onChangeText={number => onChange_onlyNumber(number, setQuantity)}
-                           ref={QuantityRef}
-                           onSubmitEditing={() => console.log('WORKING ON IT!')}
+                           value={ProductName}
+                           onChangeText={text => onChange_onlyText(text, setProductName)}
+                           ref={ProductNameRef}
+                           onSubmitEditing={() => PriceRef.getElement().focus()}
                        />
-                   </MultiInput>
-                       
-                   <SubmitButton onPress={() => console.log('WORKING ON IT!')}>
-                       Criar produto
-                   </SubmitButton>
-               </Form>
-            </Container>    
+
+                        <Picker 
+                            label="Selecione a categoria"
+                            value="Categoria"
+                            style={{ width: '100%', marginBottom: 10}}
+                            text={CategoryLabel}
+                            data={Categorias}
+                            selectedValue={Category}
+                                onValueChange={itemValue => {
+                                    setCategory(itemValue)
+                                    setCategoryLabel(itemValue)
+                                }}
+                        />
+                            
+
+                            
+                       <DescriptionForm
+                            multiline={true}
+                            autoCorrect={true}
+                            numberOfLines={4}
+                            value={Description}
+                            onChangeText={description => setDescription(description)}
+                            placeholder="Descrição"
+                            maxLength={350}
+                            ref={DescriptionRef}
+                            maxHeight={70}
+                        />
+                            
+                       <MultiInput>
+                           <MaskedInput
+                               type="money"
+                               placeholder="Preço"
+                               returnKeyType="next"
+                               style={{ 
+                                   width: '47%', 
+                                   marginRight: 10,
+                                }}
+                                maskedStyle={{
+                                    fontFamily: Price ? null : 'raleway'
+                                }}
+                               blurOnSubmit={false}
+                               value={Price}
+                               onChangeText={number => setPrice(number)}
+                               ref={ref => PriceRef = ref}
+                               onSubmitEditing={() => QuantityRef.current.focus()}
+                           />
+
+                           <FormInput
+                               placeholder="Quantidade"
+                               maxLength={5}
+                               keyboardType={typeOfkeyboardType}
+                               returnKeyType="next"
+                               style={{ width: '50%'}}
+                               blurOnSubmit={false}
+                               value={Quantity}
+                               onChangeText={number => onChange_onlyNumber(number, setQuantity)}
+                               ref={QuantityRef}
+                               onSubmitEditing={() => console.log('WORKING ON IT!')}
+                           />
+                       </MultiInput>
+                            
+               
+                       <SubmitButton style={{ background: '#283593'}} onPress={() =>  console.log('WORKING ON IT')}>
+                            Criar produto
+                        </SubmitButton>
+                   </Form>
+                </Container>    
+            </Background>
         </TouchableWithoutFeedback>
     )
 }

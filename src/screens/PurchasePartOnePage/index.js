@@ -147,6 +147,7 @@ function PurchaseTotalPage(){
                 animationOutTiming={500}
                 avoidKeyboard={false}
                 coverScreen={true}
+                onBackdropPress={() => setVisibility(false)}
             >   
                 <ChangeAddressView onPressOne={() => setVisibility(!visible)}/>
             </Modal>
