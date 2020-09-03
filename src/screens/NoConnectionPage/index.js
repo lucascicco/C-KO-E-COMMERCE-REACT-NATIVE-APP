@@ -1,5 +1,5 @@
 import React from 'react';
-import { StatusBar, Platform , Image} from 'react-native'
+import { StatusBar, Platform , Image } from 'react-native'
 import LoadingDots from "react-native-loading-dots";
 import Background from '../../components/Background2';
 

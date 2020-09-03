@@ -1,9 +1,10 @@
 import React, {useState, useEffect} from 'react';
-import ScrollViewX from '../../components/MyProfilePagesComponents/ScrollViewOptions';
-import AvatarView from '../../components/MyProfilePagesComponents/AvatarView';
 import * as ImagePicker from 'expo-image-picker';
 import Constants from 'expo-constants';
 import * as Permissions from 'expo-permissions';
+
+import AvatarView from '../../components/MyProfilePagesComponents/AvatarView';
+import ScrollViewX from '../../components/MyProfilePagesComponents/ScrollViewOptions';
 
 import {
     Container

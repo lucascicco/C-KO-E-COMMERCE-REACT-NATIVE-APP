@@ -1,9 +1,9 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
+import { Animated, Dimensions } from 'react-native';
 import { AntDesign } from '@expo/vector-icons'; 
-import LocationForm from '../LocationForm';
-import { Animated, Dimensions, Keyboard, Platform } from 'react-native';
 import AddressBox from '../AddressBox';
-import Background from '../Background'
+import Background from '../Background';
+import LocationForm from '../LocationForm';
 
 import {
     Container,

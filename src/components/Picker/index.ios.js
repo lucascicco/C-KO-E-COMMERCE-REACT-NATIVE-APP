@@ -1,9 +1,10 @@
 import React , {useState} from 'react';
-import { Picker } from '@react-native-community/picker'
 import Modal from 'react-native-modal';
-import { MainContainer, Container } from './styles';
+import { Picker } from '@react-native-community/picker'
 import ButtonType2 from '../ButtonType2';
 import Button from '../ButtonType1';
+
+import { MainContainer, Container } from './styles';
 
 
 function PickerCustomY({style, styleButton, label, value, data, onPressSubmit, text, ...rest}){

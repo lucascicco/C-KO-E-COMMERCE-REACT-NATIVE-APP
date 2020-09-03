@@ -1,6 +1,6 @@
 import React, { forwardRef } from 'react';
-import { MaterialIcons } from '@expo/vector-icons';
 import PropTypes from 'prop-types';
+import { MaterialIcons } from '@expo/vector-icons';
 
 import { Container, TextInputType1 } from './styles';
 

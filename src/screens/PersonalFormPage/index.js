@@ -1,12 +1,12 @@
 import React, { useRef, useState, useEffect } from 'react';
 import { Animated, Keyboard, Platform, StyleSheet } from 'react-native';
-import MaskedInput from '../../components/TextInputMasked';
 import GenderData from '../../utils/Gender.js';
-import Picker from '../../components/Picker';
 import ProfessionData from '../../utils/Profession.js';
-import DatePicker from '../../components/DataPicker';
 import { ImageResizingEventTwo } from '../../utils/KeyboardsEvents';
-import Background from '../../components/Background2'
+import DatePicker from '../../components/DataPicker';
+import MaskedInput from '../../components/TextInputMasked';
+import Picker from '../../components/Picker';
+import Background from '../../components/Background2';
 
 import { 
     Container, 

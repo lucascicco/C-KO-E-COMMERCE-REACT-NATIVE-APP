@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
+import { StyleSheet } from 'react-native';
 import NumericInput from 'react-native-numeric-input';
 import Background from '../../components/Background';
-import { StyleSheet } from 'react-native';
 
 import { 
     Container,

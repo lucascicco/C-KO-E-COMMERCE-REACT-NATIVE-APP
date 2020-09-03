@@ -1,8 +1,8 @@
 import React, { useRef, useState, useEffect } from 'react';
-import {Platform} from 'react-native';
-import BrazilianStates from '../../utils/BrazilStates.js';
-import Picker from '../../components/Picker';
+import { Platform } from 'react-native';
 import InputMask from '../TextInputMasked';
+import Picker from '../../components/Picker';
+import BrazilianStates from '../../utils/BrazilStates.js';
 import { onChange_onlyText, onChange_onlyNumber } from '../../utils/RestrictInputs';
 
 import { 

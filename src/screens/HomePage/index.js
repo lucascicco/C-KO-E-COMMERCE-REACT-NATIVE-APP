@@ -1,14 +1,13 @@
 import React, { useState, useEffect } from 'react';
-import ProductList from '../../components/ItemsBox';
-import { Octicons } from '@expo/vector-icons'; 
-import { MaterialCommunityIcons } from '@expo/vector-icons'; 
 import { StyleSheet } from 'react-native';
-import Background from '../../components/Background4'
 import Modal from 'react-native-modal';
-import Categorias from '../../utils/Categorias'
+import { Picker } from '@react-native-community/picker';
+import { MaterialCommunityIcons } from '@expo/vector-icons'; 
+import { Octicons } from '@expo/vector-icons'; 
+import Categorias from '../../utils/Categorias';
 import data from '../../utils/testing_data';
-import { Picker } from '@react-native-community/picker'
-
+import ProductList from '../../components/ItemsBox';
+import Background from '../../components/Background4';
 
 import {
     Container,

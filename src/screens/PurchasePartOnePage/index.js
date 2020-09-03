@@ -1,8 +1,8 @@
 import React , {useState }from 'react';
-import { RadioButton } from 'react-native-paper';
-import { FontAwesome } from '@expo/vector-icons'; 
 import { TouchableOpacity} from 'react-native';
 import Modal from 'react-native-modal';
+import { RadioButton } from 'react-native-paper';
+import { FontAwesome } from '@expo/vector-icons'; 
 import ChangeAddressView from '../../components/ChangeAddress';
 import Background from '../../components/Background';
 

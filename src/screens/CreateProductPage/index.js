@@ -1,15 +1,15 @@
 import React, {useState, useRef, useEffect } from 'react';
 import { Animated, Keyboard, Platform, TouchableWithoutFeedback  } from 'react-native';
-import { onChange_onlyText, onChange_onlyNumber } from '../../utils/RestrictInputs';
-import Picker from '../../components/Picker';
-import MaskedInput from '../../components/TextInputMasked';
-import ProductImage from '../../components/ProductImage';
-import Categorias from '../../utils/Categorias.js'
 import * as ImagePicker from 'expo-image-picker';
 import Constants from 'expo-constants';
 import * as Permissions from 'expo-permissions';
+import Categorias from '../../utils/Categorias.js';
+import { onChange_onlyText, onChange_onlyNumber } from '../../utils/RestrictInputs';
 import { ImageResizingEventThree } from '../../utils/KeyboardsEvents';
-import Background from '../../components/Background2'
+import MaskedInput from '../../components/TextInputMasked';
+import Picker from '../../components/Picker';
+import ProductImage from '../../components/ProductImage';
+import Background from '../../components/Background2';
 
 import { 
     Container, 

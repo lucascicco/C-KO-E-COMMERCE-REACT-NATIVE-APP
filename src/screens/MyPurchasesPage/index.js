@@ -1,10 +1,9 @@
-import React, { useState, useEffect } from 'react';
-import FlatlistProducts from '../../components/MyProfilePagesComponents/PurchasesFlatList';
-import TitleView from '../../components/MyProfilePagesComponents/TitleView'
-import data from '../../utils/testing_data';
+import React, { useState } from 'react';
 import Modal from 'react-native-modal';
+import data from '../../utils/testing_data';
+import FlatlistProducts from '../../components/MyProfilePagesComponents/PurchasesFlatList';
 import ModalInfo from '../../components/MyProfilePagesComponents/ModalContact';
-
+import TitleView from '../../components/MyProfilePagesComponents/TitleView';
 
 import { 
     Container

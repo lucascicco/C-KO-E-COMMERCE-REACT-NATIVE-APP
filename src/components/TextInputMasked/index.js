@@ -1,8 +1,8 @@
 import React, { forwardRef } from 'react';
-import { MaterialIcons } from '@expo/vector-icons';
 import { StyleSheet } from 'react-native';
+import { MaterialIcons } from '@expo/vector-icons';
+import { TextInputMask } from 'react-native-masked-text';
 import PropTypes from 'prop-types';
-import { TextInputMask } from 'react-native-masked-text'
 
 import { Container } from './styles';
 

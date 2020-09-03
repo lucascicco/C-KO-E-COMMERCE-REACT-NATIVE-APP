@@ -1,11 +1,10 @@
 import React, { useRef, useState, useEffect } from 'react';
 import { Animated, Keyboard, Platform, StyleSheet } from 'react-native';
 import BrazilianStates from '../../utils/BrazilStates.js';
-import Picker from '../../components/Picker';
-import InputMask from '../../components/TextInputMasked';
 import { onChange_onlyText, onChange_onlyNumber } from '../../utils/RestrictInputs';
 import { ImageResizingEventTwo } from '../../utils/KeyboardsEvents';
-
+import InputMask from '../../components/TextInputMasked';
+import Picker from '../../components/Picker';
 import Background from '../../components/Background2';
 
 import { 
