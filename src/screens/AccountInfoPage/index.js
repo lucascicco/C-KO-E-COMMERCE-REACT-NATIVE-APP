@@ -2,7 +2,7 @@ import React, {useState, useEffect} from 'react';
 import * as ImagePicker from 'expo-image-picker';
 import Constants from 'expo-constants';
 import * as Permissions from 'expo-permissions';
-
+import { Alert } from 'react-native';
 import AvatarView from '../../components/MyProfilePagesComponents/AvatarView';
 import ScrollViewX from '../../components/MyProfilePagesComponents/ScrollViewOptions';
 
@@ -14,14 +14,19 @@ function MyProductsPage(){
     const [ProductPicture, setProductImage] = useState();
 
     useEffect(() => {
-        getPermissionAsync()
+      async () => {
+        await getPermissionAsync()
+      }
     }, [])
 
     getPermissionAsync = async () => {
         if (Constants.platform.ios) {
           const { status } = await Permissions.askAsync(Permissions.CAMERA_ROLL);
           if (status !== 'granted') {
-            alert('Sorry, we need camera roll permissions to make this work!');
+            Alert.alert(
+              'Acesso negado',
+              'Desculpe, precisamos do acesso para continuar.'
+              );
           }
         }
     };

@@ -66,6 +66,7 @@ export const FilterText = styled.Text`
     font-size: 14px;
 `
 export const FilterView = styled.View`
+    flex-direction: column;
     margin-top: 6px;
     height: 23px;
 `
@@ -85,4 +86,9 @@ export const ButtonText = styled.Text`
     font-size: 20px;
     font-weight: bold;
     font-family: raleway;
+`
+
+export const CleanText = styled.Text`
+    font-size: 15px;
+    color: #3949ab;
 `

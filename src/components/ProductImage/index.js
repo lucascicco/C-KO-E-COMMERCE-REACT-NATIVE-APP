@@ -2,7 +2,6 @@ import React from 'react';
 import { Animated, TouchableHighlight, StyleSheet } from 'react-native';
 
 function ProductImage({onPress, uri, Height, Width, FontSize }){
-    console.log(Height)
     return(
         <TouchableHighlight onPress={onPress}>
             <Animated.View style={[styles.Container, { height: Height, width: Width }]}> 

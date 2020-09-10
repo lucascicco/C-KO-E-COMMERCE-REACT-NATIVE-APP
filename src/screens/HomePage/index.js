@@ -24,7 +24,8 @@ import {
     FilterView,
     TouchableButton,
     ButtonView,
-    ButtonText
+    ButtonText,
+    CleanText
 } from './styles';
 
 
@@ -85,7 +86,15 @@ function HomePage() {
                 
                 <FilterView>
                     {(filter !== '' && filter !== null) && 
-                    (<FilterText>Categoria filtrada: {filter}</FilterText>)}
+                    (
+                        <>
+                            <FilterText>Categoria filtrada: {filter}</FilterText>
+                            
+                            <TouchableButton onPress={() => setFilter('')}>
+                                <CleanText>Limpar categoria</CleanText>
+                            </TouchableButton>
+                        </>
+                    )}
                 </FilterView>
                
 

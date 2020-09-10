@@ -14,8 +14,6 @@ function MyProductsPage(){
     
     return(
         <Container>
-            <TitleView>Minhas Compras</TitleView>
-
             <FlatlistProducts 
                  data={data}
                  onPress={() => setVisibility(!visible)}
@@ -32,9 +30,9 @@ function MyProductsPage(){
                 onBackdropPress={() => setVisibility(false)}
             >       
                 <ModalInfo 
-
+                    sell
                 />
-      
+
             </Modal>
         </Container>
     )

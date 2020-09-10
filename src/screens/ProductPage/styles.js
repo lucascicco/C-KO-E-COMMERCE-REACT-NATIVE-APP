@@ -18,13 +18,20 @@ export const ProductView = styled.View`
     align-items: stretch;
     margin-bottom: 15px;
 `
+export const Title_View = styled.View`
+    flex-direction: row;
+    justify-content: space-between;
+`
 
-export const ProductTitle = styled.Text`
+export const ProductTitle = styled.Text.attrs({
+    numberOfLines: 2
+})`
     font-size: 35px;
     color: #FFF;
     margin-bottom: 10px;
     text-align: center;
     font-family: playfair-bold;
+    width: 90%;
 `
 
 export const DetailsText = styled.Text`

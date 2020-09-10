@@ -69,7 +69,7 @@ function Login() {
                         icon="lock-outline"
                         secureTextEntry
                         placeholder="Senha"
-                        maxLength={15}
+                        maxLength={50}
                         returnkKeyType="send"
                         onChangeText={setPassword}
                         onSubmitEditing={handleSubmit}

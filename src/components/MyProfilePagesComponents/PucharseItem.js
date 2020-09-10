@@ -1,16 +1,27 @@
 import React from 'react';
 
 import {
+    Item_View,
     FlatList_Item,
     Flatlist_ViewTwo,
     FlatList_Text,
+    Button_One,
+    Button_Text,
+    Code_View,
+    Code_Small,
+    Code_Bigger,
+    Title_View_Row,
     FlatList_Title,
     Product_Image,
     Details_View,
     Details_Row,
     Details_RowText,
-    Details_RowTexBold,
-    Details_RowTexItalic
+    Details_RowTextBold,
+    Details_RowTextItalic,
+    Purchase_Button,
+    Info_Button,
+    Info_text,
+    Column_ViewItem
 } from './styles';
 
 export default function Flatlist_item({title, onPress}) {
@@ -47,9 +58,26 @@ export default function Flatlist_item({title, onPress}) {
                                 <Details_RowTextItalic>Dinheiro</Details_RowTextItalic>
                             </Details_Row>
 
-                            <Button_One onPress={onPress}>
-                                <Button_Text>Contato do vendedor</Button_Text>
-                            </Button_One>
+                            <Details_Row>
+                                <Details_RowText></Details_RowText>
+                                <Details_RowTextItalic>Dinheiro</Details_RowTextItalic>
+                            </Details_Row>
+
+                            <Details_Row>
+                                <Details_RowText></Details_RowText>
+                                <Details_RowTextItalic>Dinheiro</Details_RowTextItalic>
+                            </Details_Row>
+
+                            <Cart_Button_View>
+                                <Info_Button onPress={onPress}>
+                                    <Info_text>Contato do vendedor</Info_text>
+                                </Info_Button>
+
+                                <Purchase_Button>
+                                    <Buy_text>Comprar novamente</Buy_text>
+                                </Purchase_Button>
+                            </Cart_Button_View>
+
                         </Details_View>
                     </Flatlist_ViewTwo>
             </FlatList_Item>

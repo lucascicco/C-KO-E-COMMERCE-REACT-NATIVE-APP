@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { StyleSheet } from 'react-native';
 import NumericInput from 'react-native-numeric-input';
 import Background from '../../components/Background';
+import FavoriteProduct from '../../components/HeartIcon';
 
 import { 
     Container,
@@ -17,18 +18,24 @@ import {
     DescriptionView,
     DescriptionText,
     DescriptionScroll,
-    DetailsTitle
+    DetailsTitle,
+    Title_View
 } from './styles';
 
 function ProductPage(){
     const [quantity, setQuantity] = useState(0)
+    const [favorite, setFavorite] = useState(false)
 
     return(
        <Background>
             <Container>
                 <ProductView>
-                    <ProductTitle>Nome do produto</ProductTitle>
+                    <Title_View>
+                        <ProductTitle>Nome do produto</ProductTitle>
 
+                        <FavoriteProduct onPressButton={() => setFavorite(!favorite)} favorite={favorite} />
+                    </Title_View>
+                    
                     <RowView>
                         <ProductImage 
                             source={{ uri: 'https://homepages.cae.wisc.edu/~ece533/images/monarch.png'}}

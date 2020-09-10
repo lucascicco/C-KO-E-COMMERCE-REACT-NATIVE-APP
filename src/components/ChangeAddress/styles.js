@@ -31,7 +31,6 @@ export const ButtonText = styled.Text`
     color: #FFF
 `
 
-
 export const TouchableButton = styled.TouchableOpacity`
     flex:1;
 `

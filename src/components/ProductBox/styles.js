@@ -2,7 +2,6 @@ import styled from 'styled-components/native';
 import GetDimensions from '../../utils/GetDimensions';
 
 const heightPercentage = GetDimensions('height', 30)
-const widthPercentage =  GetDimensions('width', 20)
 
 export const Container = styled.TouchableOpacity`
     padding: 5px;

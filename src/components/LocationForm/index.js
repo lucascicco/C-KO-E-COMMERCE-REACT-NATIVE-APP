@@ -1,4 +1,4 @@
-import React, { useRef, useState, useEffect } from 'react';
+import React, { useRef, useState } from 'react';
 import { Platform } from 'react-native';
 import InputMask from '../TextInputMasked';
 import Picker from '../../components/Picker';
@@ -13,7 +13,7 @@ import {
     SubmitBottom
 } from './styles';
 
-function LocationPage({ onClickSubmit , xz}){
+function LocationPage({ onClickSubmit }){
     const StateRef = useRef()
     const CityRef = useRef()
     const NeighborhoodRef = useRef()
@@ -32,7 +32,6 @@ function LocationPage({ onClickSubmit , xz}){
     const [AdNumber, setAdNumber] = useState('')
     const [Postcode, setPostcode] = useState('')
 
-    const [modalVisible, setModalVisible] = useState(false)
     const [Label, setLabel] = useState('Estado')
     
     const handleSubmit = () => {

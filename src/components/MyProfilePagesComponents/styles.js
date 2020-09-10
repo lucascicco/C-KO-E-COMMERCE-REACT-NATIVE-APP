@@ -36,7 +36,7 @@ export const ScrollView_Text = styled.Text`
 `
 
 export const FlatList_View = styled.View`
-    flex:1;
+    flex: 1;
 `
 
 export const FlatList_Item = styled.View`
@@ -222,6 +222,7 @@ export const Submit_Button = styled(Button)`
     margin-top: 10px;
     background: ${props => props.style.background}
 `
+
 export const Email_Spacing = styled.View`
     background: #757575;
     height: 140px;
@@ -236,3 +237,109 @@ export const Email_Lenght = styled.View`
 export const View_DimissKeyboard = styled.TouchableWithoutFeedback``
 
 export const View_ModalTouch = styled.View``
+
+export const CartItem_View = styled.View`
+    flex-direction: row;
+    margin: 5px;
+    border: 1px solid #9e9e9e;
+    padding: 10px;
+    background: #FFF;
+    align-items: center;
+`
+
+export const Cart_title = styled.Text.attrs({
+    numberOfLines: 1
+})`
+    font-family: raleway-bold;
+    font-size: 16px;
+`
+
+export const Cart_View_Row = styled.View`
+    flex-direction: row;
+    justify-content: space-between;
+    border-bottom-width: 1px;
+    borderColor: black;
+    borderStyle: solid;
+    paddingBottom: 5px;
+    margin-bottom: 5px;
+`
+
+export const Cart_Button_View = styled.View`
+    flex-direction: row;
+    justify-content: space-between;
+    margin-top: 5px;
+`
+
+export const Cart_button_delete = styled.TouchableOpacity`
+    width: 47%;
+    justify-content: center;
+    align-items: center;
+    padding: 5px;
+    border: 1px solid #c62828;
+`
+
+export const Cart_button_buy = styled.TouchableOpacity`
+    width: 47%;
+    justify-content: center;
+    align-items: center;
+    padding: 5px;
+    border: 1px solid #43a047;
+`
+
+export const Delete_text = styled.Text`
+    font-family: raleway;
+    font-size: 15px;
+    color: #c62828;
+`
+
+export const Buy_text = styled.Text`
+    font-family: raleway;
+    font-size: 15px;
+    color: #43a047;
+`
+
+export const Cart_FlatListView = styled.View`
+    flex:1;
+    padding: 20px 20px;
+`
+
+export const Button_Two = styled.TouchableOpacity`
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    padding: 5px;
+    border: 1px solid black;
+    margin-top: 10px;
+`
+
+export const Status_Text = styled.Text`
+    font-size: 14px;
+    font-style: italic;
+    font-weight: bold;
+    color: ${props => props.status === 'open' ? '#8bc34a' : '#c62828'} 
+`
+
+export const Purchase_Button = styled.TouchableOpacity`
+    width: 47%;
+    justify-content: center;
+    align-items: center;
+    padding: 5px;
+    border: 1px solid #43a047;
+`
+
+export const Info_Button = styled.TouchableOpacity`
+    width: 47%;
+    justify-content: center;
+    align-items: center;
+    padding: 5px;
+    border: 1px solid black;
+`
+
+export const Info_text = styled.Text`
+    font-family: raleway;
+    font-size: 15px;
+`
+
+export const Column_text = styled.View`
+    flex: 1;
+`
