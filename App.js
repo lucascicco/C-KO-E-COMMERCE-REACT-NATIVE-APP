@@ -1,8 +1,7 @@
 import { StatusBar } from 'expo-status-bar';
 import React, { useState } from 'react';
 import LoginPage from './src/screens/LoginPage';
-import COMPONENTTESTING  from './src/components/PurchaseDone';
-import PAGE from './src/screens/PurchasePage';
+import PAGE from './src/screens/MyPurchasesPage';
 import * as Font from 'expo-font';
 import { AppLoading } from 'expo';
 
@@ -22,12 +21,12 @@ export default function App() {
 
   if(fontsLoaded){
     return(
-      <COMPONENTTESTING />
+      <PAGE />
     )
   }else{
     return(
       <AppLoading
-        startAsync={getFonts}
+        startAsync={getFonts} 
         onFinish={() => setFontsLoaded(true)}
       />
     )

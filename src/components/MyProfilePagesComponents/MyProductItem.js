@@ -1,48 +1,66 @@
 import React from 'react';
 
 import {
-    Button_Two,
     CartItem_View,
     Cart_title,
     Cart_View_Row,
+    Cart_button_delete,
+    Cart_button_buy,
+    Delete_text,
+    Buy_text,
     Flatlist_ViewTwo,
+    Cart_Button_View,
     Product_Image,
     Details_View,
     Details_Row,
     Details_RowText,
+    Details_RowTextBold,
     Details_RowTextItalic,
-    Button_Text,
-    Status_Text
+    Cart_Row,
+    Title_View_Row,
+    Multiple_Title,
+    Status_Text,
+    Change_Product,
+    Button_Text
 } from './styles';
 
 export default function Flatlist_item({title, onPress}) {
     return (
             <CartItem_View>
-                <Product_Image 
-                    source={{ uri: 'https://homepages.cae.wisc.edu/~ece533/images/monarch.png'}}
-                />
+                <Title_View_Row>
+                    <Multiple_Title>{title}</Multiple_Title>
+                </Title_View_Row>
 
-                <Flatlist_ViewTwo>                
-                        <Details_View>
-                            <Cart_View_Row>
-                                <Cart_title>{title}</Cart_title>
-                            </Cart_View_Row>
+                <Cart_Row>
+                    <Product_Image 
+                        source={{ uri: 'https://homepages.cae.wisc.edu/~ece533/images/monarch.png'}}
+                    />
 
-                            <Details_Row>
-                                <Details_RowText>Status</Details_RowText>
-                                <Status_Text status="open">Aberto</Status_Text>     
-                            </Details_Row>  
-                            
-                            <Details_Row>
-                                <Details_RowText>Vendas feitas</Details_RowText>
-                                <Details_RowTextItalic>20</Details_RowTextItalic>
-                            </Details_Row> 
+                    <Flatlist_ViewTwo>                
+                            <Details_View>
 
-                            <Button_Two onPress={onPress}>
-                                <Button_Text>Alterar produto</Button_Text>
-                            </Button_Two>
-                        </Details_View>
-                </Flatlist_ViewTwo>
+                                <Details_Row>
+                                    <Details_RowText>Status</Details_RowText>
+                                    <Status_Text status="open">Aberto</Status_Text>     
+                                </Details_Row>  
+
+                                <Details_Row>
+                                    <Details_RowText>Vendas feitas</Details_RowText>
+                                    <Details_RowTextItalic>20</Details_RowTextItalic>
+                                </Details_Row> 
+
+                                <Cart_Button_View>
+                                    <Change_Product>
+                                        <Button_Text>Alterar produto</Button_Text>
+                                    </Change_Product>
+
+                                    <Cart_button_buy>
+                                        <Buy_text>Ver vendas</Buy_text>
+                                    </Cart_button_buy>
+                                </Cart_Button_View>
+                            </Details_View>
+                    </Flatlist_ViewTwo>
+                </Cart_Row>
             </CartItem_View>
     );
 }

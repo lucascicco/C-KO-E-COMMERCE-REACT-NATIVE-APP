@@ -1,23 +1,26 @@
 import React from 'react';
 
 import {
+    Item_View,
     FlatList_Item,
-    Flatlist_ViewTwo,
-    FlatList_Text,
-    FlatList_Title,
-    Product_Image,
-    Details_View,
-    Details_Row,
-    Details_RowText,
-    Details_RowTextBold,
-    Details_RowTextItalic,
-    Button_One,
-    Button_Text,
-    Title_View_Row,
     Code_View,
     Code_Small,
     Code_Bigger,
-    Item_View
+    Title_View_Row,
+    FlatList_Title,
+    Product_Image,
+    Info_Button,
+    Column_ViewItem,
+    Row_ViewItem,
+    Title_Item,
+    Info_itemText,
+    Address_text,
+    Row_Picture,
+    Column_Picture,
+    Purchase_Button_View,
+    Column_ViewAdress,
+    Column_ViewImage,
+    Info_text_bigger
 } from './styles';
 
 export default function Flatlist_item({title, onPress}) {
@@ -25,41 +28,54 @@ export default function Flatlist_item({title, onPress}) {
         <Item_View>
             <Title_View_Row>
                 <FlatList_Title>{title}</FlatList_Title>
-                
+
                 <Code_View>
                        <Code_Small>Código</Code_Small>
                        <Code_Bigger>#112784520</Code_Bigger>
                 </Code_View>
             </Title_View_Row>
 
-            <FlatList_Item>
-                <Product_Image 
-                    source={{ uri: 'https://homepages.cae.wisc.edu/~ece533/images/monarch.png'}}
-                />
+            <FlatList_Item>   
+                    <Row_ViewItem>
+                        <Column_ViewItem>
+                            <Title_Item>Total R$</Title_Item>
+                            <Info_itemText>20.000,00</Info_itemText>
+                        </Column_ViewItem>
 
-                <Flatlist_ViewTwo>                
-                        <Details_View>
-                            <Details_Row>
-                                <Details_RowTextBold>Total: R$ 2.000</Details_RowTextBold>          
-                                <Details_RowTextItalic>Qnt: 3</Details_RowTextItalic>
-                            </Details_Row>  
+                        <Column_ViewItem>
+                            <Title_Item>Data da venda</Title_Item>
+                            <Info_itemText>18/01/2000</Info_itemText>
+                        </Column_ViewItem>          
+                        
+                        <Column_ViewItem>
+                            <Title_Item>Pagamento</Title_Item>
+                            <Info_itemText>Cartão de crédito</Info_itemText>  
+                        </Column_ViewItem>
+                    </Row_ViewItem>
 
-                            <Details_Row>
-                                <Details_RowText>Data da venda</Details_RowText>
-                                <Details_RowTextItalic>18/02/2000</Details_RowTextItalic>
-                            </Details_Row> 
+                    <Row_Picture>
+                        <Column_ViewImage>
+                            <Product_Image 
+                                source={{ uri: 'https://homepages.cae.wisc.edu/~ece533/images/monarch.png'}}
+                            />
+                        </Column_ViewImage>
+                    
+                        <Column_Picture>
+                            <Column_ViewAdress>
+                                <Title_Item>Endereço de entrega</Title_Item>
+                                <Address_text>ssssssssssssssssssssssssssssssssssssssssssssssss</Address_text>
+                            </Column_ViewAdress>  
+                        </Column_Picture>
+                    </Row_Picture>
 
-                            <Details_Row>
-                                <Details_RowText>Pagamento</Details_RowText>
-                                <Details_RowTextItalic>Dinheiro</Details_RowTextItalic>
-                            </Details_Row>
+                    
+                    <Purchase_Button_View>
+                        <Info_Button onPress={onPress}>
+                            <Info_text_bigger>Contato do comprador</Info_text_bigger>
+                        </Info_Button>
+                    </Purchase_Button_View>
 
-                            <Button_One onPress={onPress}>
-                                <Button_Text>Contato do comprador</Button_Text>
-                            </Button_One>
-                        </Details_View>
-                    </Flatlist_ViewTwo>
-                </FlatList_Item>
+            </FlatList_Item>
         </Item_View>
     );
 }

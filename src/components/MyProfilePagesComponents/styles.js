@@ -40,8 +40,7 @@ export const FlatList_View = styled.View`
 `
 
 export const FlatList_Item = styled.View`
-    flex-direction: row;
-    align-items: center;
+
 `
 export const Product_Image = styled.Image`
     height: 85px;
@@ -53,7 +52,6 @@ export const Flatlist_ViewTwo = styled.View`
     flex-direction: column;
     margin-left: 8px;
     flex: 1;
-    padding: 5px;
 `
 
 export const FlatList_Text = styled.Text`
@@ -98,8 +96,6 @@ export const Item_View =  styled.View`
     border: 1px solid #9e9e9e;
     padding: 10px;
     background: #FFF;
-    align-items: center;
-    justify-content: space-between;
 `
 
 export const AvatarImage = styled.Image`
@@ -171,7 +167,9 @@ export const Button_One = styled.TouchableOpacity`
 `
 
 export const Button_Text =  styled.Text`
-    font-size: 16px;
+    font-family: raleway;
+    font-size: 14px;
+    text-align: center;
 `
 export const Modal_View = styled.View`
     background: #9e9e9e;
@@ -239,12 +237,15 @@ export const View_DimissKeyboard = styled.TouchableWithoutFeedback``
 export const View_ModalTouch = styled.View``
 
 export const CartItem_View = styled.View`
-    flex-direction: row;
+    flex-direction: column;
     margin: 5px;
     border: 1px solid #9e9e9e;
     padding: 10px;
     background: #FFF;
-    align-items: center;
+`
+export const Cart_Row = styled.View`
+    flex-direction: row;
+    margin-top: 10px;
 `
 
 export const Cart_title = styled.Text.attrs({
@@ -268,18 +269,20 @@ export const Cart_Button_View = styled.View`
     flex-direction: row;
     justify-content: space-between;
     margin-top: 5px;
+    height: 45px;
 `
 
 export const Cart_button_delete = styled.TouchableOpacity`
-    width: 47%;
+    flex: 1;
     justify-content: center;
     align-items: center;
     padding: 5px;
     border: 1px solid #c62828;
+    margin-right: 5px;
 `
 
 export const Cart_button_buy = styled.TouchableOpacity`
-    width: 47%;
+    flex: 1;
     justify-content: center;
     align-items: center;
     padding: 5px;
@@ -294,8 +297,15 @@ export const Delete_text = styled.Text`
 
 export const Buy_text = styled.Text`
     font-family: raleway;
+    font-size: 14px;
+    color: #43a047;
+    text-align: center;
+`
+export const Cart_Buytext = styled.Text`
+    font-family: raleway;
     font-size: 15px;
     color: #43a047;
+    text-align: center;
 `
 
 export const Cart_FlatListView = styled.View`
@@ -320,26 +330,141 @@ export const Status_Text = styled.Text`
 `
 
 export const Purchase_Button = styled.TouchableOpacity`
-    width: 47%;
+    flex: 1;
     justify-content: center;
-    align-items: center;
     padding: 5px;
     border: 1px solid #43a047;
 `
 
 export const Info_Button = styled.TouchableOpacity`
-    width: 47%;
+    flex: 1;
     justify-content: center;
-    align-items: center;
     padding: 5px;
     border: 1px solid black;
+    margin-right: 5px;
 `
 
 export const Info_text = styled.Text`
     font-family: raleway;
-    font-size: 15px;
+    font-size: 14px;
+    text-align: center;
 `
 
-export const Column_text = styled.View`
+export const Column_ViewItem = styled.View`
+    flex:1;
+`
+
+export const Row_ViewItem = styled.View`
+    flex-direction: row;
+    height: 75px;
+    padding: 5px;
+    border-bottom-width: 1px;
+    borderColor: black;
+    borderStyle: solid;
+    paddingBottom: 5px;
+`
+
+export const Title_Item = styled.Text`
+    font-family: raleway;
+    font-size: 15px;
+    margin-bottom: 5px;
+`
+
+export const Info_itemText = styled.Text`
+    font-size: 16px;
+`
+
+export const Address_text = styled.Text.attrs({
+    numberOfLines: 3
+})`
+    font-style: italic;
+    font-size: 14px;
+`
+
+export const Row_Picture = styled.View`
+    flex-direction: row;
+    height: 100px;
+`
+
+export const Column_Picture = styled.View`
+    padding: 5px;
+    width: 72%;
+`
+
+export const Purchase_Button_View = styled.View`
+    flex-direction: row;
+    justify-content: space-between;
+    margin-top: 5px;
+    height: 45px;
+`
+
+export const Column_ViewAdress = styled.View`
+    height: 57%;
+`
+
+export const Column_ViewImage = styled.View`
     flex: 1;
+    justify-content: center;
+`
+export const Info_text_bigger = styled.Text`
+    font-family: raleway;
+    font-size: 16px;
+    text-align: center;
+`
+
+export const LookDetais_Button = styled.TouchableOpacity`
+    flex: 1;
+    justify-content: center;
+    padding: 5px;
+    border: 1px solid #3949ab;
+`
+
+export const LookText = styled.Text`
+    font-family: raleway;
+    font-size: 20px;
+    color: #3949ab;
+    text-align: center;
+`
+
+export const Row_NoPicture = styled.View`
+    flex-direction: row;
+    height: 70px;
+    margin-top: 7px;
+`
+
+export const Title_multiple = styled.Text.attrs({
+    numberOfLines: 1
+})`
+    font-family: raleway-bold;
+    font-size: 20px;
+    color: #303f9f;
+    width: 68%;
+`
+
+export const Multiple_View =  styled.View`
+    flex-direction: row;
+    margin-top: 7px;
+`
+export const Multiple_Column =  styled.View`
+    flex: 1;
+    margin-left: 10px;
+`
+
+export const Multiple_Title = styled.Text.attrs({
+    numberOfLines: 1
+})`
+    font-family: raleway-bold;
+    font-size: 20px;
+    width: 100%;
+`
+export const Column_ForImage = styled.View`
+    justify-content: center;
+`
+
+export const Change_Product = styled.TouchableOpacity`
+    flex: 1;
+    justify-content: center;
+    padding: 5px;
+    border: 1px solid black;
+    margin-right: 5px;
 `

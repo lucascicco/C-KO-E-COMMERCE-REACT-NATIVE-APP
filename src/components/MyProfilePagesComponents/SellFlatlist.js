@@ -1,6 +1,6 @@
 import React from 'react';
 import { FlatList } from 'react-native';
-import FlatListItem from './SellItem';
+import FlatListItem from './SellMultipleItems';
 
 import {
     FlatList_View

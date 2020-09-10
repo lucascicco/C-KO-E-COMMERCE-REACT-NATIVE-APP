@@ -7,11 +7,6 @@ import {
     Code_Small,
     Code_Bigger,
     Title_View_Row,
-    FlatList_Title,
-    Product_Image,
-    Purchase_Button,
-    Info_Button,
-    Info_text,
     Column_ViewItem,
     Row_ViewItem,
     Title_Item,
@@ -23,14 +18,17 @@ import {
     Purchase_Button_View,
     Column_ViewAdress,
     Column_ViewImage,
-    Cart_Buytext
+    LookDetais_Button,
+    LookText,
+    Row_NoPicture,
+    Title_multiple
 } from './styles';
 
 export default function Flatlist_item({title, onPress}) {
     return (
         <Item_View>
             <Title_View_Row>
-                <FlatList_Title>{title}</FlatList_Title>
+                <Title_multiple>Pedido múltiplo</Title_multiple>
 
                 <Code_View>
                        <Code_Small>Código</Code_Small>
@@ -56,30 +54,18 @@ export default function Flatlist_item({title, onPress}) {
                         </Column_ViewItem>
                     </Row_ViewItem>
 
-                    <Row_Picture>
-                        <Column_ViewImage>
-                            <Product_Image 
-                                source={{ uri: 'https://homepages.cae.wisc.edu/~ece533/images/monarch.png'}}
-                            />
-                        </Column_ViewImage>
-                    
-                        <Column_Picture>
-                            <Column_ViewAdress>
-                                <Title_Item>Endereço de entrega</Title_Item>
-                                <Address_text>ssssssssssssssssssssssssssssssssssssssssssssssss</Address_text>
-                            </Column_ViewAdress>  
-                        </Column_Picture>
-                    </Row_Picture>
+                    <Row_NoPicture>
+                        <Column_ViewAdress>
+                            <Title_Item>Endereço de entrega</Title_Item>
+                            <Address_text>ssssssssssssssssssssssssssssssssssssssssssssssss</Address_text>
+                        </Column_ViewAdress>  
+                    </Row_NoPicture>
 
                     
                     <Purchase_Button_View>
-                        <Info_Button onPress={onPress}>
-                            <Info_text>Contato do vendedor</Info_text>
-                        </Info_Button>
-
-                        <Purchase_Button onPress={() => console.log('WORKING?')}>
-                            <Cart_Buytext>Comprar novamente</Cart_Buytext>
-                        </Purchase_Button>
+                        <LookDetais_Button onPress={onPress}>
+                            <LookText>Ver mais</LookText>
+                        </LookDetais_Button>
                     </Purchase_Button_View>
 
             </FlatList_Item>
