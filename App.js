@@ -1,12 +1,11 @@
-import { StatusBar } from 'expo-status-bar';
 import React, { useState } from 'react';
-import LoginPage from './src/screens/LoginPage';
-import PAGE from './src/screens/MyPurchasesPage';
 import * as Font from 'expo-font';
 import { AppLoading } from 'expo';
+import Navigator from './src';
+
 
 const getFonts = async () => {
-  return Font.loadAsync({
+  return await Font.loadAsync({
     'raleway': require('./src/assets/fonts/Raleway/Raleway.ttf'),
     'raleway-bold': require('./src/assets/fonts/Raleway/Raleway-Bold.ttf'),
     'playfair':  require('./src/assets/fonts/Playfair/PlayfairDisplay.otf'),
@@ -21,7 +20,7 @@ export default function App() {
 
   if(fontsLoaded){
     return(
-      <PAGE />
+      <Navigator />
     )
   }else{
     return(

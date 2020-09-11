@@ -12,7 +12,7 @@ import {
     Details_RowTextItalic
 } from './styles';
 
-function PurchaseCartFlatList({title}){
+function PurchaseCartFlatListComponent({title}){
     return(
         <PurchaseCartFlatList>
             <Product_Image 
@@ -43,4 +43,4 @@ function PurchaseCartFlatList({title}){
     )
 }
 
-export default PurchaseCartFlatList
+export default PurchaseCartFlatListComponent

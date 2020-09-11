@@ -39,7 +39,9 @@ function ProductForm({ onClickSubmit,  ViewHeight, ViewWidth, FontSize }){
     const [CategoryLabel, setCategoryLabel] = useState('Categoria')
     
     useEffect(() => {
-        await getPermissionAsync()
+        async () => {
+            await getPermissionAsync()
+        }
     }, [])
 
     getPermissionAsync = async () => {
