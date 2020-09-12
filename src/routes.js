@@ -35,7 +35,6 @@ import PurchasePartTwo from './screens/PurchasePage';
 
 import { createStackNavigator } from 'react-navigation-stack';
 
-const 
 
 export default () => 
     createAppContainer(
@@ -51,19 +50,27 @@ export default () =>
                 }),
                 App: createBottomTabNavigator({
                         CreateProduct,
-                        HomePage: {
-                            screen: createStackNavigator({
-                                HomePage
-                            })
-                        },
+                        HomePage,     
                         MyProfile: {
-                            screen: createStackNavigator({
-                                MyProfile
+                            screen: createSwitchNavigator({
+                                MyProfile,
+                                ChangeAccount,
+                                ChangeLocation,
+                                ChangePersonal,
+                                MyProductsPage,
+                                MySells,
+                                MyCart,
+                                PurchaseCart,
+                                MyPurchases,
+                                PurchaseMultiple
                             })
                         }
                 }),
-
-
+                Products: createStackNavigator({
+                    ProductPage,
+                    PurchasePartOne,
+                    PurchasePartTwo
+                })
             }, {
                 initialRouteName: "Sign",
                 headerMode: null,
