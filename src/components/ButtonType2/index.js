@@ -14,6 +14,9 @@ export default function Button({text, icon, ...rest }) {
 }
 
 Button.propTypes = {
-    text: PropTypes.string.isRequired,
+    text: PropTypes.oneOfType([
+      PropTypes.string,
+      PropTypes.number
+    ]),
     icon: PropTypes.string.isRequired
 };

@@ -5,18 +5,19 @@ import {
     ScrollView_one,
 } from './styles';
 
-export default function ScrollViewOptions() {
+export default function ScrollViewOptions({ navigation, signOut }) {
     return (
         <ScrollView_one contentContainerStyle={{
             paddingVertical: 20
         }}>
-            <ScrollViewItem>Alterar dados cadastrais</ScrollViewItem>
-            <ScrollViewItem>Alterar dados pessoais </ScrollViewItem>
-            <ScrollViewItem>Alterar localização</ScrollViewItem>
-            <ScrollViewItem>Minhas compras</ScrollViewItem>
-            <ScrollViewItem>Minhas vendas</ScrollViewItem>
-            <ScrollViewItem>Meus produtos</ScrollViewItem>
-            <ScrollViewItem>Meu carrinho</ScrollViewItem>
+            <ScrollViewItem onPress={() => navigation.navigate('ChangeAccount')}>Alterar dados cadastrais</ScrollViewItem>
+            <ScrollViewItem onPress={() => navigation.navigate('ChangePersonal')}>Alterar dados pessoais </ScrollViewItem>
+            <ScrollViewItem onPress={() => navigation.navigate('ChangeLocation')}>Alterar localização</ScrollViewItem>
+            <ScrollViewItem onPress={() => navigation.navigate('MyPurchases')}>Minhas compras</ScrollViewItem>
+            <ScrollViewItem onPress={() => navigation.navigate('MySells')}>Minhas vendas</ScrollViewItem>
+            <ScrollViewItem onPress={() => navigation.navigate('MyProductsPage')}>Meus produtos</ScrollViewItem>
+            <ScrollViewItem onPress={() => navigation.navigate('MyCart')}>Meu carrinho</ScrollViewItem>
+            <ScrollViewItem onPress={signOut}>Sair</ScrollViewItem>
         </ScrollView_one>
     )
 };

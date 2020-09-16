@@ -31,9 +31,6 @@ export const ButtonText = styled.Text`
     color: #FFF
 `
 
-export const TouchableButton = styled.TouchableOpacity`
-    flex:1;
-`
 export const AddressView = styled.View`
     flex-direction: column;
     justify-content: flex-start;
@@ -46,4 +43,43 @@ export const FormView = styled.View``
 export const SubmitBottom = styled(ButtonType1)`
     margin-top: 10px;
     background: ${props => props.style.background}
+`
+
+export const ViewForm = styled.View`
+
+`
+
+export const ViewTypeSend = styled.View`
+
+`
+
+export const Subtitle = styled.Text`
+    color: #FFF;
+    font-family: raleway;
+`
+
+export const TouchableButton = styled.TouchableOpacity``
+
+export const RadioView = styled.View`
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 3px;
+    border: 1px solid #FFF;
+    border-radius: 15px;
+    align-items: center;
+    margin-top: 10px;
+`
+
+export const RadioTitle = styled.View`
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    padding: 5px;
+`
+
+export const RadioText = styled.Text`
+    font-size: 20px;
+    margin-right: 10px;
+    color: #FFF;
+    font-family: raleway;
 `

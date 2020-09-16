@@ -13,7 +13,7 @@ import {
     SubmitBottom
 } from './styles';
 
-function LocationPage({ onClickSubmit, location }){
+function LocationPage({ onClickSubmit, enable, location, changeAddress}){
     const StateRef = useRef()
     const CityRef = useRef()
     const NeighborhoodRef = useRef()
@@ -31,10 +31,10 @@ function LocationPage({ onClickSubmit, location }){
     const [Address, setAddress] = useState(location ? location.address : '')
     const [AdNumber, setAdNumber] = useState(location ? location.street_number : '')
     const [Postcode, setPostcode] = useState(location ? location.postcode : '')
-    
+
     const [Label, setLabel] = useState('Estado')
     
-    const handleSubmit = () => {
+    const HandleSubmit = () => {
         onClickSubmit({
             country: Country,
             state: State,
@@ -47,7 +47,7 @@ function LocationPage({ onClickSubmit, location }){
     }
 
     return(
-        <Container>
+        <Container enable={enable}>
             <Form>  
                 <MultiInput>
                     <FormInput
@@ -72,6 +72,7 @@ function LocationPage({ onClickSubmit, location }){
                             setState(itemValue)
                             setLabel(itemValue)
                         }}
+                        editable={enable}
                     />
                             
                      <FormInput
@@ -84,6 +85,7 @@ function LocationPage({ onClickSubmit, location }){
                          onChangeText={text => onChange_onlyText(text, setCity)}
                          ref={CityRef}
                          onSubmitEditing={() => NeighborhoodRef.current.focus()}
+                         editable={enable}
                      />
                             
                 </MultiInput>
@@ -99,6 +101,7 @@ function LocationPage({ onClickSubmit, location }){
                         onChangeText={text => onChange_onlyText(text, setNeighborhood)}
                         ref={NeighborhoodRef}
                         onSubmitEditing={() => PostcodeRef.getElement().focus()}
+                        editable={enable}
                     />
                             
                     <InputMask
@@ -112,6 +115,7 @@ function LocationPage({ onClickSubmit, location }){
                         ref={(ref) => PostcodeRef = ref}
                         onSubmitEditing={() => AddressRef.current.focus()}
                         type={'zip-code'}
+                        editable={enable}
                     />
                             
                 </MultiInput>
@@ -128,6 +132,7 @@ function LocationPage({ onClickSubmit, location }){
                         onChangeText={text => onChange_onlyText(text, setAddress)}
                         ref={AddressRef}
                         onSubmitEditing={() => AdNumberRef.current.focus()}
+                        editable={enable}
                    />
                             
                    <FormInput
@@ -140,13 +145,20 @@ function LocationPage({ onClickSubmit, location }){
                         value={AdNumber}
                         ref={AdNumberRef}
                         onChangeText={number => onChange_onlyNumber(number, setAdNumber)}
-                        onSubmitEditing={handleSubmit}
+                        editable={enable}
                    />
                 </MultiInput>
 
-                <SubmitBottom style={{ background: '#283593'}} onPress={handleSubmit}>
-                    Salvar
-                </SubmitBottom>
+                {enable ? (
+                    <SubmitBottom style={{ background: '#512da8'}} onPress={HandleSubmit}>
+                        Salvar endereço
+                    </SubmitBottom>     
+                ) : (
+                    <SubmitBottom style={{ background: '#e53935'}} onPress={changeAddress}>
+                        Alterar endereço
+                    </SubmitBottom>     
+                )}
+              
             </Form>
         </Container>
     )

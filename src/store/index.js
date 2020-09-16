@@ -1,5 +1,6 @@
 import createSagaMiddleware from 'redux-saga';
 import { persistStore } from 'redux-persist';
+import AsyncStorage from '@react-native-community/async-storage';
 
 import createStore from './createStore';
 import persistReducers from './persistReducer';
@@ -19,3 +20,5 @@ const persistor = persistStore(store);
 sagaMiddleware.run(rootSaga);
 
 export { store, persistor };
+
+AsyncStorage.removeItem(`persist:products`)

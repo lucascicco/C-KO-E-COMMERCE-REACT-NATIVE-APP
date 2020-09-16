@@ -1,107 +1,83 @@
 import React, { useState } from 'react';
-import { Animated, Dimensions } from 'react-native';
-import { AntDesign } from '@expo/vector-icons'; 
-import AddressBox from '../AddressBox';
 import Background from '../Background';
 import LocationForm from '../LocationForm';
+import { RadioButton } from 'react-native-paper';
+import api from '../../services/api';
 
 import {
     Container,
-    BoxAddresses,
-    ButtonView,
-    ButtonText,
+    SubmitBottom,
+    ViewForm,
+    ViewTypeSend,
+    Subtitle,
     TouchableButton,
-    AddressView,
-    SubmitBottom
+    RadioView,
+    RadioTitle,
+    RadioText
 } from './styles';
 
 
-function ChangeAddress({ onPressOne }){
-    const [FormVisible, setVisibleForm] = useState(false);
-    const [MainAddress, setMainAddresss] = useState(0);
-    const heightWindow = Dimensions.get("window").height
-    const [animation, setAnimation] = useState(new Animated.Value(heightWindow))
-    const [viewVisible, setViewVisible] = useState(true)
+export default function ChangeAddress({ onCalculatePress, location }){
+    const [enable, setEnable] = useState(false)
+    const [fretetype,  setFretetype] = useState('04510')
+    const [locationState, setLocationState] = useState(location)
 
-    const [Addresses, setAddresses] = useState([
-        {
-            city: 'Guarulhos',
-            state: 'SP',
-            neighborhood: 'Jd Santa Mena',
-            address: 'Rua Ronaldo',
-            adNumber: '121',
-            postcode : '250000-000'
-        }
-    ])
+    const handleSubmit = async (Location) => {
+        try{
+            const response =  await api.post('location_purchase', Location)
+            console.log(response.data)
 
-    const startAnimation = () => {
-        Animated.timing(animation, {
-            toValue: 0,
-            duration: 1250,
-            useNativeDriver: true
-        }).start()
-    }
+            setLocationState(response.data)
+            setEnable(false)
+        }catch(e){
 
-
-    const HandleSubmit = (newAddress) => {
-        //condição lógica de validação de dados
-        if(Addresses.length > 1){
-            console.log(Addresses.length)
-        }else{
-            setAddresses([
-                ...Addresses,
-                newAddress
-            ])
         }
     }
 
     return(  
         <Background>
-            <Container>
-                {viewVisible && (
-                    <AddressView>
-                        <BoxAddresses>
-                            {Addresses.map((item, index) => {
-                               return <AddressBox 
-                                        item={item} 
-                                        onPress={() => setMainAddresss(index)}
-                                        MainAddress={MainAddress} 
-                                        value={index}
+            <Container>  
+                <ViewForm>
+                    <Subtitle>Endereço de entrega: </Subtitle>
+                    <LocationForm onClickSubmit={handleSubmit} enable={enable} location={location} changeAddress={() => setEnable(true)}/>
+                </ViewForm>
 
-                                        key={index}
-                                    />
-                            })}
+                <ViewTypeSend>
+                    <Subtitle>Forma de envio: {fretetype === '04510' ? 'PAC - NORMAL' : 'SEDEX - RÁPIDO' }</Subtitle>
+
+                    <TouchableButton onPress={() => setFretetype('04014')}>
+                        <RadioView>
+                            <RadioButton
+                                color="white"
+                                value="04014"
+                                status={ fretetype === '04014' ? 'checked' : 'unchecked' }
+                            />
                         
-                            {Addresses.length === 1 && (
-                                <TouchableButton onPress={() => {
-                                    setVisibleForm(true)
-                                    startAnimation()
-                                    setViewVisible(false)
-                                }}>
-                                    <ButtonView>
-                                        <AntDesign name="pluscircleo" size={60} color="black" />
-                                        <ButtonText>Adicionar endereço</ButtonText>
-                                    </ButtonView>
-                                </TouchableButton>
-                            )}
-                        </BoxAddresses>
-                 </AddressView>
-                )}
-                        
-                {FormVisible && (
-                    <Animated.View style={{ transform: [{
-                        translateY: animation
-                    }]}}>
-                       <LocationForm onClickSubmit={HandleSubmit}/>
-                       
-                        <SubmitBottom style={{ background: '#d32f2f'}} onPress={onPressOne}>
-                            Fechar
-                        </SubmitBottom>
-                    </Animated.View>
-                )}
-            </Container>
+                            <RadioText>
+                                SEDEX
+                            </RadioText>
+                        </RadioView>
+                    </TouchableButton>
+                    
+                    <TouchableButton onPress={() => setFretetype('04510')}>
+                        <RadioView>
+                            <RadioButton
+                                color="white"
+                                value="04510"
+                                status={ fretetype === '04510' ? 'checked' : 'unchecked' }
+                            />
+                            <RadioText>
+                                 PAC
+                            </RadioText>
+                        </RadioView>
+                    </TouchableButton>
+                </ViewTypeSend>
+
+                <SubmitBottom style={{ background: '#388e3c'}} onPress={onCalculatePress}>
+                    Calcular frete
+                </SubmitBottom>    
+
+            </Container>    
         </Background>   
     )
 }
-
-export default ChangeAddress

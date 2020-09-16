@@ -1,23 +1,20 @@
 import React, { useEffect } from 'react';
-import { Animated, Keyboard, Platform, StyleSheet } from 'react-native';
+import { Animated, Keyboard, Platform, StyleSheet, Alert } from 'react-native';
 import { ImageResizingEventTwo } from '../../utils/KeyboardsEvents';
 import Background from '../../components/Background2';
-import LocationForm from '../../components/LocationForm';
-import { useDispatch } from 'react-redux';
-import { createLocationRequest } from '../../store/modules/user/actions';
-
+import ProductComponent from '../../components/ProductFeatures';
+import api from '../../services/api';
 
 import { 
-    Container,
-    SubmitButton
+    Container
 } from './styles';
 
-function LocationPage(){
-    const dispatch = useDispatch()
-
+export default function ProductSendingForm({ navigation }){
     const typeOfPlatform = Platform.OS === 'ios'
 
-    const IconSize = new Animated.Value(70) 
+    const product = navigation.getParam('product');
+
+    const IconSize = new Animated.Value(50) 
     const ViewSize = new Animated.Value(100)
     const TextSize = new Animated.Value(35)
 
@@ -34,8 +31,35 @@ function LocationPage(){
             }
     }, [])
     
-    const handleSubmit = (Location) => {
-        dispatch(createLocationRequest(Location))
+    const handleSubmit = async (data) => {
+        try{
+            const bodyFormData = new FormData()
+
+            bodyFormData.append('file', product.image_id)
+            bodyFormData.append('product_name', product.product_name)
+            bodyFormData.append('category', product.category)
+            bodyFormData.append('quantity', product.quantity)
+            bodyFormData.append('description', product.description)
+            bodyFormData.append('price', product.price)
+
+            const response_one = await api.post('product', bodyFormData , 
+            {
+                headers: {'Content-Type': 'multipart/form-data' }
+            })
+
+            const response = await api.post('features', {
+                product:  response_one.data.product.id,
+                ...data
+            })   
+
+            console.log(response.data)
+        }catch(e){
+            Alert.alert
+            (
+                'Erro ao salvar',
+                'Verique se os campos foram preenchidos corretamente'
+            )
+        }
     }
 
     return(
@@ -44,33 +68,22 @@ function LocationPage(){
                <Animated.View 
                    style={[styles.TitleView, { height: ViewSize }]}
                >
-                   <Animated.Image 
-                       source={require('../../assets/Geolocation_icon.png')}
-                       style={[styles.IconView, { height: IconSize}]}
-                       resizeMode="contain"
-                   />    
-
                    <Animated.Text 
                        style={[styles.TextTitle, { fontSize: TextSize }]}
                    >
-                       Localização
+                       Dados para envio
                    </Animated.Text>
                </Animated.View>
 
-                <LocationForm onClickSubmit={handleSubmit} />
-
-               <SubmitButton style={{ background: '#283593'}}>
-                   Pular
-               </SubmitButton>
-
+                <ProductComponent onClickSubmit={handleSubmit} />
             </Container>
         </Background>
     )
 }
 
+
 const styles = StyleSheet.create({
     TitleView: {
-        flexDirection: 'row',
         justifyContent: 'center',
         alignItems: 'center'
     },
@@ -84,5 +97,3 @@ const styles = StyleSheet.create({
         marginLeft: 0
     }
 }) 
-
-export default LocationPage

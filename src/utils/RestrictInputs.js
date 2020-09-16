@@ -10,3 +10,9 @@ export const onChange_onlyNumber = (text, callback) => {
     }
 }
 
+export const onChange_numberComma = (text, callback) => {
+    if (/^[0-9\,]+$/.test(text) || text === ""){
+        callback(text);
+    }
+}
+

@@ -1,13 +1,18 @@
 import React, { useState, useEffect } from 'react';
 import { StyleSheet } from 'react-native';
+import { withNavigationFocus } from 'react-navigation';
 import Modal from 'react-native-modal';
 import { Picker } from '@react-native-community/picker';
-import { MaterialCommunityIcons } from '@expo/vector-icons'; 
+import { MaterialCommunityIcons, MaterialIcons} from '@expo/vector-icons'; 
 import { Octicons } from '@expo/vector-icons'; 
 import Categorias from '../../utils/Categorias';
-import data from '../../utils/testing_data';
 import ProductList from '../../components/ItemsBox';
 import Background from '../../components/Background4';
+import api from '../../services/api';
+import { useDispatch, useSelector } from 'react-redux';
+import { addProducts } from '../../store/modules/products/actions';
+import PropTypes from 'prop-types';
+
 
 import {
     Container,
@@ -28,16 +33,53 @@ import {
     CleanText
 } from './styles';
 
+function HomePage({ navigation, isFocused }) {
+    const dispatch = useDispatch()
+    const products = useSelector(state => state.products.products)
 
-function HomePage() {
-    const [search, setSearch] = useState('');
-    const [categorySelected, setCategorySearch] = useState('');
-    const [visible, setVisibility] = useState(false);
+    const [search, setSearch] = useState('')
+    const [categorySelected, setCategorySearch] = useState('')
+    const [visible, setVisibility] = useState(false)
     const [filter, setFilter] = useState('')
-    
+    const [visibleProducts, setVisibleProducts] = useState(products)
+
     const HandleFilterSubmit  = () => {
         setFilter(categorySelected)
         setVisibility(!visible)
+
+        const ProductsByCategory = products.filter((product) => {
+            return product.category === filter
+        })
+
+        setVisibleProducts(ProductsByCategory)
+    }
+
+    async function loadProducts() {
+        const response = await api.get('productsExceptMine');
+    
+        dispatch(addProducts(response.data))
+        setVisibleProducts(response.data)
+      }
+    
+    useEffect(() => {
+        if(isFocused){
+            loadProducts()
+        }
+    }, [isFocused])
+
+    const handleTextChange = (text) => {
+        const FiltredbySearch = visibleProducts.filter((product) => {
+            const productWord = product.product_name.toLowerCase().includes(text.toLowerCase())
+
+            return productWord
+        })
+
+        setVisibleProducts(FiltredbySearch)
+    }
+
+    const FilterDeleted = () => {
+        setFilter('')
+        setVisibleProducts(products)
     }
 
     return(
@@ -67,7 +109,7 @@ function HomePage() {
                         maxLength={30}
                         autoCapitalize="none"
                         returnKeyType="send"
-                        onChangeText={setSearch}
+                        onChangeText={handleTextChange}
                         value={search}
                         style={{ 
                             borderRadius: 0,
@@ -87,19 +129,20 @@ function HomePage() {
                 <FilterView>
                     {(filter !== '' && filter !== null) && 
                     (
-                        <>
+                        <Fragment>
                             <FilterText>Categoria filtrada: {filter}</FilterText>
                             
-                            <TouchableButton onPress={() => setFilter('')}>
+                            <TouchableButton onPress={FilterDeleted}>
                                 <CleanText>Limpar categoria</CleanText>
                             </TouchableButton>
-                        </>
+                        </Fragment>
                     )}
                 </FilterView>
                
 
                 <ProductList 
-                    data={data}
+                    data={visibleProducts}
+                    navigation={navigation}
                 />
                 
                  <Modal 
@@ -155,6 +198,10 @@ function HomePage() {
     )
 }
 
+HomePage.propTypes = {
+    isFocused: PropTypes.bool.isRequired,
+  };
+
 const styles = StyleSheet.create({
     ShadowConfig: {
         shadowColor: "black",
@@ -168,4 +215,4 @@ const styles = StyleSheet.create({
     }
 })
 
-export default HomePage
+export default withNavigationFocus(HomePage);

@@ -112,3 +112,19 @@ export const DescriptionScroll = styled.ScrollView`
 export const DescriptionText = styled.Text`
     font-size: 15px;
 `
+
+export const TextWarning = styled.Text`
+    color: #FFF;
+    font-family: raleway;
+`
+
+export const FreteButton = styled.TouchableOpacity`
+    flex-direction: row;
+    padding: 10px;
+    border: 1px solid white;
+`
+
+export const FreteText = styled.Text`
+    color: #FFF;
+    font-family: raleway;
+`

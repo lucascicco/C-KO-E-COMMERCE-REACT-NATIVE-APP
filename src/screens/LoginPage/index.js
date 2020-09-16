@@ -3,6 +3,10 @@ import { Animated, Keyboard, Platform } from 'react-native';
 import { ImageResizingEventOne } from '../../utils/KeyboardsEvents';
 import Background from '../../components/Background2'
 
+
+import { useDispatch } from 'react-redux';
+import { signInRequest } from '../../store/modules/auth/actions';
+
 import { 
     Container, 
     Form,
@@ -15,11 +19,12 @@ import {
     IMAGE_HEIGHT_SMALL
 } from './styles'
 
-function Login() {
-    const passwordRef = useRef();
+export default function Login({ navigation }) {
+    const dispatch = useDispatch()
+    const passwordRef = useRef()
     
-    const [email, setEmail] = useState('');
-    const [password, setPassword] = useState('');
+    const [email, setEmail] = useState('')
+    const [password, setPassword] = useState('')
 
     const imageHeight = new Animated.Value(IMAGE_HEIGHT)
 
@@ -39,7 +44,7 @@ function Login() {
 
 
     const handleSubmit = () => {
-        console.log('handle was pressed!')
+        dispatch(signInRequest(email,password))
     }
 
     return(
@@ -83,7 +88,7 @@ function Login() {
 
                 </Form>
 
-                <SignLink>
+                <SignLink onPress={() => navigation.navigate('SignUp')}>
                     <SignLinkText>
                         <Strong>Primeiro acesso? </Strong> Clique aqui
                     </SignLinkText>
@@ -93,5 +98,3 @@ function Login() {
         </Background>
     )
 }
-
-export default Login

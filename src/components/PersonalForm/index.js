@@ -12,18 +12,18 @@ import {
     SubmitButton
 } from './styles';
 
-function PersonalForm({ onClickSubmit }){
+function PersonalForm({ onClickSubmit , personal}){
     let PersonalIDRef 
     let CellphoneRef 
 
     const typeOfPlatform = Platform.OS === 'ios'
     const typeOfkeyboardType = typeOfPlatform ? 'numbers-and-punctuation' : 'numeric'
 
-    const [Birthday, setBirthday] = useState(new Date())
-    const [Gender, setGender] = useState('')
-    const [PersonalID, setPersonalID] = useState('')
-    const [Cellphone, setCellphone] = useState('')  
-    const [Profession, setProfession] = useState('')
+    const [Birthday, setBirthday] = useState(personal ? personal.birthay : new Date())
+    const [Gender, setGender] = useState(personal ? personal.gender : '')
+    const [PersonalID, setPersonalID] = useState(personal ? personal.identification : '')
+    const [Cellphone, setCellphone] = useState(personal ? personal.cellphone : '')  
+    const [Profession, setProfession] = useState(personal ? personal.profession : '')
     
     const [LabelGender, setLabelGender] = useState('Sexo')
     const [LabelProfession, setLabelProfession] = useState('Profissão')
@@ -34,7 +34,7 @@ function PersonalForm({ onClickSubmit }){
             gender: Gender,
             cellphone: Cellphone,
             profession: Profession,
-            personalId: PersonalID
+            identification: PersonalID
         })
     }
 
@@ -109,7 +109,7 @@ function PersonalForm({ onClickSubmit }){
             </MultiInput>
                     
             <SubmitButton style={{ background: '#283593'}} onPress={handleSubmit}>
-                Próximo
+                Salvar
             </SubmitButton>
         </Form>
     )

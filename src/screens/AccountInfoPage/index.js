@@ -5,21 +5,18 @@ import * as Permissions from 'expo-permissions';
 import { Alert } from 'react-native';
 import AvatarView from '../../components/MyProfilePagesComponents/AvatarView';
 import ScrollViewX from '../../components/MyProfilePagesComponents/ScrollViewOptions';
+import { useDispatch } from 'react-redux';
+import { signOut } from '../../store/modules/auth/actions';
 
 import {
     Container
 } from './styles';
 
-function MyProductsPage(){
+export default function MyAccountOptions({ navigation }){
     const [ProductPicture, setProductImage] = useState();
+    const dispatch = useDispatch();
 
-    useEffect(() => {
-      async () => {
-        await getPermissionAsync()
-      }
-    }, [])
-
-    getPermissionAsync = async () => {
+    const getPermissionAsync = async () => {
         if (Constants.platform.ios) {
           const { status } = await Permissions.askAsync(Permissions.CAMERA_ROLL);
           if (status !== 'granted') {
@@ -30,6 +27,7 @@ function MyProductsPage(){
           }
         }
     };
+
 
     const HandleChoosePhoto = async  () => {
         try {
@@ -48,15 +46,19 @@ function MyProductsPage(){
           }
     };
 
+    useEffect(() => {
+      getPermissionAsync()
+    }, [])
+
+
     return (
         <Container>
             <AvatarView 
                 onPress={HandleChoosePhoto}
                 uri={ProductPicture}
             />
-            <ScrollViewX />
+
+            <ScrollViewX navigation={navigation} signOut={() =>  dispatch(signOut())}/>
          </Container>
     )
 }
-
-export default MyProductsPage;

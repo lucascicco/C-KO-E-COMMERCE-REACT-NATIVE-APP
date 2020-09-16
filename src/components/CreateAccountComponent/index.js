@@ -1,5 +1,6 @@
 import React, { useRef, useState } from 'react';
 import { onChange_onlyText } from '../../utils/RestrictInputs';
+import { Alert } from 'react-native';
 
 import { 
     Form,
@@ -7,23 +8,29 @@ import {
     SubmitButton
 } from './styles';
 
-function AccountInfoForm({ onClickSubmit, account }){
-    const oldPasswordRef = useRef();
+function AccountInfoForm({ onClickSubmit }){
+    const secondPasswordRef = useRef();
     const passwordRef = useRef();
     const emailRef = useRef();
 
-    const [email, setEmail] = useState(account ? account.email : '');
+    const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
-    const [oldPassword, setOldPassword] = useState('');
-    const [name, setName] = useState(account ? account.name : '');
+    const [secondPassword, setSecondPassword] = useState('');
+    const [name, setName] = useState('');
 
     const handleSubmit = () => {
-        onClickSubmit({
-            email,
-            oldPassword,
-            password,
-            name
-        })
+        if(password !== secondPassword){
+            Alert.alert(
+                'As senhas não encaixam',
+                'Verifique se as duas senhas foram escritas igualmente.'
+            )
+        }else{
+            onClickSubmit({
+                email,
+                password,
+                name
+            })
+        }
     }
 
     return(
@@ -58,19 +65,7 @@ function AccountInfoForm({ onClickSubmit, account }){
             <FormInput
                 icon="lock-outline"
                 secureTextEntry
-                placeholder="Senha antiga"
-                maxLength={50}
-                returnkKeyType="send"
-                onChangeText={setOldPassword}
-                onSubmitEditing={handleSubmit}
-                ref={oldPasswordRef}
-                value={oldPassword}
-            />
-
-            <FormInput
-                icon="lock-outline"
-                secureTextEntry
-                placeholder="Senha nova"
+                placeholder="Senha"
                 maxLength={50}
                 returnkKeyType="next"
                 onChangeText={setPassword}
@@ -81,8 +76,20 @@ function AccountInfoForm({ onClickSubmit, account }){
             />
 
 
+            <FormInput
+                icon="lock-outline"
+                secureTextEntry
+                placeholder="Confirmar senha"
+                maxLength={50}
+                returnkKeyType="send"
+                onChangeText={setSecondPassword}
+                onSubmitEditing={handleSubmit}
+                ref={secondPasswordRef}
+                value={secondPassword}
+            />
+
             <SubmitButton style={{ background: '#283593'}} onPress={handleSubmit}>
-                Alterar
+                Cadastrar
             </SubmitButton>
         </Form>
     )

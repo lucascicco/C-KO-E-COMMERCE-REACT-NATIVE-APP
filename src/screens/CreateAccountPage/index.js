@@ -1,8 +1,11 @@
 import React, { useEffect } from 'react';
 import { Animated, Keyboard, Platform } from 'react-native';
 import { ImageResizingEventOne } from '../../utils/KeyboardsEvents';
-import Background from '../../components/Background2'
-import AccountForm from '../../components/ChangeAccount'
+import Background from '../../components/Background2';
+import AccountForm from '../../components/CreateAccountComponent';
+
+import { useDispatch } from 'react-redux';
+import { signUpRequest } from '../../store/modules/auth/actions';
 
 import { 
     Container, 
@@ -13,7 +16,9 @@ import {
     IMAGE_HEIGHT_SMALL
 } from './styles'
 
-function CreateAccount() {
+function CreateAccount({ navigation }) {
+    const dispatch = useDispatch()
+    
     const imageHeight = new Animated.Value(IMAGE_HEIGHT)
 
     useEffect(() => {
@@ -31,7 +36,7 @@ function CreateAccount() {
     }, [])
 
     const handleSubmit = (AccountInfo) => {
-        console.log(AccountInfo)
+        dispatch(signUpRequest(AccountInfo))
     }
 
     return(
@@ -44,7 +49,7 @@ function CreateAccount() {
 
                 <AccountForm onClickSubmit={handleSubmit}/>
 
-                <SignLink>
+                <SignLink onPress={() => navigation.navigate('Login')}>
                    <SignLinkText>
                        <Strong> Já possui conta ? </Strong> Clique aqui
                    </SignLinkText>

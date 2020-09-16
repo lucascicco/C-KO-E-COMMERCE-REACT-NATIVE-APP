@@ -1,19 +1,26 @@
 import React from 'react';
 import AccountForm from '../../components/ChangeAccount';
 import Background from '../../components/Background2';
+import { useDispatch, useSelector } from 'react-redux';
+import { updateAccountRequest } from '../../store/modules/user/actions';
 
 import {
     Container
 } from './styles';
 
-function ChangeAccountPage(){
+export default function ChangeAccountPage(){
+    const dispatch = useDispatch()
+    const account = useSelector(state => state.user.profile.user)
+
+    const handleSubmit = (AccountInfo) => {
+        dispatch(updateAccountRequest(AccountInfo))
+    }
+
     return(
         <Background>
             <Container>
-                <AccountForm onClickSubmit={(valores) => console.log(valores)}/>
+                <AccountForm onClickSubmit={handleSubmit} account={account} />
             </Container>
         </Background>
     )
 }
-
-export default ChangeAccountPage

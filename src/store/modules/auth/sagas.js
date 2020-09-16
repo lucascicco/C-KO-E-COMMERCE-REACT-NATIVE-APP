@@ -1,8 +1,9 @@
 import { Alert } from 'react-native'
 import { takeLatest , call, put, all } from 'redux-saga/effects';
 import { signInSuccess, signFailure, signUpSuccess} from './actions';
-import { updateNicknameSuccess } from '../user/actions';
-import api from '~/services/api';
+import { NavigationActions } from 'react-navigation';
+
+import api from '../../../services/api';
 
 export function* signIn({ payload }){
     try{
@@ -14,41 +15,32 @@ export function* signIn({ payload }){
         });
 
         const { token , user } = response.data;
-            
+        
+        console.log(response.data)
+
         api.defaults.headers.Authorization = `Bearer ${token}`
 
         yield put(signInSuccess(token, user))
-
-
-        if(user.nickname){
-            const NicknameResponse = yield call(api.get, 'searchingNameRoute', {
-                params: {
-                   nickname: user.nickname
-                }
-
-             })
-
-            yield put(updateNicknameSuccess(NicknameResponse.data))
-        }
-        
     }catch(e){
 
         Alert.alert(
         'Falha no login', 
-        'Houve um erro no login, verfique seus dados.'
+        'Houve um erro no login, verifique seus dados.'
         );
-
+        
+        console.log(e)
         yield put(signFailure())
     };
 }
 
 export function* signUp({ payload }){
     try{
-        const { email, password } = payload   
+        const { email, password, name } = payload   
 
         const response = yield call(api.post, 'users', {
-            email: email,
-            password: password
+            name,
+            email,
+            password
         })
         
         const { token , user } = response.data;
@@ -56,6 +48,10 @@ export function* signUp({ payload }){
         api.defaults.headers.Authorization = `Bearer ${token}`
 
         yield put(signUpSuccess(token, user))
+
+        
+        NavigationActions.navigate('FirstAcess')
+
     }catch(err){
         Alert.alert(
             'Falha no cadastro', 

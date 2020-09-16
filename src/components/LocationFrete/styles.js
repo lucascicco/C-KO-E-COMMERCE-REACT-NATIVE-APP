@@ -6,6 +6,7 @@ import Button from '../../components/ButtonType1';
 export const Container = styled.View`
     justify-content: center;
     align-items: center;
+    opacity: ${props => props.enable ? '0.7' : '0'}
 `;
 
 export const Form = styled.View`
@@ -23,6 +24,4 @@ export const FormInput = styled(Input)`
     padding: 0 5px;
 `;
 
-export const SubmitBottom = styled(Button)`
-    background: ${props => props.style.background}
-`
+export const SubmitBottom = styled(Button)``

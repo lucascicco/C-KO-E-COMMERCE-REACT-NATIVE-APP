@@ -16,7 +16,7 @@ function Input({ style, icon,  textStyle, ...rest}, ref) {
 // Input.propTypes = {
 //   icon: PropTypes.string,
 //   style: PropTypes.oneOfType([PropTypes.object, PropTypes.array])
-// };
+// }
 
 // Input.defaultProps = {
 //   icon: null,

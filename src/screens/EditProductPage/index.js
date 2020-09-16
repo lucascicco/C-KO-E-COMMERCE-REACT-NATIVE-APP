@@ -1,13 +1,15 @@
 import React, { useEffect } from 'react';
-import { Animated, Keyboard, Platform, TouchableWithoutFeedback  } from 'react-native';
+import { Animated, Keyboard, Platform, TouchableWithoutFeedback, Alert } from 'react-native';
 import { ImageResizingEventThree } from '../../utils/KeyboardsEvents';
 import Background from '../../components/Background2';
 import ProductForm from '../../components/ProductForm';
+import api from '../../services/api';
+
 import {
     SubmitBottom
 } from './styles';
 
-function EditProductPage(){
+function EditProductPage({ navigation }){
     //PEGAR DADOS DO REDUCER E PASSAR COMO PROPS SEPARADAMENTE PARA O 
     // PRODUCT FORM,  E NO PRODUCT FORM, FAZER A LÓGICA DENTRO DOS USESTATES
     // EXEMPLO: PRODUCTNAME? PRODUCTNAME : '. -> POIS TEM QUE DEIXAR PRE-PREENCHIDO O FORM QUANDO SE VAI EDITAR.
@@ -31,6 +33,31 @@ function EditProductPage(){
             }
     }, [])
 
+    const handleSubmit = async ({image_id, product_name, category, quantity, description, price}) => {
+        const imageData = new FormData()
+
+        imageData.append('file', image_id)
+
+        try{
+            await api.post('product', {
+                image_id: imageData,
+                product_name,
+                category,
+                quantity,
+                description,
+                price
+            })
+
+            navigation.navigate('MyProductsPage')
+
+        }catch(e){
+            Alert.alert(
+                'Erro ao atualizar produto',
+                'Verique se os campos foram preenchidos corretamente.'
+            )
+        }
+    }
+
     return(
         <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
             <Background>
@@ -38,7 +65,7 @@ function EditProductPage(){
                     ViewHeight={ViewHeight}
                     ViewWidth={ViewWidth}
                     FontSize={FontSize}
-                    onClickSubmit={(valores) => console.log(valores)}
+                    onClickSubmit={handleSubmit}
                 />
                 
                 <SubmitBottom style={{ background: '#d32f2f'}} onPress={() => console.log('red button was pressed.')}>

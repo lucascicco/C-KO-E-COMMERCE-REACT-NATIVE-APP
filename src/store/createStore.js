@@ -10,5 +10,3 @@ export default (reducers, middlewares) => {
 
     return createStore(reducers, enhancer)
 }
-
-console.log(__DEV__)

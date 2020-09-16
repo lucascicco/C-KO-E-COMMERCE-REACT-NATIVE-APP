@@ -14,7 +14,6 @@ export const Container_one_title = styled.Text`
 
 export const ScrollView_one = styled.ScrollView`
     flex: 1;
-    border: 1px solid blue;
 `
 export const ScrollViewItem = styled.TouchableOpacity`
     padding: 0 15px;
@@ -109,7 +108,7 @@ export const Avatar_View = styled.View`
     height: 250px;
     justify-content: center;
     align-items: center;
-    background: #512da8;
+    background: #4A569A;
     padding: 20px;
 `
 

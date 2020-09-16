@@ -6,18 +6,18 @@ import {
     Container
 } from './styles'
 
-function ItemsBox({data}){
+function ItemsBox({data, navigation}){
     return(
         <Container>
             <FlatList
                 data={data}
-                keyExtractor={item => item.productName}
+                keyExtractor={item => item.id}
                 numColumns={2}
                 renderItem={({ item }) => {
                     return(
                         <ProductBox 
-                            productName={item.productName}
-                            productPrice={item.price}
+                            item={item}
+                            navigation={navigation}
                         />
                     )
                 }}

@@ -12,6 +12,8 @@ import ProductImage from '../ProductImage';
 import Categorias from '../../utils/Categorias.js';
 import { onChange_onlyText, onChange_onlyNumber } from '../../utils/RestrictInputs';
 
+import api from '../../services/api';
+
 import { 
     Container, 
     Form,
@@ -68,6 +70,8 @@ function ProductForm({ onClickSubmit,  ViewHeight, ViewWidth, FontSize }){
             if (!result.cancelled) {
                 setProductImage(result.uri)
             }
+
+
           } catch (E) {
             console.log(E);
           }
@@ -75,8 +79,8 @@ function ProductForm({ onClickSubmit,  ViewHeight, ViewWidth, FontSize }){
 
     const HandleSubmit = () => {
         onClickSubmit({
-            uri: ProductPicture,
-            productName: ProductName,
+            image_id: ProductPicture,
+            product_name: ProductName,
             category: Category,
             quantity: Quantity,
             description: Description,
@@ -161,6 +165,7 @@ function ProductForm({ onClickSubmit,  ViewHeight, ViewWidth, FontSize }){
                                style={{ width: '50%'}}
                                blurOnSubmit={false}
                                value={Quantity}
+                               textStyle={{fontFamily: Quantity ? null : 'raleway'}}
                                onChangeText={number => onChange_onlyNumber(number, setQuantity)}
                                ref={QuantityRef}
                                onSubmitEditing={() => console.log('WORKING ON IT!')}
@@ -168,8 +173,8 @@ function ProductForm({ onClickSubmit,  ViewHeight, ViewWidth, FontSize }){
                        </MultiInput>
                             
                
-                       <SubmitButton style={{ background: '#283593'}} onPress={HandleSubmit}>
-                            Criar produto
+                        <SubmitButton style={{ background: '#283593'}} onPress={HandleSubmit}>
+                            Próximo
                         </SubmitButton>
                    </Form>
             </Container>    

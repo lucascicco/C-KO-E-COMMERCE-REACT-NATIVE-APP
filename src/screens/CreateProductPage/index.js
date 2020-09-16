@@ -1,10 +1,12 @@
 import React, { useEffect } from 'react';
-import { Animated, Keyboard, Platform, TouchableWithoutFeedback  } from 'react-native';
+import { Animated, Keyboard, Platform, TouchableWithoutFeedback, Alert} from 'react-native';
 import { ImageResizingEventThree } from '../../utils/KeyboardsEvents';
 import Background from '../../components/Background2';
 import ProductForm from '../../components/ProductForm';
+import api from '../../services/api';
 
-function CreateProductPage(){
+
+export default function CreateProductPage({ navigation }){
     const typeOfPlatform = Platform.OS === 'ios'
 
     const ViewHeight = new Animated.Value(175);
@@ -24,6 +26,23 @@ function CreateProductPage(){
             }
     }, [])
 
+    function isEmpty (obj) {
+        return Object.values(obj).some(element => element === '');
+    }
+    
+    const handleSubmit = (product) => {
+        if(isEmpty(product)){
+            Alert.alert(
+                'Preencha os campos',
+                'Antes de passar para a próxima página, preencha todos os campos adequadamente.'
+            )
+        }
+        
+        navigation.navigate('SendingInformations', {
+           product: product
+        })
+    }
+
     return(
         <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
             <Background>
@@ -31,12 +50,9 @@ function CreateProductPage(){
                     ViewHeight={ViewHeight}
                     ViewWidth={ViewWidth}
                     FontSize={FontSize}
-                    onClickSubmit={(valores) => console.log(valores)}
+                    onClickSubmit={handleSubmit}
                 />
             </Background>
         </TouchableWithoutFeedback>
     )
 }
-
-
-export default CreateProductPage

@@ -9,16 +9,21 @@ import {
     TextView
 } from './styles'
 
-function ProductBox({uri, productName, productPrice}){
+export default function ProductBox({ item, navigation }){
+    const { id, product_image , product_name, price} = item
+
     return(
-        <Container style={styles.ShadowConfig}>
+        <Container style={styles.ShadowConfig} onPress={() => navigation.navigate('ProductPage', {
+            product_id: id,
+            product_image: product_image.url
+        })}>
             <ProductImage
-                source={{ uri: 'https://homepages.cae.wisc.edu/~ece533/images/monarch.png'}}
+                source={{ uri: product_image.url}}
             />
-            <PriceFont>R$ {productPrice}</PriceFont>
+            <PriceFont>R$ {price}</PriceFont>
             
             <TextView>
-                <TitleFont>{productName}</TitleFont>
+                <TitleFont> {product_name} </TitleFont>
             </TextView>
         </Container>
     )
@@ -36,5 +41,3 @@ const styles = StyleSheet.create({
         elevation: 12
     }
 })
-
-export default ProductBox;

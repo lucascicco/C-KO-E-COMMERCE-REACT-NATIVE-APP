@@ -1,20 +1,6 @@
-export function updateProfileRequest(data){
+export function addProducts(products){
     return {
-        type: '@user/UPDATE_PROFILE_REQUEST',
-        payload: { data }
-    }
-}
-
-export function updateProfileSuccess(profile){
-    return {
-        type: '@user/UPDATE_PROFILE_SUCCESS',
-        payload: { profile }
-    }
-}
-
-export function updateProfileFailure(data){
-    return {
-        type: '@user/UPDATE_PROFILE_FAILURE',
-        payload: { data }
+        type: '@product/ADD_PRODUCTS',
+        payload: { products }
     }
 }

@@ -24,5 +24,19 @@ export const FormInput = styled(Input)`
 `;
 
 export const SubmitBottom = styled(Button)`
+    margin-top: 0px;
     background: ${props => props.style.background}
+`   
+
+
+export const WarningView = styled.View`
+    flex-direction: column;
+    justify-content: center;
+    padding: 0px 20px;
+`
+
+export const WarningText = styled.Text`
+    font-size: 15px;
+    font-style: italic;
+    text-align: justify;
 `
