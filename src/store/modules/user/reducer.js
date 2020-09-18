@@ -20,7 +20,7 @@ export default function user(state = INITIAL_STATE, action) {
         draft.profile.user.avatar = action.payload.user.avatar;
         draft.profile.location = action.payload.user.user_location
         draft.profile.personal_data = action.payload.user.user_personal_info
-        draft.profile.myfavorites = action.payload.user.favorite_items
+        draft.profile.myfavorites = action.payload.user.favorite_items === null ? [] : action.payload.user.favorite_items;
         break;
       }
       case '@auth/SIGN_UP_SUCCESS': {
@@ -30,7 +30,6 @@ export default function user(state = INITIAL_STATE, action) {
       case '@user/UPDATE_PROFILE_SUCCESS': {
         draft.profile.user.name = action.payload.profile.name;
         draft.profile.user.email = action.payload.profile.email;
-        draft.profile.user.avatar = action.payload.profile.avatar;
         break;
       }
       case '@user/UPDATE_LOCATION_SUCCESS':{
@@ -48,6 +47,10 @@ export default function user(state = INITIAL_STATE, action) {
       case '@user/REMOVE_FAVORITE_ITEM':{
         const itemIndex = draft.profile.myfavorites.findIndex(number => action.payload.itemNumber === number)
         draft.profile.myfavorites.splice(itemIndex, 1)
+        break
+      }
+      case '@user/ADD_AVATAR_IMAGE':{
+        draft.profile.user.avatar = action.payload.url //precisa ser alterado
         break
       }
       case '@auth/SIGN_OUT': {

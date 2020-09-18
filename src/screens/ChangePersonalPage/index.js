@@ -9,7 +9,7 @@ import {
 } from './styles';
 
 
-function ChangePersonalPage(){
+export default function ChangePersonalPage(){
     const dispatch = useDispatch()
     const personal = useSelector(state => state.user.profile.personal_data)
 
@@ -26,4 +26,6 @@ function ChangePersonalPage(){
     )
 }
 
-export default ChangePersonalPage
+ChangePersonalPage.navigationOptions = ({ navigation }) => ({
+    title: 'Minhas informações'
+});

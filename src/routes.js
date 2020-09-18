@@ -32,12 +32,11 @@ import PurchaseMultiple from './screens/MultiplePurchasePage';
 
 //BUYING PAGES
 import ProductPage from './screens/ProductPage';
+import FretePage from './screens/FretePage';
 import PurchasePartOne from './screens/PurchasePartOnePage';
 import PurchasePartTwo from './screens/PurchasePage';
 
-
 import { createStackNavigator } from 'react-navigation-stack';
-
 
 export default (isSigned = false) => 
     createAppContainer(
@@ -47,7 +46,7 @@ export default (isSigned = false) =>
                         Login,
                         SignUp
                 }),
-                FirstAcess: createStackNavigator({
+                FirstAccess: createStackNavigator({
                         PersonalInformation,
                         LocationPage
                 }),
@@ -56,6 +55,7 @@ export default (isSigned = false) =>
                             screen: createStackNavigator({
                                 HomePage,
                                 ProductPage,
+                                FretePage,
                                 PurchasePartOne,
                                 PurchasePartTwo
                             }, {
@@ -63,7 +63,14 @@ export default (isSigned = false) =>
                                     tabBarLabel: 'Início',
                                     tabBarIcon: ({ tintColor }) =>  (
                                         <MaterialIcons name="store" size={20} color={tintColor} />
-                                    )  
+                                    ),
+                                    headerBackTitle: 'Voltar'
+                                },
+                                defaultNavigationOptions: {
+                                    headerStyle: {
+                                        backgroundColor: '#5e35b1',
+                                    },
+                                    headerTintColor: 'white'
                                 }
                             })
                         },
@@ -72,17 +79,23 @@ export default (isSigned = false) =>
                                 CreateProduct,
                                 SendingInformations
                             }, {
-                                headerMode: null,
                                 navigationOptions: {
                                     tabBarLabel: 'Criar produto',
                                     tabBarIcon: ({ tintColor }) =>  (
                                         <MaterialIcons name="add" size={25} color={tintColor} />
-                                    )  
+                                    ),
+                                    headerBackTitle: 'Voltar'
+                                },
+                                defaultNavigationOptions: {
+                                    headerStyle: {
+                                        backgroundColor: '#5c6bc0',
+                                    },
+                                    headerTintColor: 'white'
                                 }
                             })
                         },
                         MyProfile: {
-                            screen: createSwitchNavigator({
+                            screen: createStackNavigator({
                                 MyProfile,
                                 ChangeAccount,
                                 ChangeLocation,
@@ -93,12 +106,20 @@ export default (isSigned = false) =>
                                 PurchaseCart,
                                 MyPurchases,
                                 PurchaseMultiple
-                            },{
+                            },{ 
+                                initialRouteName: 'MyProfile',
                                 navigationOptions: {
                                     tabBarLabel: 'Meu perfil',
                                     tabBarIcon: ({ tintColor }) =>  (
                                         <MaterialIcons name="account-circle" size={25} color={tintColor} />
-                                    )  
+                                    ),
+                                    headerBackTitle: 'Voltar'
+                                },
+                                defaultNavigationOptions: {
+                                    headerStyle: {
+                                        backgroundColor: '#5c6bc0',
+                                    },
+                                    headerTintColor: 'white'
                                 }
                             })
                         }

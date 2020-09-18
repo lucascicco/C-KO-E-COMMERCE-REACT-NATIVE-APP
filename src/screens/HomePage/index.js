@@ -215,4 +215,10 @@ const styles = StyleSheet.create({
     }
 })
 
+
+HomePage.navigationOptions = ({ navigation }) => ({
+    headerShown: false,
+    title: 'Início'
+});
+
 export default withNavigationFocus(HomePage);

@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { Animated, Keyboard, Platform, TouchableWithoutFeedback, Alert} from 'react-native';
+import { Animated, Keyboard, Platform, TouchableWithoutFeedback, Alert, StatusBar } from 'react-native';
 import { ImageResizingEventThree } from '../../utils/KeyboardsEvents';
 import Background from '../../components/Background2';
 import ProductForm from '../../components/ProductForm';
@@ -32,7 +32,7 @@ export default function CreateProductPage({ navigation }){
     
     const handleSubmit = (product) => {
         if(isEmpty(product)){
-            Alert.alert(
+            return Alert.alert(
                 'Preencha os campos',
                 'Antes de passar para a próxima página, preencha todos os campos adequadamente.'
             )
@@ -56,3 +56,7 @@ export default function CreateProductPage({ navigation }){
         </TouchableWithoutFeedback>
     )
 }
+
+CreateProductPage.navigationOptions = ({ navigation }) => ({
+    headerShown: false,
+});

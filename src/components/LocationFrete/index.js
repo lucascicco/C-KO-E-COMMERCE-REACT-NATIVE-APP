@@ -28,11 +28,11 @@ function LocationPage({ onClickSubmit, enable, location, changeAddress}){
     const [State, setState] = useState(location ? location.state : '')
     const [City, setCity] = useState(location ? location.city : '')
     const [Neighborhood, setNeighborhood] = useState(location ? location.neighborhood : '')
-    const [Address, setAddress] = useState(location ? location.address : '')
+    const [Address, setAddress] = useState(location ? location.street : '')
     const [AdNumber, setAdNumber] = useState(location ? location.street_number : '')
     const [Postcode, setPostcode] = useState(location ? location.postcode : '')
 
-    const [Label, setLabel] = useState('Estado')
+    const [Label, setLabel] = useState(location ? location.state : 'Estado')
     
     const HandleSubmit = () => {
         onClickSubmit({
@@ -40,15 +40,15 @@ function LocationPage({ onClickSubmit, enable, location, changeAddress}){
             state: State,
             city: City,
             neighborhood: Neighborhood,
-            address: Address,
+            street: Address,
             street_number: AdNumber,
             postcode: PostcodeRef.getRawValue()
         })
     }
 
     return(
-        <Container enable={enable}>
-            <Form>  
+        <Container >
+            <Form enable={enable}>  
                 <MultiInput>
                     <FormInput
                          placeholder="País"
@@ -146,20 +146,21 @@ function LocationPage({ onClickSubmit, enable, location, changeAddress}){
                         ref={AdNumberRef}
                         onChangeText={number => onChange_onlyNumber(number, setAdNumber)}
                         editable={enable}
+                        onSubmitEditing={HandleSubmit}
                    />
                 </MultiInput>
-
-                {enable ? (
-                    <SubmitBottom style={{ background: '#512da8'}} onPress={HandleSubmit}>
-                        Salvar endereço
-                    </SubmitBottom>     
-                ) : (
-                    <SubmitBottom style={{ background: '#e53935'}} onPress={changeAddress}>
-                        Alterar endereço
-                    </SubmitBottom>     
-                )}
-              
             </Form>
+
+            {enable ? (
+                <SubmitBottom style={{ background: '#512da8'}} onPress={HandleSubmit}>
+                    Salvar endereço
+                </SubmitBottom>     
+                ) : (
+                <SubmitBottom style={{ background: '#e53935'}} onPress={changeAddress}>
+                    Alterar endereço
+                </SubmitBottom>     
+            )}
+          
         </Container>
     )
 }

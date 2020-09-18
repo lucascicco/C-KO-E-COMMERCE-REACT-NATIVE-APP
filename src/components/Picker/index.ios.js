@@ -7,13 +7,13 @@ import Button from '../ButtonType1';
 import { MainContainer, Container } from './styles';
 
 
-function PickerCustomY({style, styleButton, label, value, data, onPressSubmit, text, ...rest}){
+function PickerCustomY({editable,  style, styleButton, label, value, data, onPressSubmit, text, ...rest}){
     const [modalVisible, setModalVisible] = useState(false)
 
     return(
         <MainContainer style={style}>
             <ButtonType2
-                onPress={() => setModalVisible(true)}
+                onPress={() => editable ? setModalVisible(true) : null}
                 text={text}
                 icon="select-arrows"
                 style={styleButton}

@@ -5,15 +5,19 @@ import * as Permissions from 'expo-permissions';
 import { Alert } from 'react-native';
 import AvatarView from '../../components/MyProfilePagesComponents/AvatarView';
 import ScrollViewX from '../../components/MyProfilePagesComponents/ScrollViewOptions';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { signOut } from '../../store/modules/auth/actions';
+import { addAvatarPicture } from '../../store/modules/user/actions';
+import api from '../../services/api';
+
 
 import {
     Container
 } from './styles';
 
 export default function MyAccountOptions({ navigation }){
-    const [ProductPicture, setProductImage] = useState();
+    const profile = useSelector(state => state.user.profile.user)
+    const [ProductPicture, setProductImage] = useState(profile.avatar ? profile.avatar : '');
     const dispatch = useDispatch();
 
     const getPermissionAsync = async () => {
@@ -39,7 +43,20 @@ export default function MyAccountOptions({ navigation }){
             });
 
             if (!result.cancelled) {
+                const formDat = new FormData();
+                formDat.append("file", result.uri);
+
+                const response_one = await api.post('avatar', formDat , 
+                {
+                    headers: {'Content-Type': 'multipart/form-data' }
+                })
+              
+                console.log(response_one)
+                
+                //dispatch(addAvatarPicture(response.data.url))
+
                 setProductImage(result.uri)
+
             }
           } catch (E) {
             console.log(E);
@@ -62,3 +79,8 @@ export default function MyAccountOptions({ navigation }){
          </Container>
     )
 }
+
+MyAccountOptions.navigationOptions = ({ navigation }) => ({
+    headerShown: false,
+    title: 'Meu perfil'
+});

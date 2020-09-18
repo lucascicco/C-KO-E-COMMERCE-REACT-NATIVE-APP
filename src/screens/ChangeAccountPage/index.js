@@ -8,12 +8,13 @@ import {
     Container
 } from './styles';
 
-export default function ChangeAccountPage(){
+export default function ChangeAccountPage({ navigation }){
     const dispatch = useDispatch()
     const account = useSelector(state => state.user.profile.user)
 
     const handleSubmit = (AccountInfo) => {
         dispatch(updateAccountRequest(AccountInfo))
+        navigation.goBack()
     }
 
     return(
@@ -24,3 +25,7 @@ export default function ChangeAccountPage(){
         </Background>
     )
 }
+
+ChangeAccountPage.navigationOptions = ({ navigation }) => ({
+    title: 'Minha conta'
+});

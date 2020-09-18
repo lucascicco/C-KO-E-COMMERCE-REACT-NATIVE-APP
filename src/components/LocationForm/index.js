@@ -28,11 +28,11 @@ function LocationPage({ onClickSubmit, location }){
     const [State, setState] = useState(location ? location.state : '')
     const [City, setCity] = useState(location ? location.city : '')
     const [Neighborhood, setNeighborhood] = useState(location ? location.neighborhood : '')
-    const [Address, setAddress] = useState(location ? location.address : '')
+    const [Address, setAddress] = useState(location ? location.street : '')
     const [AdNumber, setAdNumber] = useState(location ? location.street_number : '')
     const [Postcode, setPostcode] = useState(location ? location.postcode : '')
     
-    const [Label, setLabel] = useState('Estado')
+    const [Label, setLabel] = useState(location ? location.state : 'Estado')
     
     const handleSubmit = () => {
         onClickSubmit({
@@ -40,7 +40,7 @@ function LocationPage({ onClickSubmit, location }){
             state: State,
             city: City,
             neighborhood: Neighborhood,
-            address: Address,
+            street: Address,
             street_number: AdNumber,
             postcode: PostcodeRef.getRawValue()
         })

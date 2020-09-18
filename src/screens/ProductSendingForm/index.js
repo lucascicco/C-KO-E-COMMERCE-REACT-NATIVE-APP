@@ -4,6 +4,7 @@ import { ImageResizingEventTwo } from '../../utils/KeyboardsEvents';
 import Background from '../../components/Background2';
 import ProductComponent from '../../components/ProductFeatures';
 import api from '../../services/api';
+import validationDate from '../../utils/CorreiosValidation'
 
 import { 
     Container
@@ -31,8 +32,15 @@ export default function ProductSendingForm({ navigation }){
             }
     }, [])
     
-    const handleSubmit = async (data) => {
+    const handleSubmit = async ({ format, width, height, length, weight, diameter }) => {
         try{
+            if(!validationDate(format, width, height, length, weight, diameter)){
+                return Alert.alert(
+                    'Erro na validação',
+                    'Respeite os limites das dimensões proposto. Dê uma olhada na tablea novamente.'
+                )
+            }
+
             const bodyFormData = new FormData()
 
             bodyFormData.append('file', product.image_id)
@@ -49,7 +57,12 @@ export default function ProductSendingForm({ navigation }){
 
             const response = await api.post('features', {
                 product:  response_one.data.product.id,
-                ...data
+                format,
+                width,
+                height,
+                length,
+                weight,
+                diameter
             })   
 
             console.log(response.data)

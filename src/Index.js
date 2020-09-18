@@ -2,7 +2,6 @@ import React from 'react';
 import { Provider } from 'react-redux';
 import { PersistGate } from 'redux-persist/integration/react';
 import { StatusBar } from 'react-native';
-import AsyncStorage from '@react-native-community/async-storage';
 
 import './config/ReactotronConfig';
 import { store, persistor } from './store';

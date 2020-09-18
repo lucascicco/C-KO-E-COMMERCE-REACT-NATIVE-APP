@@ -105,7 +105,7 @@ export const AvatarImage = styled.Image`
 `
 
 export const Avatar_View = styled.View`
-    height: 250px;
+    height: 150px;
     justify-content: center;
     align-items: center;
     background: #4A569A;

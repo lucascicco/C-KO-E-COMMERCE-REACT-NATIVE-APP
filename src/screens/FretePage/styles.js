@@ -1,10 +1,7 @@
 import styled from 'styled-components/native';
-import ButtonType1 from '../ButtonType1';
+import ButtonType1 from '../../components/ButtonType1';
 
-export const Container = styled.KeyboardAvoidingView.attrs({
-    enabled: Platform.OS === 'ios',
-    behavior: 'padding'
-  })`
+export const Container = styled.View`
     flex: 1;
     align-items: center;
     padding: 30px 20px;
@@ -84,4 +81,8 @@ export const RadioText = styled.Text`
     margin-right: 10px;
     color: #FFF;
     font-family: raleway;
+`
+
+export const TouchableCloseKeyboard = styled.TouchableWithoutFeedback`
+    flex: 1;
 `

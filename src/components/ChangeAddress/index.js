@@ -18,6 +18,7 @@ import {
 
 
 export default function ChangeAddress({ onCalculatePress, location }){
+    console.log(location)
     const [enable, setEnable] = useState(false)
     const [fretetype,  setFretetype] = useState('04510')
     const [locationState, setLocationState] = useState(location)
@@ -71,12 +72,11 @@ export default function ChangeAddress({ onCalculatePress, location }){
                             </RadioText>
                         </RadioView>
                     </TouchableButton>
+
+                    <SubmitBottom style={{ background: '#388e3c'}} onPress={onCalculatePress}>
+                        Calcular frete
+                    </SubmitBottom>    
                 </ViewTypeSend>
-
-                <SubmitBottom style={{ background: '#388e3c'}} onPress={onCalculatePress}>
-                    Calcular frete
-                </SubmitBottom>    
-
             </Container>    
         </Background>   
     )

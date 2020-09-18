@@ -44,7 +44,6 @@ function ProductPage({ navigation, isFocused }){
     const [quantity, setQuantity] = useState(0)
     const [favorite, setFavorite] = useState(isFavorite)
     const [product, setProduct] = useState([])
-    const [frete, setFrete] = useState(null)
     const [visible, setVisibility] = useState(false)
 
     const handleModalVisibilty = () => {
@@ -70,9 +69,7 @@ function ProductPage({ navigation, isFocused }){
     }
 
     useEffect(() => {
-        if(!isFocused){
-            handleLeavePage()
-        }else{
+        if(isFocused){
             loadProduct()
         }    
     }, [isFocused])
@@ -110,27 +107,17 @@ function ProductPage({ navigation, isFocused }){
                                             borderColor: 'black',
                                             borderWidth: 1
                                         }} 
-                                        rightButtonBackgroundColor="#b0bec5"
-                                        leftButtonBackgroundColor="#b0bec5"
+                                        editable={false}
+                                        rightButtonBackgroundColor="#e0e0e0"
+                                        leftButtonBackgroundColor="#e0e0e0"
                                     />
-
-                                    {frete === null ? (
-                                        <FreteButton onPress={handleModalVisibilty}>
-                                            <FreteText>Calcular frete</FreteText>
-                                        </FreteButton>
-                                    ): (
-                                        <Fragment>
-                                            <DetailsTitle>Preço frete</DetailsTitle>
-                                            <DetailsText>R$ {frete}</DetailsText>
-                                        </Fragment>
-                                    )}
                                 </Details>   
                             </FeaturesView>
                         </RowView>
 
                     {
                         product.purchasable ? (
-                            <SubmitButton onPress={() => navigation.navigate('PurchasePartOne', {
+                            <SubmitButton onPress={() => navigation.navigate('FretePage', {
                                 product: product,
                                 quantity: quantity
                             })}>
@@ -154,19 +141,6 @@ function ProductPage({ navigation, isFocused }){
                     </DescriptionView>
                 </Container>
             )}
-
-            <Modal
-                isVisible={visible}
-                animationIn="zoomIn"
-                animationOut="zoomOut"
-                animationInTiming={500}
-                animationOutTiming={500}
-                avoidKeyboard={false}
-                coverScreen={true}
-                onBackdropPress={() => setVisibility(false)}
-            >   
-                <ChangeAddressView onCalculatePress={() => setVisibility(!visible)} location={profile.location} />
-            </Modal>
        </Background>
     )
 }
@@ -183,5 +157,10 @@ const styles = StyleSheet.create({
         elevation: 12
     }
 })
+
+
+ProductPage.navigationOptions = ({ navigation }) => ({
+    title: navigation.getParam('product_name')
+});
 
 export default withNavigationFocus(ProductPage)

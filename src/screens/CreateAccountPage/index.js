@@ -16,7 +16,7 @@ import {
     IMAGE_HEIGHT_SMALL
 } from './styles'
 
-function CreateAccount({ navigation }) {
+export default function CreateAccount({ navigation }) {
     const dispatch = useDispatch()
     
     const imageHeight = new Animated.Value(IMAGE_HEIGHT)
@@ -37,6 +37,7 @@ function CreateAccount({ navigation }) {
 
     const handleSubmit = (AccountInfo) => {
         dispatch(signUpRequest(AccountInfo))
+        navigation.navigate('FirstAccess')
     }
 
     return(
@@ -59,4 +60,3 @@ function CreateAccount({ navigation }) {
     )
 }
 
-export default CreateAccount

@@ -9,7 +9,7 @@ import {
     Container
 } from './styles';
 
-function MyProductsPage(){
+export default function MyPurchases(){
     const [visible, setVisibility] = useState(false)
     
     return(
@@ -38,4 +38,6 @@ function MyProductsPage(){
     )
 }
 
-export default MyProductsPage;
+MyPurchases.navigationOptions = ({ navigation }) => ({
+    title: 'Minhas compras'
+});

@@ -40,3 +40,14 @@ export const WarningText = styled.Text`
     font-style: italic;
     text-align: justify;
 `
+export const InfoButton = styled.TouchableOpacity`
+    flex: 1;
+    flex-direction: row;
+    padding: 10px;
+    justify-content: center;
+`
+
+export const InfoText = styled.Text`
+    color: black;
+    font-size: 15px;
+`

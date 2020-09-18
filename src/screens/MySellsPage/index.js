@@ -8,7 +8,7 @@ import {
     Container
 } from './styles';
 
-function MySellsPage(){
+export default function MySellsPage(){
     const [visible, setVisibility] = useState(false)
 
     return(
@@ -37,4 +37,6 @@ function MySellsPage(){
     )
 }
 
-export default MySellsPage;
+MySellsPage.navigationOptions = ({ navigation }) => ({
+    title: 'Minhas vendas'
+});

@@ -12,7 +12,7 @@ import {
 } from './styles';
 
 
-function MyCart(){
+export default function MyCart(){
     return(
         <Container>
             <FlatlistProducts 
@@ -31,4 +31,6 @@ function MyCart(){
     )
 }
 
-export default MyCart;
+MyCart.navigationOptions = ({ navigation }) => ({
+    title: 'Meu carrinho'
+});

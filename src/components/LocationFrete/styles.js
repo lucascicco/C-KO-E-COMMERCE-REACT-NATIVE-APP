@@ -6,12 +6,12 @@ import Button from '../../components/ButtonType1';
 export const Container = styled.View`
     justify-content: center;
     align-items: center;
-    opacity: ${props => props.enable ? '0.7' : '0'}
 `;
 
 export const Form = styled.View`
     margin-top: 10px;
     align-self: stretch;
+    opacity: ${props => props.enable ? '1.0' : '0.5'}
 `;
 
 export const MultiInput = styled.View`
@@ -24,4 +24,6 @@ export const FormInput = styled(Input)`
     padding: 0 5px;
 `;
 
-export const SubmitBottom = styled(Button)``
+export const SubmitBottom = styled(Button)`]
+    width: 95%;
+`

@@ -19,7 +19,7 @@ function PersonalForm({ onClickSubmit , personal}){
     const typeOfPlatform = Platform.OS === 'ios'
     const typeOfkeyboardType = typeOfPlatform ? 'numbers-and-punctuation' : 'numeric'
 
-    const [Birthday, setBirthday] = useState(personal ? personal.birthay : new Date())
+    const [Birthday, setBirthday] = useState(new Date())
     const [Gender, setGender] = useState(personal ? personal.gender : '')
     const [PersonalID, setPersonalID] = useState(personal ? personal.identification : '')
     const [Cellphone, setCellphone] = useState(personal ? personal.cellphone : '')  

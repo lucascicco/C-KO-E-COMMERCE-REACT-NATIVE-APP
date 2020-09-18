@@ -15,7 +15,8 @@ export default function ProductBox({ item, navigation }){
     return(
         <Container style={styles.ShadowConfig} onPress={() => navigation.navigate('ProductPage', {
             product_id: id,
-            product_image: product_image.url
+            product_image: product_image.url,
+            product_name: product_name
         })}>
             <ProductImage
                 source={{ uri: product_image.url}}

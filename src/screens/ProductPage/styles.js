@@ -17,6 +17,7 @@ export const ProductView = styled.View`
     justify-content: space-between;
     align-items: stretch;
     margin-bottom: 15px;
+    width: ${widthPercentage};
 `
 export const Title_View = styled.View`
     flex-direction: row;
@@ -67,7 +68,9 @@ export const Details = styled.View`
 export const FeaturesView = styled.View`
     flex-direction: column;
     width: 50%;
+    padding: 10px;
 `
+
 export const RowView = styled.View`
     flex-direction:row;
     justify-content: space-between;
@@ -76,7 +79,7 @@ export const RowView = styled.View`
 
 export const SubmitButton = styled(Button)`
     margin-top: 10px;
-`;
+`
 
 export const CalculateButton = styled(Button)`
 
@@ -84,7 +87,7 @@ export const CalculateButton = styled(Button)`
 
 export const QuantityInput = styled(Input)`
   margin-bottom: 10px;
-`;
+`
 
 
 export const TotalText = styled.Text`
@@ -119,12 +122,12 @@ export const TextWarning = styled.Text`
 `
 
 export const FreteButton = styled.TouchableOpacity`
+    margin-top: 10px;
     flex-direction: row;
     padding: 10px;
-    border: 1px solid white;
+    border: 1px solid black;
 `
 
 export const FreteText = styled.Text`
-    color: #FFF;
     font-family: raleway;
 `

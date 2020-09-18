@@ -1,18 +1,52 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import FlatlistProducts from '../../components/MyProfilePagesComponents/MyProductsList';
 import data from '../../utils/testing_data';
+import api from '../../services/api';
+import { withNavigationFocus } from 'react-navigation';
 
 import { 
-    Container
+    Container,
+    ViewEmpty,
+    TextNoProducts
 } from './styles';
 
 
-export default function MyProducts(){
+function MyProducts({ isFocused }){
+    const [MyProducts, SetMyProducts] = useState([])
+
+    const loadMyProducts = async () => {
+        const response = await api.get('myProducts')
+
+        SetMyProducts(response.data)
+    }
+
+    useEffect(()  => {
+        if(isFocused){
+            loadMyProducts()
+        }
+    }, [isFocused])
+
     return(
         <Container>
-            <FlatlistProducts 
-                data={data}
-            />
+            {
+                MyProducts.length === 0 ? (
+                    <ViewEmpty>
+                        <TextNoProducts>
+                            Você ainda não produtos à venda.
+                        </TextNoProducts>
+                    </ViewEmpty>
+                ) : (
+                    <FlatlistProducts 
+                         data={data}
+                    />
+                )
+            }
         </Container>
     )
 }
+
+MyProducts.navigationOptions = ({ navigation }) => ({
+    title: 'Meus produtos'
+});
+
+export default withNavigationFocus(MyProducts)

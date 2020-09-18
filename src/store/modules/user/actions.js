@@ -78,3 +78,20 @@ export function removeFavoriteItem(itemNumber){ //SAGA
         payload: { itemNumber }
     }
 }
+
+
+//AVATAR IMAGE
+export function RequestAvatarPicture(url){ //SAGA
+    return {
+        type: '@user/REQUEST_AVATAR_IMAGE',
+        payload: { url }
+    }
+}
+
+
+export function addAvatarPicture(url){ //SAGA
+    return {
+        type: '@user/ADD_AVATAR_IMAGE',
+        payload: { url }
+    }
+}

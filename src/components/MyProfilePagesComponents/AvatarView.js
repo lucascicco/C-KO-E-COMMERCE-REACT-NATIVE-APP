@@ -20,7 +20,6 @@ export default function AvatarView({ uri, onPress}) {
                     <Alert_ImageView>Adicione sua foto de perfil</Alert_ImageView>
                 )}
             </Avatar_ImageView>
-            <Text_View>USERNAME</Text_View>
         </Avatar_View>
     );
 }

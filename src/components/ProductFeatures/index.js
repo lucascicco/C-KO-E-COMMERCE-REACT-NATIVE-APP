@@ -1,5 +1,5 @@
 import React, { useRef, useState } from 'react';
-import { Platform } from 'react-native';
+import { Platform, Linking } from 'react-native';
 import Picker from '../../components/Picker';
 import FormatosCorreios from '../../utils/FormatosCorreios';
 import { onChange_numberComma, onChange_onlyNumber } from '../../utils/RestrictInputs';
@@ -11,7 +11,9 @@ import {
     MultiInput,
     SubmitBottom,
     WarningView,
-    WarningText
+    WarningText,
+    InfoButton,
+    InfoText
 } from './styles';
 
 export default function ProductsFeature({ onClickSubmit }){
@@ -31,7 +33,10 @@ export default function ProductsFeature({ onClickSubmit }){
     const [diameter, setDiameter] = useState('')
     
     const [Label, setLabel] = useState('Formato')
-    const [enable, setEnable] =  useState(true)
+
+    const [enableHeight, setEnableHeight] =  useState(true)
+    const [enableWidth, setEnableWidth] =  useState(true)
+    const [enableDiameter, setEnableDiameter] =  useState(true)
 
     const handleSubmit = () => {
         onClickSubmit({
@@ -47,12 +52,28 @@ export default function ProductsFeature({ onClickSubmit }){
     const handlePickingFormat = (itemValue) => {
         setFormat(itemValue)
 
-        if(itemValue === 3){
-            setHeight(0)
-            setDiameter(0)
-            setEnable(false)
-        }else{
-            setEnable(true)
+        switch(itemValue){
+            case 3: 
+                setEnableHeight(false)
+                setEnableDiameter(false)
+                setEnableWidth(true)
+                setDiameter(0)
+                setHeight(0)
+            case 2: 
+                setEnableHeight(false)
+                setEnableWidth(false)
+                setEnableDiameter(true)
+                setHeight(0)
+                setWidth(0)
+            case 1: 
+                setEnableHeight(true)
+                setEnableWidth(true)
+                setEnableDiameter(false)
+                setDiameter(0)
+            default: 
+                setEnableHeight(true)
+                setEnableWidth(true)
+                setEnableDiameter(true)
         }
     }
 
@@ -77,7 +98,7 @@ export default function ProductsFeature({ onClickSubmit }){
                      <FormInput
                          placeholder="Peso"
                          keyboardType={typeOfkeyboardType}
-                         maxLength={5}
+                         maxLength={4}
                          returnKeyType="next"
                          style={{ width: '27%'}}
                          blurOnSubmit={false}
@@ -90,7 +111,7 @@ export default function ProductsFeature({ onClickSubmit }){
                      <FormInput
                         placeholder="Altura"
                         keyboardType={typeOfkeyboardType}
-                        maxLength={5}
+                        maxLength={3}
                         returnKeyType="next"
                         style={{ width: '28%'}}
                         blurOnSubmit={false}
@@ -99,7 +120,7 @@ export default function ProductsFeature({ onClickSubmit }){
                         textStyle={{fontFamily: height ? null : 'raleway'}}
                         ref={HeightRef}
                         onSubmitEditing={() => WidthRef.current.focus()}
-                        editable={enable}
+                        editable={enableHeight}
                     />
                 </MultiInput>
                             
@@ -108,7 +129,7 @@ export default function ProductsFeature({ onClickSubmit }){
                     <FormInput
                         placeholder="Largura"
                         keyboardType={typeOfkeyboardType}
-                        maxLength={5}
+                        maxLength={3}
                         returnKeyType="next"
                         style={{ width: '30%'}}
                         blurOnSubmit={false}
@@ -117,12 +138,13 @@ export default function ProductsFeature({ onClickSubmit }){
                         textStyle={{fontFamily: width ? null : 'raleway'}}
                         ref={WidthRef}
                         onSubmitEditing={() => LengthRef.current.focus()}
+                        editable={enableWidth}
                     />
 
                     <FormInput
                         placeholder="Comprimento"
                         keyboardType={typeOfkeyboardType}
-                        maxLength={5}
+                        maxLength={3}
                         returnKeyType="next"
                         style={{ width: '30%'}}
                         blurOnSubmit={false}
@@ -136,7 +158,7 @@ export default function ProductsFeature({ onClickSubmit }){
                     <FormInput
                         placeholder="Diâmetro"
                         keyboardType={typeOfkeyboardType}
-                        maxLength={5}
+                        maxLength={3}
                         returnKeyType="next"
                         style={{ width: '30%'}}
                         blurOnSubmit={false}
@@ -144,7 +166,7 @@ export default function ProductsFeature({ onClickSubmit }){
                         onChangeText={text => onChange_onlyNumber(text, setDiameter)}
                         textStyle={{fontFamily: diameter ? null : 'raleway'}}
                         ref={DiameterRef}
-                        editable={enable}
+                        editable={enableDiameter}
                     />
 
                 </MultiInput>
@@ -152,9 +174,12 @@ export default function ProductsFeature({ onClickSubmit }){
                 <WarningView>
                     <WarningText>
                         Todas as medidas devem ser feitas incluindo a embalagem.
-                        Peso é dado em kilogramas. Já o restante é dado em centímetros.
-                        Se o formato é envelope, o peso máximo será de um kilograma.
-                        Exemplo: Peso = 60,0 (KG) / Altura = 170 (CM).
+                        Valores de dimensões são dados em CM. Já, o peso é dado KG.
+                        <InfoButton onPress={() => Linking.openURL('https://www.correios.com.br/enviar-e-receber/precisa-de-ajuda/limites-de-dimensoes-e-peso')}>
+                            <InfoText>
+                                Ver medidas
+                            </InfoText>
+                        </InfoButton>
                     </WarningText>
                 </WarningView>
 

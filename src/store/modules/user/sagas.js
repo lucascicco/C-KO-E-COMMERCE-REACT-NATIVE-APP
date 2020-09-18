@@ -28,7 +28,17 @@ export function* UpdateAccountSaga({ payload }){
 
 export function* CreateLocationSaga({ payload }){
     try{
-        const response = yield call(api.post, 'location', payload.data)
+        const { street , city, country, neighborhood, postcode, state, street_number } = payload.data
+
+        const response = yield call(api.post, 'location', {
+            street,
+            city,
+            country,
+            neighborhood,
+            postcode,
+            state,
+            street_number
+        })
   
         yield put(updateLocationSuccess(response.data))
     }catch(err){
@@ -43,9 +53,20 @@ export function* CreateLocationSaga({ payload }){
 
 export function* UpdateLocationSaga({ payload }){
     try{
-        const response = yield call(api.put, 'location', payload.data)
+        const { street, city, country, neighborhood, postcode, state, street_number } = payload.data
+
+        const response = yield call(api.put, 'location', {
+            street,
+            city,
+            country,
+            neighborhood,
+            postcode,
+            state,
+            street_number
+        })
 
         yield put(updateLocationSuccess(response.data))
+
     }catch(err){
         Alert.alert(
             'Falha ao atualizar', 
@@ -59,7 +80,15 @@ export function* UpdateLocationSaga({ payload }){
 
 export function* CreatePersonalSaga({ payload }){
     try{  
-        const response = yield call(api.post, 'personal_data', payload.data)
+        const { birthday, gender, cellphone, profession, identification } = payload.data
+
+        const response = yield call(api.post, 'personal_data',{
+            birthday,
+            gender,
+            cellphone,
+            profession,
+            identification
+        })
         
         yield put(updatePersonalDataSuccess(response.data))
 
@@ -75,7 +104,15 @@ export function* CreatePersonalSaga({ payload }){
 
 export function* UpdatePersonalSaga({ payload }){
     try{
-        const response = yield call(api.put, 'personal_data', payload.data)
+        const { birthday, gender, cellphone, profession, identification } = payload.data
+
+        const response = yield call(api.put, 'personal_data',{
+            birthday,
+            gender,
+            cellphone,
+            profession,
+            identification
+        })
         
         yield put(updatePersonalDataSuccess(response.data))
 
@@ -114,5 +151,5 @@ export default all([
     takeLatest('@user/CREATE_PERSONAL_REQUEST', CreatePersonalSaga),
     takeLatest('@user/UPDATE_LOCATION_REQUEST', UpdateLocationSaga),
     takeLatest('@user/UPDATE_PERSONAL_REQUEST', UpdatePersonalSaga),
-    takeLatest('@user/REQUEST_FAVORITE_ITEM', FavoriteSaga),
+    takeLatest('@user/REQUEST_FAVORITE_ITEM', FavoriteSaga)
 ])
