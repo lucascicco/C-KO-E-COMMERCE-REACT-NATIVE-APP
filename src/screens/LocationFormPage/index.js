@@ -12,7 +12,7 @@ import {
     SubmitButton
 } from './styles';
 
-function LocationPage(){
+function LocationPage({ navigation }){
     const dispatch = useDispatch()
 
     const typeOfPlatform = Platform.OS === 'ios'
@@ -59,7 +59,7 @@ function LocationPage(){
 
                 <LocationForm onClickSubmit={handleSubmit} />
 
-               <SubmitButton style={{ background: '#283593'}}>
+               <SubmitButton style={{ background: '#d32f2f'}} onPress={() => navigation.navigate('App')}>
                    Pular
                </SubmitButton>
 

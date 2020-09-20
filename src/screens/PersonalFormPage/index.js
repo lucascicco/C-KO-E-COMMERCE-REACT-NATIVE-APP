@@ -11,7 +11,7 @@ import {
     SubmitButton
 } from './styles';
 
-export default function PersonalInformation(){
+export default function PersonalInformation({ navigation }){
     const dispatch = useDispatch()
 
     const typeOfPlatform = Platform.OS === 'ios'
@@ -60,7 +60,7 @@ export default function PersonalInformation(){
 
                 <PersonalPage onClickSubmit={handleSubmit}/>
 
-                <SubmitButton style={{ background: '#283593'}}>
+                <SubmitButton style={{ background: '#d32f2f'}} onPress={() => navigation.navigate('LocationPage')}>
                     Pular
                 </SubmitButton>
             </Container>

@@ -1,6 +1,6 @@
 import { Alert } from 'react-native'
 import { takeLatest , call, put, all } from 'redux-saga/effects';
-import { signInSuccess, signFailure, signUpSuccess} from './actions';
+import { signInSuccess, signFailure, signUpSuccess, FirstAccessSuccess } from './actions';
 import { NavigationActions } from 'react-navigation';
 
 import api from '../../../services/api';
@@ -47,15 +47,12 @@ export function* signUp({ payload }){
         
         api.defaults.headers.Authorization = `Bearer ${token}`
 
-        yield put(signUpSuccess(token, user))
-
+        yield put(FirstAccessSuccess(token, user))
         
-        NavigationActions.navigate('FirstAcess')
-
     }catch(err){
         Alert.alert(
             'Falha no cadastro', 
-            'Houve um erro no cadastro, verfique seus dados.'
+            'Houve um erro no cadastro, verifique seus dados.'
             );
 
         yield put(signFailure())

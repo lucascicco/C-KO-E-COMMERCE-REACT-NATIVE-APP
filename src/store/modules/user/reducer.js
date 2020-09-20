@@ -13,7 +13,6 @@ export default function user(state = INITIAL_STATE, action) {
   return produce(state, draft => {
     switch (action.type) {
       case '@auth/SIGN_IN_SUCCESS': {
-        console.log(draft)
         draft.profile.user.id = action.payload.user.id;
         draft.profile.user.name = action.payload.user.name;
         draft.profile.user.email = action.payload.user.email;
@@ -49,8 +48,14 @@ export default function user(state = INITIAL_STATE, action) {
         draft.profile.myfavorites.splice(itemIndex, 1)
         break
       }
-      case '@user/ADD_AVATAR_IMAGE':{
+      case '@user/ADD_AVATAR_IMAGE': {
         draft.profile.user.avatar = action.payload.url //precisa ser alterado
+        break
+      }
+      case '@auth/FIRST_ACCESS_ON': { 
+        draft.profile.user.id = action.payload.user.id;
+        draft.profile.user.name = action.payload.user.name;
+        draft.profile.user.email = action.payload.user.email;
         break
       }
       case '@auth/SIGN_OUT': {

@@ -36,3 +36,10 @@ export function signOut(){
         type: '@auth/SIGN_OUT'
     }
 }
+
+export function FirstAccessSuccess(token, user){
+    return {
+        type: '@auth/FIRST_ACCESS_ON',
+        payload: { token, user }
+    }
+}

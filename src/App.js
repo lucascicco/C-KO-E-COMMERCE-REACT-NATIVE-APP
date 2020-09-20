@@ -5,8 +5,10 @@ import createRouter from './routes';
 
 export default function App() {
   const signed = useSelector(state => state.auth.signed);
-  
-  const Routes = createRouter(signed);
+  const firstAccess = useSelector(state => state.auth.first_access);
+
+
+  const Routes = createRouter(signed, firstAccess);
 
   return <Routes />;
 }

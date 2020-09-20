@@ -2,6 +2,7 @@ import React from 'react';
 import { createAppContainer, createSwitchNavigator } from 'react-navigation';
 import { createBottomTabNavigator } from 'react-navigation-tabs';
 import { MaterialIcons } from '@expo/vector-icons'; 
+import InitialRoute from './utils/InitialRoute';
 
 //FIRST SCREENS
 import Login from './screens/LoginPage';
@@ -38,7 +39,7 @@ import PurchasePartTwo from './screens/PurchasePage';
 
 import { createStackNavigator } from 'react-navigation-stack';
 
-export default (isSigned = false) => 
+export default (isSigned, FirstAccess) => 
     createAppContainer(
         createSwitchNavigator(
             {
@@ -49,6 +50,8 @@ export default (isSigned = false) =>
                 FirstAccess: createStackNavigator({
                         PersonalInformation,
                         LocationPage
+                }, {
+                    headerMode: null
                 }),
                 App: createBottomTabNavigator({
                         HomePage: {
@@ -112,8 +115,7 @@ export default (isSigned = false) =>
                                     tabBarLabel: 'Meu perfil',
                                     tabBarIcon: ({ tintColor }) =>  (
                                         <MaterialIcons name="account-circle" size={25} color={tintColor} />
-                                    ),
-                                    headerBackTitle: 'Voltar'
+                                    )
                                 },
                                 defaultNavigationOptions: {
                                     headerStyle: {
@@ -136,7 +138,7 @@ export default (isSigned = false) =>
                 })
             }, 
             {
-                initialRouteName: isSigned ? 'App' :  'Sign',
+                initialRouteName: InitialRoute(isSigned, FirstAccess),
                 headerMode: null,
                 navigationOptions: {
                     headerVisible: false
