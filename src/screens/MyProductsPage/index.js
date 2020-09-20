@@ -37,7 +37,7 @@ function MyProducts({ isFocused }){
                     </ViewEmpty>
                 ) : (
                     <FlatlistProducts 
-                         data={data}
+                         data={MyProducts}
                     />
                 )
             }
@@ -46,7 +46,8 @@ function MyProducts({ isFocused }){
 }
 
 MyProducts.navigationOptions = ({ navigation }) => ({
-    title: 'Meus produtos'
+    title: 'Meus produtos',
+    headerBackTitle: 'Voltar'
 });
 
 export default withNavigationFocus(MyProducts)

@@ -27,5 +27,6 @@ export default function ChangeAccountPage({ navigation }){
 }
 
 ChangeAccountPage.navigationOptions = ({ navigation }) => ({
-    title: 'Minha conta'
+    title: 'Minha conta',
+    headerBackTitle: 'Voltar'
 });

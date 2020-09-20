@@ -16,7 +16,9 @@ export default function MyCartFlatList({data , onPress}) {
                 renderItem={({ item }) => {
                     return(
                         <FlatListItem 
-                            title={item.productName}
+                            title={item.product.product_name}
+                            selldone={item.sellsdone}
+                            status={item.product.status}
                             onPress={onPress}
                         />
                     )

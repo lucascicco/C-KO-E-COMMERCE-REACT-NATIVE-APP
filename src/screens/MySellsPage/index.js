@@ -38,5 +38,6 @@ export default function MySellsPage(){
 }
 
 MySellsPage.navigationOptions = ({ navigation }) => ({
-    title: 'Minhas vendas'
+    title: 'Minhas vendas',
+    headerBackTitle: 'Voltar'
 });

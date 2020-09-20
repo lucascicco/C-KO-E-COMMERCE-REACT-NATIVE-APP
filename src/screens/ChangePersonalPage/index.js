@@ -27,5 +27,6 @@ export default function ChangePersonalPage(){
 }
 
 ChangePersonalPage.navigationOptions = ({ navigation }) => ({
-    title: 'Minhas informações'
+    title: 'Minhas informações',
+    headerBackTitle: 'Voltar'
 });

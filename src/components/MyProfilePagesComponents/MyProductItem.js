@@ -24,7 +24,9 @@ import {
     Button_Text
 } from './styles';
 
-export default function Flatlist_item({title, onPress}) {
+export default function Flatlist_item({title, selldone, status , onPress}) {
+    const statusName = status === 'open' ? 'Aberto' : 'Fechado'
+
     return (
             <CartItem_View>
                 <Title_View_Row>
@@ -41,12 +43,12 @@ export default function Flatlist_item({title, onPress}) {
 
                                 <Details_Row>
                                     <Details_RowText>Status</Details_RowText>
-                                    <Status_Text status="open">Aberto</Status_Text>     
+                                    <Status_Text status={status}>{statusName}</Status_Text>     
                                 </Details_Row>  
 
                                 <Details_Row>
                                     <Details_RowText>Vendas feitas</Details_RowText>
-                                    <Details_RowTextItalic>20</Details_RowTextItalic>
+                                    <Details_RowTextItalic>{selldone}</Details_RowTextItalic>
                                 </Details_Row> 
 
                                 <Cart_Button_View>

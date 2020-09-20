@@ -39,5 +39,6 @@ export default function MyPurchases(){
 }
 
 MyPurchases.navigationOptions = ({ navigation }) => ({
-    title: 'Minhas compras'
+    title: 'Minhas compras',
+    headerBackTitle: 'Voltar'
 });

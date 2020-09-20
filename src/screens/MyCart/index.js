@@ -32,5 +32,6 @@ export default function MyCart(){
 }
 
 MyCart.navigationOptions = ({ navigation }) => ({
-    title: 'Meu carrinho'
+    title: 'Meu carrinho',
+    headerBackTitle: 'Voltar'
 });

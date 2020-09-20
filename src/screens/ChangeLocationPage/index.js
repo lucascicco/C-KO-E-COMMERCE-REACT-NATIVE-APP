@@ -33,5 +33,6 @@ export default function ChangeLocationPage({ navigation }){
 }
 
 ChangeLocationPage.navigationOptions = ({ navigation }) => ({
-    title: 'Minha localização'
+    title: 'Minha localização',
+    headerBackTitle: 'Voltar'
 });
