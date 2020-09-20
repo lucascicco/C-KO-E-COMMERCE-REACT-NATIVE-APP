@@ -1,7 +1,7 @@
 import { Alert } from 'react-native'
 import { takeLatest , call, put, all } from 'redux-saga/effects';
-import { signInSuccess, signFailure, signUpSuccess, FirstAccessSuccess } from './actions';
-import { NavigationActions } from 'react-navigation';
+import { signInSuccess, signFailure, FirstAccessSuccess } from './actions';
+
 
 import api from '../../../services/api';
 
@@ -48,7 +48,7 @@ export function* signUp({ payload }){
         api.defaults.headers.Authorization = `Bearer ${token}`
 
         yield put(FirstAccessSuccess(token, user))
-        
+
     }catch(err){
         Alert.alert(
             'Falha no cadastro', 

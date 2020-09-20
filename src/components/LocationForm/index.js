@@ -13,7 +13,7 @@ import {
     SubmitBottom
 } from './styles';
 
-function LocationPage({ onClickSubmit, location }){
+function LocationPage({ onClickSubmit, location}){
     const StateRef = useRef()
     const CityRef = useRef()
     const NeighborhoodRef = useRef()
@@ -72,6 +72,7 @@ function LocationPage({ onClickSubmit, location }){
                             setState(itemValue)
                             setLabel(itemValue)
                         }}
+                        editable={true}
                     />
                             
                      <FormInput

@@ -122,6 +122,7 @@ function ProductForm({ onClickSubmit,  ViewHeight, ViewWidth, FontSize }){
                                     setCategory(itemValue)
                                     setCategoryLabel(itemValue)
                                 }}
+                            editable={true}
                         />
                             
 

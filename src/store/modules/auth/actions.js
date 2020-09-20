@@ -18,13 +18,6 @@ export function signUpRequest({email, password, name}){
     }
 }
 
-export function signUpSuccess(token, user){
-    return {
-        type: '@auth/SIGN_UP_SUCCESS',
-        payload: { token, user }
-    }
-}
-
 export function signFailure() {
     return {
         type: '@auth/SIGN_FAILURE'

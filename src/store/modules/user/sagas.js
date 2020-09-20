@@ -1,6 +1,7 @@
 import { Alert } from 'react-native'
 import { takeLatest , call, put, all } from 'redux-saga/effects';
 import { updateAccountSuccess, updateLocationSuccess, updatePersonalDataSuccess, addFavoriteItem, removeFavoriteItem } from './actions';
+import { NavigationActions } from 'react-navigation';
 
 import api from '../../../services/api';
 
@@ -30,6 +31,12 @@ export function* CreateLocationSaga({ payload }){
     try{
         const { street , city, country, neighborhood, postcode, state, street_number } = payload.data
 
+        if(state === 'Estado'){
+            return Alert.alert('Preencha os campos',
+                'Não se esqueça de escolher seu estado.'
+            )
+        }
+
         const response = yield call(api.post, 'location', {
             street,
             city,
@@ -41,6 +48,9 @@ export function* CreateLocationSaga({ payload }){
         })
   
         yield put(updateLocationSuccess(response.data))
+
+        yield put(NavigationActions.navigate({ routeName: 'App' }));
+
     }catch(err){
         Alert.alert(
             'Falha ao registrar', 
@@ -54,6 +64,12 @@ export function* CreateLocationSaga({ payload }){
 export function* UpdateLocationSaga({ payload }){
     try{
         const { street, city, country, neighborhood, postcode, state, street_number } = payload.data
+
+        if(state === 'Estado'){
+            return Alert.alert('Problema ao atualizar',
+                'Escolha algum estado corretamente.'
+            )
+        }
 
         const response = yield call(api.put, 'location', {
             street,
@@ -82,6 +98,12 @@ export function* CreatePersonalSaga({ payload }){
     try{  
         const { birthday, gender, cellphone, profession, identification } = payload.data
 
+        if(profession === 'Profissão' || gender === 'Sexo'){
+            return Alert.alert('Preencha os campos',
+            'Por favor, escolha algum campo dentro da lista.'
+            )
+        }
+
         const response = yield call(api.post, 'personal_data',{
             birthday,
             gender,
@@ -91,6 +113,8 @@ export function* CreatePersonalSaga({ payload }){
         })
         
         yield put(updatePersonalDataSuccess(response.data))
+
+        yield put(NavigationActions.navigate({ routeName: 'App' }));
 
     }catch(err){
         Alert.alert(
@@ -106,6 +130,12 @@ export function* UpdatePersonalSaga({ payload }){
     try{
         const { birthday, gender, cellphone, profession, identification } = payload.data
 
+        if(profession === 'Profissão' || gender === 'Sexo'){
+            return Alert.alert('Erro ao atualizar',
+            'Não esqueça de escolher corretamente os campos para "profissão" e "sexo".'
+            )
+        }
+
         const response = yield call(api.put, 'personal_data',{
             birthday,
             gender,
@@ -118,7 +148,7 @@ export function* UpdatePersonalSaga({ payload }){
 
     }catch(err){
         Alert.alert(
-            'Falha ao registrar', 
+            'Falha ao atualizar', 
             'Houve um erro na atualização das informações, verfique seus dados.'
         );
     }

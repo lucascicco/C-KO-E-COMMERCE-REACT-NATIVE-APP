@@ -22,10 +22,6 @@ export default function user(state = INITIAL_STATE, action) {
         draft.profile.myfavorites = action.payload.user.favorite_items === null ? [] : action.payload.user.favorite_items;
         break;
       }
-      case '@auth/SIGN_UP_SUCCESS': {
-        draft.profile.user = action.payload.user;
-        break
-      }
       case '@user/UPDATE_PROFILE_SUCCESS': {
         draft.profile.user.name = action.payload.profile.name;
         draft.profile.user.email = action.payload.profile.email;

@@ -25,8 +25,8 @@ function PersonalForm({ onClickSubmit , personal}){
     const [Cellphone, setCellphone] = useState(personal ? personal.cellphone : '')  
     const [Profession, setProfession] = useState(personal ? personal.profession : '')
     
-    const [LabelGender, setLabelGender] = useState('Sexo')
-    const [LabelProfession, setLabelProfession] = useState('Profissão')
+    const [LabelGender, setLabelGender] = useState(personal ? personal.gender : 'Sexo')
+    const [LabelProfession, setLabelProfession] = useState(personal ? personal.profession : 'Profissão')
 
     const handleSubmit = () => {
         onClickSubmit({
@@ -60,6 +60,7 @@ function PersonalForm({ onClickSubmit , personal}){
                         setGender(itemValue)
                         setLabelGender(itemValue)
                     }}
+                    editable={true}
                 />
             </MultiInput>
                         
@@ -104,6 +105,7 @@ function PersonalForm({ onClickSubmit , personal}){
                     setProfession(itemValue)
                     setLabelProfession(itemValue)
                 }}
+                editable={true}
             />
                            
             </MultiInput>

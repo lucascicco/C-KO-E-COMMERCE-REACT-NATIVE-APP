@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { Animated, Keyboard, Platform, StyleSheet } from 'react-native';
+import { Animated, Keyboard, Platform, StyleSheet, Alert } from 'react-native';
 import { ImageResizingEventTwo } from '../../utils/KeyboardsEvents';
 import Background from '../../components/Background2';
 import LocationForm from '../../components/LocationForm';
