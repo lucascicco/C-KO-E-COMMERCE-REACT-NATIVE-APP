@@ -1,5 +1,5 @@
 import React, {useState }from 'react';
-import { Platform } from 'react-native';
+import { Platform , Alert} from 'react-native';
 import GenderData from '../../utils/Gender.js';
 import ProfessionData from '../../utils/Profession.js';
 import DatePicker from '../DataPicker';
@@ -18,17 +18,25 @@ function PersonalForm({ onClickSubmit , personal}){
 
     const typeOfPlatform = Platform.OS === 'ios'
     const typeOfkeyboardType = typeOfPlatform ? 'numbers-and-punctuation' : 'numeric'
+    
 
-    const [Birthday, setBirthday] = useState(new Date())
+    const [Birthday, setBirthday] = useState(personal ? new Date(personal.birthday) : new Date())
     const [Gender, setGender] = useState(personal ? personal.gender : '')
     const [PersonalID, setPersonalID] = useState(personal ? personal.identification : '')
     const [Cellphone, setCellphone] = useState(personal ? personal.cellphone : '')  
     const [Profession, setProfession] = useState(personal ? personal.profession : '')
     
-    const [LabelGender, setLabelGender] = useState(personal ? personal.gender : 'Sexo')
+    const [LabelGender, setLabelGender] = useState(personal? personal.gender : 'Sexo')
     const [LabelProfession, setLabelProfession] = useState(personal ? personal.profession : 'Profissão')
 
     const handleSubmit = () => {
+        if(Profession === 'Profissão' || Profession === undefined || Gender === 'Sexo' || Gender === undefined){
+            return Alert.alert(
+                'Erro',
+                'Não esqueça de escolher corretamente os campos para "profissão" e "sexo".'
+            )
+        }
+
         onClickSubmit({
             birthday: Birthday,
             gender: Gender,

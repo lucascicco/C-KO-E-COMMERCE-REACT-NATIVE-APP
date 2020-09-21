@@ -1,7 +1,7 @@
 import { Alert } from 'react-native'
 import { takeLatest , call, put, all } from 'redux-saga/effects';
 import { signInSuccess, signFailure, FirstAccessSuccess } from './actions';
-
+import * as NavigationService from '../../../services/NavigationService';
 
 import api from '../../../services/api';
 
@@ -24,11 +24,11 @@ export function* signIn({ payload }){
     }catch(e){
 
         Alert.alert(
-        'Falha no login', 
-        'Houve um erro no login, verifique seus dados.'
+            'Falha no login', 
+            'Houve um erro no login, verifique seus dados.'
         );
         
-        console.log(e)
+
         yield put(signFailure())
     };
 }

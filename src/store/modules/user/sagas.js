@@ -1,11 +1,11 @@
 import { Alert } from 'react-native'
 import { takeLatest , call, put, all } from 'redux-saga/effects';
 import { updateAccountSuccess, updateLocationSuccess, updatePersonalDataSuccess, addFavoriteItem, removeFavoriteItem } from './actions';
-import { NavigationActions } from 'react-navigation';
+import * as NavigationService from '../../../services/NavigationService';
 
 import api from '../../../services/api';
 
-export function* UpdateAccountSaga({ payload }){
+export function* UpdateAccountSaga({ payload, navigation}){
     try{
         const { name, email, password, oldPassword} = payload;
 
@@ -19,6 +19,9 @@ export function* UpdateAccountSaga({ payload }){
         const { user } = response.data;
             
         yield put(updateAccountSuccess(user))
+
+        navigation.goBack()
+        
     }catch(e){
         Alert.alert(
             'Falha ao atualizar', 
@@ -27,15 +30,10 @@ export function* UpdateAccountSaga({ payload }){
     };
 }
 
-export function* CreateLocationSaga({ payload }){
+export function* CreateLocationSaga({ payload, navigation, page }){
     try{
         const { street , city, country, neighborhood, postcode, state, street_number } = payload.data
 
-        if(state === 'Estado'){
-            return Alert.alert('Preencha os campos',
-                'Não se esqueça de escolher seu estado.'
-            )
-        }
 
         const response = yield call(api.post, 'location', {
             street,
@@ -49,7 +47,11 @@ export function* CreateLocationSaga({ payload }){
   
         yield put(updateLocationSuccess(response.data))
 
-        yield put(NavigationActions.navigate({ routeName: 'App' }));
+        if(page === 'goBack'){
+            navigation.goBack()
+        }else{
+            navigation.navigate(page)
+        }
 
     }catch(err){
         Alert.alert(
@@ -61,15 +63,9 @@ export function* CreateLocationSaga({ payload }){
 }
 
 
-export function* UpdateLocationSaga({ payload }){
+export function* UpdateLocationSaga({ payload, navigation }){
     try{
         const { street, city, country, neighborhood, postcode, state, street_number } = payload.data
-
-        if(state === 'Estado'){
-            return Alert.alert('Problema ao atualizar',
-                'Escolha algum estado corretamente.'
-            )
-        }
 
         const response = yield call(api.put, 'location', {
             street,
@@ -83,6 +79,8 @@ export function* UpdateLocationSaga({ payload }){
 
         yield put(updateLocationSuccess(response.data))
 
+        navigation.goBack()
+
     }catch(err){
         Alert.alert(
             'Falha ao atualizar', 
@@ -94,15 +92,9 @@ export function* UpdateLocationSaga({ payload }){
 }
 
 
-export function* CreatePersonalSaga({ payload }){
+export function* CreatePersonalSaga({ payload, navigation, page }){
     try{  
         const { birthday, gender, cellphone, profession, identification } = payload.data
-
-        if(profession === 'Profissão' || gender === 'Sexo'){
-            return Alert.alert('Preencha os campos',
-            'Por favor, escolha algum campo dentro da lista.'
-            )
-        }
 
         const response = yield call(api.post, 'personal_data',{
             birthday,
@@ -114,7 +106,11 @@ export function* CreatePersonalSaga({ payload }){
         
         yield put(updatePersonalDataSuccess(response.data))
 
-        yield put(NavigationActions.navigate({ routeName: 'App' }));
+        if(page === 'goBack'){
+            navigation.goBack()
+        }else{
+            navigation.navigate(page)
+        }
 
     }catch(err){
         Alert.alert(
@@ -126,15 +122,9 @@ export function* CreatePersonalSaga({ payload }){
 }
 
 
-export function* UpdatePersonalSaga({ payload }){
+export function* UpdatePersonalSaga({ payload, navigation }){
     try{
         const { birthday, gender, cellphone, profession, identification } = payload.data
-
-        if(profession === 'Profissão' || gender === 'Sexo'){
-            return Alert.alert('Erro ao atualizar',
-            'Não esqueça de escolher corretamente os campos para "profissão" e "sexo".'
-            )
-        }
 
         const response = yield call(api.put, 'personal_data',{
             birthday,
@@ -146,6 +136,8 @@ export function* UpdatePersonalSaga({ payload }){
         
         yield put(updatePersonalDataSuccess(response.data))
 
+        navigation.goBack()
+        
     }catch(err){
         Alert.alert(
             'Falha ao atualizar', 

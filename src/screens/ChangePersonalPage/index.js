@@ -14,12 +14,10 @@ export default function ChangePersonalPage({ navigation }){
     const personal = useSelector(state => state.user.profile.personal_data)
 
     const handleSubmit = (PersonalInfo) => {
-        if(personal.id === null){
-            dispatch(createPersonalDataRequest(PersonalInfo))
-            navigation.goBack()
+        if(personal === null){
+            dispatch(createPersonalDataRequest(PersonalInfo, navigation, 'GoBack'))
         }else{
-            dispatch(updatePersonalDataRequest(PersonalInfo))
-            navigation.goBack()
+            dispatch(updatePersonalDataRequest(PersonalInfo, navigation))
         }
     }
 

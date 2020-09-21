@@ -1,5 +1,5 @@
 import React, { useRef, useState } from 'react';
-import { Platform } from 'react-native';
+import { Platform, Alert} from 'react-native';
 import InputMask from '../TextInputMasked';
 import Picker from '../../components/Picker';
 import BrazilianStates from '../../utils/BrazilStates.js';
@@ -32,9 +32,16 @@ function LocationPage({ onClickSubmit, location}){
     const [AdNumber, setAdNumber] = useState(location ? location.street_number : '')
     const [Postcode, setPostcode] = useState(location ? location.postcode : '')
     
-    const [Label, setLabel] = useState(location ? location.state : 'Estado')
+    const [Label, setLabel] = useState(location.state ? location.state : 'Estado')
     
     const handleSubmit = () => {
+        if(State === 'Estado' || State === undefined){
+            return Alert.alert(
+                'Erro',
+                'Escolha algum estado corretamente.'
+            )
+        }
+
         onClickSubmit({
             country: Country,
             state: State,

@@ -13,8 +13,7 @@ export default function ChangeAccountPage({ navigation }){
     const account = useSelector(state => state.user.profile.user)
 
     const handleSubmit = (AccountInfo) => {
-        dispatch(updateAccountRequest(AccountInfo))
-        navigation.goBack()
+        dispatch(updateAccountRequest(AccountInfo, navigation))
     }
 
     return(

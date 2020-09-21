@@ -13,12 +13,10 @@ export default function ChangeLocationPage({ navigation }){
     const location = useSelector(state => state.user.profile.location)
 
     const handleSubmit = (LocationData) => {
-        if(location.id === null){
-            dispatch(createLocationRequest(LocationData))
-            navigation.goBack()
+        if(location === null){
+            dispatch(createLocationRequest(LocationData, navigation, 'GoBack'))
         }else{
-            dispatch(updateLocationRequest(LocationData))
-            navigation.goBack()
+            dispatch(updateLocationRequest(LocationData, navigation))
         }
     }
         

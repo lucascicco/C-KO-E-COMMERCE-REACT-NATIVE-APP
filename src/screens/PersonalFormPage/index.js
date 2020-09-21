@@ -35,7 +35,7 @@ export default function PersonalInformation({ navigation }){
     }, [])
     
     const handleSubmit = (PersonalInfo) => {
-        dispatch(createPersonalDataRequest(PersonalInfo))
+        dispatch(createPersonalDataRequest(PersonalInfo, navigation, 'LocationPage'))
     }
 
     return(

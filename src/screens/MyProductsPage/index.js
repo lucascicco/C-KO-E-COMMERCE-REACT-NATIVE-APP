@@ -32,7 +32,7 @@ function MyProducts({ isFocused }){
                 MyProducts.length === 0 ? (
                     <ViewEmpty>
                         <TextNoProducts>
-                            Você ainda não produtos à venda.
+                            Você ainda não possui produtos à venda.
                         </TextNoProducts>
                     </ViewEmpty>
                 ) : (
