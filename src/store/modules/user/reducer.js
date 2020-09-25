@@ -50,7 +50,7 @@ export default function user(state = INITIAL_STATE, action) {
         break;
       }
       case '@user/ADD_AVATAR_IMAGE': {
-        draft.profile.user.avatar = action.payload.url; // precisa ser alterado
+        draft.profile.user.avatar = action.payload.avatar;
         break;
       }
       case '@auth/FIRST_ACCESS_ON': {

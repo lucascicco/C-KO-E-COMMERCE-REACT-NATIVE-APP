@@ -91,19 +91,10 @@ export function removeFavoriteItem(itemNumber) {
   };
 }
 
-// AVATAR IMAGE
-export function RequestAvatarPicture(url) {
-  // SAGA
-  return {
-    type: '@user/REQUEST_AVATAR_IMAGE',
-    payload: { url },
-  };
-}
-
-export function addAvatarPicture(url) {
+export function addAvatarPicture(avatar) {
   // SAGA
   return {
     type: '@user/ADD_AVATAR_IMAGE',
-    payload: { url },
+    payload: { avatar },
   };
 }

@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 import React, { useState, useEffect } from 'react';
 import * as ImagePicker from 'expo-image-picker';
 import Constants from 'expo-constants';
@@ -15,8 +16,8 @@ import { Container } from './styles';
 
 export default function MyAccountOptions({ navigation }) {
   const profile = useSelector((state) => state.user.profile.user);
-  const [ProductPicture, setProductImage] = useState(
-    profile.avatar ? profile.avatar : ''
+  const [AvatarPicture, setAvatarPicture] = useState(
+    profile.avatar ? profile.avatar.url : ''
   );
   const dispatch = useDispatch();
 
@@ -38,20 +39,30 @@ export default function MyAccountOptions({ navigation }) {
         mediaTypes: ImagePicker.MediaTypeOptions.Images,
         allowsEditing: true,
         aspect: [4, 3],
+        base64: true,
         quality: 1,
       });
 
       if (!result.cancelled) {
-        const data = new FormData();
+        const formData = new FormData();
+        const path = result.uri.split('/');
+        const name = path[path.length - 1];
 
-        data.append('file', result);
+        formData.append('file', {
+          uri: result.uri,
+          name,
+          type: `image/${result.type}`,
+        });
 
-        setProductImage(result.uri);
-        console.log(result);
+        setAvatarPicture(result.uri);
 
-        const response = await api.post('avatar', data);
+        const response = await api.post('avatar', formData, {
+          headers: { 'Content-Type': 'multipart/form-data' },
+        });
 
-        console.log(response.data);
+        setAvatarPicture(response.data.url);
+
+        dispatch(addAvatarPicture(response.data));
       }
     } catch (E) {
       console.log(E);
@@ -59,12 +70,13 @@ export default function MyAccountOptions({ navigation }) {
   };
 
   useEffect(() => {
+    console.log(profile);
     getPermissionAsync();
   }, []);
 
   return (
     <Container>
-      <AvatarView onPress={HandleChoosePhoto} uri={ProductPicture} />
+      <AvatarView onPress={HandleChoosePhoto} uri={AvatarPicture} />
 
       <ScrollViewX
         navigation={navigation}
