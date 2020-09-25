@@ -1,8 +1,9 @@
+/* eslint-disable react/prop-types */
 import React, { useRef, useState } from 'react';
 import { Platform, Alert } from 'react-native';
 import InputMask from '../TextInputMasked';
-import Picker from '../../components/Picker';
-import BrazilianStates from '../../utils/BrazilStates.js';
+import Picker from '~/components/Picker';
+import BrazilianStates from '~/utils/BrazilStates.js';
 import {
   onChange_onlyText,
   onChange_onlyNumber,
@@ -30,14 +31,13 @@ function LocationPage({ onClickSubmit, location }) {
     location ? location.neighborhood : ''
   );
   const [Address, setAddress] = useState(location ? location.street : '');
+
   const [AdNumber, setAdNumber] = useState(
     location ? location.street_number : ''
   );
   const [Postcode, setPostcode] = useState(location ? location.postcode : '');
 
-  const [Label, setLabel] = useState(
-    location.state ? location.state : 'Estado'
-  );
+  const [Label, setLabel] = useState(location ? location.state : 'Estado');
 
   const handleSubmit = () => {
     if (State === 'Estado' || State === undefined) {

@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { RadioButton } from 'react-native-paper';
-import Background from '../Background';
+import Background from '../Backgrounds/Background';
 import LocationForm from '../LocationForm';
 import api from '../../services/api';
 
@@ -12,7 +12,6 @@ import {
   Subtitle,
   TouchableButton,
   RadioView,
-  RadioTitle,
   RadioText,
 } from './styles';
 

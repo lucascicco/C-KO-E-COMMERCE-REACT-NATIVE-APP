@@ -7,9 +7,8 @@ import {
   addFavoriteItem,
   removeFavoriteItem,
 } from './actions';
-import * as NavigationService from '../../../services/NavigationService';
 
-import api from '../../../services/api';
+import api from '~/services/api';
 
 export function* UpdateAccountSaga({ payload, navigation }) {
   try {
@@ -133,7 +132,7 @@ export function* CreatePersonalSaga({ payload, navigation, page }) {
   } catch (err) {
     Alert.alert(
       'Falha ao registrar',
-      'Houve um erro no registro das informações, verfique seus dados.'
+      'Houve um erro no registro das informações, verifique seus dados.'
     );
   }
 }

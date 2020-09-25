@@ -1,7 +1,7 @@
 import React from 'react';
 import { StatusBar, Platform, Image } from 'react-native';
 import LoadingDots from 'react-native-loading-dots';
-import Background from '../../components/Background2';
+import Background from '~/components/Backgrounds/Background2';
 
 import {
   Container,
@@ -12,7 +12,7 @@ import {
   WarningText,
 } from './styles';
 
-function NoConnectionPage() {
+export default function NoConnectionPage() {
   const barStyle = Platform.OS === 'ios' ? 'dark-content' : 'light-content';
 
   return (
@@ -49,5 +49,3 @@ function NoConnectionPage() {
     </Background>
   );
 }
-
-export default NoConnectionPage;

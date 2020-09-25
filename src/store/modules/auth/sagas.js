@@ -16,8 +16,6 @@ export function* signIn({ payload }) {
 
     const { token, user } = response.data;
 
-    console.log(response.data);
-
     api.defaults.headers.Authorization = `Bearer ${token}`;
 
     yield put(signInSuccess(token, user));

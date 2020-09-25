@@ -1,6 +1,6 @@
 import React, { useRef, useState } from 'react';
 import { Alert } from 'react-native';
-import { onChange_onlyText } from '../../utils/RestrictInputs';
+import { onChange_onlyText } from '~/utils/RestrictInputs';
 
 import { Form, FormInput, SubmitButton } from './styles';
 

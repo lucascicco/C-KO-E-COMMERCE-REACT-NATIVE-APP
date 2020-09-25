@@ -26,8 +26,8 @@ export const ViewItem = styled.View`
   justify-content: center;
   border-bottom-width: 1px;
   border-top-width: 1px;
-  bordercolor: black;
-  borderstyle: solid;
+  border-color: black;
+  border-style: solid;
 `;
 export const ScrollView_Text = styled.Text`
   font-family: raleway;
@@ -65,8 +65,8 @@ export const FlatList_Title = styled.Text.attrs({
 export const Title_View_Row = styled.View`
   width: 100%;
   border-bottom-width: 1px;
-  bordercolor: black;
-  borderstyle: solid;
+  border-color: black;
+  border-style: solid;
   paddingbottom: 5px;
 `;
 
@@ -255,8 +255,8 @@ export const Cart_View_Row = styled.View`
   flex-direction: row;
   justify-content: space-between;
   border-bottom-width: 1px;
-  bordercolor: black;
-  borderstyle: solid;
+  border-color: black;
+  border-style: solid;
   paddingbottom: 5px;
   margin-bottom: 5px;
 `;
@@ -355,8 +355,8 @@ export const Row_ViewItem = styled.View`
   height: 75px;
   padding: 5px;
   border-bottom-width: 1px;
-  bordercolor: black;
-  borderstyle: solid;
+  border-color: black;
+  border-style: solid;
   paddingbottom: 5px;
 `;
 

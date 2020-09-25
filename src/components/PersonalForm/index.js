@@ -1,7 +1,8 @@
+/* eslint-disable import/no-unresolved */
 import React, { useState } from 'react';
 import { Platform, Alert } from 'react-native';
-import GenderData from '../../utils/Gender.js';
-import ProfessionData from '../../utils/Profession.js';
+import GenderData from '~/utils/Gender.js';
+import ProfessionData from '~/utils/Profession.js';
 import DatePicker from '../DataPicker';
 import MaskedInput from '../TextInputMasked';
 import Picker from '../Picker';

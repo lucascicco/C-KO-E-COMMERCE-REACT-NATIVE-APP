@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import React from 'react';
 import { createAppContainer, createSwitchNavigator } from 'react-navigation';
 import { createBottomTabNavigator } from 'react-navigation-tabs';
@@ -6,37 +7,36 @@ import { createStackNavigator } from 'react-navigation-stack';
 import InitialRoute from './utils/InitialRoute';
 
 // FIRST SCREENS
-import Login from './screens/LoginPage';
-import SignUp from './screens/CreateAccountPage';
+import Login from './screens/FirstScreens/LoginPage';
+import SignUp from './screens/FirstScreens/CreateAccountPage';
 
-import PersonalInformation from './screens/PersonalFormPage';
-import LocationPage from './screens/LocationFormPage';
+import PersonalInformation from './screens/FirstScreens/PersonalFormPage';
+import LocationPage from './screens/FirstScreens/LocationFormPage';
 
 // BOTTOM MENU NAVIGATION
-import CreateProduct from './screens/CreateProductPage';
-import SendingInformations from './screens/ProductSendingForm';
-import HomePage from './screens/HomePage';
-import MyProfile from './screens/AccountInfoPage';
+import CreateProduct from './screens/CreateProductScreens/CreateProductPage';
+import SendingInformations from './screens/CreateProductScreens/ProductSendingForm';
+import HomePage from './screens/ProductsScreens/HomePage';
+import MyProfile from './screens/ProfilePages/AccountInfoPage';
 
 // PROFILE SCREENS
-import ChangeAccount from './screens/ChangeAccountPage';
-import ChangeLocation from './screens/ChangeLocationPage';
-import ChangePersonal from './screens/ChangePersonalPage';
+import ChangeAccount from './screens/ProfilePages/ChangeAccountPage';
+import ChangeLocation from './screens/ProfilePages/ChangeLocationPage';
+import ChangePersonal from './screens/ProfilePages/ChangePersonalPage';
 
-import MyProductsPage from './screens/MyProductsPage';
-import MySells from './screens/MySellsPage';
+import MyProductsPage from './screens/ProfilePages/MyProductsPage';
+import MySells from './screens/ProfilePages/MySellsPage';
 
-import MyCart from './screens/MyCart';
-import PurchaseCart from './screens/PurchaseCartPage';
+import MyCart from './screens/ProfilePages/MyCart';
+import PurchaseCart from './screens/ProfilePages/PurchaseCartPage';
 
-import MyPurchases from './screens/MyPurchasesPage';
-import PurchaseMultiple from './screens/MultiplePurchasePage';
+import MyPurchases from './screens/ProfilePages/MyPurchasesPage';
 
 // BUYING PAGES
-import ProductPage from './screens/ProductPage';
-import FretePage from './screens/FretePage';
-import PurchasePartOne from './screens/PurchasePartOnePage';
-import PurchasePartTwo from './screens/PurchasePage';
+import ProductPage from './screens/ProductsScreens/ProductPage';
+import FretePage from './screens/ProductsScreens/FretePage';
+import PurchasePartOne from './screens/ProductsScreens/PurchasePartOnePage';
+import PurchasePartTwo from './screens/ProductsScreens/PurchasePage';
 
 export default (isSigned, FirstAccess) =>
   createAppContainer(
@@ -118,7 +118,6 @@ export default (isSigned, FirstAccess) =>
                   MyCart,
                   PurchaseCart,
                   MyPurchases,
-                  PurchaseMultiple,
                 },
                 {
                   initialRouteName: 'MyProfile',

@@ -10,7 +10,7 @@ import {
 } from './styles';
 
 export default function ProductBox({ item, navigation }) {
-  const { id, product_image, product_name, price } = item;
+  const { id, url, product_name, price } = item;
 
   return (
     <Container
@@ -18,12 +18,12 @@ export default function ProductBox({ item, navigation }) {
       onPress={() =>
         navigation.navigate('ProductPage', {
           product_id: id,
-          product_image: product_image.url,
+          product_image: url,
           product_name,
         })
       }
     >
-      <ProductImage source={{ uri: product_image.url }} />
+      <ProductImage source={{ uri: url }} />
       <PriceFont>R$ {price}</PriceFont>
 
       <TextView>

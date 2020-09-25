@@ -8,7 +8,7 @@ import persistReducers from './persistReducer';
 import rootReducer from './modules/rootReducer';
 import rootSaga from './modules/rootSaga';
 
-AsyncStorage.removeItem('persist:products');
+// AsyncStorage.removeItem('persist:products');
 
 const sagaMonitor = __DEV__ ? console.tron.createSagaMonitor() : null;
 

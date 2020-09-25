@@ -3,8 +3,8 @@ import produce from 'immer';
 const INITIAL_STATE = {
   profile: {
     user: {},
-    location: {},
-    personal_data: {},
+    location: null,
+    personal_data: null,
     myfavorites: [],
   },
 };
