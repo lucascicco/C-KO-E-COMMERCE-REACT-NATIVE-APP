@@ -1,128 +1,140 @@
-import React, {useState }from 'react';
-import { Platform , Alert} from 'react-native';
+import React, { useState } from 'react';
+import { Platform, Alert } from 'react-native';
 import GenderData from '../../utils/Gender.js';
 import ProfessionData from '../../utils/Profession.js';
 import DatePicker from '../DataPicker';
 import MaskedInput from '../TextInputMasked';
 import Picker from '../Picker';
 
-import {
-    Form,
-    MultiInput,
-    SubmitButton
-} from './styles';
+import { Form, MultiInput, SubmitButton } from './styles';
 
-function PersonalForm({ onClickSubmit , personal}){
-    let PersonalIDRef 
-    let CellphoneRef 
+function PersonalForm({ onClickSubmit, personal }) {
+  let PersonalIDRef;
+  let CellphoneRef;
 
-    const typeOfPlatform = Platform.OS === 'ios'
-    const typeOfkeyboardType = typeOfPlatform ? 'numbers-and-punctuation' : 'numeric'
-    
+  const typeOfPlatform = Platform.OS === 'ios';
+  const typeOfkeyboardType = typeOfPlatform
+    ? 'numbers-and-punctuation'
+    : 'numeric';
 
-    const [Birthday, setBirthday] = useState(personal ? new Date(personal.birthday) : new Date())
-    const [Gender, setGender] = useState(personal ? personal.gender : '')
-    const [PersonalID, setPersonalID] = useState(personal ? personal.identification : '')
-    const [Cellphone, setCellphone] = useState(personal ? personal.cellphone : '')  
-    const [Profession, setProfession] = useState(personal ? personal.profession : '')
-    
-    const [LabelGender, setLabelGender] = useState(personal? personal.gender : 'Sexo')
-    const [LabelProfession, setLabelProfession] = useState(personal ? personal.profession : 'Profissão')
+  const [Birthday, setBirthday] = useState(
+    personal ? new Date(personal.birthday) : new Date()
+  );
+  const [Gender, setGender] = useState(personal ? personal.gender : '');
+  const [PersonalID, setPersonalID] = useState(
+    personal ? personal.identification : ''
+  );
+  const [Cellphone, setCellphone] = useState(
+    personal ? personal.cellphone : ''
+  );
+  const [Profession, setProfession] = useState(
+    personal ? personal.profession : ''
+  );
 
-    const handleSubmit = () => {
-        if(Profession === 'Profissão' || Profession === undefined || Gender === 'Sexo' || Gender === undefined){
-            return Alert.alert(
-                'Erro',
-                'Não esqueça de escolher corretamente os campos para "profissão" e "sexo".'
-            )
-        }
+  const [LabelGender, setLabelGender] = useState(
+    personal ? personal.gender : 'Sexo'
+  );
+  const [LabelProfession, setLabelProfession] = useState(
+    personal ? personal.profession : 'Profissão'
+  );
 
-        onClickSubmit({
-            birthday: Birthday,
-            gender: Gender,
-            cellphone: Cellphone,
-            profession: Profession,
-            identification: PersonalID
-        })
+  const handleSubmit = () => {
+    if (
+      Profession === 'Profissão' ||
+      Profession === undefined ||
+      Gender === 'Sexo' ||
+      Gender === undefined
+    ) {
+      return Alert.alert(
+        'Erro',
+        'Não esqueça de escolher corretamente os campos para "profissão" e "sexo".'
+      );
     }
 
-    return(
-        <Form>  
-            <MultiInput>
-                <DatePicker
-                    date={Birthday}
-                    onChange={(event, date) => {
-                            if(date === undefined) setBirthday(new Date())
-                            setBirthday(date)
-                        }
-                    }
-                />
-                <Picker 
-                    label="Selecione o gênero"
-                    value="Gênero"
-                    style={{ width: '40%'}}
-                    text={LabelGender}
-                    data={GenderData}
-                    selectedValue={Gender}
-                    onValueChange={itemValue => {
-                        setGender(itemValue)
-                        setLabelGender(itemValue)
-                    }}
-                    editable={true}
-                />
-            </MultiInput>
-                        
-            <MultiInput>
-                <MaskedInput
-                    type={'cpf'}
-                    placeholder="CPF"
-                    keyboardType={typeOfkeyboardType}
-                    returnKeyType="next"
-                    style={{ width: '50%', marginRight: 10}}
-                    maskedStyle={{fontFamily: PersonalID ? null : 'raleway'}}
-                    blurOnSubmit={false}
-                    value={PersonalID}
-                    onChangeText={setPersonalID}
-                    ref={(ref) => PersonalIDRef = ref}
-                    onSubmitEditing={() => CellphoneRef.getElement().focus()}
-                />
-                <MaskedInput
-                    type={'cel-phone'}
-                    placeholder="Celular"
-                    keyboardType={typeOfkeyboardType}
-                    returnKeyType="next"
-                    style={{ width: '47%'}}
-                    maskedStyle={{fontFamily: Cellphone ? null : 'raleway'}}
-                    blurOnSubmit={false}
-                    value={Cellphone}
-                    onChangeText={setCellphone}
-                    ref={(ref) => CellphoneRef = ref}
-                />
-            </MultiInput>
-                        
-            <MultiInput>
-        
-            <Picker 
-                label="Selecione a profissão"
-                value="Profissão"
-                style={{ width: '100%'}}
-                text={LabelProfession}
-                data={ProfessionData}
-                selectedValue={Profession}
-                onValueChange={itemValue => {
-                    setProfession(itemValue)
-                    setLabelProfession(itemValue)
-                }}
-                editable={true}
-            />
-                           
-            </MultiInput>
-                    
-            <SubmitButton style={{ background: '#283593'}} onPress={handleSubmit}>
-                Salvar
-            </SubmitButton>
-        </Form>
-    )
+    onClickSubmit({
+      birthday: Birthday,
+      gender: Gender,
+      cellphone: Cellphone,
+      profession: Profession,
+      identification: PersonalID,
+    });
+  };
+
+  return (
+    <Form>
+      <MultiInput>
+        <DatePicker
+          date={Birthday}
+          onChange={(event, date) => {
+            if (date === undefined) setBirthday(new Date());
+            setBirthday(date);
+          }}
+        />
+
+        <Picker
+          label="Selecione o gênero"
+          value="Gênero"
+          style={{ width: '40%' }}
+          text={LabelGender}
+          data={GenderData}
+          selectedValue={Gender}
+          onValueChange={(itemValue) => {
+            setGender(itemValue);
+            setLabelGender(itemValue);
+          }}
+          editable
+        />
+      </MultiInput>
+
+      <MultiInput>
+        <MaskedInput
+          type="cpf"
+          placeholder="CPF"
+          keyboardType={typeOfkeyboardType}
+          returnKeyType="next"
+          style={{ width: '50%', marginRight: 10 }}
+          maskedStyle={{ fontFamily: PersonalID ? null : 'raleway' }}
+          blurOnSubmit={false}
+          value={PersonalID}
+          onChangeText={setPersonalID}
+          ref={(ref) => (PersonalIDRef = ref)}
+          onSubmitEditing={() => CellphoneRef.getElement().focus()}
+        />
+        <MaskedInput
+          type="cel-phone"
+          placeholder="Celular"
+          keyboardType={typeOfkeyboardType}
+          returnKeyType="next"
+          style={{ width: '47%' }}
+          maskedStyle={{ fontFamily: Cellphone ? null : 'raleway' }}
+          blurOnSubmit={false}
+          value={Cellphone}
+          onChangeText={setCellphone}
+          ref={(ref) => (CellphoneRef = ref)}
+        />
+      </MultiInput>
+
+      <MultiInput>
+        <Picker
+          label="Selecione a profissão"
+          value="Profissão"
+          style={{ width: '100%' }}
+          text={LabelProfession}
+          data={ProfessionData}
+          selectedValue={Profession}
+          onValueChange={(itemValue) => {
+            setProfession(itemValue);
+            setLabelProfession(itemValue);
+          }}
+          editable
+        />
+      </MultiInput>
+
+      <SubmitButton style={{ background: '#283593' }} onPress={handleSubmit}>
+        Salvar
+      </SubmitButton>
+    </Form>
+  );
 }
 
-export default PersonalForm
+export default PersonalForm;

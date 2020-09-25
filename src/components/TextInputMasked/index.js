@@ -11,27 +11,26 @@ function Input({ type, options, style, maskedStyle, icon, ...rest }, ref) {
     <Container style={style}>
       {icon && <MaterialIcons name={icon} size={23} color="#fff" />}
 
-      <TextInputMask 
-            {...rest}
-            ref={ref}
-            style={[styles.TextInput, maskedStyle]}
-            placeholderTextColor="#FFF"
-            type={type}
-            options={options}
+      <TextInputMask
+        {...rest}
+        ref={ref}
+        style={[styles.TextInput, maskedStyle]}
+        placeholderTextColor="#FFF"
+        type={type}
+        options={options}
       />
-      
     </Container>
   );
 }
 
 const styles = StyleSheet.create({
-    TextInput: {
-        flex: 1,
-        color: '#FFF',
-        fontSize: 18,
-        marginLeft: 7
-    }
-})
+  TextInput: {
+    flex: 1,
+    color: '#FFF',
+    fontSize: 18,
+    marginLeft: 7,
+  },
+});
 
 // Input.propTypes = {
 //   icon: PropTypes.string,

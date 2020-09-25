@@ -1,12 +1,12 @@
-import valid from "card-validator";
-import { pick } from "lodash";
-import { values } from "lodash";
-import { every } from "lodash";
+import valid from 'card-validator';
+import { pick, values, every } from 'lodash';
 
-const toStatus = validation => {
-  return validation.isValid ? "valid" :
-         validation.isPotentiallyValid ? "incomplete" :
-         "invalid";
+const toStatus = (validation) => {
+  return validation.isValid
+    ? 'valid'
+    : validation.isPotentiallyValid
+    ? 'incomplete'
+    : 'invalid';
 };
 
 const FALLBACK_CARD = { gaps: [4, 8, 12], lengths: [16], code: { size: 3 } };
@@ -22,16 +22,19 @@ export default class CCFieldValidator {
     const maxCVCLength = (numberValidation.card || FALLBACK_CARD).code.size;
     const cvcValidation = valid.cvv(formValues.cvc, maxCVCLength);
 
-    const validationStatuses = pick({
-      number: toStatus(numberValidation),
-      expiry: toStatus(expiryValidation),
-      cvc: toStatus(cvcValidation),
-      name: !!formValues.name ? "valid" : "incomplete",
-      postalCode: this._validatePostalCode(formValues.postalCode),
-    }, this._displayedFields);
+    const validationStatuses = pick(
+      {
+        number: toStatus(numberValidation),
+        expiry: toStatus(expiryValidation),
+        cvc: toStatus(cvcValidation),
+        name: formValues.name ? 'valid' : 'incomplete',
+        postalCode: this._validatePostalCode(formValues.postalCode),
+      },
+      this._displayedFields
+    );
 
     return {
-      valid: every(values(validationStatuses), status => status === "valid"),
+      valid: every(values(validationStatuses), (status) => status === 'valid'),
       status: validationStatuses,
     };
   };

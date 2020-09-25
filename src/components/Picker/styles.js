@@ -6,18 +6,15 @@ export const Container = styled.View`
   background: #7986cb;
 `;
 
-
 export const MainContainer = styled.View`
-    width: 29%;
-    margin-right: 10px;
-`
-
-
-export const ContainerAndroid = styled.View`
-    width: 29%;
-    background: #546e7a;
-    height: 46px;
-    margin-right: 10px;
-    border-radius: 4px;
+  width: 29%;
+  margin-right: 10px;
 `;
 
+export const ContainerAndroid = styled.View`
+  width: 29%;
+  background: #546e7a;
+  height: 46px;
+  margin-right: 10px;
+  border-radius: 4px;
+`;

@@ -18,19 +18,19 @@ export const DateText = styled.Text`
   margin-left: 15px;
   font-size: 18px;
   color: #fff;
-  font-family: ${props => props.style.fontFamily};
+  font-family: ${(props) => props.style.fontFamily};
 `;
 
 export const Picker = styled.View`
-    justify-content: center;
-    padding: 5%;
-    background: #7986cb;
+  justify-content: center;
+  padding: 5%;
+  background: #7986cb;
 `;
 
 export const PickerTitle = styled.Text`
-    font-size: 40px;
-    font-weight: bold;
-    text-align: center;
-    margin-bottom: 20px;
-    font-family: playfair-bold
-`
+  font-size: 40px;
+  font-weight: bold;
+  text-align: center;
+  margin-bottom: 20px;
+  font-family: playfair-bold;
+`;

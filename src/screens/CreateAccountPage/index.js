@@ -1,61 +1,72 @@
 import React, { useEffect } from 'react';
 import { Animated, Keyboard, Platform } from 'react-native';
+import { useDispatch } from 'react-redux';
 import { ImageResizingEventOne } from '../../utils/KeyboardsEvents';
 import Background from '../../components/Background2';
 import AccountForm from '../../components/CreateAccountComponent';
 
-import { useDispatch } from 'react-redux';
 import { signUpRequest } from '../../store/modules/auth/actions';
 
-import { 
-    Container, 
-    SignLink,
-    SignLinkText,
-    Strong,
-    IMAGE_HEIGHT,
-    IMAGE_HEIGHT_SMALL
-} from './styles'
+import {
+  Container,
+  SignLink,
+  SignLinkText,
+  Strong,
+  IMAGE_HEIGHT,
+  IMAGE_HEIGHT_SMALL,
+} from './styles';
 
 export default function CreateAccount() {
-    const dispatch = useDispatch()
-    
-    const imageHeight = new Animated.Value(IMAGE_HEIGHT)
+  const dispatch = useDispatch();
 
-    useEffect(() => {
-        const typeOfPlatform = Platform.OS === 'ios'
-        const typeOfShow = typeOfPlatform ?  'keyboardWillShow' : 'keyboardDidShow'
-        const typeOfHide = typeOfPlatform ? 'keyboardWillHide' : 'keyboardDidHide'
+  const imageHeight = new Animated.Value(IMAGE_HEIGHT);
 
-            Keyboard.addListener(typeOfShow, ImageResizingEventOne(imageHeight, IMAGE_HEIGHT_SMALL ));
-            Keyboard.addListener(typeOfHide, ImageResizingEventOne(imageHeight, IMAGE_HEIGHT));
+  useEffect(() => {
+    const typeOfPlatform = Platform.OS === 'ios';
+    const typeOfShow = typeOfPlatform ? 'keyboardWillShow' : 'keyboardDidShow';
+    const typeOfHide = typeOfPlatform ? 'keyboardWillHide' : 'keyboardDidHide';
 
-            return () => {
-                 Keyboard.removeListener(typeOfShow, ImageResizingEventOne(imageHeight, IMAGE_HEIGHT_SMALL));
-                 Keyboard.removeListener(typeOfHide, ImageResizingEventOne(imageHeight, IMAGE_HEIGHT));
-            }
-    }, [])
+    Keyboard.addListener(
+      typeOfShow,
+      ImageResizingEventOne(imageHeight, IMAGE_HEIGHT_SMALL)
+    );
+    Keyboard.addListener(
+      typeOfHide,
+      ImageResizingEventOne(imageHeight, IMAGE_HEIGHT)
+    );
 
-    const handleSubmit = (AccountInfo) => {
-        dispatch(signUpRequest(AccountInfo))
-    }
+    return () => {
+      Keyboard.removeListener(
+        typeOfShow,
+        ImageResizingEventOne(imageHeight, IMAGE_HEIGHT_SMALL)
+      );
+      Keyboard.removeListener(
+        typeOfHide,
+        ImageResizingEventOne(imageHeight, IMAGE_HEIGHT)
+      );
+    };
+  }, []);
 
-    return(
-        <Background>
-            <Container>
-                <Animated.Image
-                    source={require('../../assets/Cko_logo.png')}
-                    style={{height: imageHeight , width: 200 }}
-                />
+  const handleSubmit = (AccountInfo) => {
+    dispatch(signUpRequest(AccountInfo));
+  };
 
-                <AccountForm onClickSubmit={handleSubmit}/>
+  return (
+    <Background>
+      <Container>
+        <Animated.Image
+          source={require('../../assets/Cko_logo.png')}
+          style={{ height: imageHeight, width: 200 }}
+        />
 
-                <SignLink onPress={() => navigation.navigate('Login')}>
-                   <SignLinkText>
-                       <Strong> Já possui conta ? </Strong> Clique aqui
-                   </SignLinkText>
-                </SignLink>
-            </Container>
-        </Background>
-    )
+        <AccountForm onClickSubmit={handleSubmit} />
+
+        <SignLink onPress={() => navigation.navigate('Login')}>
+          <SignLinkText>
+            <Strong> Já possui conta ? </Strong> Clique aqui
+          </SignLinkText>
+        </SignLink>
+      </Container>
+    </Background>
+  );
 }
-

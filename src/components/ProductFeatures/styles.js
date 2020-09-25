@@ -1,53 +1,52 @@
 import styled from 'styled-components/native';
 
-import Input from '../../components/TextInput';
-import Button from '../../components/ButtonType1';
+import Input from '../TextInput';
+import Button from '../ButtonType1';
 
 export const Container = styled.View`
-    justify-content: center;
-    align-items: center;
+  justify-content: center;
+  align-items: center;
 `;
 
 export const Form = styled.View`
-    margin-top: 10px;
-    align-self: stretch;
+  margin-top: 10px;
+  align-self: stretch;
 `;
 
 export const MultiInput = styled.View`
-    flex-direction: row;
-    margin-bottom: 10px;
-`
+  flex-direction: row;
+  margin-bottom: 10px;
+`;
 
 export const FormInput = styled(Input)`
-    margin-right: 10px;
-    padding: 0 5px;
+  margin-right: 10px;
+  padding: 0 5px;
 `;
 
 export const SubmitBottom = styled(Button)`
-    margin-top: 0px;
-    background: ${props => props.style.background}
-`   
-
+  margin-top: 0px;
+  background: ${(props) => props.style.background};
+`;
 
 export const WarningView = styled.View`
-    flex-direction: column;
-    justify-content: center;
-    padding: 0px 20px;
-`
+  flex-direction: column;
+  justify-content: center;
+  padding: 0px 20px;
+`;
 
 export const WarningText = styled.Text`
-    font-size: 15px;
-    font-style: italic;
-    text-align: justify;
-`
+  font-size: 15px;
+  font-style: italic;
+  text-align: justify;
+`;
 export const InfoButton = styled.TouchableOpacity`
-    flex: 1;
-    flex-direction: row;
-    padding: 10px;
-    justify-content: center;
-`
+  flex: 1;
+  flex-direction: row;
+  padding: 10px;
+  justify-content: center;
+`;
 
 export const InfoText = styled.Text`
-    color: black;
-    font-size: 15px;
-`
+  color: black;
+  font-size: 15px;
+`;

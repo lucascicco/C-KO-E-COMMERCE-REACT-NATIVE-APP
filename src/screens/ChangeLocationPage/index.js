@@ -1,36 +1,36 @@
 import React from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import LocationForm from '../../components/LocationForm';
 import Background from '../../components/Background2';
-import { useDispatch, useSelector } from 'react-redux';
-import { updateLocationRequest, createLocationRequest } from '../../store/modules/user/actions';
-
 import {
-    Container
-} from './styles';
+  updateLocationRequest,
+  createLocationRequest,
+} from '../../store/modules/user/actions';
 
-export default function ChangeLocationPage({ navigation }){
-    const dispatch = useDispatch()
-    const location = useSelector(state => state.user.profile.location)
+import { Container } from './styles';
 
-    const handleSubmit = (LocationData) => {
-        if(location === null){
-            dispatch(createLocationRequest(LocationData, navigation, 'GoBack'))
-        }else{
-            dispatch(updateLocationRequest(LocationData, navigation))
-        }
+export default function ChangeLocationPage({ navigation }) {
+  const dispatch = useDispatch();
+  const location = useSelector((state) => state.user.profile.location);
+
+  const handleSubmit = (LocationData) => {
+    if (location === null) {
+      dispatch(createLocationRequest(LocationData, navigation, 'GoBack'));
+    } else {
+      dispatch(updateLocationRequest(LocationData, navigation));
     }
-        
+  };
 
-    return(
-        <Background>
-            <Container>
-                <LocationForm onClickSubmit={handleSubmit} location={location} />
-            </Container>
-        </Background>
-    )   
+  return (
+    <Background>
+      <Container>
+        <LocationForm onClickSubmit={handleSubmit} location={location} />
+      </Container>
+    </Background>
+  );
 }
 
 ChangeLocationPage.navigationOptions = ({ navigation }) => ({
-    title: 'Minha localização',
-    headerBackTitle: 'Voltar'
+  title: 'Minha localização',
+  headerBackTitle: 'Voltar',
 });

@@ -4,7 +4,7 @@ import { MaterialIcons } from '@expo/vector-icons';
 
 import { Container, TextInputType1 } from './styles';
 
-function Input({ style, icon,  textStyle, ...rest}, ref) {
+function Input({ style, icon, textStyle, ...rest }, ref) {
   return (
     <Container style={style}>
       {icon && <MaterialIcons name={icon} size={23} color="#fff" />}
