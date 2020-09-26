@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { StyleSheet } from 'react-native';
+import { StyleSheet, ActivityIndicator } from 'react-native';
 import { withNavigationFocus } from 'react-navigation';
 import NumericInput from 'react-native-numeric-input';
 import { useDispatch, useSelector } from 'react-redux';
@@ -26,6 +26,7 @@ import {
   DetailsTitle,
   Title_View,
   TextWarning,
+  LoadingView,
 } from './styles';
 
 function ProductPage({ navigation, isFocused }) {
@@ -40,11 +41,6 @@ function ProductPage({ navigation, isFocused }) {
   const [quantity, setQuantity] = useState(0);
   const [favorite, setFavorite] = useState(isFavorite);
   const [product, setProduct] = useState([]);
-  const [visible, setVisibility] = useState(false);
-
-  const handleModalVisibilty = () => {
-    setVisibility(!visible);
-  };
 
   const handleLeavePage = () => {
     console.log(isFavorite);
@@ -71,7 +67,7 @@ function ProductPage({ navigation, isFocused }) {
 
   return (
     <Background>
-      {product && (
+      {product.length !== 0 ? (
         <Container>
           <ProductView>
             <Title_View>
@@ -134,6 +130,10 @@ function ProductPage({ navigation, isFocused }) {
             </DescriptionScroll>
           </DescriptionView>
         </Container>
+      ) : (
+        <LoadingView>
+          <ActivityIndicator size="large" color="#FFF" />
+        </LoadingView>
       )}
     </Background>
   );

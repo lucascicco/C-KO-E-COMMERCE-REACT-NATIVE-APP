@@ -21,10 +21,11 @@ export const MultiInput = styled.View`
 export const FormInput = styled(Input)`
   margin-right: 10px;
   padding: 0 5px;
+  opacity: ${(props) => (props.editable ? '1.0' : '0.2')};
 `;
 
 export const SubmitBottom = styled(Button)`
-  margin-top: 0px;
+  margin-top: 10px;
   background: ${(props) => props.style.background};
 `;
 
@@ -35,18 +36,20 @@ export const WarningView = styled.View`
 `;
 
 export const WarningText = styled.Text`
-  font-size: 15px;
+  font-size: 14px;
   font-style: italic;
   text-align: justify;
+  font-family: raleway;
 `;
 export const InfoButton = styled.TouchableOpacity`
-  flex: 1;
   flex-direction: row;
   padding: 10px;
   justify-content: center;
 `;
 
 export const InfoText = styled.Text`
-  color: black;
-  font-size: 15px;
+  color: white;
+  font-size: 19px;
+  font-family: raleway;
+  text-decoration: underline;
 `;

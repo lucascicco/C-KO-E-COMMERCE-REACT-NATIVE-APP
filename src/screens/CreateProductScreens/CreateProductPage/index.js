@@ -10,7 +10,6 @@ import PropTypes from 'prop-types';
 import { ImageResizingEventThree } from '~/utils/KeyboardsEvents';
 import Background from '~/components/Backgrounds/Background2';
 import ProductForm from '~/components/ProductForm';
-import api from '~/services/api';
 
 export default function CreateProductPage({ navigation }) {
   const typeOfPlatform = Platform.OS === 'ios';
@@ -80,5 +79,7 @@ CreateProductPage.navigationOptions = () => ({
 });
 
 CreateProductPage.propTypes = {
-  navigation: PropTypes.func.isRequired,
+  navigation: PropTypes.shape({
+    navigate: PropTypes.func.isRequired,
+  }).isRequired,
 };

@@ -1,3 +1,4 @@
+/* eslint-disable default-case */
 export default (format, width, height, length, weight, diameter) => {
   switch (format) {
     case 1:

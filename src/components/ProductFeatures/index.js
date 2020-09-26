@@ -1,11 +1,12 @@
+/* eslint-disable import/no-unresolved */
 import React, { useRef, useState } from 'react';
 import { Platform, Linking } from 'react-native';
-import Picker from '../../components/Picker';
-import FormatosCorreios from '../../utils/FormatosCorreios';
+import Picker from '~/components/Picker';
+import FormatosCorreios from '~/utils/FormatosCorreios';
 import {
-  onChange_numberComma,
   onChange_onlyNumber,
-} from '../../utils/RestrictInputs';
+  onChange_numberWeight,
+} from '~/utils/RestrictInputs';
 
 import {
   Container,
@@ -64,17 +65,20 @@ export default function ProductsFeature({ onClickSubmit }) {
         setEnableWidth(true);
         setDiameter(0);
         setHeight(0);
+        break;
       case 2:
         setEnableHeight(false);
         setEnableWidth(false);
         setEnableDiameter(true);
         setHeight(0);
         setWidth(0);
+        break;
       case 1:
         setEnableHeight(true);
         setEnableWidth(true);
         setEnableDiameter(false);
         setDiameter(0);
+        break;
       default:
         setEnableHeight(true);
         setEnableWidth(true);
@@ -95,22 +99,23 @@ export default function ProductsFeature({ onClickSubmit }) {
             onValueChange={(itemValue) => {
               handlePickingFormat(itemValue);
               setLabel(itemValue.toString());
-              console.log(itemValue);
             }}
             style={{ width: '35%' }}
+            editable
           />
 
           <FormInput
             placeholder="Peso"
             keyboardType={typeOfkeyboardType}
-            maxLength={4}
+            maxLength={2}
             returnKeyType="next"
             style={{ width: '27%' }}
             blurOnSubmit={false}
             value={weight}
-            onChangeText={(text) => onChange_numberComma(text, setWeight)}
+            onChangeText={(text) => onChange_numberWeight(text, setWeight)}
             onSubmitEditing={() => HeightRef.current.focus()}
             textStyle={{ fontFamily: weight ? null : 'raleway' }}
+            editable
           />
 
           <FormInput
@@ -157,6 +162,7 @@ export default function ProductsFeature({ onClickSubmit }) {
             textStyle={{ fontFamily: length ? null : 'raleway' }}
             ref={LengthRef}
             onSubmitEditing={() => DiameterRef.current.focus()}
+            editable
           />
 
           <FormInput
@@ -177,17 +183,18 @@ export default function ProductsFeature({ onClickSubmit }) {
         <WarningView>
           <WarningText>
             Todas as medidas devem ser feitas incluindo a embalagem. Valores de
-            dimensões são dados em CM. Já, o peso é dado KG.
-            <InfoButton
-              onPress={() =>
-                Linking.openURL(
-                  'https://www.correios.com.br/enviar-e-receber/precisa-de-ajuda/limites-de-dimensoes-e-peso'
-                )
-              }
-            >
-              <InfoText>Ver medidas</InfoText>
-            </InfoButton>
+            dimensões são dados em (CM). Já, o peso é dado (KG). Apenas números
+            inteiros.
           </WarningText>
+          <InfoButton
+            onPress={() =>
+              Linking.openURL(
+                'https://www.correios.com.br/enviar-e-receber/precisa-de-ajuda/limites-de-dimensoes-e-peso'
+              )
+            }
+          >
+            <InfoText>Ver medidas</InfoText>
+          </InfoButton>
         </WarningView>
 
         <SubmitBottom onPress={handleSubmit} style={{ background: '#283593' }}>

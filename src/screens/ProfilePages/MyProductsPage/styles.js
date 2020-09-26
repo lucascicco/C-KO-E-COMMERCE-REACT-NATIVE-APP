@@ -13,7 +13,14 @@ export const ViewEmpty = styled.View`
 `;
 
 export const TextNoProducts = styled.Text`
-  font-family: raleway;
+  font-family: raleway-bold;
   font-size: 25px;
   text-align: center;
+  margin: 0 auto;
+  width: 80%;
+`;
+
+export const LoadingView = styled.View`
+  flex: 1;
+  justify-content: center;
 `;

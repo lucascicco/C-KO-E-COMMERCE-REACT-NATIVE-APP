@@ -59,30 +59,28 @@ export default function ProductSendingForm({ navigation }) {
         );
       }
 
-      const bodyFormData = new FormData();
+      const formData = new FormData();
 
-      bodyFormData.append('file', product.image_id);
-      bodyFormData.append('product_name', product.product_name);
-      bodyFormData.append('category', product.category);
-      bodyFormData.append('quantity', product.quantity);
-      bodyFormData.append('description', product.description);
-      bodyFormData.append('price', product.price);
+      const path = product.image.uri.split('/');
+      const name = path[path.length - 1];
 
-      const response_one = await api.post('product', bodyFormData, {
+      formData.append('file', {
+        uri: product.image.uri,
+        name,
+        type: `image/${product.image.type}`,
+      });
+
+      formData.append('product_name', product.product_name);
+      formData.append('category', product.category);
+      formData.append('quantity', product.quantity);
+      formData.append('description', product.description);
+      formData.append('price', product.price);
+
+      const response_one = await api.post('product', formData, {
         headers: { 'Content-Type': 'multipart/form-data' },
       });
 
-      const response = await api.post('features', {
-        product: response_one.data.product.id,
-        format,
-        width,
-        height,
-        length,
-        weight,
-        diameter,
-      });
-
-      console.log(response.data);
+      console.log(response_one);
     } catch (e) {
       Alert.alert(
         'Erro ao salvar',
@@ -94,12 +92,6 @@ export default function ProductSendingForm({ navigation }) {
   return (
     <Background>
       <Container>
-        <Animated.View style={[styles.TitleView, { height: ViewSize }]}>
-          <Animated.Text style={[styles.TextTitle, { fontSize: TextSize }]}>
-            Dados para envio
-          </Animated.Text>
-        </Animated.View>
-
         <ProductComponent onClickSubmit={handleSubmit} />
       </Container>
     </Background>
@@ -123,5 +115,13 @@ const styles = StyleSheet.create({
 });
 
 ProductSendingForm.propTypes = {
-  navigation: PropTypes.func.isRequired,
+  navigation: PropTypes.shape({
+    navigate: PropTypes.func.isRequired,
+    getParam: PropTypes.func.isRequired,
+  }).isRequired,
 };
+
+ProductSendingForm.navigationOptions = () => ({
+  title: 'Dimensões',
+  headerBackTitle: 'Voltar',
+});

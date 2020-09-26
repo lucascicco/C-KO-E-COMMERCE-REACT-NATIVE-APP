@@ -127,3 +127,8 @@ export const FreteButton = styled.TouchableOpacity`
 export const FreteText = styled.Text`
   font-family: raleway;
 `;
+
+export const LoadingView = styled.View`
+  flex: 1;
+  justify-content: center;
+`;

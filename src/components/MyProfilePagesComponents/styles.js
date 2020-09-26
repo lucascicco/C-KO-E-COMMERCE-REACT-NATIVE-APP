@@ -67,7 +67,7 @@ export const Title_View_Row = styled.View`
   border-bottom-width: 1px;
   border-color: black;
   border-style: solid;
-  paddingbottom: 5px;
+  padding-bottom: 5px;
 `;
 
 export const Code_View = styled.View`
@@ -257,7 +257,7 @@ export const Cart_View_Row = styled.View`
   border-bottom-width: 1px;
   border-color: black;
   border-style: solid;
-  paddingbottom: 5px;
+  padding-bottom: 5px;
   margin-bottom: 5px;
 `;
 
@@ -357,7 +357,7 @@ export const Row_ViewItem = styled.View`
   border-bottom-width: 1px;
   border-color: black;
   border-style: solid;
-  paddingbottom: 5px;
+  padding-bottom: 5px;
 `;
 
 export const Title_Item = styled.Text`

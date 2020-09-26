@@ -9,7 +9,6 @@ export const Container = styled.KeyboardAvoidingView.attrs({
   behavior: 'padding',
 })`
   flex: 1;
-  justify-content: center;
   align-items: center;
   padding: 0 15px;
 `;

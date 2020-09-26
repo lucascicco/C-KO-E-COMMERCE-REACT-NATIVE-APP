@@ -9,13 +9,9 @@ import MaskedInput from '../TextInputMasked';
 import Picker from '../Picker';
 import ProductImage from '../ProductImage';
 
-import Categorias from '../../utils/Categorias.js';
-import {
-  onChange_onlyText,
-  onChange_onlyNumber,
-} from '../../utils/RestrictInputs';
+import Categorias from '~/utils/Categorias.js';
 
-import api from '../../services/api';
+import { onChange_onlyText, onChange_onlyNumber } from '~/utils/RestrictInputs';
 
 import {
   Container,
@@ -37,7 +33,7 @@ function ProductForm({ onClickSubmit, ViewHeight, ViewWidth, FontSize }) {
   let PriceRef;
   const DescriptionRef = useRef();
 
-  const [ProductPicture, setProductImage] = useState('');
+  const [ProductPicture, setProductImage] = useState([]);
   const [ProductName, setProductName] = useState('');
   const [Category, setCategory] = useState('');
   const [Quantity, setQuantity] = useState('');
@@ -45,13 +41,7 @@ function ProductForm({ onClickSubmit, ViewHeight, ViewWidth, FontSize }) {
   const [Price, setPrice] = useState('');
   const [CategoryLabel, setCategoryLabel] = useState('Categoria');
 
-  useEffect(() => {
-    async () => {
-      await getPermissionAsync();
-    };
-  }, []);
-
-  getPermissionAsync = async () => {
+  const getPermissionAsync = async () => {
     if (Constants.platform.ios) {
       const { status } = await Permissions.askAsync(Permissions.CAMERA_ROLL);
       if (status !== 'granted') {
@@ -73,7 +63,7 @@ function ProductForm({ onClickSubmit, ViewHeight, ViewWidth, FontSize }) {
       });
 
       if (!result.cancelled) {
-        setProductImage(result.uri);
+        setProductImage(result);
       }
     } catch (E) {
       console.log(E);
@@ -82,7 +72,7 @@ function ProductForm({ onClickSubmit, ViewHeight, ViewWidth, FontSize }) {
 
   const HandleSubmit = () => {
     onClickSubmit({
-      image_id: ProductPicture,
+      image: ProductPicture,
       product_name: ProductName,
       category: Category,
       quantity: Quantity,
@@ -91,6 +81,10 @@ function ProductForm({ onClickSubmit, ViewHeight, ViewWidth, FontSize }) {
     });
   };
 
+  useEffect(() => {
+    getPermissionAsync();
+  }, []);
+
   return (
     <Container>
       <ProductImage
@@ -98,7 +92,7 @@ function ProductForm({ onClickSubmit, ViewHeight, ViewWidth, FontSize }) {
         Width={ViewWidth}
         FontSize={FontSize}
         onPress={HandleChoosePhoto}
-        uri={ProductPicture}
+        uri={ProductPicture.uri}
       />
 
       <Form>
