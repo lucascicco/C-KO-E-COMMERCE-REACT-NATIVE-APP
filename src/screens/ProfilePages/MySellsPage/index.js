@@ -1,24 +1,25 @@
 import React, { useState, useEffect } from 'react';
 import Modal from 'react-native-modal';
 import { withNavigationFocus } from 'react-navigation';
+import { ActivityIndicator } from 'react-native';
 import PropTypes from 'prop-types';
-import data from '~/utils/testing_data';
 import FlatlistSells from '~/components/MyProfilePagesComponents/MySellsFL/SellFlatlist';
 import ModalInfo from '~/components/MyProfilePagesComponents/ModalContact';
 
 import api from '~/services/api';
 
-import { Container, ViewEmpty, TextNoProducts } from './styles';
+import { Container, TextNoProducts } from './styles';
 
 function MySellsPage({ isFocused }) {
   const [visible, setVisibility] = useState(false);
-  const [MySells, SetMySells] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [mySells, SetMySells] = useState([]);
 
   const loadMySells = async () => {
     const response = await api.get('mySells');
 
     SetMySells(response.data);
-    console.log(response.data);
+    setLoading(false);
   };
 
   useEffect(() => {
@@ -29,12 +30,21 @@ function MySellsPage({ isFocused }) {
 
   return (
     <Container>
-      {MySells.length === 0 ? (
-        <ViewEmpty>
-          <TextNoProducts>Você ainda não possui nenhuma venda.</TextNoProducts>
-        </ViewEmpty>
+      {loading ? (
+        <ActivityIndicator size="large" color="#000000" />
       ) : (
-        <FlatlistSells data={MySells} onPress={() => setVisibility(!visible)} />
+        <>
+          {mySells.length === 0 ? (
+            <TextNoProducts>
+              Você ainda não possui nenhuma venda.
+            </TextNoProducts>
+          ) : (
+            <FlatlistSells
+              data={mySells}
+              onPress={() => setVisibility(!visible)}
+            />
+          )}
+        </>
       )}
 
       <Modal
@@ -53,9 +63,13 @@ function MySellsPage({ isFocused }) {
   );
 }
 
-MySellsPage.navigationOptions = ({ navigation }) => ({
+MySellsPage.navigationOptions = () => ({
   title: 'Minhas vendas',
   headerBackTitle: 'Voltar',
 });
+
+MySellsPage.propTypes = {
+  isFocused: PropTypes.bool.isRequired,
+};
 
 export default withNavigationFocus(MySellsPage);

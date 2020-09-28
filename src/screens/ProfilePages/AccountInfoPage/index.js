@@ -70,7 +70,6 @@ export default function MyAccountOptions({ navigation }) {
   };
 
   useEffect(() => {
-    console.log(profile);
     getPermissionAsync();
   }, []);
 

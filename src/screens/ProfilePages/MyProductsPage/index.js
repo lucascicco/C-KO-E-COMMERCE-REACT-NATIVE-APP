@@ -4,7 +4,7 @@ import { ActivityIndicator } from 'react-native';
 import PropTypes from 'prop-types';
 import FlatlistProducts from '~/components/MyProfilePagesComponents/MyProductsFL/MyProductsList';
 import api from '~/services/api';
-import { Container, ViewEmpty, TextNoProducts, LoadingView } from './styles';
+import { Container, TextNoProducts } from './styles';
 
 function MyProducts({ isFocused, navigation }) {
   const [myProducts, SetMyProducts] = useState([]);

@@ -1,11 +1,11 @@
 import React from 'react';
 import { format } from 'date-fns';
+import PropTypes from 'prop-types';
 
 import {
   Item_View,
   FlatList_Item,
   Code_View,
-  Code_Small,
   Code_Bigger,
   Title_View_Row,
   FlatList_Title,
@@ -33,7 +33,6 @@ export default function Flatlist_item({ item, onPress }) {
     location,
     createdAt,
     payment_form,
-    purchase_quantity,
   } = item;
 
   const dataVenda = format(new Date(createdAt), 'dd/MM/yyyy');
@@ -73,8 +72,7 @@ export default function Flatlist_item({ item, onPress }) {
           <Column_ViewImage>
             <Product_Image
               source={{
-                uri:
-                  'https://homepages.cae.wisc.edu/~ece533/images/monarch.png',
+                uri: purchase_product.url,
               }}
             />
           </Column_ViewImage>
@@ -104,3 +102,55 @@ export default function Flatlist_item({ item, onPress }) {
     </Item_View>
   );
 }
+
+Flatlist_item.propTypes = {
+  item: PropTypes.shape({
+    buyer: PropTypes.number,
+    canceled_at: PropTypes.oneOfType([
+      PropTypes.instanceOf(null),
+      PropTypes.string,
+    ]),
+    createdAt: PropTypes.oneOfType([
+      PropTypes.instanceOf(null),
+      PropTypes.string,
+    ]),
+    frete_price: PropTypes.string,
+    id: PropTypes.string,
+    location: PropTypes.shape({
+      city: PropTypes.string,
+      country: PropTypes.string,
+      neighborhood: PropTypes.string,
+      postcode: PropTypes.string,
+      state: PropTypes.string,
+      street: PropTypes.string,
+      street_number: PropTypes.string,
+    }),
+    payment_form: PropTypes.string,
+    product: PropTypes.number,
+    purchase_code: PropTypes.string,
+    purchase_location: PropTypes.number,
+    purchase_product: PropTypes.shape({
+      category: PropTypes.string,
+      path: PropTypes.string,
+      price: PropTypes.string,
+      product_name: PropTypes.string,
+      url: PropTypes.string,
+    }),
+    purchase_quantity: PropTypes.number,
+    seller: PropTypes.number,
+    total_price: PropTypes.string,
+    updatedAt: PropTypes.oneOfType([
+      PropTypes.instanceOf(null),
+      PropTypes.string,
+    ]),
+    user_buyer: PropTypes.shape({
+      personal_info: PropTypes.oneOfType([
+        PropTypes.instanceOf(null),
+        PropTypes.number,
+      ]),
+      name: PropTypes.string,
+      email: PropTypes.string,
+    }),
+  }).isRequired,
+  onPress: PropTypes.func.isRequired,
+};

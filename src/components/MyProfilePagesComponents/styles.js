@@ -299,7 +299,7 @@ export const Buy_text = styled.Text`
 `;
 export const Cart_Buytext = styled.Text`
   font-family: raleway;
-  font-size: 15px;
+  font-size: 14px;
   color: #43a047;
   text-align: center;
 `;
