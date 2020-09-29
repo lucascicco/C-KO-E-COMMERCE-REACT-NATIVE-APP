@@ -475,3 +475,18 @@ export const Change_Product = styled.TouchableOpacity`
 export const QuantityRow = styled.View`
   flex-direction: row;
 `;
+
+export const PauseProductView = styled.TouchableOpacity`
+  flex: 1;
+  flex-direction: row;
+  justify-content: center;
+  padding: 5px;
+  border: 1px solid #d32f2f;
+  margin-top: 10px;
+`;
+
+export const PauseProductText = styled.Text`
+  color: #d32f2f;
+  font-family: raleway;
+  font-size: 16px;
+`;

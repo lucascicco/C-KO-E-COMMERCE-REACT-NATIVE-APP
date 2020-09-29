@@ -1,6 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { Platform, Alert } from 'react-native';
-
+import PropTypes from 'prop-types';
 import * as ImagePicker from 'expo-image-picker';
 import Constants from 'expo-constants';
 import * as Permissions from 'expo-permissions';
@@ -22,7 +22,13 @@ import {
   DescriptionForm,
 } from './styles';
 
-function ProductForm({ onClickSubmit, ViewHeight, ViewWidth, FontSize }) {
+export default function ProductForm({
+  onClickSubmit,
+  ViewHeight,
+  ViewWidth,
+  FontSize,
+  productData,
+}) {
   const typeOfPlatform = Platform.OS === 'ios';
   const typeOfkeyboardType = typeOfPlatform
     ? 'numbers-and-punctuation'
@@ -33,13 +39,25 @@ function ProductForm({ onClickSubmit, ViewHeight, ViewWidth, FontSize }) {
   let PriceRef;
   const DescriptionRef = useRef();
 
-  const [ProductPicture, setProductImage] = useState([]);
-  const [ProductName, setProductName] = useState('');
-  const [Category, setCategory] = useState('');
-  const [Quantity, setQuantity] = useState('');
-  const [Description, setDescription] = useState('');
-  const [Price, setPrice] = useState('');
-  const [CategoryLabel, setCategoryLabel] = useState('Categoria');
+  const [ProductPicture, setProductImage] = useState(
+    productData ? productData.url : []
+  );
+  const [ProductName, setProductName] = useState(
+    productData ? productData.name : ''
+  );
+  const [Category, setCategory] = useState(
+    productData ? productData.category : ''
+  );
+  const [Quantity, setQuantity] = useState(
+    productData ? productData.quantity : ''
+  );
+  const [Description, setDescription] = useState(
+    productData ? productData.description : ''
+  );
+  const [Price, setPrice] = useState(productData ? productData.price : '');
+  const [CategoryLabel, setCategoryLabel] = useState(
+    productData ? productData.category : 'Categoria'
+  );
 
   const getPermissionAsync = async () => {
     if (Constants.platform.ios) {
@@ -92,7 +110,7 @@ function ProductForm({ onClickSubmit, ViewHeight, ViewWidth, FontSize }) {
         Width={ViewWidth}
         FontSize={FontSize}
         onPress={HandleChoosePhoto}
-        uri={ProductPicture.uri}
+        uri={productData ? ProductPicture : ProductPicture.uri}
       />
 
       <Form>
@@ -175,5 +193,3 @@ function ProductForm({ onClickSubmit, ViewHeight, ViewWidth, FontSize }) {
     </Container>
   );
 }
-
-export default ProductForm;

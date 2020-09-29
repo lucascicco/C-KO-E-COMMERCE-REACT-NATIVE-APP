@@ -1,4 +1,6 @@
 import React from 'react';
+import { formatDistanceStrict, addDays, isAfter } from 'date-fns';
+import api from '~/services/api';
 
 import {
   Container,
@@ -12,11 +14,20 @@ import {
   Row_View,
 } from './styles';
 
-function StoppedPage() {
+export default function StoppedPage({ navigation }) {
+  const product = navigation.getParam('product');
+  const FreeDate = addDays(new Date(product.pausedAt), 15);
+  const currentDate = new Date();
+
+  const DaysMissing = formatDistanceStrict(currentDate, FreeDate, {
+    unit: 'day',
+  });
+  const isAvailableToChange = isAfter(currentDate, FreeDate);
+
   return (
     <Container>
       <Text_View>
-        <Text_Title>ACORDO - ANÚNCIO PAUSADO</Text_Title>
+        <Text_Title>ACORDO - PAUSA DE ANÚNCIO </Text_Title>
 
         <Text_Text>
           {' '}
@@ -49,26 +60,19 @@ function StoppedPage() {
         <Date_View>
           <Row_View>
             <Date_Text>Dias restantes:</Date_Text>
-            <Date_date> 9</Date_date>
-          </Row_View>
-
-          <Row_View>
-            <Date_Text>Status: </Date_Text>
-            <Date_date>Andamento</Date_date>
+            <Date_date>{DaysMissing}</Date_date>
           </Row_View>
         </Date_View>
       </Text_View>
 
-      {/* FAZER CONDIÇÃO LÓGICA ONDE
-                SE STATUS === ANDAMENTO -> NÃO MOSTRAR  OS DOIS BUTTONS ABAIXO,
-                PORÉM, QUANDO ESTIVER LIBERADO, MOSTRAR PARA PODER FAZER A ESCOLHA.
-            */}
-
-      <SubmitButton style={{ background: '#d32f2f' }}>EXCLUIR</SubmitButton>
-
-      <SubmitButton style={{ background: '#8bc34a' }}>DESPAUSAR</SubmitButton>
+      {isAvailableToChange && (
+        <>
+          <SubmitButton style={{ background: '#d32f2f' }}>EXCLUIR</SubmitButton>
+          <SubmitButton style={{ background: '#8bc34a' }}>
+            DESPAUSAR
+          </SubmitButton>
+        </>
+      )}
     </Container>
   );
 }
-
-export default StoppedPage;

@@ -21,6 +21,11 @@ export default function MyProductList({ data, navigation }) {
               url={item.product.url}
               status={item.product.status}
               navigation={navigation}
+              category={item.product.category}
+              price={item.product.price}
+              quantity={item.product.quantity}
+              description={item.product.description}
+              pausedAt={item.product.paused_at}
             />
           );
         }}

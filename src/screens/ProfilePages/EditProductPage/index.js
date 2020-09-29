@@ -15,10 +15,7 @@ import api from '~/services/api';
 import { SubmitBottom } from './styles';
 
 export default function EditProductPage({ navigation }) {
-  // PEGAR DADOS DO REDUCER E PASSAR COMO PROPS SEPARADAMENTE PARA O
-  // PRODUCT FORM,  E NO PRODUCT FORM, FAZER A LÓGICA DENTRO DOS USESTATES
-  // EXEMPLO: PRODUCTNAME? PRODUCTNAME : '. -> POIS TEM QUE DEIXAR PRE-PREENCHIDO O FORM QUANDO SE VAI EDITAR.
-
+  const product = navigation.getParam('product');
   const typeOfPlatform = Platform.OS === 'ios';
 
   const ViewHeight = new Animated.Value(175);
@@ -89,14 +86,8 @@ export default function EditProductPage({ navigation }) {
           ViewWidth={ViewWidth}
           FontSize={FontSize}
           onClickSubmit={handleSubmit}
+          productData={product}
         />
-
-        <SubmitBottom
-          style={{ background: '#d32f2f' }}
-          onPress={() => console.log('red button was pressed.')}
-        >
-          Pausar anúncio
-        </SubmitBottom>
       </Background>
     </TouchableWithoutFeedback>
   );

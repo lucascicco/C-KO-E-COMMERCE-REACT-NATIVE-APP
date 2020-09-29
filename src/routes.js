@@ -27,6 +27,8 @@ import ChangePersonal from './screens/ProfilePages/ChangePersonalPage';
 import MyProductsPage from './screens/ProfilePages/MyProductsPage';
 import SellsById from './screens/ProfilePages/SellsByProduct';
 import MySells from './screens/ProfilePages/MySellsPage';
+import EditProductPage from './screens/ProfilePages/EditProductPage';
+import StoppedPage from './screens/ProfilePages/StoppedPage';
 
 import MyCart from './screens/ProfilePages/MyCart';
 import PurchaseCart from './screens/ProfilePages/PurchaseCartPage';
@@ -116,6 +118,8 @@ export default (isSigned, FirstAccess) =>
                   ChangePersonal,
                   MyProductsPage,
                   SellsById,
+                  EditProductPage,
+                  StoppedPage,
                   MySells,
                   MyCart,
                   PurchaseCart,

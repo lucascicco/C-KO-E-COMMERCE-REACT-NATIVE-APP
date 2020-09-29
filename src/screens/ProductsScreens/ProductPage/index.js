@@ -181,8 +181,7 @@ ProductPage.propTypes = {
   navigation: PropTypes.shape({
     navigate: PropTypes.func.isRequired,
     getParam: PropTypes.func.isRequired,
-    addListener: PropTypes.func.isRequired,
-    setParams: PropTypes.func,
+    setParams: PropTypes.func.isRequired,
   }).isRequired,
   isFocused: PropTypes.bool.isRequired,
 };
