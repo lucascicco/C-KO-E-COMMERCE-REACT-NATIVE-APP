@@ -1,9 +1,8 @@
 import { Alert } from 'react-native';
 import { takeLatest, call, put, all } from 'redux-saga/effects';
 import { signInSuccess, signFailure, FirstAccessSuccess } from './actions';
-import * as NavigationService from '../../../services/NavigationService';
 
-import api from '../../../services/api';
+import api from '~/services/api';
 
 export function* signIn({ payload }) {
   try {

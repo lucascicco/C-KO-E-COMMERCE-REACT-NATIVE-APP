@@ -1,12 +1,14 @@
-import React from 'react';
+import React, { useState } from 'react';
+import { Alert } from 'react-native';
 import { format } from 'date-fns';
 import PropTypes from 'prop-types';
+import Modal from 'react-native-modal';
+import ModalInfo from '../ModalContact';
 
 import {
   Item_View,
   FlatList_Item,
   Code_View,
-  Code_Small,
   Code_Bigger,
   Title_View_Row,
   FlatList_Title,
@@ -26,9 +28,12 @@ import {
   Column_ViewImage,
   Cart_Buytext,
   Address_textOne,
+  QuantityRow,
 } from '../styles';
 
-export default function Flatlist_item({ item, onPress, navigation }) {
+export default function Flatlist_item({ item, navigation }) {
+  const [visible, setVisibility] = useState(false);
+
   const {
     purchase_product,
     purchase_code,
@@ -36,12 +41,29 @@ export default function Flatlist_item({ item, onPress, navigation }) {
     location,
     createdAt,
     payment_form,
+    purchase_quantity,
+    user_seller,
   } = item;
 
   const dataVenda = format(new Date(createdAt), 'dd/MM/yyyy');
   const paymentForm =
     payment_form === 'cash' ? 'Dinheiro' : 'Cartão de crédito';
   const priceFormatted = Number.parseFloat(total_price).toFixed(2);
+
+  const buyAgainProduct = () => {
+    if (purchase_product.status === 'open') {
+      navigation.navigate('ProductPage', {
+        product_id: purchase_product.id,
+        product_image: purchase_product.url,
+        product_name: purchase_product.product_name,
+      });
+    } else {
+      Alert.alert(
+        'Anúncio fechado',
+        'Lamentamos o transtorno, porém o anúncio foi pausado pelo vendedor.'
+      );
+    }
+  };
 
   return (
     <Item_View>
@@ -58,6 +80,11 @@ export default function Flatlist_item({ item, onPress, navigation }) {
           <Column_ViewItem>
             <Title_Item>Total R$</Title_Item>
             <Info_itemText>{priceFormatted}</Info_itemText>
+
+            <QuantityRow>
+              <Title_Item>Qnt: </Title_Item>
+              <Info_itemText>{purchase_quantity}</Info_itemText>
+            </QuantityRow>
           </Column_ViewItem>
 
           <Column_ViewItem>
@@ -97,23 +124,33 @@ export default function Flatlist_item({ item, onPress, navigation }) {
         </Row_Picture>
 
         <Purchase_Button_View>
-          <Info_Button onPress={onPress}>
+          <Info_Button onPress={() => setVisibility(true)}>
             <Info_text>Contato do vendedor</Info_text>
           </Info_Button>
 
-          <Purchase_Button
-            onPress={() =>
-              navigation.navigate('ProductPage', {
-                product_id: purchase_product.id,
-                product_image: purchase_product.url,
-                product_name: purchase_product.product_name,
-              })
-            }
-          >
+          <Purchase_Button onPress={buyAgainProduct}>
             <Cart_Buytext>Comprar novamente</Cart_Buytext>
           </Purchase_Button>
         </Purchase_Button_View>
       </FlatList_Item>
+
+      <Modal
+        isVisible={visible}
+        animationIn="zoomIn"
+        animationOut="zoomOut"
+        animationInTiming={500}
+        animationOutTiming={500}
+        avoidKeyboard
+        coverScreen
+        onBackdropPress={() => setVisibility(false)}
+      >
+        <ModalInfo
+          sell
+          idPersonalnfo={user_seller.personal_info}
+          name={user_seller.name}
+          email={user_seller.email}
+        />
+      </Modal>
     </Item_View>
   );
 }
@@ -151,6 +188,7 @@ Flatlist_item.propTypes = {
       price: PropTypes.string,
       product_name: PropTypes.string,
       url: PropTypes.string,
+      status: PropTypes.string,
     }),
     purchase_quantity: PropTypes.number,
     seller: PropTypes.number,
@@ -168,7 +206,6 @@ Flatlist_item.propTypes = {
       email: PropTypes.string,
     }),
   }).isRequired,
-  onPress: PropTypes.func.isRequired,
   navigation: PropTypes.shape({
     navigate: PropTypes.func.isRequired,
   }).isRequired,

@@ -171,11 +171,15 @@ export function* FavoriteSaga({ payload }) {
     const { itemNumber, favorite } = payload;
 
     if (favorite) {
-      yield call(api.put, 'Add_favoriteitem', itemNumber);
+      yield call(api.put, 'Add_favoriteitem', {
+        item: itemNumber,
+      });
 
       yield put(addFavoriteItem(itemNumber));
     } else {
-      yield call(api.put, 'Remove_favoriteitem', itemNumber);
+      yield call(api.put, 'Remove_favoriteitem', {
+        item: itemNumber,
+      });
 
       yield put(removeFavoriteItem(itemNumber));
     }

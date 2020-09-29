@@ -210,7 +210,7 @@ export const Email_Form = styled.TextInput.attrs({
   flex: 1;
   color: #fff;
   font-family: raleway;
-  textalignvertical: top;
+  text-align-vertical: top;
 `;
 export const Submit_Button = styled(Button)`
   margin-top: 10px;
@@ -219,7 +219,7 @@ export const Submit_Button = styled(Button)`
 
 export const Email_Spacing = styled.View`
   background: #757575;
-  height: 140px;
+  height: 130px;
   padding: 10px;
 `;
 export const Email_Lenght = styled.View`
@@ -470,4 +470,8 @@ export const Change_Product = styled.TouchableOpacity`
   padding: 5px;
   border: 1px solid black;
   margin-right: 5px;
+`;
+
+export const QuantityRow = styled.View`
+  flex-direction: row;
 `;

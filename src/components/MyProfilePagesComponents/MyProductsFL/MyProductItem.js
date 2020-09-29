@@ -1,9 +1,9 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 import {
   CartItem_View,
   Cart_button_buy,
-  Delete_text,
   Buy_text,
   Flatlist_ViewTwo,
   Cart_Button_View,
@@ -11,7 +11,6 @@ import {
   Details_View,
   Details_Row,
   Details_RowText,
-  Details_RowTextBold,
   Details_RowTextItalic,
   Cart_Row,
   Title_View_Row,
@@ -21,7 +20,14 @@ import {
   Button_Text,
 } from '../styles';
 
-export default function Flatlist_item({ title, selldone, status, onPress }) {
+export default function Flatlist_item({
+  title,
+  selldone,
+  url,
+  status,
+  navigation,
+  id,
+}) {
   const statusName = status === 'open' ? 'Aberto' : 'Fechado';
 
   return (
@@ -33,7 +39,7 @@ export default function Flatlist_item({ title, selldone, status, onPress }) {
       <Cart_Row>
         <Product_Image
           source={{
-            uri: 'https://homepages.cae.wisc.edu/~ece533/images/monarch.png',
+            uri: url,
           }}
         />
 
@@ -54,7 +60,13 @@ export default function Flatlist_item({ title, selldone, status, onPress }) {
                 <Button_Text>Alterar produto</Button_Text>
               </Change_Product>
 
-              <Cart_button_buy>
+              <Cart_button_buy
+                onPress={() =>
+                  navigation.navigate('SellsById', {
+                    product_id: id,
+                  })
+                }
+              >
                 <Buy_text>Ver vendas</Buy_text>
               </Cart_button_buy>
             </Cart_Button_View>
@@ -64,3 +76,14 @@ export default function Flatlist_item({ title, selldone, status, onPress }) {
     </CartItem_View>
   );
 }
+
+Flatlist_item.propTypes = {
+  id: PropTypes.number.isRequired,
+  title: PropTypes.string.isRequired,
+  selldone: PropTypes.number.isRequired,
+  status: PropTypes.string.isRequired,
+  navigation: PropTypes.shape({
+    navigate: PropTypes.func.isRequired,
+  }).isRequired,
+  url: PropTypes.string.isRequired,
+};

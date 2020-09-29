@@ -16,7 +16,6 @@ import {
 } from './styles';
 
 export default function ChangeAddress({ onCalculatePress, location }) {
-  console.log(location);
   const [enable, setEnable] = useState(false);
   const [fretetype, setFretetype] = useState('04510');
   const [locationState, setLocationState] = useState(location);

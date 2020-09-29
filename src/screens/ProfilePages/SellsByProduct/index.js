@@ -1,3 +1,4 @@
+/* eslint-disable prettier/prettier */
 import React, { useState, useEffect } from 'react';
 import { withNavigationFocus } from 'react-navigation';
 import { ActivityIndicator } from 'react-native';
@@ -8,12 +9,18 @@ import api from '~/services/api';
 
 import { Container, TextNoProducts } from './styles';
 
-function MySellsPage({ isFocused }) {
+function MySellsByIdPage({ isFocused, navigation }) {
   const [loading, setLoading] = useState(true);
   const [mySells, SetMySells] = useState([]);
 
+  const product_id = navigation.getParam('product_id');
+
   const loadMySells = async () => {
-    const response = await api.get('mySells');
+    const response = await api.get('mySellsByProductId', {
+      params: {
+        id: product_id,
+      },
+    });
 
     SetMySells(response.data);
     setLoading(false);
@@ -44,16 +51,17 @@ function MySellsPage({ isFocused }) {
   );
 }
 
-MySellsPage.navigationOptions = () => ({
-  title: 'Minhas vendas',
+MySellsByIdPage.navigationOptions = () => ({
+  title: null,
   headerBackTitle: 'Voltar',
 });
 
-MySellsPage.propTypes = {
+MySellsByIdPage.propTypes = {
   isFocused: PropTypes.bool.isRequired,
   navigation: PropTypes.shape({
     navigate: PropTypes.func.isRequired,
+    getParam: PropTypes.func.isRequired,
   }).isRequired,
 };
 
-export default withNavigationFocus(MySellsPage);
+export default withNavigationFocus(MySellsByIdPage);

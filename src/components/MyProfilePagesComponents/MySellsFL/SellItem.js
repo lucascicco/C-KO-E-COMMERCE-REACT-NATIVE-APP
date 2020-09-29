@@ -1,6 +1,8 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { format } from 'date-fns';
 import PropTypes from 'prop-types';
+import Modal from 'react-native-modal';
+import ModalInfo from '../ModalContact';
 
 import {
   Item_View,
@@ -23,9 +25,12 @@ import {
   Column_ViewImage,
   Info_text_bigger,
   Address_textOne,
+  QuantityRow,
 } from '../styles';
 
-export default function Flatlist_item({ item, onPress }) {
+export default function Flatlist_item({ item }) {
+  const [visible, setVisibility] = useState(false);
+
   const {
     purchase_product,
     purchase_code,
@@ -33,6 +38,8 @@ export default function Flatlist_item({ item, onPress }) {
     location,
     createdAt,
     payment_form,
+    purchase_quantity,
+    user_buyer,
   } = item;
 
   const dataVenda = format(new Date(createdAt), 'dd/MM/yyyy');
@@ -55,6 +62,11 @@ export default function Flatlist_item({ item, onPress }) {
           <Column_ViewItem>
             <Title_Item>Total R$</Title_Item>
             <Info_itemText>{priceFormatted}</Info_itemText>
+
+            <QuantityRow>
+              <Title_Item>Qnt: </Title_Item>
+              <Info_itemText>{purchase_quantity}</Info_itemText>
+            </QuantityRow>
           </Column_ViewItem>
 
           <Column_ViewItem>
@@ -94,11 +106,29 @@ export default function Flatlist_item({ item, onPress }) {
         </Row_Picture>
 
         <Purchase_Button_View>
-          <Info_Button onPress={onPress}>
+          <Info_Button onPress={() => setVisibility(true)}>
             <Info_text_bigger>Contato do comprador</Info_text_bigger>
           </Info_Button>
         </Purchase_Button_View>
       </FlatList_Item>
+
+      <Modal
+        isVisible={visible}
+        animationIn="zoomIn"
+        animationOut="zoomOut"
+        animationInTiming={500}
+        animationOutTiming={500}
+        avoidKeyboard
+        coverScreen
+        onBackdropPress={() => setVisibility(false)}
+      >
+        <ModalInfo
+          sell
+          idPersonalnfo={user_buyer.personal_info}
+          name={user_buyer.name}
+          email={user_buyer.email}
+        />
+      </Modal>
     </Item_View>
   );
 }
@@ -152,5 +182,4 @@ Flatlist_item.propTypes = {
       email: PropTypes.string,
     }),
   }).isRequired,
-  onPress: PropTypes.func.isRequired,
 };

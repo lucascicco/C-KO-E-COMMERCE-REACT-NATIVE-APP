@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { StyleSheet, ActivityIndicator } from 'react-native';
+import { HeaderBackButton } from 'react-navigation-stack';
 import { withNavigationFocus } from 'react-navigation';
 import NumericInput from 'react-native-numeric-input';
 import { useDispatch, useSelector } from 'react-redux';
 import PropTypes from 'prop-types';
 import Background from '~/components/Backgrounds/Background';
-import ChangeAddressView from '~/components/ChangeAddress';
 import FavoriteProduct from '~/components/HeartIcon';
 import { RequestFavoriteItems } from '~/store/modules/user/actions';
 import api from '~/services/api';
@@ -43,7 +43,6 @@ function ProductPage({ navigation, isFocused }) {
   const [product, setProduct] = useState([]);
 
   const handleLeavePage = () => {
-    console.log(isFavorite);
     if (isFavorite !== favorite) {
       dispatch(RequestFavoriteItems(product_id, favorite));
     }
@@ -59,11 +58,29 @@ function ProductPage({ navigation, isFocused }) {
     setProduct(response.data);
   };
 
+  const Navigating = () => {
+    if (quantity > 0) {
+      navigation.navigate('FretePage', {
+        product,
+        quantity,
+      });
+      handleLeavePage();
+    }
+  };
+
   useEffect(() => {
+    navigation.setParams({
+      handleFunction: () => {
+        if (isFavorite !== favorite) {
+          dispatch(RequestFavoriteItems(product_id, favorite));
+        }
+      },
+    });
+    // navigation.addListener('DidBlur') didnot work for the GOBACK.
     if (isFocused) {
       loadProduct();
     }
-  }, [isFocused]);
+  }, [isFocused, favorite]);
 
   return (
     <Background>
@@ -107,16 +124,7 @@ function ProductPage({ navigation, isFocused }) {
             </RowView>
 
             {product.purchasable ? (
-              <SubmitButton
-                onPress={() =>
-                  navigation.navigate('FretePage', {
-                    product,
-                    quantity,
-                  })
-                }
-              >
-                Comprar
-              </SubmitButton>
+              <SubmitButton onPress={Navigating}>Comprar</SubmitButton>
             ) : (
               <TextWarning>Produto temporariamente esgostado</TextWarning>
             )}
@@ -152,12 +160,30 @@ const styles = StyleSheet.create({
   },
 });
 
-ProductPage.navigationOptions = ({ navigation }) => ({
-  title: navigation.getParam('product_name'),
-});
+ProductPage.navigationOptions = ({ navigation }) => {
+  return {
+    title: null,
+    headerLeft: () => (
+      <HeaderBackButton
+        onPress={() => {
+          navigation.goBack();
+          navigation.state.params.handleFunction();
+        }}
+        tintColor="#FFF"
+        backTitleVisible
+        label="Voltar"
+      />
+    ),
+  };
+};
 
 ProductPage.propTypes = {
-  navigation: PropTypes.func.isRequired,
+  navigation: PropTypes.shape({
+    navigate: PropTypes.func.isRequired,
+    getParam: PropTypes.func.isRequired,
+    addListener: PropTypes.func.isRequired,
+    setParams: PropTypes.func,
+  }).isRequired,
   isFocused: PropTypes.bool.isRequired,
 };
 

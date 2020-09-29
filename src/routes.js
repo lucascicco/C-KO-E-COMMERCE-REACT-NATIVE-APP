@@ -16,7 +16,7 @@ import LocationPage from './screens/FirstScreens/LocationFormPage';
 // BOTTOM MENU NAVIGATION
 import CreateProduct from './screens/CreateProductScreens/CreateProductPage';
 import SendingInformations from './screens/CreateProductScreens/ProductSendingForm';
-import HomePage from './screens/ProductsScreens/HomePage';
+import HomePageProducts from './screens/ProductsScreens/HomePage';
 import MyProfile from './screens/ProfilePages/AccountInfoPage';
 
 // PROFILE SCREENS
@@ -25,6 +25,7 @@ import ChangeLocation from './screens/ProfilePages/ChangeLocationPage';
 import ChangePersonal from './screens/ProfilePages/ChangePersonalPage';
 
 import MyProductsPage from './screens/ProfilePages/MyProductsPage';
+import SellsById from './screens/ProfilePages/SellsByProduct';
 import MySells from './screens/ProfilePages/MySellsPage';
 
 import MyCart from './screens/ProfilePages/MyCart';
@@ -60,7 +61,7 @@ export default (isSigned, FirstAccess) =>
             HomePage: {
               screen: createStackNavigator(
                 {
-                  HomePage,
+                  HomePageProducts,
                   ProductPage,
                   FretePage,
                   PurchasePartOne,
@@ -114,6 +115,7 @@ export default (isSigned, FirstAccess) =>
                   ChangeLocation,
                   ChangePersonal,
                   MyProductsPage,
+                  SellsById,
                   MySells,
                   MyCart,
                   PurchaseCart,

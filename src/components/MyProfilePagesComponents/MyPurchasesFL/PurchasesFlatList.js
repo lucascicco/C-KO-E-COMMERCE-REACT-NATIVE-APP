@@ -5,21 +5,15 @@ import FlatListItem from './PucharseItem';
 
 import { FlatList_View } from '../styles';
 
-export default function FlatlistProducts({ data, onPress, navigation }) {
+export default function FlatlistProducts({ data, navigation }) {
   return (
     <FlatList_View>
       <FlatList
         data={data}
-        keyExtractor={(index) => index}
+        keyExtractor={(item) => item.id}
         numColumns={1}
         renderItem={({ item }) => {
-          return (
-            <FlatListItem
-              item={item}
-              onPress={onPress}
-              navigation={navigation}
-            />
-          );
+          return <FlatListItem item={item} navigation={navigation} />;
         }}
       />
     </FlatList_View>
@@ -77,6 +71,5 @@ FlatlistProducts.propTypes = {
       }),
     })
   ).isRequired,
-  onPress: PropTypes.func.isRequired,
   navigation: PropTypes.func.isRequired,
 };

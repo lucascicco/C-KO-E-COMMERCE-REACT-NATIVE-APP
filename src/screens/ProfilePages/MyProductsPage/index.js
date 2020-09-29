@@ -34,7 +34,7 @@ function MyProducts({ isFocused, navigation }) {
               Você ainda não possui produtos à venda.
             </TextNoProducts>
           ) : (
-            <FlatlistProducts data={myProducts} />
+            <FlatlistProducts data={myProducts} navigation={navigation} />
           )}
         </>
       )}

@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Keyboard } from 'react-native';
+import PropTypes from 'prop-types';
+import api from '~/services/api';
 
 import {
   Modal_View,
@@ -17,8 +19,23 @@ import {
   View_ModalTouch,
 } from './styles';
 
-function ModalContact({ sell }) {
+export default function ModalContact({ sell, idPersonalnfo, name, email }) {
   const [message, setMessage] = useState('');
+  const [cellphone, setCellphone] = useState('');
+
+  const loadCellphone = async () => {
+    const response = await api.get('cellphone', {
+      params: {
+        id: idPersonalnfo,
+      },
+    });
+
+    setCellphone(response.data);
+  };
+
+  useEffect(() => {
+    loadCellphone();
+  });
 
   return (
     <Modal_View>
@@ -30,7 +47,7 @@ function ModalContact({ sell }) {
             autoCorrect
             numberOfLines={4}
             value={message}
-            onChangeText={(message) => setMessage(message)}
+            onChangeText={(text) => setMessage(text)}
             placeholder="Informações, reclamações, elogios e etc..."
             maxLength={350}
           />
@@ -46,17 +63,17 @@ function ModalContact({ sell }) {
         <View_ModalTouch>
           <Modal_Details>
             <Modal_label>{sell ? 'Vendedor' : 'Comprador'}</Modal_label>
-            <Modal_Text>Lucas vitor</Modal_Text>
+            <Modal_Text>{name}</Modal_Text>
           </Modal_Details>
 
           <Modal_Details>
             <Modal_label>Telefone</Modal_label>
-            <Modal_TextPhone>(11) 94701-6590</Modal_TextPhone>
+            <Modal_TextPhone>{cellphone}</Modal_TextPhone>
           </Modal_Details>
 
           <Modal_Details>
             <Modal_label>Email</Modal_label>
-            <Modal_Text>lucasvitorx1@gmail.com</Modal_Text>
+            <Modal_Text>{email}</Modal_Text>
           </Modal_Details>
         </View_ModalTouch>
       </View_DimissKeyboard>
@@ -64,4 +81,9 @@ function ModalContact({ sell }) {
   );
 }
 
-export default ModalContact;
+ModalContact.propTypes = {
+  sell: PropTypes.bool.isRequired,
+  idPersonalnfo: PropTypes.number.isRequired,
+  name: PropTypes.string.isRequired,
+  email: PropTypes.string.isRequired,
+};
