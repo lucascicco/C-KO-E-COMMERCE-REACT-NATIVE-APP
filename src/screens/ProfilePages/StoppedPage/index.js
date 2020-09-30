@@ -1,5 +1,6 @@
 import React from 'react';
 import { formatDistanceStrict, addDays, isAfter } from 'date-fns';
+import PropTypes from 'prop-types';
 import api from '~/services/api';
 
 import {
@@ -11,7 +12,6 @@ import {
   Date_View,
   Date_Text,
   Date_date,
-  Row_View,
 } from './styles';
 
 export default function StoppedPage({ navigation }) {
@@ -22,7 +22,26 @@ export default function StoppedPage({ navigation }) {
   const DaysMissing = formatDistanceStrict(currentDate, FreeDate, {
     unit: 'day',
   });
+
   const isAvailableToChange = isAfter(currentDate, FreeDate);
+
+  const RemovePause = async () => {
+    await api.put('changestatus', {
+      product_id: product.id,
+      status: 'open',
+    });
+
+    navigation.goBack();
+  };
+
+  const DeleteItem = async () => {
+    await api.put('changestatus', {
+      product_id: product.id,
+      status: 'deleted',
+    });
+
+    navigation.goBack();
+  };
 
   return (
     <Container>
@@ -58,17 +77,18 @@ export default function StoppedPage({ navigation }) {
         <Text_Text>Agradecemos a atenção. Conte conosco.</Text_Text>
 
         <Date_View>
-          <Row_View>
-            <Date_Text>Dias restantes:</Date_Text>
-            <Date_date>{DaysMissing}</Date_date>
-          </Row_View>
+          <Date_Text>Dias restantes para liberação: </Date_Text>
+          <Date_date>{DaysMissing.replace('days', 'dias')}</Date_date>
         </Date_View>
       </Text_View>
 
       {isAvailableToChange && (
         <>
-          <SubmitButton style={{ background: '#d32f2f' }}>EXCLUIR</SubmitButton>
-          <SubmitButton style={{ background: '#8bc34a' }}>
+          <SubmitButton style={{ background: '#d32f2f' }} onPress={DeleteItem}>
+            EXCLUIR
+          </SubmitButton>
+
+          <SubmitButton style={{ background: '#8bc34a' }} onPress={RemovePause}>
             DESPAUSAR
           </SubmitButton>
         </>
@@ -76,3 +96,15 @@ export default function StoppedPage({ navigation }) {
     </Container>
   );
 }
+
+StoppedPage.navigationOptions = () => ({
+  title: 'Termo de pausa',
+  headerBackTitle: 'Voltar',
+});
+
+StoppedPage.propTypes = {
+  navigation: PropTypes.shape({
+    getParam: PropTypes.func.isRequired,
+    goBack: PropTypes.func.isRequired,
+  }).isRequired,
+};

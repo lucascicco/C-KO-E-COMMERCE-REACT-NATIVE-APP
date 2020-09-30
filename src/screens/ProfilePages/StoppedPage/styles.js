@@ -47,5 +47,4 @@ export const Date_View = styled.View`
 
 export const Row_View = styled.View`
   flex-direction: row;
-  width: 50%;
 `;

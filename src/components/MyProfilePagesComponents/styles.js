@@ -322,7 +322,7 @@ export const Status_Text = styled.Text`
   font-size: 14px;
   font-style: italic;
   font-weight: bold;
-  color: ${(props) => (props.status === 'open' ? '#8bc34a' : '#c62828')};
+  color: ${(props) => (props.status === 'Aberto' ? '#8bc34a' : '#c62828')};
 `;
 
 export const Purchase_Button = styled.TouchableOpacity`

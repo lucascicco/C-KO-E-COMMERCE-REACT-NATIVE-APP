@@ -41,6 +41,7 @@ export default function Flatlist_item({
   const priceFormatted = Number.parseFloat(price).toFixed(2);
 
   const [statusState, setStatusState] = useState(StatusTranslator(status));
+  const [pausedAtState, setPausedState] = useState(pausedAt);
 
   const EditProductStatus = () => {
     Alert.alert(
@@ -49,11 +50,11 @@ export default function Flatlist_item({
       [
         {
           text: 'Discordo',
-          style: 'cancel',
+          style: 'destructive',
         },
         {
           text: 'Concordo',
-          style: 'destructive',
+          style: 'cancel',
           onPress: async () => {
             const response = await api.put('changestatus', {
               product_id: id,
@@ -61,6 +62,7 @@ export default function Flatlist_item({
             });
 
             setStatusState(StatusTranslator(response.data.status));
+            setPausedState(response.data.paused_at);
           },
         },
       ]
@@ -72,10 +74,12 @@ export default function Flatlist_item({
       product: {
         product_id: id,
         currentStatus: statusState,
-        pausedAt,
+        pausedAt: pausedAtState,
       },
     });
   };
+
+  const RedOptions = statusState === 'Aberto' || statusState === 'Esgotado';
 
   return (
     <CartItem_View>
@@ -94,7 +98,7 @@ export default function Flatlist_item({
           <Details_View>
             <Details_Row>
               <Details_RowText>Status</Details_RowText>
-              <Status_Text status={status}>{statusState}</Status_Text>
+              <Status_Text status={statusState}>{statusState}</Status_Text>
             </Details_Row>
 
             <Details_Row>
@@ -103,24 +107,26 @@ export default function Flatlist_item({
             </Details_Row>
 
             <Cart_Button_View>
-              <Change_Product
-                onPress={() =>
-                  navigation.navigate('EditProductPage', {
-                    product: {
-                      id,
-                      name: title,
-                      url,
-                      status,
-                      category,
-                      quantity,
-                      description,
-                      price: priceFormatted,
-                    },
-                  })
-                }
-              >
-                <Button_Text>Alterar produto</Button_Text>
-              </Change_Product>
+              {(statusState === 'Aberto' || statusState === 'Esgotado') && (
+                <Change_Product
+                  onPress={() =>
+                    navigation.navigate('EditProductPage', {
+                      product: {
+                        id,
+                        name: title,
+                        url,
+                        status,
+                        category,
+                        quantity,
+                        description,
+                        price: priceFormatted,
+                      },
+                    })
+                  }
+                >
+                  <Button_Text>Alterar produto</Button_Text>
+                </Change_Product>
+              )}
 
               <Cart_button_buy
                 onPress={() =>
@@ -136,13 +142,13 @@ export default function Flatlist_item({
         </Flatlist_ViewTwo>
       </Cart_Row>
 
-      {statusState === 'Aberto' || statusState === 'Esgotado' ? (
-        <PauseProductView onPress={EditProductStatus}>
-          <PauseProductText>Pausar anúncio</PauseProductText>
-        </PauseProductView>
-      ) : (
-        <PauseProductView onPress={SeeTheProcess}>
-          <PauseProductText>Acompanhe o processo</PauseProductText>
+      {statusState !== 'Deletado' && (
+        <PauseProductView
+          onPress={RedOptions ? EditProductStatus : SeeTheProcess}
+        >
+          <PauseProductText>
+            {RedOptions ? 'Pausar anúncio' : 'Acompanhe o processo'}
+          </PauseProductText>
         </PauseProductView>
       )}
     </CartItem_View>
