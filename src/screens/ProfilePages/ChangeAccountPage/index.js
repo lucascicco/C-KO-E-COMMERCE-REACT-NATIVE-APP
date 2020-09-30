@@ -24,7 +24,11 @@ export default function ChangeAccountPage({ navigation }) {
   );
 }
 
-ChangeAccountPage.navigationOptions = ({ navigation }) => ({
+ChangeAccountPage.navigationOptions = () => ({
   title: 'Minha conta',
   headerBackTitle: 'Voltar',
 });
+
+ChangeAccountPage.propTypes = {
+  navigation: PropTypes.func.isRequired,
+};

@@ -31,7 +31,11 @@ export default function ChangeLocationPage({ navigation }) {
   );
 }
 
-ChangeLocationPage.navigationOptions = ({ navigation }) => ({
+ChangeLocationPage.navigationOptions = () => ({
   title: 'Minha localização',
   headerBackTitle: 'Voltar',
 });
+
+ChangeLocationPage.propTypes = {
+  navigation: PropTypes.func.isRequired,
+};

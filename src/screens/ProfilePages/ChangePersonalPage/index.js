@@ -31,7 +31,11 @@ export default function ChangePersonalPage({ navigation }) {
   );
 }
 
-ChangePersonalPage.navigationOptions = ({ navigation }) => ({
+ChangePersonalPage.navigationOptions = () => ({
   title: 'Minhas informações',
   headerBackTitle: 'Voltar',
 });
+
+ChangePersonalPage.propTypes = {
+  navigation: PropTypes.func.isRequired,
+};

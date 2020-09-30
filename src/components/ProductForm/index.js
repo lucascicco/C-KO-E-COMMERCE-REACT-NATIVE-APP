@@ -27,7 +27,6 @@ export default function ProductForm({
   ViewHeight,
   ViewWidth,
   FontSize,
-  productData,
 }) {
   const typeOfPlatform = Platform.OS === 'ios';
   const typeOfkeyboardType = typeOfPlatform
@@ -39,25 +38,13 @@ export default function ProductForm({
   let PriceRef;
   const DescriptionRef = useRef();
 
-  const [ProductPicture, setProductImage] = useState(
-    productData ? productData.url : []
-  );
-  const [ProductName, setProductName] = useState(
-    productData ? productData.name : ''
-  );
-  const [Category, setCategory] = useState(
-    productData ? productData.category : ''
-  );
-  const [Quantity, setQuantity] = useState(
-    productData ? productData.quantity : ''
-  );
-  const [Description, setDescription] = useState(
-    productData ? productData.description : ''
-  );
-  const [Price, setPrice] = useState(productData ? productData.price : '');
-  const [CategoryLabel, setCategoryLabel] = useState(
-    productData ? productData.category : 'Categoria'
-  );
+  const [ProductPicture, setProductImage] = useState([]);
+  const [ProductName, setProductName] = useState('');
+  const [Category, setCategory] = useState('');
+  const [Quantity, setQuantity] = useState('');
+  const [Description, setDescription] = useState('');
+  const [Price, setPrice] = useState('');
+  const [CategoryLabel, setCategoryLabel] = useState('Categoria');
 
   const getPermissionAsync = async () => {
     if (Constants.platform.ios) {
@@ -83,8 +70,8 @@ export default function ProductForm({
       if (!result.cancelled) {
         setProductImage(result);
       }
-    } catch (E) {
-      console.log(E);
+    } catch (e) {
+      console.log(e);
     }
   };
 
@@ -110,7 +97,7 @@ export default function ProductForm({
         Width={ViewWidth}
         FontSize={FontSize}
         onPress={HandleChoosePhoto}
-        uri={productData ? ProductPicture : ProductPicture.uri}
+        uri={ProductPicture.uri}
       />
 
       <Form>
@@ -182,7 +169,7 @@ export default function ProductForm({
             textStyle={{ fontFamily: Quantity ? null : 'raleway' }}
             onChangeText={(number) => onChange_onlyNumber(number, setQuantity)}
             ref={QuantityRef}
-            onSubmitEditing={() => console.log('WORKING ON IT!')}
+            onSubmitEditing={HandleSubmit}
           />
         </MultiInput>
 
@@ -193,3 +180,10 @@ export default function ProductForm({
     </Container>
   );
 }
+
+ProductForm.propTypes = {
+  onClickSubmit: PropTypes.func.isRequired,
+  ViewHeight: PropTypes.number.isRequired,
+  ViewWidth: PropTypes.number.isRequired,
+  FontSize: PropTypes.number.isRequired,
+};
