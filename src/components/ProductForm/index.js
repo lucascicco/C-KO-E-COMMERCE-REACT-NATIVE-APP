@@ -6,6 +6,7 @@ import Constants from 'expo-constants';
 import * as Permissions from 'expo-permissions';
 
 import MaskedInput from '../TextInputMasked';
+// eslint-disable-next-line import/no-unresolved
 import Picker from '../Picker';
 import ProductImage from '../ProductImage';
 
@@ -41,9 +42,12 @@ export default function ProductForm({
   const [ProductPicture, setProductImage] = useState([]);
   const [ProductName, setProductName] = useState('');
   const [Category, setCategory] = useState('');
+  const [CategoryId, setCategoryId] = useState('');
+
   const [Quantity, setQuantity] = useState('');
   const [Description, setDescription] = useState('');
   const [Price, setPrice] = useState('');
+
   const [CategoryLabel, setCategoryLabel] = useState('Categoria');
 
   const getPermissionAsync = async () => {
@@ -71,6 +75,7 @@ export default function ProductForm({
         setProductImage(result);
       }
     } catch (e) {
+      // eslint-disable-next-line no-console
       console.log(e);
     }
   };
@@ -79,7 +84,7 @@ export default function ProductForm({
     onClickSubmit({
       image: ProductPicture,
       product_name: ProductName,
-      category: Category,
+      category: CategoryId,
       quantity: Quantity,
       description: Description,
       price: Price,
@@ -120,8 +125,9 @@ export default function ProductForm({
           text={CategoryLabel}
           data={Categorias}
           selectedValue={Category}
-          onValueChange={(itemValue) => {
+          onValueChange={(itemValue, itemIndex) => {
             setCategory(itemValue);
+            setCategoryId(itemIndex);
             setCategoryLabel(itemValue);
           }}
           editable
@@ -154,6 +160,7 @@ export default function ProductForm({
             blurOnSubmit={false}
             value={Price}
             onChangeText={(number) => setPrice(number)}
+            // eslint-disable-next-line no-return-assign
             ref={(ref) => (PriceRef = ref)}
             onSubmitEditing={() => QuantityRef.current.focus()}
           />

@@ -1,15 +1,10 @@
 import styled from 'styled-components/native';
-import { Platform } from 'react-native';
 
 import Input from '../TextInput';
 import Button from '../ButtonType1';
 
-export const Container = styled.KeyboardAvoidingView.attrs({
-  enabled: Platform.OS === 'ios',
-  behavior: 'padding',
-})`
+export const Container = styled.View`
   flex: 1;
-  justify-content: center;
   align-items: center;
   padding: 0 15px;
   margin-top: 10px;
@@ -58,6 +53,7 @@ export const DescriptionForm = styled.TextInput.attrs({
   color: #fff;
   margin-bottom: 10px;
   font-family: raleway;
+  height: 100px;
 `;
 
 export const IMAGE_HEIGHT = 200;

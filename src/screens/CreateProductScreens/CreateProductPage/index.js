@@ -44,7 +44,10 @@ export default function CreateProductPage({ navigation }) {
   }, []);
 
   function isEmpty(obj) {
-    return Object.values(obj).some((element) => element === '');
+    const emptyValue = Object.values(obj).some((element) => element === '');
+    const invalidCategory = obj.category === 0;
+
+    return emptyValue || invalidCategory;
   }
 
   const handleSubmit = (product) => {

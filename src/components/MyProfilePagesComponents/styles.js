@@ -39,6 +39,7 @@ export const FlatList_View = styled.View`
 `;
 
 export const FlatList_Item = styled.View``;
+
 export const Product_Image = styled.Image`
   height: 85px;
   width: 85px;
@@ -489,4 +490,9 @@ export const PauseProductText = styled.Text`
   color: #d32f2f;
   font-family: raleway;
   font-size: 16px;
+`;
+
+export const MyProduct_Image = styled.Image`
+  width: 85px;
+  border-radius: 3px;
 `;

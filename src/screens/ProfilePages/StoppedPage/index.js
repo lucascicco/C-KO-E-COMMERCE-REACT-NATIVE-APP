@@ -27,8 +27,9 @@ export default function StoppedPage({ navigation }) {
 
   const RemovePause = async () => {
     await api.put('changestatus', {
-      product_id: product.id,
+      product_id: product.product_id,
       status: 'open',
+      paused_at: null,
     });
 
     navigation.goBack();
@@ -36,7 +37,7 @@ export default function StoppedPage({ navigation }) {
 
   const DeleteItem = async () => {
     await api.put('changestatus', {
-      product_id: product.id,
+      product_id: product.product_id,
       status: 'deleted',
     });
 
@@ -82,7 +83,7 @@ export default function StoppedPage({ navigation }) {
         </Date_View>
       </Text_View>
 
-      {isAvailableToChange && (
+      {!isAvailableToChange && (
         <>
           <SubmitButton style={{ background: '#d32f2f' }} onPress={DeleteItem}>
             EXCLUIR

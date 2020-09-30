@@ -10,8 +10,10 @@ export default function EditProductPage({ navigation }) {
 
   const handleSubmit = async ({ quantity, description, price }) => {
     try {
+      console.log(price);
+
       await api.put('product', {
-        product_id: product.product_id,
+        product_id: product.id,
         quantity,
         description,
         price,

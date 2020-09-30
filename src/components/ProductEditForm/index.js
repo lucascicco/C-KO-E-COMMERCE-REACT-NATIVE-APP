@@ -21,9 +21,11 @@ export default function ProductForm({ onClickSubmit, productData }) {
     : 'numeric';
 
   const QuantityRef = useRef();
+  let moneyField;
   const DescriptionRef = useRef();
 
-  const [Quantity, setQuantity] = useState(productData.quantity);
+
+  const [Quantity, setQuantity] = useState(`${productData.quantity}`);
   const [Description, setDescription] = useState(productData.description);
   const [Price, setPrice] = useState(productData.price);
 
@@ -31,7 +33,7 @@ export default function ProductForm({ onClickSubmit, productData }) {
     onClickSubmit({
       quantity: Quantity,
       description: Description,
-      price: Price,
+      price: moneyField.getRawValue(),
     });
   };
 
@@ -47,7 +49,7 @@ export default function ProductForm({ onClickSubmit, productData }) {
           placeholder="Descrição"
           maxLength={350}
           ref={DescriptionRef}
-          maxHeight={70}
+          maxHeight={200}
         />
 
         <MultiInput>
@@ -65,12 +67,13 @@ export default function ProductForm({ onClickSubmit, productData }) {
             blurOnSubmit={false}
             value={Price}
             onChangeText={(number) => setPrice(number)}
+            ref={(ref) => moneyField = ref}
             onSubmitEditing={() => QuantityRef.current.focus()}
           />
 
           <FormInput
             placeholder="Quantidade"
-            maxLength={5}
+            maxLength={3}
             keyboardType={typeOfkeyboardType}
             returnKeyType="next"
             style={{ width: '50%' }}

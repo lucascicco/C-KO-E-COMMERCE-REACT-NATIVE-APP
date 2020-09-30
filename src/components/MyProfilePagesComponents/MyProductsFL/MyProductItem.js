@@ -23,6 +23,7 @@ import {
   Button_Text,
   PauseProductView,
   PauseProductText,
+  MyProduct_Image,
 } from '../styles';
 
 export default function Flatlist_item({
@@ -42,6 +43,9 @@ export default function Flatlist_item({
 
   const [statusState, setStatusState] = useState(StatusTranslator(status));
   const [pausedAtState, setPausedState] = useState(pausedAt);
+  const [redOptions, setRedOptionsState] = useState(
+    statusState === 'Aberto' || statusState === 'Esgotado'
+  );
 
   const EditProductStatus = () => {
     Alert.alert(
@@ -63,6 +67,10 @@ export default function Flatlist_item({
 
             setStatusState(StatusTranslator(response.data.status));
             setPausedState(response.data.paused_at);
+            setRedOptionsState(
+              response.data.status === 'open' ||
+                response.data.status === 'soldout'
+            );
           },
         },
       ]
@@ -79,8 +87,6 @@ export default function Flatlist_item({
     });
   };
 
-  const RedOptions = statusState === 'Aberto' || statusState === 'Esgotado';
-
   return (
     <CartItem_View>
       <Title_View_Row>
@@ -88,7 +94,7 @@ export default function Flatlist_item({
       </Title_View_Row>
 
       <Cart_Row>
-        <Product_Image
+        <MyProduct_Image
           source={{
             uri: url,
           }}
@@ -106,6 +112,13 @@ export default function Flatlist_item({
               <Details_RowTextItalic>{selldone}</Details_RowTextItalic>
             </Details_Row>
 
+            {(statusState === 'Aberto' || statusState === 'Esgotado') && (
+              <Details_Row>
+                <Details_RowText>Quantidade disponível</Details_RowText>
+                <Details_RowTextItalic>{quantity}</Details_RowTextItalic>
+              </Details_Row>
+            )}
+
             <Cart_Button_View>
               {(statusState === 'Aberto' || statusState === 'Esgotado') && (
                 <Change_Product
@@ -114,8 +127,6 @@ export default function Flatlist_item({
                       product: {
                         id,
                         name: title,
-                        url,
-                        status,
                         category,
                         quantity,
                         description,
@@ -144,10 +155,10 @@ export default function Flatlist_item({
 
       {statusState !== 'Deletado' && (
         <PauseProductView
-          onPress={RedOptions ? EditProductStatus : SeeTheProcess}
+          onPress={redOptions ? EditProductStatus : SeeTheProcess}
         >
           <PauseProductText>
-            {RedOptions ? 'Pausar anúncio' : 'Acompanhe o processo'}
+            {redOptions ? 'Pausar anúncio' : 'Acompanhe o processo'}
           </PauseProductText>
         </PauseProductView>
       )}

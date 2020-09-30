@@ -38,19 +38,27 @@ function HomePage({ navigation, isFocused }) {
 
   const [search, setSearch] = useState('');
   const [categorySelected, setCategorySearch] = useState('');
+  const [categoryIdSelected, setCategoryIdSelected] = useState('');
   const [visible, setVisibility] = useState(false);
   const [filter, setFilter] = useState('');
+  const [categoryProducts, setCategoryProducts] = useState([]);
   const [visibleProducts, setVisibleProducts] = useState(products);
 
   const HandleFilterSubmit = () => {
-    setFilter(categorySelected);
     setVisibility(!visible);
 
-    const ProductsByCategory = products.filter((product) => {
-      return product.category === filter;
-    });
+    console.log(categoryIdSelected, categorySelected);
 
-    setVisibleProducts(ProductsByCategory);
+    if (categoryIdSelected !== 0 && categorySelected !== null) {
+      setFilter(categorySelected);
+
+      const ProductsByCategory = products.filter((product) => {
+        return product.category === `${categoryIdSelected}`;
+      });
+
+      setVisibleProducts(ProductsByCategory);
+      setCategoryProducts(ProductsByCategory);
+    }
   };
 
   async function loadProducts() {
@@ -67,7 +75,11 @@ function HomePage({ navigation, isFocused }) {
   }, [isFocused]);
 
   const handleTextChange = (text) => {
-    const FiltredbySearch = visibleProducts.filter((product) => {
+    setSearch(text);
+
+    const items = categoryProducts.length !== 0 ? categoryProducts : products;
+
+    const FiltredbySearch = items.filter((product) => {
       const productWord = product.product_name
         .toLowerCase()
         .includes(text.toLowerCase());
@@ -81,6 +93,7 @@ function HomePage({ navigation, isFocused }) {
   const FilterDeleted = () => {
     setFilter('');
     setVisibleProducts(products);
+    setCategoryProducts([]);
   };
 
   return (
@@ -135,7 +148,7 @@ function HomePage({ navigation, isFocused }) {
         </ViewUp>
 
         <FilterView>
-          {filter !== '' && filter !== null && (
+          {filter !== '' && (
             <>
               <FilterText>Categoria filtrada: {filter}</FilterText>
 
@@ -161,8 +174,9 @@ function HomePage({ navigation, isFocused }) {
           <ModalView>
             <Picker
               selectedValue={categorySelected}
-              onValueChange={(item) => {
+              onValueChange={(item, itemIndex) => {
                 setCategorySearch(item);
+                setCategoryIdSelected(itemIndex);
               }}
               itemStyle={{
                 fontFamily: 'raleway',
@@ -173,7 +187,13 @@ function HomePage({ navigation, isFocused }) {
               <Picker.Item label="Selecione uma categoria" value={null} />
 
               {Categorias.map((item) => {
-                return <Picker.Item label={item} value={item} key={item} />;
+                return (
+                  <Picker.Item
+                    label={item.category}
+                    value={item.category}
+                    key={item.category_id}
+                  />
+                );
               })}
             </Picker>
 

@@ -9,7 +9,7 @@ export const Container = styled.View`
 `;
 
 export const SubmitButton = styled(Button)`
-  margin-top: 20px;
+  margin-top: 10px;
   background: ${(props) => props.style.background};
 `;
 
@@ -21,13 +21,12 @@ export const Text_View = styled.View`
 
 export const Text_Title = styled.Text`
   font-family: playfair-bold;
-  font-size: 20px;
+  font-size: 16px;
   text-align: center;
   margin-bottom: 10px;
 `;
 export const Text_Text = styled.Text`
-  font-family: raleway;
-  font-size: 17px;
+  font-size: 15px;
   text-align: justify;
   margin-bottom: 5px;
 `;
