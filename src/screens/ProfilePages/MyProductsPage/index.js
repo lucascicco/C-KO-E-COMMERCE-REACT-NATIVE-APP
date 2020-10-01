@@ -10,10 +10,21 @@ function MyProducts({ isFocused, navigation }) {
   const [myProducts, SetMyProducts] = useState([]);
   const [loading, setLoading] = useState(true);
 
+  const sortItems = (a, b) => {
+    if (a.product.status_id > b.product.status_id) {
+      return 1;
+    }
+    if (a.product.status_id < b.product.status_id) {
+      return -1;
+    }
+    return 0;
+  };
+
   const loadMyProducts = async () => {
+    setLoading(true);
     const response = await api.get('myProducts');
 
-    SetMyProducts(response.data);
+    SetMyProducts(response.data.sort(sortItems));
     setLoading(false);
   };
 

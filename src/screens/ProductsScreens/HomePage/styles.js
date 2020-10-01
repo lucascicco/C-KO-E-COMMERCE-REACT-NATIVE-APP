@@ -92,3 +92,8 @@ export const CleanText = styled.Text`
   font-size: 15px;
   color: #3949ab;
 `;
+
+export const ViewLoading = styled.View`
+  flex: 1;
+  justify-content: center;
+`;

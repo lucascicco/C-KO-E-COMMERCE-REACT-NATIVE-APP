@@ -10,7 +10,6 @@ import {
   Buy_text,
   Flatlist_ViewTwo,
   Cart_Button_View,
-  Product_Image,
   Details_View,
   Details_Row,
   Details_RowText,
@@ -43,9 +42,6 @@ export default function Flatlist_item({
 
   const [statusState, setStatusState] = useState(StatusTranslator(status));
   const [pausedAtState, setPausedState] = useState(pausedAt);
-  const [redOptions, setRedOptionsState] = useState(
-    statusState === 'Aberto' || statusState === 'Esgotado'
-  );
 
   const EditProductStatus = () => {
     Alert.alert(
@@ -67,10 +63,14 @@ export default function Flatlist_item({
 
             setStatusState(StatusTranslator(response.data.status));
             setPausedState(response.data.paused_at);
-            setRedOptionsState(
-              response.data.status === 'open' ||
-                response.data.status === 'soldout'
-            );
+
+            navigation.navigate('StoppedPage', {
+              product: {
+                product_id: id,
+                currentStatus: statusState,
+                pausedAt: pausedAtState,
+              },
+            });
           },
         },
       ]
@@ -86,6 +86,8 @@ export default function Flatlist_item({
       },
     });
   };
+
+  const RenderByStatus = statusState === 'Aberto' || statusState === 'Esgotado';
 
   return (
     <CartItem_View>
@@ -112,7 +114,7 @@ export default function Flatlist_item({
               <Details_RowTextItalic>{selldone}</Details_RowTextItalic>
             </Details_Row>
 
-            {(statusState === 'Aberto' || statusState === 'Esgotado') && (
+            {RenderByStatus && (
               <Details_Row>
                 <Details_RowText>Quantidade disponível</Details_RowText>
                 <Details_RowTextItalic>{quantity}</Details_RowTextItalic>
@@ -120,7 +122,7 @@ export default function Flatlist_item({
             )}
 
             <Cart_Button_View>
-              {(statusState === 'Aberto' || statusState === 'Esgotado') && (
+              {RenderByStatus && (
                 <Change_Product
                   onPress={() =>
                     navigation.navigate('EditProductPage', {
@@ -155,10 +157,10 @@ export default function Flatlist_item({
 
       {statusState !== 'Deletado' && (
         <PauseProductView
-          onPress={redOptions ? EditProductStatus : SeeTheProcess}
+          onPress={RenderByStatus ? EditProductStatus : SeeTheProcess}
         >
           <PauseProductText>
-            {redOptions ? 'Pausar anúncio' : 'Acompanhe o processo'}
+            {RenderByStatus ? 'Pausar anúncio' : 'Acompanhar processo'}
           </PauseProductText>
         </PauseProductView>
       )}

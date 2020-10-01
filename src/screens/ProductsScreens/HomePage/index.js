@@ -1,6 +1,6 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { useState, useEffect } from 'react';
-import { StyleSheet } from 'react-native';
+import { StyleSheet, Keyboard, ActivityIndicator } from 'react-native';
 import { withNavigationFocus } from 'react-navigation';
 import Modal from 'react-native-modal';
 import { Picker } from '@react-native-community/picker';
@@ -11,7 +11,13 @@ import Categorias from '~/utils/Categorias';
 import ProductList from '~/components/ItemsBox';
 import Background from '~/components/Backgrounds/Background4';
 import api from '~/services/api';
-import { addProducts } from '~/store/modules/products/actions';
+import {
+  addProducts,
+  addCategory,
+  removeCategory,
+  addFilter,
+  removeFilter,
+} from '~/store/modules/products/actions';
 
 import {
   Container,
@@ -30,27 +36,32 @@ import {
   ButtonView,
   ButtonText,
   CleanText,
+  ViewLoading,
 } from './styles';
 
 function HomePage({ navigation, isFocused }) {
   const dispatch = useDispatch();
   const products = useSelector((state) => state.products.products);
 
-  const [search, setSearch] = useState('');
-  const [categorySelected, setCategorySearch] = useState('');
-  const [categoryIdSelected, setCategoryIdSelected] = useState('');
+  const filter = useSelector((state) => state.products.filters.filter);
+  const categoryIdSelected = useSelector(
+    (state) => state.products.filters.categorySelectedId
+  );
+
   const [visible, setVisibility] = useState(false);
-  const [filter, setFilter] = useState('');
+  const [loading, setLoading] = useState(true);
+
+  const [search, setSearch] = useState(''); //
+  const [categorySelected, setCategorySearch] = useState('');
+
   const [categoryProducts, setCategoryProducts] = useState([]);
   const [visibleProducts, setVisibleProducts] = useState(products);
 
   const HandleFilterSubmit = () => {
     setVisibility(!visible);
 
-    console.log(categoryIdSelected, categorySelected);
-
     if (categoryIdSelected !== 0 && categorySelected !== null) {
-      setFilter(categorySelected);
+      dispatch(addFilter(categorySelected));
 
       const ProductsByCategory = products.filter((product) => {
         return product.category === `${categoryIdSelected}`;
@@ -65,7 +76,23 @@ function HomePage({ navigation, isFocused }) {
     const response = await api.get('productsExceptMine');
 
     dispatch(addProducts(response.data));
-    setVisibleProducts(response.data);
+
+    console.log(!filter);
+
+    if (!filter) {
+      setVisibleProducts(products);
+      setLoading(false);
+
+      return;
+    }
+
+    const ProductsByCategory = products.filter((product) => {
+      return product.category === `${categoryIdSelected}`;
+    });
+
+    setVisibleProducts(ProductsByCategory);
+    setCategoryProducts(ProductsByCategory);
+    setLoading(false);
   }
 
   useEffect(() => {
@@ -91,7 +118,7 @@ function HomePage({ navigation, isFocused }) {
   };
 
   const FilterDeleted = () => {
-    setFilter('');
+    dispatch(removeFilter());
     setVisibleProducts(products);
     setCategoryProducts([]);
   };
@@ -135,7 +162,7 @@ function HomePage({ navigation, isFocused }) {
             textStyle={{
               color: 'black',
             }}
-            onSubmitEditing={() => console.log('Sended')}
+            onSubmitEditing={Keyboard.dismiss}
           />
           <ButtonCategory style={styles.ShadowConfig}>
             <Octicons
@@ -159,7 +186,13 @@ function HomePage({ navigation, isFocused }) {
           )}
         </FilterView>
 
-        <ProductList data={visibleProducts} navigation={navigation} />
+        {loading ? (
+          <ViewLoading>
+            <ActivityIndicator size="large" color="#FFF" />
+          </ViewLoading>
+        ) : (
+          <ProductList data={visibleProducts} navigation={navigation} />
+        )}
 
         <Modal
           isVisible={visible}
@@ -176,7 +209,7 @@ function HomePage({ navigation, isFocused }) {
               selectedValue={categorySelected}
               onValueChange={(item, itemIndex) => {
                 setCategorySearch(item);
-                setCategoryIdSelected(itemIndex);
+                dispatch(addCategory(itemIndex));
               }}
               itemStyle={{
                 fontFamily: 'raleway',
