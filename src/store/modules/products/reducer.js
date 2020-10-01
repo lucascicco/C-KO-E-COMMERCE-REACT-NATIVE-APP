@@ -5,6 +5,7 @@ const INITIAL_STATE = {
   filters: {
     categorySelectedId: '',
     filter: '',
+    searchText: '',
   },
 };
 
@@ -34,6 +35,14 @@ export default function products(state = INITIAL_STATE, action) {
       }
       case '@product/REMOVE_FILTER': {
         draft.filters.filter = INITIAL_STATE.filters.filter;
+        break;
+      }
+      case '@product/ADD_SEARCHTEXT': {
+        draft.filters.searchText = action.payload.text;
+        break;
+      }
+      case '@product/REMOVE_SEARCHTEXT': {
+        draft.filters.searchText = INITIAL_STATE.filters.searchText;
         break;
       }
       default:

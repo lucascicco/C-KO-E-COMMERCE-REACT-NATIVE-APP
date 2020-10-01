@@ -17,6 +17,7 @@ import {
   removeCategory,
   addFilter,
   removeFilter,
+  addSearchText,
 } from '~/store/modules/products/actions';
 
 import {
@@ -47,11 +48,11 @@ function HomePage({ navigation, isFocused }) {
   const categoryIdSelected = useSelector(
     (state) => state.products.filters.categorySelectedId
   );
+  const search = useSelector((state) => state.products.filters.searchText);
 
   const [visible, setVisibility] = useState(false);
   const [loading, setLoading] = useState(true);
 
-  const [search, setSearch] = useState(''); //
   const [categorySelected, setCategorySearch] = useState('');
 
   const [categoryProducts, setCategoryProducts] = useState([]);
@@ -60,7 +61,10 @@ function HomePage({ navigation, isFocused }) {
   const HandleFilterSubmit = () => {
     setVisibility(!visible);
 
-    if (categoryIdSelected !== 0 && categorySelected !== null) {
+    if (
+      (categoryIdSelected !== 0 || categoryIdSelected !== undefined) &&
+      categorySelected !== null
+    ) {
       dispatch(addFilter(categorySelected));
 
       const ProductsByCategory = products.filter((product) => {
@@ -72,14 +76,27 @@ function HomePage({ navigation, isFocused }) {
     }
   };
 
-  async function loadProducts() {
+  const loadProducts = async () => {
     const response = await api.get('productsExceptMine');
 
     dispatch(addProducts(response.data));
 
-    console.log(!filter);
-
     if (!filter) {
+      if (search) {
+        const SearchFiltred = products.filter((product) => {
+          const productWord = product.product_name
+            .toLowerCase()
+            .includes(search.toLowerCase());
+
+          return productWord;
+        });
+
+        setVisibleProducts(SearchFiltred);
+        setLoading(false);
+
+        return;
+      }
+
       setVisibleProducts(products);
       setLoading(false);
 
@@ -90,19 +107,29 @@ function HomePage({ navigation, isFocused }) {
       return product.category === `${categoryIdSelected}`;
     });
 
-    setVisibleProducts(ProductsByCategory);
     setCategoryProducts(ProductsByCategory);
-    setLoading(false);
-  }
 
-  useEffect(() => {
-    if (isFocused) {
-      loadProducts();
+    if (search) {
+      const FiltredbySearch = ProductsByCategory.filter((product) => {
+        const productWord = product.product_name
+          .toLowerCase()
+          .includes(search.toLowerCase());
+
+        return productWord;
+      });
+
+      setVisibleProducts(FiltredbySearch);
+      setLoading(false);
+
+      return;
     }
-  }, [isFocused]);
+
+    setVisibleProducts(ProductsByCategory);
+    setLoading(false);
+  };
 
   const handleTextChange = (text) => {
-    setSearch(text);
+    dispatch(addSearchText(text));
 
     const items = categoryProducts.length !== 0 ? categoryProducts : products;
 
@@ -119,9 +146,17 @@ function HomePage({ navigation, isFocused }) {
 
   const FilterDeleted = () => {
     dispatch(removeFilter());
+    dispatch(removeCategory());
+
     setVisibleProducts(products);
     setCategoryProducts([]);
   };
+
+  useEffect(() => {
+    if (isFocused) {
+      loadProducts();
+    }
+  }, [isFocused]);
 
   return (
     <Background>

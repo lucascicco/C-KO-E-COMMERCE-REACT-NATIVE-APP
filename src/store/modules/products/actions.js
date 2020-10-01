@@ -30,3 +30,16 @@ export function removeFilter() {
     type: '@product/REMOVE_FILTER',
   };
 }
+
+export function addSearchText(text) {
+  return {
+    type: '@product/ADD_SEARCHTEXT',
+    payload: { text },
+  };
+}
+
+export function removeSearchItem() {
+  return {
+    type: '@product/REMOVE_FILTER',
+  };
+}
