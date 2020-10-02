@@ -64,10 +64,13 @@ function ProductPage({ navigation, isFocused }) {
         product,
         quantity,
       });
+
       handleLeavePage();
+
+      return;
     }
 
-    return Alert.alert(
+    Alert.alert(
       'Quantidade inválida',
       'Escolha a quantidade para a sua compra.'
     );

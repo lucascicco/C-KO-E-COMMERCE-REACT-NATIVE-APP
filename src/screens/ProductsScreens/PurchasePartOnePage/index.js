@@ -1,10 +1,8 @@
 import React, { useState } from 'react';
 import { TouchableOpacity } from 'react-native';
-import Modal from 'react-native-modal';
 import { RadioButton } from 'react-native-paper';
 import { FontAwesome } from '@expo/vector-icons';
 import PropTypes from 'prop-types';
-import ChangeAddressView from '~/components/ChangeAddress';
 import Background from '~/components/Backgrounds/Background';
 
 import {
@@ -23,21 +21,19 @@ import {
   RadioTitle,
   RadioText,
   ScrollPurchase,
-  SmallText,
-  AddressView,
-  ButtonText,
-  ChangeButton,
   TextDetails,
   TextIndent,
 } from './styles';
 
 export default function PurchaseTotalPage({ navigation }) {
   const [payment, setPayment] = useState('creditcard');
-  const [visible, setVisibility] = useState(false);
 
-  const handleModalVisibilty = () => {
-    setVisibility(!visible);
-  };
+  const product = navigation.getParam('product');
+  const purchase_quantity = navigation.getParam('purchase_quantity');
+  const frete = navigation.getParam('frete');
+
+  const totalProduct = (product.price * purchase_quantity).toFixed(2);
+  const totalofTotal = (totalProduct + frete.price).toFixed(2);
 
   return (
     <Background>
@@ -46,8 +42,7 @@ export default function PurchaseTotalPage({ navigation }) {
           <SliptView>
             <ProductImage
               source={{
-                uri:
-                  'https://homepages.cae.wisc.edu/~ece533/images/monarch.png',
+                uri: product.url,
               }}
             />
 
@@ -55,42 +50,31 @@ export default function PurchaseTotalPage({ navigation }) {
               <TextTitle>Nome do produto</TextTitle>
 
               <BasicView>
-                <TextDetails>R$ 10.000,00</TextDetails>
+                <TextDetails>R$ {product.price}</TextDetails>
 
                 <TextIndent>
                   <NormalText>Quantidade:</NormalText>
-                  <TextDetails style={{ marginLeft: 5 }}>3</TextDetails>
+                  <TextDetails style={{ marginLeft: 5 }}>
+                    {purchase_quantity}
+                  </TextDetails>
                 </TextIndent>
               </BasicView>
             </FeaturesView>
           </SliptView>
 
           <SliptView>
-            <AddressView>
-              <NormalText>Endereço de entrega</NormalText>
-              <SmallText>07096-080 Rua Ronaldo</SmallText>
-            </AddressView>
-
-            <TouchableOpacity onPress={handleModalVisibilty}>
-              <ChangeButton>
-                <ButtonText>Trocar</ButtonText>
-              </ChangeButton>
-            </TouchableOpacity>
-          </SliptView>
-
-          <SliptView>
             <NormalText>Total produto</NormalText>
-            <TotalBasic>R$ 100</TotalBasic>
+            <TotalBasic>R$ {totalProduct}</TotalBasic>
           </SliptView>
 
           <SliptView>
             <NormalText>Frete</NormalText>
-            <TotalBasic>R$ 100</TotalBasic>
+            <TotalBasic>R$ {frete.fretePrice}</TotalBasic>
           </SliptView>
 
           <SliptView>
             <NormalText>Valor total</NormalText>
-            <TotalText>R$ 100</TotalText>
+            <TotalText>R$ {totalofTotal}</TotalText>
           </SliptView>
 
           <PaymentTypeView>
@@ -130,23 +114,18 @@ export default function PurchaseTotalPage({ navigation }) {
 
         <SubmitButton>Continuar</SubmitButton>
       </Container>
-
-      <Modal
-        isVisible={visible}
-        animationIn="zoomIn"
-        animationOut="zoomOut"
-        animationInTiming={500}
-        animationOutTiming={500}
-        avoidKeyboard={false}
-        coverScreen
-        onBackdropPress={() => setVisibility(false)}
-      >
-        <ChangeAddressView onPressOne={() => setVisibility(!visible)} />
-      </Modal>
     </Background>
   );
 }
 
+PurchaseTotalPage.navigationOptions = () => ({
+  title: 'Valores da compra',
+  headerBackTitle: 'Voltar',
+});
+
 PurchaseTotalPage.propTypes = {
-  navigation: PropTypes.func.isRequired,
+  navigation: PropTypes.shape({
+    navigate: PropTypes.func.isRequired,
+    getParam: PropTypes.func.isRequired,
+  }).isRequired,
 };

@@ -98,7 +98,6 @@ export default function ChangeAddress({ navigation }) {
       saveAddressDatabase();
     }
 
-    // chamar api frete.
     const freteApi = await api.get('frete', {
       params: {
         locationId: locationState.id,
@@ -111,9 +110,11 @@ export default function ChangeAddress({ navigation }) {
       product,
       purchase_quantity,
       location: locationState,
-      freteType: fretetype,
-      fretePrice: freteApi.data.Valor,
-      freteDays: freteApi.data.PrazoEntrega,
+      frete: {
+        freteType: fretetype,
+        fretePrice: freteApi.data.Valor,
+        freteDays: freteApi.data.PrazoEntrega,
+      },
     });
 
     setLoading(false);
@@ -173,8 +174,12 @@ export default function ChangeAddress({ navigation }) {
                 </RadioView>
               </TouchableButton>
 
-              <SubmitBottom style={{ background: '#512da8' }} loading={loading}>
-                Próximo
+              <SubmitBottom
+                style={{ background: '#512da8' }}
+                loading={loading}
+                onPress={goNextScreen}
+              >
+                Continuar
               </SubmitBottom>
 
               <SubmitBottom
@@ -191,8 +196,7 @@ export default function ChangeAddress({ navigation }) {
   );
 }
 
-// eslint-disable-next-line no-unused-vars
-ChangeAddress.navigationOptions = ({ navigation }) => ({
+ChangeAddress.navigationOptions = () => ({
   title: 'Dados de entrega',
   headerBackTitle: 'Voltar',
 });
