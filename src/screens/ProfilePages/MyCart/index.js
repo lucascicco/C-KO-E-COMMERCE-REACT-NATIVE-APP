@@ -1,34 +1,55 @@
-import React from 'react';
-import { AntDesign } from '@expo/vector-icons';
+import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
+import { withNavigationFocus } from 'react-navigation';
+import { ActivityIndicator } from 'react-native';
 import FlatlistProducts from '~/components/MyProfilePagesComponents/MyCartFL/MyCartFlatList';
-import data from '~/utils/testing_data';
-import {
-  Container,
-  Total_View,
-  Total_Price,
-  Continue_Text,
-  Continue_Button,
-} from './styles';
+import { Container, NoCart_Text } from './styles';
+import api from '~/services/api';
 
-export default function MyCart() {
+function MyCart({ navigation, isFocused }) {
+  const [products, setProducts] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+  const loadMyFavoriteProducts = async () => {
+    const response = await api.get('myCart');
+
+    setProducts(response.data);
+    setLoading(false);
+  };
+
+  useEffect(() => {
+    if (isFocused) {
+      loadMyFavoriteProducts();
+    }
+  }, [isFocused]);
+
   return (
     <Container>
-      <FlatlistProducts data={data} />
-
-      <Total_View>
-        <Total_Price>R$ 8.000,00 </Total_Price>
-
-        <Continue_Button>
-          <Continue_Text>Comprar</Continue_Text>
-          <AntDesign name="arrowright" size={30} color="black" />
-        </Continue_Button>
-      </Total_View>
+      {loading ? (
+        <ActivityIndicator size="large" color="#000000" />
+      ) : (
+        <>
+          {products.length === 0 ? (
+            <NoCart_Text>Nenhum produto listado como favorito</NoCart_Text>
+          ) : (
+            <FlatlistProducts data={products} navigation={navigation} />
+          )}
+        </>
+      )}
     </Container>
   );
 }
 
-MyCart.navigationOptions = ({ navigation }) => ({
+MyCart.navigationOptions = () => ({
   title: 'Meu carrinho',
   headerBackTitle: 'Voltar',
 });
+
+MyCart.propTypes = {
+  navigation: PropTypes.shape({
+    navigate: PropTypes.func.isRequired,
+  }).isRequired,
+  isFocused: PropTypes.bool.isRequired,
+};
+
+export default withNavigationFocus(MyCart);
