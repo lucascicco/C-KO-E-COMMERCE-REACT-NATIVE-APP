@@ -38,6 +38,8 @@ export default function Flatlist_item({
     dispatch(RequestFavoriteItems(id, false));
   };
 
+  console.log(title);
+
   return (
     <CartItem_View>
       <Title_View_Row>
@@ -92,7 +94,7 @@ Flatlist_item.propTypes = {
   id: PropTypes.number.isRequired,
   title: PropTypes.string.isRequired,
   url: PropTypes.string.isRequired,
-  price: PropTypes.number.isRequired,
+  price: PropTypes.string.isRequired,
   status: PropTypes.string.isRequired,
   navigation: PropTypes.shape({
     navigate: PropTypes.func.isRequired,

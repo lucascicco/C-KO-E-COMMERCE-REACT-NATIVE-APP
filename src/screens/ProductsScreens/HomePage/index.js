@@ -78,7 +78,6 @@ function HomePage({ navigation, isFocused }) {
 
   const loadProducts = async () => {
     const response = await api.get('productsExceptMine');
-
     dispatch(addProducts(response.data));
 
     if (!filter) {
@@ -97,7 +96,9 @@ function HomePage({ navigation, isFocused }) {
         return;
       }
 
-      setVisibleProducts(products);
+      // First time load
+
+      setVisibleProducts(response.data);
       setLoading(false);
 
       return;
@@ -170,7 +171,10 @@ function HomePage({ navigation, isFocused }) {
             <TextTitle>Página inicial</TextTitle>
           </LogoView>
 
-          <ButtonCart style={styles.ShadowConfig}>
+          <ButtonCart
+            style={styles.ShadowConfig}
+            onPress={() => navigation.navigate('MyCart')}
+          >
             <MaterialCommunityIcons
               name="cart-outline"
               size={35}
