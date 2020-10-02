@@ -1,8 +1,6 @@
 import React from 'react';
-import { useDispatch } from 'react-redux';
 import PropTypes from 'prop-types';
 import TranslateStatus from '~/utils/TranslateStatusFC';
-import { RequestFavoriteItems } from '~/store/modules/user/actions';
 
 import {
   CartItem_View,
@@ -30,15 +28,9 @@ export default function Flatlist_item({
   price,
   status,
   navigation,
+  onDeleteProduct,
 }) {
   const statusText = TranslateStatus(status);
-  const dispatch = useDispatch();
-
-  const deleteItemFromCart = () => {
-    dispatch(RequestFavoriteItems(id, false));
-  };
-
-  console.log(title);
 
   return (
     <CartItem_View>
@@ -65,7 +57,7 @@ export default function Flatlist_item({
             </Details_Row>
 
             <Cart_Button_View>
-              <Cart_button_delete onPress={deleteItemFromCart}>
+              <Cart_button_delete onPress={() => onDeleteProduct(id)}>
                 <Delete_text>Excluir</Delete_text>
               </Cart_button_delete>
 
@@ -99,4 +91,5 @@ Flatlist_item.propTypes = {
   navigation: PropTypes.shape({
     navigate: PropTypes.func.isRequired,
   }).isRequired,
+  onDeleteProduct: PropTypes.func.isRequired,
 };

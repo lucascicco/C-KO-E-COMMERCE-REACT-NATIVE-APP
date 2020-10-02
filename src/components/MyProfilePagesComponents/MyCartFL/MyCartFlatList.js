@@ -5,7 +5,7 @@ import FlatListItem from './MyCartItem';
 
 import { Cart_FlatListView } from '../styles';
 
-export default function MyCartFlatList({ data, navigation }) {
+export default function MyCartFlatList({ data, navigation, onDeleteProduct }) {
   return (
     <Cart_FlatListView>
       <FlatList
@@ -21,6 +21,7 @@ export default function MyCartFlatList({ data, navigation }) {
               price={item.price}
               status={item.status}
               navigation={navigation}
+              onDeleteProduct={onDeleteProduct}
             />
           );
         }}
@@ -31,4 +32,5 @@ export default function MyCartFlatList({ data, navigation }) {
 
 MyCartFlatList.propTypes = {
   navigation: PropTypes.func.isRequired,
+  onDeleteProduct: PropTypes.func.isRequired,
 };
