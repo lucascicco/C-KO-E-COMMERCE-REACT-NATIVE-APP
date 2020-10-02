@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { StyleSheet, ActivityIndicator } from 'react-native';
+import { StyleSheet, ActivityIndicator, Alert } from 'react-native';
 import { HeaderBackButton } from 'react-navigation-stack';
 import { withNavigationFocus } from 'react-navigation';
 import NumericInput from 'react-native-numeric-input';
@@ -66,6 +66,11 @@ function ProductPage({ navigation, isFocused }) {
       });
       handleLeavePage();
     }
+
+    return Alert.alert(
+      'Quantidade inválida',
+      'Escolha a quantidade para a sua compra.'
+    );
   };
 
   useEffect(() => {

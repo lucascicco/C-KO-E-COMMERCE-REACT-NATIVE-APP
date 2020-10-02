@@ -7,6 +7,8 @@ import PropTypes from 'prop-types';
 import Background from '~/components/Backgrounds/Background';
 import LocationForm from '~/components/LocationFrete';
 import api from '~/services/api';
+import configureLayout from '~/utils/configureTransition'; // A PENSAR
+import { locationVerifier } from '~/utils/EmptyObjectVerifier'; // REFORMULAR
 
 import {
   Container,
@@ -23,11 +25,17 @@ import {
 export default function ChangeAddress({ navigation }) {
   const location = useSelector((state) => state.user.profile.location);
 
+  const product = navigation.getParam('product');
+  const purchase_quantity = navigation.getParam('quantity');
+
   const [enable, setEnable] = useState(location === null);
   const [fretetype, setFretetype] = useState('04510');
   const [locationState, setLocationState] = useState(location);
+  const [loading, setLoading] = useState(false);
 
-  const handleSubmit = async (LocationData) => {
+  const [transitionState, setTransitionState] = useState('FirstPart');
+
+  const saveAddressDatabase = async () => {
     try {
       const {
         country,
@@ -37,7 +45,7 @@ export default function ChangeAddress({ navigation }) {
         street,
         street_number,
         postcode,
-      } = LocationData;
+      } = locationState;
 
       const response = await api.post('location_purchase', {
         country,
@@ -49,65 +57,134 @@ export default function ChangeAddress({ navigation }) {
         postcode,
       });
 
-      Keyboard.dismiss();
-
       setLocationState(response.data);
-      setEnable(false);
     } catch (e) {
-      Alert.alert(
+      console.log(e);
+    }
+  };
+
+  const handleSubmit = (LocationData) => {
+    if (locationVerifier(LocationData)) {
+      return Alert.alert(
         'Erro ao salvar',
-        'Ocorrou um erro ao salvar a localização para a compra. Verifique os campos.'
+        'Ocorreu um erro ao salvar a localização para a compra. Verifique os campos.'
       );
     }
+
+    Keyboard.dismiss();
+
+    setLocationState(LocationData);
+    setEnable(false);
+  };
+
+  const GoNextPart = () => {
+    if (locationState === null) {
+      return Alert.alert(
+        'Endereço inválido',
+        'Antes de ir para a próxima parte, preencha sua localização corretamente.'
+      );
+    }
+    return setTransitionState('SecondPart');
+  };
+
+  const GoBackPart = () => {
+    return setTransitionState('FirstPart');
+  };
+
+  const goNextScreen = async () => {
+    setLoading(true);
+
+    if (location !== locationState) {
+      saveAddressDatabase();
+    }
+
+    // chamar api frete.
+    const freteApi = await api.get('frete', {
+      params: {
+        locationId: locationState.id,
+        product_id: product.id,
+        service: fretetype,
+      },
+    });
+
+    navigation.navigate('PurchasePartOne', {
+      product,
+      purchase_quantity,
+      location: locationState,
+      freteType: fretetype,
+      fretePrice: freteApi.data.Valor,
+      freteDays: freteApi.data.PrazoEntrega,
+    });
+
+    setLoading(false);
   };
 
   return (
     <TouchableCloseKeyboard onPress={Keyboard.dismiss}>
       <Background>
         <Container>
-          <ViewForm>
-            <Subtitle>Endereço de entrega:</Subtitle>
-            <LocationForm
-              onClickSubmit={handleSubmit}
-              enable={enable}
-              location={location}
-              changeAddress={() => setEnable(true)}
-            />
-          </ViewForm>
+          {transitionState === 'FirstPart' && (
+            <ViewForm>
+              <Subtitle>Endereço de entrega:</Subtitle>
 
-          <ViewTypeSend>
-            <Subtitle>
-              Forma de envio:{' '}
-              {fretetype === '04510' ? 'PAC - NORMAL' : 'SEDEX - RÁPIDO'}
-            </Subtitle>
+              <LocationForm
+                onClickSubmit={handleSubmit}
+                enable={enable}
+                location={locationState}
+                changeAddress={() => setEnable(true)}
+              />
 
-            <TouchableButton onPress={() => setFretetype('04014')}>
-              <RadioView>
-                <RadioButton
-                  color="white"
-                  value="04014"
-                  status={fretetype === '04014' ? 'checked' : 'unchecked'}
-                />
+              <SubmitBottom
+                style={{ background: '#512da8' }}
+                onPress={GoNextPart}
+              >
+                Próximo
+              </SubmitBottom>
+            </ViewForm>
+          )}
 
-                <RadioText>SEDEX</RadioText>
-              </RadioView>
-            </TouchableButton>
+          {transitionState === 'SecondPart' && (
+            <ViewTypeSend>
+              <Subtitle>
+                Forma de envio:{' '}
+                {fretetype === '04510' ? 'PAC - NORMAL' : 'SEDEX - RÁPIDO'}
+              </Subtitle>
 
-            <TouchableButton onPress={() => setFretetype('04510')}>
-              <RadioView>
-                <RadioButton
-                  color="white"
-                  value="04510"
-                  status={fretetype === '04510' ? 'checked' : 'unchecked'}
-                />
-                <RadioText>PAC</RadioText>
-              </RadioView>
-            </TouchableButton>
+              <TouchableButton onPress={() => setFretetype('04014')}>
+                <RadioView>
+                  <RadioButton
+                    color="white"
+                    value="04014"
+                    status={fretetype === '04014' ? 'checked' : 'unchecked'}
+                  />
 
-            <SubmitBottom style={{ background: '#512da8' }}>
-              Proxímo
-            </SubmitBottom>
-          </ViewTypeSend>
+                  <RadioText>SEDEX</RadioText>
+                </RadioView>
+              </TouchableButton>
+
+              <TouchableButton onPress={() => setFretetype('04510')}>
+                <RadioView>
+                  <RadioButton
+                    color="white"
+                    value="04510"
+                    status={fretetype === '04510' ? 'checked' : 'unchecked'}
+                  />
+                  <RadioText>PAC</RadioText>
+                </RadioView>
+              </TouchableButton>
+
+              <SubmitBottom style={{ background: '#512da8' }} loading={loading}>
+                Próximo
+              </SubmitBottom>
+
+              <SubmitBottom
+                style={{ background: '#512da8' }}
+                onPress={GoBackPart}
+              >
+                Voltar
+              </SubmitBottom>
+            </ViewTypeSend>
+          )}
         </Container>
       </Background>
     </TouchableCloseKeyboard>
@@ -116,7 +193,7 @@ export default function ChangeAddress({ navigation }) {
 
 // eslint-disable-next-line no-unused-vars
 ChangeAddress.navigationOptions = ({ navigation }) => ({
-  title: 'Escolha o frete',
+  title: 'Dados de entrega',
   headerBackTitle: 'Voltar',
 });
 

@@ -1,12 +1,14 @@
+/* eslint-disable import/no-unresolved */
 import React, { useRef, useState } from 'react';
 import { Platform } from 'react-native';
 import InputMask from '../TextInputMasked';
-import Picker from '../../components/Picker';
-import BrazilianStates from '../../utils/BrazilStates.js';
+import Picker from '../Picker';
+import BrazilianStates from '~/utils/BrazilStates.js';
 import {
   onChange_onlyText,
   onChange_onlyNumber,
-} from '../../utils/RestrictInputs';
+  onChange_onlyTextandNumber,
+} from '~/utils/RestrictInputs';
 
 import { Container, Form, FormInput, MultiInput, SubmitBottom } from './styles';
 
@@ -85,7 +87,7 @@ function LocationPage({ onClickSubmit, enable, location, changeAddress }) {
             style={{ width: '47%' }}
             blurOnSubmit={false}
             value={City}
-            onChangeText={(text) => onChange_onlyText(text, setCity)}
+            onChangeText={(text) => onChange_onlyTextandNumber(text, setCity)}
             ref={CityRef}
             onSubmitEditing={() => NeighborhoodRef.current.focus()}
             editable={enable}

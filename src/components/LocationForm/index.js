@@ -7,6 +7,7 @@ import BrazilianStates from '~/utils/BrazilStates.js';
 import {
   onChange_onlyText,
   onChange_onlyNumber,
+  onChange_onlyTextandNumber,
 } from '../../utils/RestrictInputs';
 
 import { Container, Form, FormInput, MultiInput, SubmitBottom } from './styles';
@@ -132,7 +133,9 @@ function LocationPage({ onClickSubmit, location }) {
             style={{ width: '75%' }}
             blurOnSubmit={false}
             value={Address}
-            onChangeText={(text) => onChange_onlyText(text, setAddress)}
+            onChangeText={(text) =>
+              onChange_onlyTextandNumber(text, setAddress)
+            }
             ref={AddressRef}
             onSubmitEditing={() => AdNumberRef.current.focus()}
           />

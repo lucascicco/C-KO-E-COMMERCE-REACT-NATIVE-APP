@@ -40,8 +40,8 @@ export default function Flatlist_item({
 }) {
   const priceFormatted = Number.parseFloat(price).toFixed(2);
 
-  const [statusState, setStatusState] = useState(StatusTranslator(status));
-  const [pausedAtState, setPausedState] = useState(pausedAt);
+  const statusText = StatusTranslator(status);
+  const RenderByStatus = statusText === 'Aberto' || statusText === 'Esgotado';
 
   const EditProductStatus = () => {
     Alert.alert(
@@ -61,14 +61,11 @@ export default function Flatlist_item({
               status: 'closed',
             });
 
-            setStatusState(StatusTranslator(response.data.status));
-            setPausedState(response.data.paused_at);
-
             navigation.navigate('StoppedPage', {
               product: {
                 product_id: id,
-                currentStatus: statusState,
-                pausedAt: pausedAtState,
+                currentStatus: StatusTranslator(response.data.status),
+                pausedAt: response.data.paused_at,
               },
             });
           },
@@ -81,13 +78,11 @@ export default function Flatlist_item({
     return navigation.navigate('StoppedPage', {
       product: {
         product_id: id,
-        currentStatus: statusState,
-        pausedAt: pausedAtState,
+        currentStatus: statusText,
+        pausedAt,
       },
     });
   };
-
-  const RenderByStatus = statusState === 'Aberto' || statusState === 'Esgotado';
 
   return (
     <CartItem_View>
@@ -106,7 +101,7 @@ export default function Flatlist_item({
           <Details_View>
             <Details_Row>
               <Details_RowText>Status</Details_RowText>
-              <Status_Text status={statusState}>{statusState}</Status_Text>
+              <Status_Text status={statusText}>{statusText}</Status_Text>
             </Details_Row>
 
             <Details_Row>
@@ -155,7 +150,7 @@ export default function Flatlist_item({
         </Flatlist_ViewTwo>
       </Cart_Row>
 
-      {statusState !== 'Deletado' && (
+      {statusText !== 'Deletado' && (
         <PauseProductView
           onPress={RenderByStatus ? EditProductStatus : SeeTheProcess}
         >

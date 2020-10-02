@@ -83,7 +83,7 @@ export default function StoppedPage({ navigation }) {
         </Date_View>
       </Text_View>
 
-      {!isAvailableToChange && (
+      {isAvailableToChange && (
         <>
           <SubmitButton style={{ background: '#d32f2f' }} onPress={DeleteItem}>
             EXCLUIR

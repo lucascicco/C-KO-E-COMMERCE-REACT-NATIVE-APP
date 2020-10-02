@@ -38,6 +38,7 @@ MyProductList.propTypes = {
   data: PropTypes.arrayOf(
     PropTypes.shape({
       product: PropTypes.shape({
+        status_id: PropTypes.number,
         purchasable: PropTypes.bool,
         url: PropTypes.string,
         id: PropTypes.number,
