@@ -7,7 +7,6 @@ export const Container = styled.KeyboardAvoidingView.attrs({
   behavior: 'height',
 })`
   flex: 1;
-  justify-content: center;
   padding: 0 15px;
 `;
 
@@ -29,4 +28,5 @@ export const SecurityText = styled.Text`
 
 export const PaymentView = styled.View`
   margin-bottom: 35px;
+  margin-top: 10px;
 `;

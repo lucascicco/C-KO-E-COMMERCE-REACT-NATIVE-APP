@@ -31,9 +31,21 @@ export default function PurchaseTotalPage({ navigation }) {
   const product = navigation.getParam('product');
   const purchase_quantity = navigation.getParam('purchase_quantity');
   const frete = navigation.getParam('frete');
+  const location = navigation.getParam('frete');
 
-  const totalProduct = (product.price * purchase_quantity).toFixed(2);
-  const totalofTotal = (totalProduct + frete.price).toFixed(2);
+  const handleNext = () => {
+    if (payment === 'creditcard') {
+      navigation.navigate('PurchasePartTwo', {
+        payload: {
+          product: product.id,
+          purchase_quantity,
+          frete_price: frete.fretePrice,
+          location: location.id,
+          payment_form: payment,
+        },
+      });
+    }
+  };
 
   return (
     <Background>
@@ -47,7 +59,7 @@ export default function PurchaseTotalPage({ navigation }) {
             />
 
             <FeaturesView>
-              <TextTitle>Nome do produto</TextTitle>
+              <TextTitle>{product.product_name}</TextTitle>
 
               <BasicView>
                 <TextDetails>R$ {product.price}</TextDetails>
@@ -64,7 +76,7 @@ export default function PurchaseTotalPage({ navigation }) {
 
           <SliptView>
             <NormalText>Total produto</NormalText>
-            <TotalBasic>R$ {totalProduct}</TotalBasic>
+            <TotalBasic>R$ {}</TotalBasic>
           </SliptView>
 
           <SliptView>
@@ -74,7 +86,7 @@ export default function PurchaseTotalPage({ navigation }) {
 
           <SliptView>
             <NormalText>Valor total</NormalText>
-            <TotalText>R$ {totalofTotal}</TotalText>
+            <TotalText>R$ {}</TotalText>
           </SliptView>
 
           <PaymentTypeView>
@@ -112,7 +124,7 @@ export default function PurchaseTotalPage({ navigation }) {
           </PaymentTypeView>
         </ScrollPurchase>
 
-        <SubmitButton>Continuar</SubmitButton>
+        <SubmitButton onPress={handleNext}>Continuar</SubmitButton>
       </Container>
     </Background>
   );

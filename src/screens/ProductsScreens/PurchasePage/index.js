@@ -89,6 +89,11 @@ export default function PurchasePage({ navigation }) {
   );
 }
 
+PurchasePage.navigationOptions = () => ({
+  title: 'Cartão de crédito',
+  headerBackTitle: 'Voltar',
+});
+
 PurchasePage.propTypes = {
   navigation: PropTypes.func.isRequired,
 };

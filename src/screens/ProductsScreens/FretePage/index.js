@@ -8,7 +8,7 @@ import Background from '~/components/Backgrounds/Background';
 import LocationForm from '~/components/LocationFrete';
 import api from '~/services/api';
 import configureLayout from '~/utils/configureTransition'; // A PENSAR
-import { locationVerifier } from '~/utils/EmptyObjectVerifier'; // REFORMULAR
+import { locationVerifier } from '~/utils/EmptyObjectVerifier';
 
 import {
   Container,
@@ -36,31 +36,27 @@ export default function ChangeAddress({ navigation }) {
   const [transitionState, setTransitionState] = useState('FirstPart');
 
   const saveAddressDatabase = async () => {
-    try {
-      const {
-        country,
-        state,
-        city,
-        neighborhood,
-        street,
-        street_number,
-        postcode,
-      } = locationState;
+    const {
+      country,
+      state,
+      city,
+      neighborhood,
+      street,
+      street_number,
+      postcode,
+    } = locationState;
 
-      const response = await api.post('location_purchase', {
-        country,
-        state,
-        city,
-        neighborhood,
-        street,
-        street_number,
-        postcode,
-      });
+    const response = await api.post('location_purchase', {
+      country,
+      state,
+      city,
+      neighborhood,
+      street,
+      street_number,
+      postcode,
+    });
 
-      setLocationState(response.data);
-    } catch (e) {
-      console.log(e);
-    }
+    setLocationState(response.data);
   };
 
   const handleSubmit = (LocationData) => {
@@ -84,11 +80,11 @@ export default function ChangeAddress({ navigation }) {
         'Antes de ir para a próxima parte, preencha sua localização corretamente.'
       );
     }
-    return setTransitionState('SecondPart');
+    setTransitionState('SecondPart');
   };
 
   const GoBackPart = () => {
-    return setTransitionState('FirstPart');
+    setTransitionState('FirstPart');
   };
 
   const goNextScreen = async () => {
