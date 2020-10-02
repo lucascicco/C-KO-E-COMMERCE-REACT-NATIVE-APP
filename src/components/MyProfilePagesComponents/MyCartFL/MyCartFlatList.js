@@ -1,10 +1,11 @@
 import React from 'react';
 import { FlatList } from 'react-native';
+import PropTypes from 'prop-types';
 import FlatListItem from './MyCartItem';
 
 import { Cart_FlatListView } from '../styles';
 
-export default function MyCartFlatList({ data, onPress }) {
+export default function MyCartFlatList({ data, navigation }) {
   return (
     <Cart_FlatListView>
       <FlatList
@@ -12,9 +13,22 @@ export default function MyCartFlatList({ data, onPress }) {
         keyExtractor={(item, index) => index}
         numColumns={1}
         renderItem={({ item }) => {
-          return <FlatListItem title={item.productName} onPress={onPress} />;
+          return (
+            <FlatListItem
+              id={item.id}
+              title={item.product_name}
+              url={item.url}
+              price={item.price}
+              status={item.status}
+              navigation={navigation}
+            />
+          );
         }}
       />
     </Cart_FlatListView>
   );
 }
+
+MyCartFlatList.propTypes = {
+  navigation: PropTypes.func.isRequired,
+};
