@@ -34,7 +34,7 @@ export function* UpdateAccountSaga({ payload, navigation }) {
   }
 }
 
-export function* CreateLocationSaga({ payload, navigation, page }) {
+export function* CreateLocationSaga({ payload, navigation }) {
   try {
     const {
       street,
@@ -58,10 +58,10 @@ export function* CreateLocationSaga({ payload, navigation, page }) {
 
     yield put(updateLocationSuccess(response.data));
 
-    if (page === 'goBack') {
-      navigation.goBack();
+    if (navigation.page === 'goBack') {
+      navigation.navigation.goBack();
     } else {
-      navigation.navigate(page);
+      navigation.navigation(navigation.page);
     }
   } catch (err) {
     Alert.alert(
@@ -104,7 +104,7 @@ export function* UpdateLocationSaga({ payload, navigation }) {
   }
 }
 
-export function* CreatePersonalSaga({ payload, navigation, page }) {
+export function* CreatePersonalSaga({ payload, navigation }) {
   try {
     const {
       birthday,
@@ -124,10 +124,10 @@ export function* CreatePersonalSaga({ payload, navigation, page }) {
 
     yield put(updatePersonalDataSuccess(response.data));
 
-    if (page === 'goBack') {
-      navigation.goBack();
+    if (navigation.page === 'goBack') {
+      navigation.navigation.goBack();
     } else {
-      navigation.navigate(page);
+      navigation.navigation.navigate(navigation.page, navigation.params);
     }
   } catch (err) {
     Alert.alert(

@@ -1,13 +1,18 @@
 /* eslint-disable no-unused-vars */
 import React, { useState } from 'react';
-import { Alert, Keyboard } from 'react-native';
+import {
+  Alert,
+  Keyboard,
+  LayoutAnimation,
+  Platform,
+  UIManager,
+} from 'react-native';
 import { RadioButton } from 'react-native-paper';
 import { useSelector } from 'react-redux';
 import PropTypes from 'prop-types';
 import Background from '~/components/Backgrounds/Background';
 import LocationForm from '~/components/LocationFrete';
 import api from '~/services/api';
-import configureLayout from '~/utils/configureTransition'; // A PENSAR
 import { locationVerifier } from '~/utils/EmptyObjectVerifier';
 
 import {
@@ -20,7 +25,14 @@ import {
   RadioView,
   RadioText,
   TouchableCloseKeyboard,
+  BackBottom,
 } from './styles';
+
+if (Platform.OS === 'android') {
+  if (UIManager.setLayoutAnimationEnabledExperimental) {
+    UIManager.setLayoutAnimationEnabledExperimental(true);
+  }
+}
 
 export default function ChangeAddress({ navigation }) {
   const location = useSelector((state) => state.user.profile.location);
@@ -80,6 +92,15 @@ export default function ChangeAddress({ navigation }) {
         'Antes de ir para a próxima parte, preencha sua localização corretamente.'
       );
     }
+
+    LayoutAnimation.configureNext(
+      LayoutAnimation.create(
+        300,
+        LayoutAnimation.Types.easeIn,
+        LayoutAnimation.Properties.opacity
+      )
+    );
+
     setTransitionState('SecondPart');
   };
 
@@ -131,12 +152,12 @@ export default function ChangeAddress({ navigation }) {
                 changeAddress={() => setEnable(true)}
               />
 
-              <SubmitBottom
+              <BackBottom
                 style={{ background: '#512da8' }}
                 onPress={GoNextPart}
               >
                 Próximo
-              </SubmitBottom>
+              </BackBottom>
             </ViewForm>
           )}
 
@@ -170,20 +191,16 @@ export default function ChangeAddress({ navigation }) {
                 </RadioView>
               </TouchableButton>
 
-              <SubmitBottom
-                style={{ background: '#512da8' }}
-                loading={loading}
-                onPress={goNextScreen}
-              >
+              <SubmitBottom loading={loading} onPress={goNextScreen}>
                 Continuar
               </SubmitBottom>
 
-              <SubmitBottom
+              <BackBottom
                 style={{ background: '#512da8' }}
                 onPress={GoBackPart}
               >
                 Voltar
-              </SubmitBottom>
+              </BackBottom>
             </ViewTypeSend>
           )}
         </Container>

@@ -41,12 +41,12 @@ export function updateLocationSuccess(location) {
 }
 
 // PERSONAL DATA ACTIONS
-export function createPersonalDataRequest(data, navigation, page) {
+export function createPersonalDataRequest(data, navigation, page, params = {}) {
   // SAGA
   return {
     type: '@user/CREATE_PERSONAL_REQUEST',
     payload: { data },
-    navigation: { navigation, page },
+    navigation: { navigation, page, params },
   };
 }
 

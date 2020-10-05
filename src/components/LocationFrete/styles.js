@@ -25,5 +25,5 @@ export const FormInput = styled(Input)`
 `;
 
 export const SubmitBottom = styled(Button)`
-  ]width: 95%;
+  width: 100%;
 `;

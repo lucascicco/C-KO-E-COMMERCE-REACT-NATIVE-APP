@@ -37,6 +37,7 @@ import MyPurchases from './screens/ProfilePages/MyPurchasesPage';
 
 // BUYING PAGES
 import ProductPage from './screens/ProductsScreens/ProductPage';
+import PersonalFormBuy from './screens/ProductsScreens/PersonalPage';
 import FretePage from './screens/ProductsScreens/FretePage';
 import PurchasePartOne from './screens/ProductsScreens/PurchasePartOnePage';
 import PurchasePartTwo from './screens/ProductsScreens/PurchasePage';
@@ -65,6 +66,7 @@ export default (isSigned, FirstAccess) =>
                 {
                   HomePageProducts,
                   ProductPage,
+                  PersonalFormBuy,
                   FretePage,
                   PurchasePartOne,
                   PurchasePartTwo,

@@ -39,6 +39,10 @@ export const FormView = styled.View``;
 
 export const SubmitBottom = styled(ButtonType1)`
   margin-top: 10px;
+`;
+
+export const BackBottom = styled(ButtonType1)`
+  margin-top: 10px;
   background: ${(props) => props.style.background};
 `;
 

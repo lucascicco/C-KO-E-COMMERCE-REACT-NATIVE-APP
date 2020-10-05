@@ -60,20 +60,25 @@ function ProductPage({ navigation, isFocused }) {
 
   const Navigating = () => {
     if (quantity > 0) {
-      navigation.navigate('FretePage', {
-        product,
-        quantity,
-      });
+      if (profile.personal_data === null) {
+        navigation.navigate('PersonalFormBuy', {
+          product,
+          quantity,
+        });
+      } else {
+        navigation.navigate('FretePage', {
+          product,
+          quantity,
+        });
+      }
 
       handleLeavePage();
-
-      return;
+    } else {
+      Alert.alert(
+        'Quantidade inválida',
+        'Escolha a quantidade para a sua compra.'
+      );
     }
-
-    Alert.alert(
-      'Quantidade inválida',
-      'Escolha a quantidade para a sua compra.'
-    );
   };
 
   useEffect(() => {
@@ -84,7 +89,7 @@ function ProductPage({ navigation, isFocused }) {
         }
       },
     });
-    // navigation.addListener('DidBlur') didnot work for the GOBACK.
+
     if (isFocused) {
       loadProduct();
     }

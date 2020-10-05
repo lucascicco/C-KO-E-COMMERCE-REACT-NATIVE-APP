@@ -1,9 +1,11 @@
 /* eslint-disable import/no-unresolved */
 import React, { useRef, useState } from 'react';
 import { Platform } from 'react-native';
+import PropTypes from 'prop-types';
 import InputMask from '../TextInputMasked';
 import Picker from '../Picker';
 import BrazilianStates from '~/utils/BrazilStates.js';
+
 import {
   onChange_onlyText,
   onChange_onlyNumber,
@@ -12,7 +14,12 @@ import {
 
 import { Container, Form, FormInput, MultiInput, SubmitBottom } from './styles';
 
-function LocationPage({ onClickSubmit, enable, location, changeAddress }) {
+export default function LocationPage({
+  onClickSubmit,
+  enable,
+  location,
+  changeAddress,
+}) {
   const StateRef = useRef();
   const CityRef = useRef();
   const NeighborhoodRef = useRef();
@@ -166,4 +173,16 @@ function LocationPage({ onClickSubmit, enable, location, changeAddress }) {
   );
 }
 
-export default LocationPage;
+LocationPage.propTypes = {
+  onClickSubmit: PropTypes.func.isRequired,
+  enable: PropTypes.bool.isRequired,
+  location: PropTypes.shape({
+    state: PropTypes.string.isRequired,
+    city: PropTypes.string.isRequired,
+    neighborhood: PropTypes.string.isRequired,
+    street: PropTypes.string.isRequired,
+    street_number: PropTypes.number.isRequired,
+    postcode: PropTypes.string.isRequired,
+  }).isRequired,
+  changeAddress: PropTypes.func.isRequired,
+};
