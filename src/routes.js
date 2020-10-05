@@ -31,7 +31,6 @@ import EditProductPage from './screens/ProfilePages/EditProductPage';
 import StoppedPage from './screens/ProfilePages/StoppedPage';
 
 import MyCart from './screens/ProfilePages/MyCart';
-import PurchaseCart from './screens/ProfilePages/PurchaseCartPage';
 
 import MyPurchases from './screens/ProfilePages/MyPurchasesPage';
 
@@ -124,7 +123,6 @@ export default (isSigned, FirstAccess) =>
                   StoppedPage,
                   MySells,
                   MyCart,
-                  PurchaseCart,
                   MyPurchases,
                 },
                 {

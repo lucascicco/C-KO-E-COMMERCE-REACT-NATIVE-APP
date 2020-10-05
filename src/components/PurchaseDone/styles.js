@@ -1,8 +1,8 @@
 import styled from 'styled-components/native';
-import ButtonType1 from '../ButtonType1';
 
 export const Container = styled.View`
   flex: 1;
+  background: #fff;
   align-items: center;
   padding: 30px 20px;
 `;
@@ -11,14 +11,15 @@ export const Title_View_Row = styled.View`
   justify-content: space-between;
   width: 100%;
   border-bottom-width: 1px;
-  bordercolor: black;
-  borderstyle: solid;
-  paddingbottom: 10px;
+  border-color: black;
+  border-style: solid;
+  padding-bottom: 10px;
 `;
 
 export const Purchase_Success = styled.Text`
   color: #2e7d32;
   font-family: playfair;
+  text-align: center;
   font-size: 23px;
   margin-bottom: 10px;
 `;
@@ -42,8 +43,8 @@ export const Code_Bigger = styled.Text`
 
 export const Purchase_data = styled.View`
   border-bottom-width: 1px;
-  bordercolor: black;
-  borderstyle: solid;
+  border-color: black;
+  border-style: solid;
   width: 100%;
   margin-top: 10px;
   padding: 10px;
@@ -85,8 +86,8 @@ export const Seller_View = styled.View`
   margin-top: 10px;
   width: 100%;
   border-bottom-width: 1px;
-  bordercolor: black;
-  borderstyle: solid;
+  border-color: black;
+  border-style: solid;
   padding: 10px;
 `;
 
@@ -121,7 +122,7 @@ export const CKO_text = styled.Text`
 export const Continue_Button = styled.TouchableOpacity`
   flex-direction: row;
   padding: 5px;
-  margin-top: 10px;
+  margin-top: 30px;
 `;
 
 export const Continue_Text = styled.Text`

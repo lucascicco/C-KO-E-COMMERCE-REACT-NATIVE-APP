@@ -1,9 +1,9 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 import {
   Avatar_View,
   AvatarImage,
-  Text_View,
   Avatar_ImageView,
   Alert_ImageView,
 } from './styles';
@@ -21,3 +21,8 @@ export default function AvatarView({ uri, onPress }) {
     </Avatar_View>
   );
 }
+
+AvatarView.propTypes = {
+  uri: PropTypes.string.isRequired,
+  onPress: PropTypes.func.isRequired,
+};

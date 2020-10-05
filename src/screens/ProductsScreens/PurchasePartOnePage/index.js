@@ -31,7 +31,11 @@ export default function PurchaseTotalPage({ navigation }) {
   const product = navigation.getParam('product');
   const purchase_quantity = navigation.getParam('purchase_quantity');
   const frete = navigation.getParam('frete');
-  const location = navigation.getParam('frete');
+  const location = navigation.getParam('location');
+
+  const total_products = purchase_quantity * product.price;
+  const frete_price = parseFloat(frete.fretePrice.replace(',', '.'));
+  const total_price = parseFloat(total_products + frete_price);
 
   const handleNext = () => {
     if (payment === 'creditcard') {
@@ -39,9 +43,11 @@ export default function PurchaseTotalPage({ navigation }) {
         payload: {
           product: product.id,
           purchase_quantity,
-          frete_price: frete.fretePrice,
-          location: location.id,
+          purchase_total: total_products,
           payment_form: payment,
+          frete_price,
+          total_price,
+          location: location.id,
         },
       });
     }
@@ -62,7 +68,12 @@ export default function PurchaseTotalPage({ navigation }) {
               <TextTitle>{product.product_name}</TextTitle>
 
               <BasicView>
-                <TextDetails>R$ {product.price}</TextDetails>
+                <TextDetails>
+                  {product.price.toLocaleString('pt-BR', {
+                    style: 'currency',
+                    currency: 'BRL',
+                  })}
+                </TextDetails>
 
                 <TextIndent>
                   <NormalText>Quantidade:</NormalText>
@@ -76,7 +87,12 @@ export default function PurchaseTotalPage({ navigation }) {
 
           <SliptView>
             <NormalText>Total produto</NormalText>
-            <TotalBasic>R$ {}</TotalBasic>
+            <TotalBasic>
+              {total_products.toLocaleString('pt-BR', {
+                style: 'currency',
+                currency: 'BRL',
+              })}
+            </TotalBasic>
           </SliptView>
 
           <SliptView>
@@ -86,7 +102,12 @@ export default function PurchaseTotalPage({ navigation }) {
 
           <SliptView>
             <NormalText>Valor total</NormalText>
-            <TotalText>R$ {}</TotalText>
+            <TotalText>
+              {total_price.toLocaleString('pt-BR', {
+                style: 'currency',
+                currency: 'BRL',
+              })}
+            </TotalText>
           </SliptView>
 
           <PaymentTypeView>

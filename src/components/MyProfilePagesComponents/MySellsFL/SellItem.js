@@ -45,7 +45,11 @@ export default function Flatlist_item({ item }) {
   const dataVenda = format(new Date(createdAt), 'dd/MM/yyyy');
   const paymentForm =
     payment_form === 'cash' ? 'Dinheiro' : 'Cartão de crédito';
-  const priceFormatted = Number.parseFloat(total_price).toFixed(2);
+
+  const price_product = total_price.toLocaleString('pt-BR', {
+    style: 'currency',
+    currency: 'BRL',
+  });
 
   return (
     <Item_View>
@@ -60,8 +64,8 @@ export default function Flatlist_item({ item }) {
       <FlatList_Item>
         <Row_ViewItem>
           <Column_ViewItem>
-            <Title_Item>Total R$</Title_Item>
-            <Info_itemText>{priceFormatted}</Info_itemText>
+            <Title_Item>Total</Title_Item>
+            <Info_itemText>{price_product}</Info_itemText>
 
             <QuantityRow>
               <Title_Item>Qnt: </Title_Item>
@@ -162,13 +166,13 @@ Flatlist_item.propTypes = {
     purchase_product: PropTypes.shape({
       category: PropTypes.string,
       path: PropTypes.string,
-      price: PropTypes.string,
+      price: PropTypes.number,
       product_name: PropTypes.string,
       url: PropTypes.string,
     }),
     purchase_quantity: PropTypes.number,
     seller: PropTypes.number,
-    total_price: PropTypes.string,
+    total_price: PropTypes.number,
     updatedAt: PropTypes.oneOfType([
       PropTypes.instanceOf(null),
       PropTypes.string,

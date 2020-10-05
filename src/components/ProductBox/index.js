@@ -13,6 +13,11 @@ import {
 export default function ProductBox({ item, navigation }) {
   const { id, url, product_name, price } = item;
 
+  const price_product = price.toLocaleString('pt-BR', {
+    style: 'currency',
+    currency: 'BRL',
+  });
+
   return (
     <Container
       style={styles.ShadowConfig}
@@ -25,7 +30,7 @@ export default function ProductBox({ item, navigation }) {
       }
     >
       <ProductImage source={{ uri: url }} />
-      <PriceFont>R$ {price}</PriceFont>
+      <PriceFont>{price_product}</PriceFont>
 
       <TextView>
         <TitleFont> {product_name} </TitleFont>
@@ -52,7 +57,7 @@ ProductBox.propTypes = {
     id: PropTypes.number.isRequired,
     url: PropTypes.string.isRequired,
     product_name: PropTypes.string.isRequired,
-    price: PropTypes.string.isRequired,
+    price: PropTypes.number.isRequired,
   }).isRequired,
   navigation: PropTypes.shape({
     navigate: PropTypes.func.isRequired,

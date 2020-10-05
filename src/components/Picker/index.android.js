@@ -25,23 +25,15 @@ export default function PickerCustomX({ style, data, ...rest }) {
 }
 
 PickerCustomX.propTypes = {
-  editable: PropTypes.bool.isRequired,
-  label: PropTypes.string.isRequired,
-  value: PropTypes.string.isRequired,
+  editable: PropTypes.bool,
   data: PropTypes.arrayOf(
-    PropTypes.oneOfType[(PropTypes.object, PropTypes.string, PropTypes.number)]
+    PropTypes.oneOfType([PropTypes.object, PropTypes.string, PropTypes.number])
   ).isRequired,
-  onPressSubmit: PropTypes.func.isRequired,
-  text: PropTypes.string.isRequired,
   style: PropTypes.objectOf(
-    PropTypes.oneOfType([PropTypes.string, PropTypes.number])
-  ),
-  styleButton: PropTypes.objectOf(
     PropTypes.oneOfType([PropTypes.string, PropTypes.number])
   ),
 };
 
 PickerCustomX.defaultProps = {
   style: {},
-  styleButton: {},
 };

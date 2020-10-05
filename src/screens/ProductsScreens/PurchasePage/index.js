@@ -2,6 +2,7 @@
 import React, { useState, useEffect } from 'react';
 import {
   Keyboard,
+  Alert,
   Image,
   Animated,
   StyleSheet,
@@ -10,11 +11,12 @@ import {
   UIManager,
 } from 'react-native';
 import PropTypes from 'prop-types';
+import Modal from 'react-native-modal';
 import { CreditCardInput } from '~/utils/react-native-credit-card';
 import Background from '~/components/Backgrounds/Background3';
 import api from '~/services/api';
-
 import { Container, SubmitButton, SecurityText, PaymentView } from './styles';
+import PurchaseDone from '~/components/PurchaseDone';
 
 if (Platform.OS === 'android') {
   if (UIManager.setLayoutAnimationEnabledExperimental) {
@@ -30,8 +32,13 @@ export default function PurchasePage({ navigation }) {
   const [typeCard, setTypeCard] = useState('');
   const [Valid, setValid] = useState(false);
   const [CardView, setCardView] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [visible, setVisible] = useState(false);
+  const [purchase, setPurchase] = useState([]);
 
   const OpacityViewSec = new Animated.Value(1);
+
+  const payload = navigation.getParam('payload');
 
   const setCardValues = ({ values, valid }) => {
     const { number, cvc, type, name, expiry } = values;
@@ -44,8 +51,36 @@ export default function PurchasePage({ navigation }) {
     setValid(valid);
   };
 
-  const handleSubmit = () => {
-    Keyboard.dismiss();
+  const handleSubmit = async () => {
+    if (Valid) {
+      Alert.alert(
+        'Dados inválidos',
+        'Por favor, verifique o número do cartão de crédito.'
+      );
+    } else {
+      setLoading(true);
+
+      const response = await api.post('createPurchase', {
+        product: payload.product,
+        purchase_quantity: payload.purchase_quantity,
+        purchase_total: payload.purchase_total,
+        frete_price: payload.frete_price,
+        location: payload.location,
+        payment_form: payload.payment_form,
+        total_price: payload.total_price,
+      });
+
+      Keyboard.dismiss();
+
+      setPurchase(response.data);
+      setLoading(false);
+      setVisible(true);
+    }
+  };
+
+  const ContinueBuying = () => {
+    setVisible(false);
+    navigation.navigate('HomePageProducts');
   };
 
   useEffect(() => {
@@ -101,7 +136,7 @@ export default function PurchasePage({ navigation }) {
               allowScroll
               onChange={setCardValues}
             />
-            <SubmitButton onPress={handleSubmit}>
+            <SubmitButton onPress={handleSubmit} loading={loading}>
               Realizar pagamento
             </SubmitButton>
           </PaymentView>
@@ -117,6 +152,18 @@ export default function PurchasePage({ navigation }) {
             <SecurityText>Seus dados estão sendo protegidos</SecurityText>
           </Animated.View>
         )}
+
+        <Modal
+          isVisible={visible}
+          animationIn="zoomIn"
+          animationOut="zoomOut"
+          animationInTiming={1000}
+          animationOutTiming={1000}
+          avoidKeyboard
+          coverScreen
+        >
+          <PurchaseDone item={purchase} continueBuying={ContinueBuying} />
+        </Modal>
       </Container>
     </Background>
   );

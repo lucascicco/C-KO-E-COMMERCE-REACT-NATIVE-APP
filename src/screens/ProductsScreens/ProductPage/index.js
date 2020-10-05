@@ -114,7 +114,12 @@ function ProductPage({ navigation, isFocused }) {
 
               <FeaturesView>
                 <Details>
-                  <PriceText>R$ {product.price}</PriceText>
+                  <PriceText>
+                    {product.price.toLocaleString('pt-BR', {
+                      style: 'currency',
+                      currency: 'BRL',
+                    })}
+                  </PriceText>
                   <DetailsTitle>Quantidade</DetailsTitle>
                   <NumericInput
                     onChange={(value) => setQuantity(value)}

@@ -82,9 +82,9 @@ PickerCustomY.propTypes = {
   label: PropTypes.string.isRequired,
   value: PropTypes.string.isRequired,
   data: PropTypes.arrayOf(
-    PropTypes.oneOfType[(PropTypes.object, PropTypes.string, PropTypes.number)]
+    PropTypes.oneOfType([PropTypes.object, PropTypes.string, PropTypes.number])
   ).isRequired,
-  onPressSubmit: PropTypes.func.isRequired,
+  onPressSubmit: PropTypes.func,
   text: PropTypes.string.isRequired,
   style: PropTypes.objectOf(
     PropTypes.oneOfType([PropTypes.string, PropTypes.number])
@@ -97,4 +97,5 @@ PickerCustomY.propTypes = {
 PickerCustomY.defaultProps = {
   style: {},
   styleButton: {},
+  onPressSubmit: false,
 };

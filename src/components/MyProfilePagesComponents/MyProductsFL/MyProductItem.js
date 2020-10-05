@@ -38,8 +38,6 @@ export default function Flatlist_item({
   description,
   pausedAt,
 }) {
-  const priceFormatted = Number.parseFloat(price).toFixed(2);
-
   const statusText = StatusTranslator(status);
   const RenderByStatus = statusText === 'Aberto' || statusText === 'Esgotado';
 
@@ -127,7 +125,7 @@ export default function Flatlist_item({
                         category,
                         quantity,
                         description,
-                        price: priceFormatted,
+                        price,
                       },
                     })
                   }
@@ -169,7 +167,7 @@ Flatlist_item.propTypes = {
   selldone: PropTypes.number.isRequired,
   status: PropTypes.string.isRequired,
   category: PropTypes.string.isRequired,
-  price: PropTypes.string.isRequired,
+  price: PropTypes.number.isRequired,
   quantity: PropTypes.number.isRequired,
   description: PropTypes.string.isRequired,
   navigation: PropTypes.shape({

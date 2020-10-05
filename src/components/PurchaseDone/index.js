@@ -1,6 +1,7 @@
 import React from 'react';
 import { AntDesign } from '@expo/vector-icons';
-import Background from '../Backgrounds/Background';
+import { format } from 'date-fns';
+import PropTypes from 'prop-types';
 
 import {
   Container,
@@ -26,7 +27,14 @@ import {
   Continue_Text,
 } from './styles';
 
-function PurchaseDone({ onPressOne }) {
+export default function PurchaseDone({ continueBuying, item }) {
+  const { purchase, seller_info } = item;
+
+  const dataCompra = format(new Date(purchase.createdAt), 'dd/MM/yyyy');
+  const product_price = purchase.total_price.toLocaleString('pt-BR', {
+    style: 'currency',
+    currency: 'BRL',
+  });
   return (
     <Container>
       <Title_View_Row>
@@ -34,7 +42,7 @@ function PurchaseDone({ onPressOne }) {
 
         <Code_View>
           <Code_Bigger>Código do pedido</Code_Bigger>
-          <Code_Small>#195956456161611164678678454655465131</Code_Small>
+          <Code_Small>#{purchase.purchase_code}</Code_Small>
         </Code_View>
       </Title_View_Row>
 
@@ -42,21 +50,14 @@ function PurchaseDone({ onPressOne }) {
         <Row_View>
           <Column_View>
             <Purchase_title>Data da Compra</Purchase_title>
-            <Purchase_small>18/01/2000</Purchase_small>
+            <Purchase_small>{dataCompra}</Purchase_small>
           </Column_View>
 
           <Column_View>
             <Purchase_title>Total</Purchase_title>
-            <Purchase_small>R$ 50.000,00</Purchase_small>
+            <Purchase_small>{product_price}</Purchase_small>
           </Column_View>
         </Row_View>
-
-        <Column_View_Two>
-          <Purchase_title>Endereço de entrega</Purchase_title>
-          <Adress_text>
-            São paulo, Brasil. Sp, Guarulhos. Rua Ronaldo, 542. Jd Santa mena.
-          </Adress_text>
-        </Column_View_Two>
       </Purchase_data>
 
       <Seller_View>
@@ -65,18 +66,18 @@ function PurchaseDone({ onPressOne }) {
         <Row_View>
           <Column_View>
             <Purchase_title>Nome</Purchase_title>
-            <Seller_name>Machado de Assis</Seller_name>
+            <Seller_name>{seller_info.name}</Seller_name>
           </Column_View>
 
           <Column_View>
             <Purchase_title>Telefone</Purchase_title>
-            <Purchase_small>(11) - 947016590</Purchase_small>
+            <Purchase_small>{seller_info.cellphone}</Purchase_small>
           </Column_View>
         </Row_View>
 
         <Column_View_Two>
           <Purchase_title>Email para contato</Purchase_title>
-          <Adress_text>MachadodeAssis@gmail.com</Adress_text>
+          <Adress_text>{seller_info.email}</Adress_text>
         </Column_View_Two>
       </Seller_View>
 
@@ -89,7 +90,7 @@ function PurchaseDone({ onPressOne }) {
         </CKO_text>
       </Normal_View>
 
-      <Continue_Button>
+      <Continue_Button onPress={continueBuying}>
         <Continue_Text>Continuar comprando</Continue_Text>
         <AntDesign name="arrowright" size={30} color="black" />
       </Continue_Button>
@@ -97,4 +98,18 @@ function PurchaseDone({ onPressOne }) {
   );
 }
 
-export default PurchaseDone;
+PurchaseDone.propTypes = {
+  item: PropTypes.shape({
+    purchase: PropTypes.shape({
+      purchase_code: PropTypes.string.isRequired,
+      createdAt: PropTypes.instanceOf(Date).isRequired,
+      total_price: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+    }).isRequired,
+    seller_info: PropTypes.shape({
+      name: PropTypes.string.isRequired,
+      cellphone: PropTypes.string.isRequired,
+      email: PropTypes.string.isRequired,
+    }).isRequired,
+  }).isRequired,
+  continueBuying: PropTypes.func.isRequired,
+};

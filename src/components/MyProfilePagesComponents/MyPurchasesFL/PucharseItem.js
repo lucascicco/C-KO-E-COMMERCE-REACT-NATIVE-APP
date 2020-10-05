@@ -48,7 +48,11 @@ export default function Flatlist_item({ item, navigation }) {
   const dataVenda = format(new Date(createdAt), 'dd/MM/yyyy');
   const paymentForm =
     payment_form === 'cash' ? 'Dinheiro' : 'Cartão de crédito';
-  const priceFormatted = Number.parseFloat(total_price).toFixed(2);
+
+  const price_product = total_price.toLocaleString('pt-BR', {
+    style: 'currency',
+    currency: 'BRL',
+  });
 
   const buyAgainProduct = () => {
     if (purchase_product.status === 'open') {
@@ -78,8 +82,8 @@ export default function Flatlist_item({ item, navigation }) {
       <FlatList_Item>
         <Row_ViewItem>
           <Column_ViewItem>
-            <Title_Item>Total R$</Title_Item>
-            <Info_itemText>{priceFormatted}</Info_itemText>
+            <Title_Item>Total </Title_Item>
+            <Info_itemText>{price_product}</Info_itemText>
 
             <QuantityRow>
               <Title_Item>Qnt: </Title_Item>
@@ -166,7 +170,7 @@ Flatlist_item.propTypes = {
       PropTypes.instanceOf(null),
       PropTypes.string,
     ]),
-    frete_price: PropTypes.string,
+    frete_price: PropTypes.number,
     id: PropTypes.string,
     location: PropTypes.shape({
       city: PropTypes.string,
@@ -185,14 +189,14 @@ Flatlist_item.propTypes = {
       id: PropTypes.number,
       category: PropTypes.string,
       path: PropTypes.string,
-      price: PropTypes.string,
+      price: PropTypes.number,
       product_name: PropTypes.string,
       url: PropTypes.string,
       status: PropTypes.string,
     }),
     purchase_quantity: PropTypes.number,
     seller: PropTypes.number,
-    total_price: PropTypes.string,
+    total_price: PropTypes.number,
     updatedAt: PropTypes.oneOfType([
       PropTypes.instanceOf(null),
       PropTypes.string,

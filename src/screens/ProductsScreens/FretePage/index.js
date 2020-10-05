@@ -191,16 +191,16 @@ export default function ChangeAddress({ navigation }) {
                 </RadioView>
               </TouchableButton>
 
-              <SubmitBottom loading={loading} onPress={goNextScreen}>
-                Continuar
-              </SubmitBottom>
-
               <BackBottom
                 style={{ background: '#512da8' }}
                 onPress={GoBackPart}
               >
                 Voltar
               </BackBottom>
+
+              <SubmitBottom loading={loading} onPress={goNextScreen}>
+                Próximo
+              </SubmitBottom>
             </ViewTypeSend>
           )}
         </Container>

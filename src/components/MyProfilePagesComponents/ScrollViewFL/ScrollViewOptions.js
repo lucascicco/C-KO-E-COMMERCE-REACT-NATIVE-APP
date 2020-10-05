@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import ScrollViewItem from './ScrollView_Item';
 
 import { ScrollView_one } from '../styles';
@@ -35,3 +36,10 @@ export default function ScrollViewOptions({ navigation, signOut }) {
     </ScrollView_one>
   );
 }
+
+ScrollViewOptions.propTypes = {
+  navigation: PropTypes.shape({
+    navigate: PropTypes.func.isRequired,
+  }).isRequired,
+  signOut: PropTypes.func.isRequired,
+};

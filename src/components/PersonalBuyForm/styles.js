@@ -20,5 +20,4 @@ export const FormInput = styled(Input)`
 
 export const SubmitButton = styled(Button)`
   margin-top: 10px;
-  background: ${(props) => props.style.background};
 `;

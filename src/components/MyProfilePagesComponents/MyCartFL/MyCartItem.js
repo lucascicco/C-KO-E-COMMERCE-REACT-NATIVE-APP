@@ -32,6 +32,11 @@ export default function Flatlist_item({
 }) {
   const statusText = TranslateStatus(status);
 
+  const price_product = price.toLocaleString('pt-BR', {
+    style: 'currency',
+    currency: 'BRL',
+  });
+
   return (
     <CartItem_View>
       <Title_View_Row>
@@ -48,7 +53,7 @@ export default function Flatlist_item({
         <Flatlist_ViewTwo>
           <Details_View>
             <Details_Row>
-              <Details_RowTextBold>Preço: R$ {price}</Details_RowTextBold>
+              <Details_RowTextBold>{price_product}</Details_RowTextBold>
             </Details_Row>
 
             <Details_Row>
@@ -86,7 +91,7 @@ Flatlist_item.propTypes = {
   id: PropTypes.number.isRequired,
   title: PropTypes.string.isRequired,
   url: PropTypes.string.isRequired,
-  price: PropTypes.string.isRequired,
+  price: PropTypes.number.isRequired,
   status: PropTypes.string.isRequired,
   navigation: PropTypes.shape({
     navigate: PropTypes.func.isRequired,
