@@ -1,6 +1,7 @@
 /* eslint-disable import/no-unresolved */
 import React, { useRef, useState } from 'react';
 import { Platform, Linking } from 'react-native';
+import PropTypes from 'prop-types';
 import Picker from '~/components/Picker';
 import FormatosCorreios from '~/utils/FormatosCorreios';
 import {
@@ -204,3 +205,7 @@ export default function ProductsFeature({ onClickSubmit }) {
     </Container>
   );
 }
+
+ProductsFeature.propTypes = {
+  onClickSubmit: PropTypes.func.isRequired,
+};

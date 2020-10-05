@@ -1,10 +1,11 @@
 import React from 'react';
 import { FlatList } from 'react-native';
+import PropTypes from 'prop-types';
 import ProductBox from '../ProductBox';
 
 import { Container } from './styles';
 
-function ItemsBox({ data, navigation }) {
+export default function ItemsBox({ data, navigation }) {
   return (
     <Container>
       <FlatList
@@ -19,4 +20,7 @@ function ItemsBox({ data, navigation }) {
   );
 }
 
-export default ItemsBox;
+ItemsBox.propTypes = {
+  data: PropTypes.instanceOf(Date).isRequired,
+  navigation: PropTypes.func.isRequired,
+};

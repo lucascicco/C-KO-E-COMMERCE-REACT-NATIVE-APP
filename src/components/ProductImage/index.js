@@ -1,7 +1,14 @@
 import React from 'react';
 import { Animated, TouchableHighlight, StyleSheet } from 'react-native';
+import PropTypes from 'prop-types';
 
-function ProductImage({ onPress, uri, Height, Width, FontSize }) {
+export default function ProductImage({
+  onPress,
+  uri,
+  Height,
+  Width,
+  FontSize,
+}) {
   return (
     <TouchableHighlight onPress={onPress}>
       <Animated.View
@@ -42,4 +49,10 @@ const styles = StyleSheet.create({
   },
 });
 
-export default ProductImage;
+ProductImage.propTypes = {
+  uri: PropTypes.string.isRequired,
+  onPress: PropTypes.func.isRequired,
+  Height: PropTypes.number.isRequired,
+  Width: PropTypes.number.isRequired,
+  FontSize: PropTypes.number.isRequired,
+};

@@ -1,12 +1,13 @@
 import React, { useState } from 'react';
 import Modal from 'react-native-modal';
 import { Picker } from '@react-native-community/picker';
+import PropTypes from 'prop-types';
 import ButtonType2 from '../ButtonType2';
 import Button from '../ButtonType1';
 
 import { MainContainer, Container } from './styles';
 
-function PickerCustomY({
+export default function PickerCustomY({
   editable,
   style,
   styleButton,
@@ -76,4 +77,24 @@ function PickerCustomY({
   );
 }
 
-export default PickerCustomY;
+PickerCustomY.propTypes = {
+  editable: PropTypes.bool.isRequired,
+  label: PropTypes.string.isRequired,
+  value: PropTypes.string.isRequired,
+  data: PropTypes.arrayOf(
+    PropTypes.oneOfType[(PropTypes.object, PropTypes.string, PropTypes.number)]
+  ).isRequired,
+  onPressSubmit: PropTypes.func.isRequired,
+  text: PropTypes.string.isRequired,
+  style: PropTypes.objectOf(
+    PropTypes.oneOfType([PropTypes.string, PropTypes.number])
+  ),
+  styleButton: PropTypes.objectOf(
+    PropTypes.oneOfType([PropTypes.string, PropTypes.number])
+  ),
+};
+
+PickerCustomY.defaultProps = {
+  style: {},
+  styleButton: {},
+};

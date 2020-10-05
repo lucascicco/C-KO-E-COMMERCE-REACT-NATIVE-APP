@@ -1,6 +1,6 @@
 /* eslint-disable import/no-unresolved */
 import React, { useState } from 'react';
-import { Platform, Alert } from 'react-native';
+import { Platform } from 'react-native';
 import PropTypes from 'prop-types';
 import GenderData from '~/utils/Gender.js';
 import ProfessionData from '~/utils/Profession.js';

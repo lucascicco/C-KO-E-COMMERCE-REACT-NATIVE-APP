@@ -1,10 +1,10 @@
 import React, { useRef, useState } from 'react';
 import { Alert } from 'react-native';
+import PropTypes from 'prop-types';
 import { onChange_onlyText } from '~/utils/RestrictInputs';
-
 import { Form, FormInput, SubmitButton } from './styles';
 
-function AccountInfoForm({ onClickSubmit }) {
+export default function AccountInfoForm({ onClickSubmit }) {
   const secondPasswordRef = useRef();
   const passwordRef = useRef();
   const emailRef = useRef();
@@ -90,4 +90,6 @@ function AccountInfoForm({ onClickSubmit }) {
   );
 }
 
-export default AccountInfoForm;
+AccountInfoForm.propTypes = {
+  onClickSubmit: PropTypes.func.isRequired,
+};

@@ -1,6 +1,6 @@
 /* eslint-disable import/no-unresolved */
 import React, { useState } from 'react';
-import { Platform, Alert } from 'react-native';
+import { Platform } from 'react-native';
 import PropTypes from 'prop-types';
 import GenderData from '~/utils/Gender.js';
 import ProfessionData from '~/utils/Profession.js';
@@ -9,7 +9,7 @@ import MaskedInput from '../TextInputMasked';
 import Picker from '../Picker';
 import { Form, MultiInput, SubmitButton } from './styles';
 
-export default function PersonalForm({ onClickSubmit, personal }) {
+export default function PersonalForm({ onClickSubmit }) {
   let PersonalIDRef;
   let CellphoneRef;
 
@@ -18,26 +18,14 @@ export default function PersonalForm({ onClickSubmit, personal }) {
     ? 'numbers-and-punctuation'
     : 'numeric';
 
-  const [Birthday, setBirthday] = useState(
-    personal ? new Date(personal.birthday) : new Date()
-  );
-  const [Gender, setGender] = useState(personal ? personal.gender : '');
-  const [PersonalID, setPersonalID] = useState(
-    personal ? personal.identification : ''
-  );
-  const [Cellphone, setCellphone] = useState(
-    personal ? personal.cellphone : ''
-  );
-  const [Profession, setProfession] = useState(
-    personal ? personal.profession : ''
-  );
+  const [Birthday, setBirthday] = useState(new Date());
+  const [Gender, setGender] = useState('');
+  const [PersonalID, setPersonalID] = useState('');
+  const [Cellphone, setCellphone] = useState('');
+  const [Profession, setProfession] = useState('');
 
-  const [LabelGender, setLabelGender] = useState(
-    personal ? personal.gender : 'Sexo'
-  );
-  const [LabelProfession, setLabelProfession] = useState(
-    personal ? personal.profession : 'Profissão'
-  );
+  const [LabelGender, setLabelGender] = useState('Sexo');
+  const [LabelProfession, setLabelProfession] = useState('Profissão');
 
   const handleSubmit = () => {
     onClickSubmit({
@@ -126,15 +114,4 @@ export default function PersonalForm({ onClickSubmit, personal }) {
 
 PersonalForm.propTypes = {
   onClickSubmit: PropTypes.func.isRequired,
-  personal: PropTypes.shape({
-    birthday: PropTypes.instanceOf(Date).isRequired,
-    identification: PropTypes.string.isRequired,
-    cellphone: PropTypes.string.isRequired,
-    profession: PropTypes.string.isRequired,
-    gender: PropTypes.string.isRequired,
-  }),
-};
-
-PersonalForm.defaultProps = {
-  personal: false,
 };

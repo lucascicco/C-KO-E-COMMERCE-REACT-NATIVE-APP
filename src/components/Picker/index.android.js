@@ -1,17 +1,9 @@
 import React from 'react';
 import { Picker } from '@react-native-community/picker';
+import PropTypes from 'prop-types';
 import { ContainerAndroid } from './styles';
 
-function PickerCustomX({
-  style,
-  styleButton,
-  label,
-  value,
-  data,
-  onPressSubmit,
-  text,
-  ...rest
-}) {
+export default function PickerCustomX({ style, data, ...rest }) {
   return (
     <ContainerAndroid style={style}>
       <Picker {...rest} style={{ color: '#fff' }}>
@@ -32,4 +24,24 @@ function PickerCustomX({
   );
 }
 
-export default PickerCustomX;
+PickerCustomX.propTypes = {
+  editable: PropTypes.bool.isRequired,
+  label: PropTypes.string.isRequired,
+  value: PropTypes.string.isRequired,
+  data: PropTypes.arrayOf(
+    PropTypes.oneOfType[(PropTypes.object, PropTypes.string, PropTypes.number)]
+  ).isRequired,
+  onPressSubmit: PropTypes.func.isRequired,
+  text: PropTypes.string.isRequired,
+  style: PropTypes.objectOf(
+    PropTypes.oneOfType([PropTypes.string, PropTypes.number])
+  ),
+  styleButton: PropTypes.objectOf(
+    PropTypes.oneOfType([PropTypes.string, PropTypes.number])
+  ),
+};
+
+PickerCustomX.defaultProps = {
+  style: {},
+  styleButton: {},
+};

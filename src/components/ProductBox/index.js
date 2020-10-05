@@ -1,5 +1,6 @@
 import React from 'react';
 import { StyleSheet } from 'react-native';
+import PropTypes from 'prop-types';
 
 import {
   Container,
@@ -45,3 +46,15 @@ const styles = StyleSheet.create({
     elevation: 12,
   },
 });
+
+ProductBox.propTypes = {
+  item: PropTypes.shape({
+    id: PropTypes.number.isRequired,
+    url: PropTypes.string.isRequired,
+    product_name: PropTypes.string.isRequired,
+    price: PropTypes.string.isRequired,
+  }).isRequired,
+  navigation: PropTypes.shape({
+    navigate: PropTypes.func.isRequired,
+  }).isRequired,
+};

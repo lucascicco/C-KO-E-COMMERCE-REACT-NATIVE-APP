@@ -35,6 +35,9 @@ module.exports = {
     'react/jsx-pascal-case': 'off',
     'import/extensions': 'off',
     'no-use-before-define': 'warn',
+    'react/jsx-props-no-spreading': 'off',
+    'import/no-unresolved': 'warn',
+    'no-return-assign': 'warn',
   },
   settings: {
     'import/resolver': {

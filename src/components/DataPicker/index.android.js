@@ -1,8 +1,8 @@
-import React, { useMemo, useState } from 'react';
+import React, { useState } from 'react';
 import DateTimePicker from '@react-native-community/datetimepicker';
 import { format } from 'date-fns';
 import Icon from 'react-native-vector-icons/MaterialIcons';
-
+import PropTypes from 'prop-types';
 import { Container, DateButton, DateText } from './styles';
 
 export default function DateInput({ date, onChange }) {
@@ -26,8 +26,8 @@ export default function DateInput({ date, onChange }) {
       {showDatePicker && (
         <DateTimePicker
           value={date}
-          onChange={(event, date) => {
-            onChange(event, date); // I need to fix this problem yet.
+          onChange={(event, dateValue) => {
+            onChange(event, dateValue); // I need to fix this problem yet.
           }}
           maximumDate={new Date()}
           mode="date"
@@ -38,3 +38,8 @@ export default function DateInput({ date, onChange }) {
     </Container>
   );
 }
+
+DateInput.propTypes = {
+  date: PropTypes.instanceOf(Date).isRequired,
+  onChange: PropTypes.func.isRequired,
+};

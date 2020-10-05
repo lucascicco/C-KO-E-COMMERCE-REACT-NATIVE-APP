@@ -13,14 +13,18 @@ function Input({ style, icon, textStyle, ...rest }, ref) {
   );
 }
 
-// Input.propTypes = {
-//   icon: PropTypes.string,
-//   style: PropTypes.oneOfType([PropTypes.object, PropTypes.array])
-// }
+Input.propTypes = {
+  icon: PropTypes.string,
+  style: PropTypes.oneOfType([PropTypes.object, PropTypes.array]),
+  textStyle: PropTypes.objectOf(
+    PropTypes.oneOfType([PropTypes.string, PropTypes.number])
+  ),
+};
 
-// Input.defaultProps = {
-//   icon: null,
-//   style: {},
-// };
+Input.defaultProps = {
+  icon: null,
+  style: {},
+  textStyle: {},
+};
 
 export default forwardRef(Input);

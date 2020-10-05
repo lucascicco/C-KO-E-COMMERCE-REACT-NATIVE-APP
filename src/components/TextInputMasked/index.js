@@ -32,14 +32,20 @@ const styles = StyleSheet.create({
   },
 });
 
-// Input.propTypes = {
-//   icon: PropTypes.string,
-//   style: PropTypes.oneOfType([PropTypes.object, PropTypes.array])
-// };
+Input.propTypes = {
+  icon: PropTypes.string,
+  style: PropTypes.oneOfType([PropTypes.object, PropTypes.array]),
+  maskedStyle: PropTypes.oneOfType([PropTypes.object, PropTypes.array]),
+  type: PropTypes.string,
+  options: PropTypes.oneOfType([PropTypes.object, PropTypes.func]),
+};
 
-// Input.defaultProps = {
-//   icon: null,
-//   style: {},
-// };
+Input.defaultProps = {
+  icon: null,
+  style: {},
+  maskedStyle: {},
+  type: 'default',
+  options: null,
+};
 
 export default forwardRef(Input);

@@ -1,9 +1,10 @@
 import React, { useRef, useState } from 'react';
+import PropTypes from 'prop-types';
 import { onChange_onlyText } from '../../utils/RestrictInputs';
 
 import { Form, FormInput, SubmitButton } from './styles';
 
-function AccountInfoForm({ onClickSubmit, account }) {
+export default function AccountInfoForm({ onClickSubmit, account }) {
   const oldPasswordRef = useRef();
   const passwordRef = useRef();
   const emailRef = useRef();
@@ -70,7 +71,7 @@ function AccountInfoForm({ onClickSubmit, account }) {
         maxLength={50}
         returnkKeyType="next"
         onChangeText={setPassword}
-        onSubmitEditing={() => secondPasswordRef.current.focus()}
+        onSubmitEditing={handleSubmit}
         ref={passwordRef}
         blurOnSubmit={false}
         value={password}
@@ -83,4 +84,10 @@ function AccountInfoForm({ onClickSubmit, account }) {
   );
 }
 
-export default AccountInfoForm;
+AccountInfoForm.propTypes = {
+  onClickSubmit: PropTypes.func.isRequired,
+  account: PropTypes.shape({
+    email: PropTypes.string.isRequired,
+    name: PropTypes.string.isRequired,
+  }).isRequired,
+};

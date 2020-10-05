@@ -1,6 +1,7 @@
 /* eslint-disable react/prop-types */
 import React, { useRef, useState } from 'react';
-import { Platform, Alert } from 'react-native';
+import { Platform } from 'react-native';
+import PropTypes from 'prop-types';
 import InputMask from '../TextInputMasked';
 import Picker from '~/components/Picker';
 import BrazilianStates from '~/utils/BrazilStates.js';
@@ -12,7 +13,7 @@ import {
 
 import { Container, Form, FormInput, MultiInput, SubmitBottom } from './styles';
 
-function LocationPage({ onClickSubmit, location }) {
+export default function LocationPage({ onClickSubmit, location }) {
   const StateRef = useRef();
   const CityRef = useRef();
   const NeighborhoodRef = useRef();
@@ -158,4 +159,14 @@ function LocationPage({ onClickSubmit, location }) {
   );
 }
 
-export default LocationPage;
+LocationPage.propTypes = {
+  onClickSubmit: PropTypes.func.isRequired,
+  location: PropTypes.shape({
+    state: PropTypes.string.isRequired,
+    city: PropTypes.string.isRequired,
+    neighborhood: PropTypes.string.isRequired,
+    street: PropTypes.string.isRequired,
+    street_number: PropTypes.number.isRequired,
+    postcode: PropTypes.string.isRequired,
+  }).isRequired,
+};

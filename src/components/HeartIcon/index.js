@@ -1,9 +1,9 @@
 import React from 'react';
 import { AntDesign } from '@expo/vector-icons';
-
+import PropTypes from 'prop-types';
 import { View_Touchable } from './styles';
 
-function HeartIcon({ onPressButton, favorite }) {
+export default function HeartIcon({ onPressButton, favorite }) {
   const name = favorite ? 'heart' : 'hearto';
 
   return (
@@ -12,4 +12,8 @@ function HeartIcon({ onPressButton, favorite }) {
     </View_Touchable>
   );
 }
-export default HeartIcon;
+
+HeartIcon.propTypes = {
+  onPressButton: PropTypes.func.isRequired,
+  favorite: PropTypes.bool.isRequired,
+};
