@@ -1,9 +1,11 @@
 import React from 'react';
+import { Alert } from 'react-native';
 import { useDispatch } from 'react-redux';
 import PropTypes from 'prop-types';
 import Background from '~/components/Backgrounds/Background';
 import PersonalPage from '~/components/PersonalForm';
 import { createPersonalDataRequest } from '~/store/modules/user/actions';
+import { personalVerifier } from '~/utils/EmptyObjectVerifier';
 
 import { Container } from './styles';
 
@@ -13,10 +15,17 @@ export default function PersonalFormPurchase({ navigation }) {
   const purchase_quantity = navigation.getParam('quantity');
 
   const handleSubmit = (PersonalInfo) => {
+    if (personalVerifier(PersonalInfo)) {
+      return Alert.alert(
+        'Erro',
+        'Preencha corretamente os campos de informações pessoais.'
+      );
+    }
+
     dispatch(
       createPersonalDataRequest(PersonalInfo, navigation, 'FretePage', {
         product,
-        purchase_quantity,
+        quantity: purchase_quantity,
       })
     );
   };

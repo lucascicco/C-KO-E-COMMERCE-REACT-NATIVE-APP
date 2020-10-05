@@ -7,7 +7,6 @@ import ProfessionData from '~/utils/Profession.js';
 import DatePicker from '../DataPicker';
 import MaskedInput from '../TextInputMasked';
 import Picker from '../Picker';
-
 import { Form, MultiInput, SubmitButton } from './styles';
 
 export default function PersonalForm({ onClickSubmit, personal }) {
@@ -120,9 +119,7 @@ export default function PersonalForm({ onClickSubmit, personal }) {
         />
       </MultiInput>
 
-      <SubmitButton style={{ background: '#283593' }} onPress={handleSubmit}>
-        Salvar
-      </SubmitButton>
+      <SubmitButton onPress={handleSubmit}>Próximo</SubmitButton>
     </Form>
   );
 }

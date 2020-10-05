@@ -41,10 +41,6 @@ function LocationPage({ onClickSubmit, location }) {
   const [Label, setLabel] = useState(location ? location.state : 'Estado');
 
   const handleSubmit = () => {
-    if (State === 'Estado' || State === undefined) {
-      return Alert.alert('Erro', 'Escolha algum estado corretamente.');
-    }
-
     onClickSubmit({
       country: Country,
       state: State,

@@ -1,5 +1,5 @@
 import React from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch, useSelector, Alert } from 'react-redux';
 import PropTypes from 'prop-types';
 import LocationForm from '~/components/LocationForm';
 import Background from '~/components/Backgrounds/Background2';
@@ -7,6 +7,7 @@ import {
   updateLocationRequest,
   createLocationRequest,
 } from '~/store/modules/user/actions';
+import { locationVerifier } from '~/utils/EmptyObjectVerifier';
 
 import { Container } from './styles';
 
@@ -15,6 +16,13 @@ export default function ChangeLocationPage({ navigation }) {
   const location = useSelector((state) => state.user.profile.location);
 
   const handleSubmit = (LocationData) => {
+    if (locationVerifier(LocationData)) {
+      return Alert.alert(
+        'Erro',
+        'Preencha corretamente os campos de localização.'
+      );
+    }
+
     if (location === null) {
       dispatch(createLocationRequest(LocationData, navigation, 'GoBack'));
     } else {

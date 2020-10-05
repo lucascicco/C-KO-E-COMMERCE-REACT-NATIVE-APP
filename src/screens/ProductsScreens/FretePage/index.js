@@ -74,8 +74,8 @@ export default function ChangeAddress({ navigation }) {
   const handleSubmit = (LocationData) => {
     if (locationVerifier(LocationData)) {
       return Alert.alert(
-        'Erro ao salvar',
-        'Ocorreu um erro ao salvar a localização para a compra. Verifique os campos.'
+        'Erro',
+        'Preencha corretamente os campos de localização.'
       );
     }
 

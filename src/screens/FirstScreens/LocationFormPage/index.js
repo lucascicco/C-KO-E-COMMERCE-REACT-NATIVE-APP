@@ -1,11 +1,12 @@
 import React, { useEffect } from 'react';
-import { Animated, Keyboard, Platform, StyleSheet } from 'react-native';
+import { Animated, Keyboard, Platform, StyleSheet, Alert } from 'react-native';
 import { useDispatch } from 'react-redux';
 import PropTypes from 'prop-types';
 import { ImageResizingEventTwo } from '~/utils/KeyboardsEvents';
 import Background from '~/components/Backgrounds/Background2';
 import LocationForm from '~/components/LocationForm';
 import { createLocationRequest } from '~/store/modules/user/actions';
+import { locationVerifier } from '~/utils/EmptyObjectVerifier';
 
 import { Container, SubmitButton } from './styles';
 
@@ -44,7 +45,14 @@ export default function LocationPage({ navigation }) {
   }, []);
 
   const handleSubmit = (Location) => {
-    dispatch(createLocationRequest(Location, navigation, 'App'));
+    if (locationVerifier(Location)) {
+      return Alert.alert(
+        'Erro',
+        'Preencha corretamente os campos de localização.'
+      );
+    }
+
+    return dispatch(createLocationRequest(Location, navigation, 'App'));
   };
 
   return (

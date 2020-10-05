@@ -1,11 +1,12 @@
 import React, { useEffect } from 'react';
-import { Animated, Keyboard, Platform, StyleSheet } from 'react-native';
+import { Animated, Keyboard, Platform, StyleSheet, Alert } from 'react-native';
 import { useDispatch } from 'react-redux';
 import PropTypes from 'prop-types';
 import { ImageResizingEventTwo } from '~/utils/KeyboardsEvents';
 import Background from '~/components/Backgrounds/Background2';
 import PersonalPage from '~/components/PersonalForm';
 import { createPersonalDataRequest } from '~/store/modules/user/actions';
+import { personalVerifier } from '~/utils/EmptyObjectVerifier';
 
 import { Container, SubmitButton } from './styles';
 
@@ -44,7 +45,14 @@ export default function PersonalInformation({ navigation }) {
   }, []);
 
   const handleSubmit = (PersonalInfo) => {
-    dispatch(
+    if (personalVerifier(PersonalInfo)) {
+      return Alert.alert(
+        'Erro',
+        'Preencha corretamente os campos de informações pessoais.'
+      );
+    }
+
+    return dispatch(
       createPersonalDataRequest(PersonalInfo, navigation, 'LocationPage')
     );
   };
