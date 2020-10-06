@@ -22,7 +22,11 @@ function MySellsByIdPage({ isFocused, navigation }) {
       },
     });
 
-    SetMySells(response.data);
+    const organizedData = response.data.sort((a, b) => {
+      return new Date(b.createdAt) - new Date(a.createdAt);
+    });
+
+    SetMySells(organizedData);
     setLoading(false);
   };
 

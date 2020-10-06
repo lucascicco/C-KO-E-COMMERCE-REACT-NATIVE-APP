@@ -1,77 +1,64 @@
-import React, { useEffect } from 'react';
-import {
-  Animated,
-  Keyboard,
-  Platform,
-  TouchableWithoutFeedback,
-  Alert,
-} from 'react-native';
+/* eslint-disable no-unused-vars */
+import React, { useState, useEffect } from 'react';
+import { Keyboard, TouchableWithoutFeedback, Alert } from 'react-native';
 import PropTypes from 'prop-types';
-import { ImageResizingEventThree } from '~/utils/KeyboardsEvents';
 import Background from '~/components/Backgrounds/Background2';
-import ProductForm from '~/components/ProductForm';
+
+import ImageForm from '~/components/ProductForm/ImageForm';
+import DataForm from '~/components/ProductForm/DataForm';
+import DescriptionForm from '~/components/ProductForm/DescriptionFormScreen';
+
+import { productVerifier } from '~/utils/EmptyObjectVerifier';
 
 export default function CreateProductPage({ navigation }) {
-  const typeOfPlatform = Platform.OS === 'ios';
+  const [screen, setScreen] = useState('image');
+  const [imageState, setImage] = useState([]);
+  const [formDataState, setformDataState] = useState([]);
+  const [descriptionState, setDescriptionState] = useState('');
 
-  const ViewHeight = new Animated.Value(175);
-  const ViewWidth = new Animated.Value(175);
-  const FontSize = new Animated.Value(22);
+  const handleImage = (image) => {
+    if (image.url === null) {
+      return;
+    }
+    setImage(image);
+    setScreen('dataform');
+  };
 
-  useEffect(() => {
-    const typeOfShow = typeOfPlatform ? 'keyboardWillShow' : 'keyboardDidShow';
-    const typeOfHide = typeOfPlatform ? 'keyboardWillHide' : 'keyboardDidHide';
-
-    Keyboard.addListener(
-      typeOfShow,
-      ImageResizingEventThree('show', ViewHeight, ViewWidth, FontSize)
-    );
-    Keyboard.addListener(
-      typeOfHide,
-      ImageResizingEventThree('hide', ViewHeight, ViewWidth, FontSize)
-    );
-
-    return () => {
-      Keyboard.removeListener(
-        typeOfShow,
-        ImageResizingEventThree('show', ViewHeight, ViewWidth, FontSize)
-      );
-      Keyboard.removeListener(
-        typeOfHide,
-        ImageResizingEventThree('hide', ViewHeight, ViewWidth, FontSize)
-      );
-    };
-  }, []);
-
-  function isEmpty(obj) {
-    const emptyValue = Object.values(obj).some((element) => element === '');
-    const invalidCategory = obj.category === 0;
-
-    return emptyValue || invalidCategory;
-  }
-
-  const handleSubmit = (product) => {
-    if (isEmpty(product)) {
-      return Alert.alert(
-        'Preencha os campos',
-        'Antes de passar para a próxima página, preencha todos os campos adequadamente.'
-      );
+  const handleDataForm = (formData) => {
+    if (productVerifier(formData)) {
+      return;
     }
 
-    return navigation.navigate('SendingInformations', {
-      product,
+    setformDataState(formData);
+    setScreen('description');
+  };
+
+  const handleDescription = (description) => {
+    if (description.length < 50) {
+      return;
+    }
+    setDescriptionState(description);
+
+    navigation.navigate('SendingInformations', {
+      product: {
+        image: imageState,
+        product_name: formDataState.product_name,
+        category: formDataState.category,
+        quantity: formDataState.quantity,
+        description: descriptionState,
+        price: formDataState.price,
+      },
     });
   };
 
   return (
     <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
       <Background>
-        <ProductForm
-          ViewHeight={ViewHeight}
-          ViewWidth={ViewWidth}
-          FontSize={FontSize}
-          onClickSubmit={handleSubmit}
-        />
+        {screen === 'image' && <ImageForm onClickSubmit={handleImage} />}
+        {screen === 'dataform' && <DataForm onClickSubmit={handleDataForm} />}
+        {screen === 'description' && (
+          <DescriptionForm onClickSubmit={handleDescription} />
+        )}
       </Background>
     </TouchableWithoutFeedback>
   );

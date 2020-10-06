@@ -30,11 +30,13 @@ import {
 export default function PurchaseDone({ continueBuying, item }) {
   const { purchase, seller_info } = item;
 
-  const dataCompra = format(new Date(purchase.createdAt), 'dd/MM/yyyy');
+  const dateDeliver = format(new Date(purchase.deliver_date), 'dd/MM/yyyy');
+
   const product_price = purchase.total_price.toLocaleString('pt-BR', {
     style: 'currency',
     currency: 'BRL',
   });
+
   return (
     <Container>
       <Title_View_Row>
@@ -49,8 +51,8 @@ export default function PurchaseDone({ continueBuying, item }) {
       <Purchase_data>
         <Row_View>
           <Column_View>
-            <Purchase_title>Data da Compra</Purchase_title>
-            <Purchase_small>{dataCompra}</Purchase_small>
+            <Purchase_title>Data limite para entrega</Purchase_title>
+            <Purchase_small>{dateDeliver}</Purchase_small>
           </Column_View>
 
           <Column_View>
@@ -104,6 +106,7 @@ PurchaseDone.propTypes = {
       purchase_code: PropTypes.string.isRequired,
       createdAt: PropTypes.instanceOf(Date).isRequired,
       total_price: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+      deliver_date: PropTypes.instanceOf(Date).isRequired,
     }).isRequired,
     seller_info: PropTypes.shape({
       name: PropTypes.string.isRequired,

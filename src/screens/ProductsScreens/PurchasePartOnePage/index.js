@@ -46,6 +46,7 @@ export default function PurchaseTotalPage({ navigation }) {
           purchase_total: total_products,
           payment_form: payment,
           frete_price,
+          frete_date: frete.freteDays,
           total_price,
           location: location.id,
         },

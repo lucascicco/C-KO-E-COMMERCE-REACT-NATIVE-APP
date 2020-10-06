@@ -12,6 +12,7 @@ import {
 } from 'react-native';
 import PropTypes from 'prop-types';
 import Modal from 'react-native-modal';
+import { addDays } from 'date-fns';
 import { CreditCardInput } from '~/utils/react-native-credit-card';
 import Background from '~/components/Backgrounds/Background3';
 import api from '~/services/api';
@@ -52,13 +53,15 @@ export default function PurchasePage({ navigation }) {
   };
 
   const handleSubmit = async () => {
-    if (Valid) {
+    if (!Valid) {
       Alert.alert(
         'Dados inválidos',
         'Por favor, verifique o número do cartão de crédito.'
       );
     } else {
       setLoading(true);
+
+      const daysMaxDeliver = addDays(new Date(payload.frete_date), 3);
 
       const response = await api.post('createPurchase', {
         product: payload.product,
@@ -68,6 +71,7 @@ export default function PurchasePage({ navigation }) {
         location: payload.location,
         payment_form: payload.payment_form,
         total_price: payload.total_price,
+        frete_date: daysMaxDeliver,
       });
 
       Keyboard.dismiss();

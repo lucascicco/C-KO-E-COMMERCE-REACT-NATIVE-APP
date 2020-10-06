@@ -15,7 +15,11 @@ function MyPurchases({ isFocused, navigation }) {
   const loadMySells = async () => {
     const response = await api.get('myPurchases');
 
-    setMyPurchases(response.data);
+    const organizedData = response.data.sort((a, b) => {
+      return new Date(b.createdAt) - new Date(a.createdAt);
+    });
+
+    setMyPurchases(organizedData);
     setLoading(false);
   };
 
@@ -32,7 +36,9 @@ function MyPurchases({ isFocused, navigation }) {
       ) : (
         <>
           {myPurchases.length === 0 ? (
-            <TextNoPurchases>Você ainda realizou uma compra.</TextNoPurchases>
+            <TextNoPurchases>
+              Você ainda não realizou uma compra.
+            </TextNoPurchases>
           ) : (
             <FlatlistProducts data={myPurchases} navigation={navigation} />
           )}

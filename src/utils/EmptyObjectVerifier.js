@@ -25,3 +25,10 @@ export const personalVerifier = (obj) => {
     identificationValue
   );
 };
+
+export const productVerifier = (obj) => {
+  const emptyValue = Object.values(obj).some((element) => element === '');
+  const invalidCategory = obj.category === 0;
+
+  return emptyValue || invalidCategory;
+};

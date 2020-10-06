@@ -15,7 +15,11 @@ function MySellsPage({ isFocused }) {
   const loadMySells = async () => {
     const response = await api.get('mySells');
 
-    SetMySells(response.data);
+    const organizedData = response.data.sort((a, b) => {
+      return new Date(b.createdAt) - new Date(a.createdAt);
+    });
+
+    SetMySells(organizedData);
     setLoading(false);
   };
 
