@@ -1,6 +1,6 @@
 /* eslint-disable prettier/prettier */
 import React, { useEffect, useState } from 'react';
-import {  Alert } from 'react-native';
+import { Alert, Animated, StyleSheet } from 'react-native';
 import PropTypes from 'prop-types';
 import * as ImagePicker from 'expo-image-picker';
 import Constants from 'expo-constants';
@@ -10,9 +10,9 @@ import * as Permissions from 'expo-permissions';
 import ProductImage from '../ProductImage';
 
 
-import { Container, SubmitButton } from './styles';
+import { ImageButton } from './styles';
 
-export default function ImageForm({ onClickSubmit }) {
+export default function ImageForm({ onClickSubmit, positionY }) {
   const [ProductPicture, setProductImage] = useState([]);
 
   const getPermissionAsync = async () => {
@@ -54,18 +54,35 @@ export default function ImageForm({ onClickSubmit }) {
   }, []);
 
   return (
-    <Container>
+    <Animated.View style={[styles.View, {
+      transform: [{
+        translateY: positionY
+      }]
+    }]}>
       <ProductImage
         onPress={HandleChoosePhoto}
         uri={ProductPicture.uri}
       />
-      <SubmitButton style={{ background: '#283593' }} onPress={HandleSubmit}>
+
+      <ImageButton style={{ background: '#283593' }} onPress={HandleSubmit}>
         Próximo
-      </SubmitButton>
-    </Container>
+      </ImageButton>
+    </Animated.View>
   );
 }
 
+const styles = StyleSheet.create({
+  View: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    paddingVertical: 15,
+    paddingHorizontal: 0,
+    marginTop: 10
+  }
+});
+
 ImageForm.propTypes = {
   onClickSubmit: PropTypes.func.isRequired,
+  positionY: PropTypes.number.isRequired,
 };

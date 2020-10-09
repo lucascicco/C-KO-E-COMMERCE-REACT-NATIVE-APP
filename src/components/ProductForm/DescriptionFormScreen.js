@@ -1,8 +1,10 @@
+/* eslint-disable prettier/prettier */
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
-import { Container, SubmitButton, DescriptionForm } from './styles';
+import { StyleSheet, Animated } from 'react-native';
+import { SubmitButton, DescriptionForm } from './styles';
 
-export default function DescriptionFormScreen({ onClickSubmit }) {
+export default function DescriptionFormScreen({ onClickSubmit, positionY }) {
   const [Description, setDescription] = useState('');
 
   const HandleSubmit = () => {
@@ -10,7 +12,11 @@ export default function DescriptionFormScreen({ onClickSubmit }) {
   };
 
   return (
-    <Container>
+    <Animated.View style={[styles.View, {
+      transform: [{
+        translateY: positionY
+      }]
+    }]}>
       <DescriptionForm
         multiline
         autoCorrect
@@ -19,15 +25,26 @@ export default function DescriptionFormScreen({ onClickSubmit }) {
         onChangeText={(description) => setDescription(description)}
         placeholder="Descrição"
         maxLength={350}
-        maxHeight={70}
+        maxHeight={150}
       />
+
       <SubmitButton style={{ background: '#283593' }} onPress={HandleSubmit}>
         Próximo
       </SubmitButton>
-    </Container>
+    </Animated.View>
   );
 }
 
+const styles = StyleSheet.create({
+  View: {
+    flex: 1,
+    paddingVertical: 30,
+    paddingHorizontal: 15,
+    marginTop: 10,
+  },
+});
+
 DescriptionFormScreen.propTypes = {
   onClickSubmit: PropTypes.func.isRequired,
+  positionY: PropTypes.number.isRequired,
 };

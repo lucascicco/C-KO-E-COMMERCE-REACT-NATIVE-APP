@@ -1,64 +1,32 @@
 import styled from 'styled-components/native';
-import { Platform } from 'react-native';
 
-import Input from '~/components/TextInput';
-import Button from '~/components/ButtonType1';
-
-export const Container = styled.KeyboardAvoidingView.attrs({
-  enabled: Platform.OS === 'ios',
-  behavior: 'padding',
-})`
+export const ForbidenView = styled.View`
   flex: 1;
+  padding: 0 30px;
+  justify-content: center;
+`;
+
+export const TouchableButton = styled.TouchableOpacity`
+  flex-direction: row;
+  padding: 15px;
+  background: white;
   justify-content: center;
   align-items: center;
-  padding: 0 15px;
-  margin-top: 10px;
+  border: 1px solid black;
 `;
 
-export const Form = styled.View`
-  margin-top: 10px;
-  align-self: stretch;
-`;
-
-export const MultiInput = styled.View`
-  flex-direction: row;
-  margin-bottom: 10px;
-`;
-
-export const FormInput = styled(Input)`
-  margin-right: 10px;
-  padding: 0 5px;
-`;
-
-export const SubmitButton = styled(Button)`
-  margin-top: 0px;
-  background: ${(props) => props.style.background};
-`;
-
-export const SignLink = styled.TouchableOpacity`
-  margin-top: 20px;
-`;
-
-export const SignLinkText = styled.Text`
-  color: #0d47a1;
-  font-size: 16px;
-`;
-
-export const Strong = styled.Text`
-  font-weight: bold;
-`;
-
-export const DescriptionForm = styled.TextInput.attrs({
-  placeholderTextColor: '#FFF',
-})`
+export const ButtonText = styled.Text`
+  font-family: raleway-bold;
   font-size: 20px;
-  background: #546e7a;
-  border-radius: 4px;
-  padding: 10px;
-  color: #fff;
-  margin-bottom: 10px;
-  font-family: raleway;
 `;
 
-export const IMAGE_HEIGHT = 200;
-export const IMAGE_HEIGHT_SMALL = 100;
+export const ForbidenText = styled.Text`
+  font-family: raleway-bold;
+  font-size: 17px;
+  text-align: center;
+  margin-bottom: 15px;
+`;
+
+export const FormView = styled.View`
+  flex: 1;
+`;

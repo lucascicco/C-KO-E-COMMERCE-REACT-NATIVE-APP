@@ -1,13 +1,16 @@
 import styled from 'styled-components/native';
-import { Platform } from 'react-native';
 
 import Input from '../TextInput';
 import Button from '../ButtonType1';
 
-export const Container = styled.KeyboardAvoidingView.attrs({
-  enabled: Platform.OS === 'ios',
-  behavior: 'padding',
-})`
+export const Container = styled.View`
+  flex: 1;
+  align-items: center;
+  padding: 30px 15px;
+  margin-top: 10px;
+`;
+
+export const ContainerImage = styled.View`
   flex: 1;
   justify-content: center;
   align-items: center;
@@ -33,6 +36,13 @@ export const FormInput = styled(Input)`
 export const SubmitButton = styled(Button)`
   margin-top: 0px;
   background: ${(props) => props.style.background};
+  width: 100%;
+`;
+
+export const ImageButton = styled(Button)`
+  margin-top: 20px;
+  background: ${(props) => props.style.background};
+  width: 80%;
 `;
 
 export const SignLink = styled.TouchableOpacity`
@@ -58,6 +68,8 @@ export const DescriptionForm = styled.TextInput.attrs({
   color: #fff;
   margin-bottom: 10px;
   font-family: raleway;
+  height: 150px;
+  width: 100%;
 `;
 
 export const IMAGE_HEIGHT = 200;

@@ -1,18 +1,17 @@
+/* eslint-disable prettier/prettier */
 import React, { useState, useRef } from 'react';
-import { Platform } from 'react-native';
+import { Platform,  Animated, StyleSheet } from 'react-native';
 import PropTypes from 'prop-types';
 
 import MaskedInput from '../TextInputMasked';
 // eslint-disable-next-line import/no-unresolved
-import Picker from '../Picker';
-
-import Categorias from '~/utils/Categorias.js';
+import PickerCategory from '~/components/PickerCategory';
 
 import { onChange_onlyText, onChange_onlyNumber } from '~/utils/RestrictInputs';
 
-import { Container, Form, FormInput, SubmitButton, MultiInput } from './styles';
+import { Form, FormInput, SubmitButton, MultiInput } from './styles';
 
-export default function ProductForm({ onClickSubmit }) {
+export default function ProductForm({ onClickSubmit, positionY }) {
   const typeOfPlatform = Platform.OS === 'ios';
   const typeOfkeyboardType = typeOfPlatform
     ? 'numbers-and-punctuation'
@@ -20,7 +19,7 @@ export default function ProductForm({ onClickSubmit }) {
 
   const ProductNameRef = useRef();
   const QuantityRef = useRef();
-  let PriceRef;
+  let moneyField;
 
   const [ProductName, setProductName] = useState('');
   const [Category, setCategory] = useState('');
@@ -29,19 +28,23 @@ export default function ProductForm({ onClickSubmit }) {
   const [Quantity, setQuantity] = useState('');
   const [Price, setPrice] = useState('');
 
-  const [CategoryLabel, setCategoryLabel] = useState('Categoria');
+  const [CategoryLabel, setCategoryLabel] = useState('Categorias');
 
   const HandleSubmit = () => {
     onClickSubmit({
       product_name: ProductName,
       category: CategoryId,
       quantity: Quantity,
-      price: Price,
+      price: moneyField.getRawValue(),
     });
   };
 
   return (
-    <Container>
+    <Animated.View style={[styles.View, {
+      transform: [{
+        translateY: positionY
+      }]
+    }]}>
       <Form>
         <FormInput
           placeholder="Nome do produto"
@@ -52,23 +55,23 @@ export default function ProductForm({ onClickSubmit }) {
           value={ProductName}
           onChangeText={(text) => onChange_onlyText(text, setProductName)}
           ref={ProductNameRef}
-          onSubmitEditing={() => PriceRef.getElement().focus()}
         />
 
-        <Picker
-          label="Selecione a categoria"
-          value="Categoria"
-          style={{ width: '100%', marginBottom: 10 }}
-          text={CategoryLabel}
-          data={Categorias}
+        <PickerCategory 
           selectedValue={Category}
-          onValueChange={(itemValue, itemIndex) => {
-            setCategory(itemValue);
-            setCategoryId(itemIndex);
-            setCategoryLabel(itemValue);
+          text={CategoryLabel}
+          onValueChange={(item, itemIndex) => {
+            setCategoryLabel(item)
+            setCategory(item)
+            setCategoryId(itemIndex)
           }}
+          itemStyle={{
+            fontFamily: 'raleway',
+            fontSize: 25,
+          }}
+          mode="dropdown"
           editable
-        />
+          />
 
         <MultiInput>
           <MaskedInput
@@ -84,15 +87,15 @@ export default function ProductForm({ onClickSubmit }) {
             }}
             blurOnSubmit={false}
             value={Price}
+            ref={(ref) => moneyField = ref}
             onChangeText={(number) => setPrice(number)}
             // eslint-disable-next-line no-return-assign
-            ref={(ref) => (PriceRef = ref)}
             onSubmitEditing={() => QuantityRef.current.focus()}
           />
 
           <FormInput
             placeholder="Quantidade"
-            maxLength={5}
+            maxLength={3}
             keyboardType={typeOfkeyboardType}
             returnKeyType="next"
             style={{ width: '50%' }}
@@ -109,10 +112,21 @@ export default function ProductForm({ onClickSubmit }) {
           Próximo
         </SubmitButton>
       </Form>
-    </Container>
+    </Animated.View>
   );
 }
 
+const styles = StyleSheet.create({
+  View: {
+    flex: 1,
+    paddingVertical: 30,
+    paddingHorizontal: 15,
+    marginTop: 10
+  }
+});
+
+
 ProductForm.propTypes = {
   onClickSubmit: PropTypes.func.isRequired,
+  positionY: PropTypes.number.isRequired,
 };

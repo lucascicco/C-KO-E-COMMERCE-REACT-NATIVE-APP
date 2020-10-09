@@ -2,20 +2,18 @@ import React from 'react';
 import { Picker } from '@react-native-community/picker';
 import PropTypes from 'prop-types';
 import { ContainerAndroid } from './styles';
+import Categorias from '~/utils/Categorias';
 
-export default function PickerCustomX({ style, data, ...rest }) {
+export default function PickerCustomX({ style, ...rest }) {
   return (
     <ContainerAndroid style={style}>
       <Picker {...rest} style={{ color: '#fff' }}>
-        {data.map((item, index) => {
-          const labelName = `${item.sigla || index + 1} - ${item.nome}`;
-          const labelInUse = item.nome ? labelName : `${item}`;
-
+        {Categorias.map((item) => {
           return (
             <Picker.Item
-              label={labelInUse}
-              value={item.sigla || item}
-              key={item.sigla || index + 1}
+              label={item.category}
+              value={item.category}
+              key={item.category_id}
             />
           );
         })}

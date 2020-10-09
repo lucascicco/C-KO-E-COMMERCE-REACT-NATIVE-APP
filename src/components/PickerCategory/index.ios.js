@@ -4,6 +4,7 @@ import { Picker } from '@react-native-community/picker';
 import PropTypes from 'prop-types';
 import ButtonType2 from '../ButtonType2';
 import Button from '../ButtonType1';
+import Categorias from '~/utils/Categorias';
 
 import { MainContainer, Container } from './styles';
 
@@ -11,9 +12,6 @@ export default function PickerCustomY({
   editable,
   style,
   styleButton,
-  label,
-  value,
-  data,
   text,
   ...rest
 }) {
@@ -23,7 +21,7 @@ export default function PickerCustomY({
     <MainContainer style={style}>
       <ButtonType2
         onPress={() => (editable ? setModalVisible(true) : null)}
-        text={text}
+        text={text || 'Categorias'}
         icon="select-arrows"
         style={styleButton}
       />
@@ -48,14 +46,14 @@ export default function PickerCustomY({
               height: 300,
             }}
           >
-            <Picker.Item label={label} value={value} />
+            <Picker.Item label="Selecione uma categoria" value={null} />
 
-            {data.map((item, index) => {
+            {Categorias.map((item) => {
               return (
                 <Picker.Item
-                  label={item.nome || item}
-                  value={item.sigla || item}
-                  key={item.sigla || index}
+                  label={item.category}
+                  value={item.category}
+                  key={item.category_id}
                 />
               );
             })}
@@ -79,9 +77,6 @@ PickerCustomY.propTypes = {
   editable: PropTypes.bool.isRequired,
   label: PropTypes.string.isRequired,
   value: PropTypes.string.isRequired,
-  data: PropTypes.arrayOf(
-    PropTypes.oneOfType([PropTypes.object, PropTypes.string, PropTypes.number])
-  ).isRequired,
   text: PropTypes.string.isRequired,
   style: PropTypes.objectOf(
     PropTypes.oneOfType([PropTypes.string, PropTypes.number])
