@@ -130,7 +130,7 @@ export default function PersonalForm({ onClickSubmit, personal }) {
 PersonalForm.propTypes = {
   onClickSubmit: PropTypes.func.isRequired,
   personal: PropTypes.shape({
-    birthday: PropTypes.instanceOf(Date).isRequired,
+    birthday: PropTypes.string.isRequired,
     identification: PropTypes.string.isRequired,
     cellphone: PropTypes.string.isRequired,
     profession: PropTypes.string.isRequired,

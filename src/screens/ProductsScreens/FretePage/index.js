@@ -73,35 +73,32 @@ export default function ChangeAddress({ navigation }) {
 
   const handleSubmit = (LocationData) => {
     if (locationVerifier(LocationData)) {
-      return Alert.alert(
-        'Erro',
-        'Preencha corretamente os campos de localização.'
-      );
+      Alert.alert('Erro', 'Preencha corretamente os campos de localização.');
+    } else {
+      Keyboard.dismiss();
+
+      setLocationState(LocationData);
+      setEnable(false);
     }
-
-    Keyboard.dismiss();
-
-    setLocationState(LocationData);
-    setEnable(false);
   };
 
   const GoNextPart = () => {
     if (locationState === null) {
-      return Alert.alert(
+      Alert.alert(
         'Endereço inválido',
         'Antes de ir para a próxima parte, preencha sua localização corretamente.'
       );
+    } else {
+      LayoutAnimation.configureNext(
+        LayoutAnimation.create(
+          300,
+          LayoutAnimation.Types.easeIn,
+          LayoutAnimation.Properties.opacity
+        )
+      );
+
+      setTransitionState('SecondPart');
     }
-
-    LayoutAnimation.configureNext(
-      LayoutAnimation.create(
-        300,
-        LayoutAnimation.Types.easeIn,
-        LayoutAnimation.Properties.opacity
-      )
-    );
-
-    setTransitionState('SecondPart');
   };
 
   const GoBackPart = () => {

@@ -151,7 +151,6 @@ export default function CreateProductPage({ navigation }) {
                 </ForbidenText>
                 <ObsText>
                   Observação: Limite máximo de 20 produtos por usuário.
-                  Quantidade de produtos já criados por você: {quantityPd}
                 </ObsText>
                 <ForbidenText>Equipe C-KO, agradece.</ForbidenText>
                 <TouchableButton

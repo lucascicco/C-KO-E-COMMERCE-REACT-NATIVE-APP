@@ -13,7 +13,8 @@ import {
 import PropTypes from 'prop-types';
 import Modal from 'react-native-modal';
 import { addDays } from 'date-fns';
-import { CreditCardInput } from '~/utils/react-native-credit-card';
+import { CreditCardInput } from 'react-native-credit-card-input-ecotrade';
+
 import Background from '~/components/Backgrounds/Background3';
 import api from '~/services/api';
 import { Container, SubmitButton, SecurityText, PaymentView } from './styles';
@@ -26,12 +27,9 @@ if (Platform.OS === 'android') {
 }
 
 export default function PurchasePage({ navigation }) {
-  const [CardNumber, setCardNumber] = useState('');
-  const [CVC, setCVC] = useState('');
-  const [ExpireDate, setExpireDate] = useState('');
-  const [Owner, setOwner] = useState('');
-  const [typeCard, setTypeCard] = useState('');
   const [Valid, setValid] = useState(false);
+  const [valuesState, SetValue] = useState([]);
+
   const [CardView, setCardView] = useState(false);
   const [loading, setLoading] = useState(false);
   const [visible, setVisible] = useState(false);
@@ -42,14 +40,8 @@ export default function PurchasePage({ navigation }) {
   const payload = navigation.getParam('payload');
 
   const setCardValues = ({ values, valid }) => {
-    const { number, cvc, type, name, expiry } = values;
-
-    setCardNumber(number);
-    setCVC(cvc);
-    setExpireDate(expiry);
-    setOwner(name);
-    setTypeCard(type);
     setValid(valid);
+    SetValue(values);
   };
 
   const handleSubmit = async () => {
@@ -125,7 +117,7 @@ export default function PurchasePage({ navigation }) {
               }}
               labelStyle={{
                 color: 'white',
-                fontSize: 15,
+                fontSize: 13,
               }}
               inputStyle={{
                 color: 'black',

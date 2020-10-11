@@ -21,6 +21,13 @@ export default function ItemsBox({ data, navigation }) {
 }
 
 ItemsBox.propTypes = {
-  data: PropTypes.instanceOf(Date).isRequired,
+  data: PropTypes.arrayOf(
+    PropTypes.shape({
+      id: PropTypes.number.isRequired,
+      url: PropTypes.string.isRequired,
+      product_name: PropTypes.string.isRequired,
+      price: PropTypes.number.isRequired,
+    })
+  ).isRequired,
   navigation: PropTypes.func.isRequired,
 };

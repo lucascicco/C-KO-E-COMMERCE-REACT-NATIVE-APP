@@ -114,11 +114,7 @@ export default function PurchaseTotalPage({ navigation }) {
           <PaymentTypeView>
             <RadioTitle>
               <NormalText>Forma de pagamento</NormalText>
-              {payment === 'creditcard' ? (
-                <FontAwesome name="credit-card" size={25} color="white" />
-              ) : (
-                <FontAwesome name="money" size={25} color="white" />
-              )}
+              <FontAwesome name="credit-card" size={25} color="white" />
             </RadioTitle>
 
             <TouchableOpacity onPress={() => setPayment('creditcard')}>
@@ -128,19 +124,7 @@ export default function PurchaseTotalPage({ navigation }) {
                   value="creditcard"
                   status={payment === 'creditcard' ? 'checked' : 'unchecked'}
                 />
-
                 <RadioText>Cartão de crédito</RadioText>
-              </RadioView>
-            </TouchableOpacity>
-
-            <TouchableOpacity onPress={() => setPayment('cash')}>
-              <RadioView>
-                <RadioButton
-                  color="white"
-                  value="cash"
-                  status={payment === 'cash' ? 'checked' : 'unchecked'}
-                />
-                <RadioText>Boleto bancário</RadioText>
               </RadioView>
             </TouchableOpacity>
           </PaymentTypeView>

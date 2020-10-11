@@ -2132,7 +2132,14 @@ capture-exit@^2.0.0:
   dependencies:
     rsvp "^4.8.4"
 
-card-validator@^8.1.0:
+card-validator@^6.2.0:
+  version "6.2.0"
+  resolved "https://registry.yarnpkg.com/card-validator/-/card-validator-6.2.0.tgz#59037c6480df5786473cab720f165ba868560e0b"
+  integrity sha512-1vYv45JaE9NmixZr4dl6ykzbFKv7imI9L7MQDs235b/a7EGbG8rrEsipeHtVvscLSUbl3RX6UP5gyOe0Y2FlHA==
+  dependencies:
+    credit-card-type "^8.0.0"
+
+card-validator@^8.0.0, card-validator@^8.1.0:
   version "8.1.0"
   resolved "https://registry.yarnpkg.com/card-validator/-/card-validator-8.1.0.tgz#9f59e039e9a15f66152b228831f3bdcd713f1edf"
   integrity sha512-KlWjnGs6DyxRj9DLGPv+sb7AvU9Y6Od7DJWjnTghzplzsKz/vTYqRMK46xO/BCpHNqvnFNNVbSQa1vBFJ+/o8g==
@@ -2457,6 +2464,11 @@ create-react-class@^15.6.2, create-react-class@^15.6.3:
     fbjs "^0.8.9"
     loose-envify "^1.3.1"
     object-assign "^4.1.1"
+
+credit-card-type@^8.0.0:
+  version "8.3.0"
+  resolved "https://registry.yarnpkg.com/credit-card-type/-/credit-card-type-8.3.0.tgz#f93c187c9362411544158c91d552efcc443aa87a"
+  integrity sha512-czfZUpQ7W9CDxZL4yFLb1kFtM/q2lTOY975hL2aO+DC8+GRNDVSXVCHXhVFZPxiUKmQCZbFP8vIhxx5TBQaThw==
 
 credit-card-type@^9.0.0:
   version "9.0.1"
@@ -4550,10 +4562,30 @@ locate-path@^5.0.0:
   dependencies:
     p-locate "^4.1.0"
 
+lodash.compact@^3.0.1:
+  version "3.0.1"
+  resolved "https://registry.yarnpkg.com/lodash.compact/-/lodash.compact-3.0.1.tgz#540ce3837745975807471e16b4a2ba21e7256ca5"
+  integrity sha1-VAzjg3dFl1gHRx4WtKK6IeclbKU=
+
+lodash.every@^4.6.0:
+  version "4.6.0"
+  resolved "https://registry.yarnpkg.com/lodash.every/-/lodash.every-4.6.0.tgz#eb89984bebc4364279bb3aefbbd1ca19bfa6c6a7"
+  integrity sha1-64mYS+vENkJ5uzrvu9HKGb+mxqc=
+
+lodash.pick@^4.4.0:
+  version "4.4.0"
+  resolved "https://registry.yarnpkg.com/lodash.pick/-/lodash.pick-4.4.0.tgz#52f05610fff9ded422611441ed1fc123a03001b3"
+  integrity sha1-UvBWEP/53tQiYRRB7R/BI6AwAbM=
+
 lodash.throttle@^4.1.1:
   version "4.1.1"
   resolved "https://registry.yarnpkg.com/lodash.throttle/-/lodash.throttle-4.1.1.tgz#c23e91b710242ac70c37f1e1cda9274cc39bf2f4"
   integrity sha1-wj6RtxAkKscMN/HhzaknTMOb8vQ=
+
+lodash.values@^4.3.0:
+  version "4.3.0"
+  resolved "https://registry.yarnpkg.com/lodash.values/-/lodash.values-4.3.0.tgz#a3a6c2b0ebecc5c2cba1c17e6e620fe81b53d347"
+  integrity sha1-o6bCsOvsxcLLocF+bmIP6BtT00c=
 
 lodash@^4.17.11, lodash@^4.17.14, lodash@^4.17.15, lodash@^4.17.19, lodash@^4.17.20, lodash@^4.17.4, lodash@^4.3.0, lodash@^4.5.0, lodash@^4.6.0:
   version "4.17.20"
@@ -5705,6 +5737,19 @@ react-native-awesome-card-io@^0.8.3:
   dependencies:
     prop-types "^15.6.2"
 
+react-native-credit-card-input-ecotrade@^1.0.4:
+  version "1.0.4"
+  resolved "https://registry.yarnpkg.com/react-native-credit-card-input-ecotrade/-/react-native-credit-card-input-ecotrade-1.0.4.tgz#e54929c342829c293816fcef8fb1d917a47bf06f"
+  integrity sha512-qb3h4pyxR2b5StB9UI9mOSVdTfXsQ/08KCIb3K7e4cLWaRH/sxmEhcx1KQGKio9WRLh9Bj5IyJ+LyBPjb23/xA==
+  dependencies:
+    card-validator "^8.0.0"
+    lodash.compact "^3.0.1"
+    lodash.every "^4.6.0"
+    lodash.pick "^4.4.0"
+    lodash.values "^4.3.0"
+    prop-types "^15.6.0"
+    react-native-flip-card "^3.4.1"
+
 react-native-date-picker@^3.2.0:
   version "3.2.0"
   resolved "https://registry.yarnpkg.com/react-native-date-picker/-/react-native-date-picker-3.2.0.tgz#756364e95ed3c355d5b519a674c364f3c1544a8a"
@@ -5712,7 +5757,7 @@ react-native-date-picker@^3.2.0:
   dependencies:
     moment "^2.22.1"
 
-react-native-flip-card@^3.5.6:
+react-native-flip-card@^3.4.1, react-native-flip-card@^3.5.6:
   version "3.5.6"
   resolved "https://registry.yarnpkg.com/react-native-flip-card/-/react-native-flip-card-3.5.6.tgz#de26f0285aa6f8ee10bb4b696c60c6fb43bb580f"
   integrity sha512-lqsjl4vF5DyHD7mjBJpyBoaLKVxalzoKfCosE63QF+TaCF9MKdJrxmGFQj/i64GDiMJqeS/5sNDcICUXtgFsVA==
@@ -5743,6 +5788,19 @@ react-native-image-picker@^2.3.3:
   version "2.3.3"
   resolved "https://registry.yarnpkg.com/react-native-image-picker/-/react-native-image-picker-2.3.3.tgz#eaacd4a1ed9e9887613be31f0765478ca2f18a51"
   integrity sha512-i/7JDnxKkUGSbFY2i7YqFNn3ncJm1YlcrPKXrXmJ/YUElz8tHkuwknuqBd9QCJivMfHX41cmq4XvdBDwIOtO+A==
+
+react-native-input-credit-card@^0.5.5:
+  version "0.5.5"
+  resolved "https://registry.yarnpkg.com/react-native-input-credit-card/-/react-native-input-credit-card-0.5.5.tgz#f983c407607110e8a46d5a27060abc1ac0f47e6f"
+  integrity sha512-paE9+sTNKsrpVaBlSVylA7LAKGSQ5T97zb/NLxCG9rwalzS50j55yORt5mjQy2d2Mmmry0shJBhPx7sPdjh9Bg==
+  dependencies:
+    card-validator "^6.2.0"
+    lodash.compact "^3.0.1"
+    lodash.every "^4.6.0"
+    lodash.pick "^4.4.0"
+    lodash.values "^4.3.0"
+    prop-types "^15.6.0"
+    react-native-flip-card "^3.4.1"
 
 react-native-iphone-x-helper@^1.2.1:
   version "1.2.1"

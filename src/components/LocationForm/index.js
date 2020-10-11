@@ -166,7 +166,7 @@ LocationPage.propTypes = {
     city: PropTypes.string.isRequired,
     neighborhood: PropTypes.string.isRequired,
     street: PropTypes.string.isRequired,
-    street_number: PropTypes.number.isRequired,
+    street_number: PropTypes.string.isRequired,
     postcode: PropTypes.string.isRequired,
   }).isRequired,
 };
