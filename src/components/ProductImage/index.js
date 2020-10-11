@@ -44,6 +44,10 @@ const styles = StyleSheet.create({
 });
 
 ProductImage.propTypes = {
-  uri: PropTypes.string.isRequired,
+  uri: PropTypes.string,
   onPress: PropTypes.func.isRequired,
+};
+
+ProductImage.defaultProps = {
+  uri: undefined,
 };

@@ -15,7 +15,7 @@ export default function ScrollViewOptions({ navigation, signOut }) {
         Alterar dados cadastrais
       </ScrollViewItem>
       <ScrollViewItem onPress={() => navigation.navigate('ChangePersonal')}>
-        Alterar dados pessoais{' '}
+        Alterar dados pessoais
       </ScrollViewItem>
       <ScrollViewItem onPress={() => navigation.navigate('ChangeLocation')}>
         Alterar localização

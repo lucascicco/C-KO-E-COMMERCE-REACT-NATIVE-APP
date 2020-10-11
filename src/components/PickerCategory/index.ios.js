@@ -75,8 +75,6 @@ export default function PickerCustomY({
 
 PickerCustomY.propTypes = {
   editable: PropTypes.bool.isRequired,
-  label: PropTypes.string.isRequired,
-  value: PropTypes.string.isRequired,
   text: PropTypes.string.isRequired,
   style: PropTypes.objectOf(
     PropTypes.oneOfType([PropTypes.string, PropTypes.number])

@@ -27,6 +27,14 @@ export const ForbidenText = styled.Text`
   margin-bottom: 15px;
 `;
 
+export const ObsText = styled.Text`
+  font-family: raleway-bold;
+  font-size: 17px;
+  text-align: center;
+  margin-bottom: 15px;
+  color: #e53935;
+`;
+
 export const FormView = styled.View`
   flex: 1;
 `;

@@ -9,19 +9,20 @@ import {
   onChange_numberWeight,
 } from '~/utils/RestrictInputs';
 
+import ButtonSubmit from '../ButtonType3';
+
 import {
   Container,
   Form,
   FormInput,
   MultiInput,
-  SubmitBottom,
   WarningView,
   WarningText,
   InfoButton,
   InfoText,
 } from './styles';
 
-export default function ProductsFeature({ onClickSubmit }) {
+export default function ProductsFeature({ onClickSubmit, loading, enable }) {
   const HeightRef = useRef();
   const WidthRef = useRef();
   const DiameterRef = useRef();
@@ -198,9 +199,9 @@ export default function ProductsFeature({ onClickSubmit }) {
           </InfoButton>
         </WarningView>
 
-        <SubmitBottom onPress={handleSubmit} style={{ background: '#283593' }}>
+        <ButtonSubmit onPress={handleSubmit} loading={loading} enable={enable}>
           Salvar produto
-        </SubmitBottom>
+        </ButtonSubmit>
       </Form>
     </Container>
   );
@@ -208,4 +209,6 @@ export default function ProductsFeature({ onClickSubmit }) {
 
 ProductsFeature.propTypes = {
   onClickSubmit: PropTypes.func.isRequired,
+  loading: PropTypes.bool.isRequired,
+  enable: PropTypes.bool.isRequired,
 };

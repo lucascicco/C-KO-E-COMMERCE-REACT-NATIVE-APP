@@ -5,10 +5,10 @@ import { StyleSheet, Animated } from 'react-native';
 import { SubmitButton, DescriptionForm } from './styles';
 
 export default function DescriptionFormScreen({ onClickSubmit, positionY }) {
-  const [Description, setDescription] = useState('');
+  const [description, setDescription] = useState('');
 
   const HandleSubmit = () => {
-    onClickSubmit(Description);
+    onClickSubmit(description);
   };
 
   return (
@@ -21,8 +21,8 @@ export default function DescriptionFormScreen({ onClickSubmit, positionY }) {
         multiline
         autoCorrect
         numberOfLines={4}
-        value={Description}
-        onChangeText={(description) => setDescription(description)}
+        value={description}
+        onChangeText={(text) => setDescription(text)}
         placeholder="Descrição"
         maxLength={350}
         maxHeight={150}

@@ -10,7 +10,7 @@ export const Container = styled.View`
 
 export const Form = styled.View`
   margin-top: 10px;
-  align-self: stretch;
+  align-items: center;
 `;
 
 export const MultiInput = styled.View`

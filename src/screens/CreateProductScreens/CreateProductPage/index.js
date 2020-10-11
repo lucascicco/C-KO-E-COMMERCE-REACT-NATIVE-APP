@@ -12,6 +12,7 @@ import Background from '~/components/Backgrounds/Background2';
 import ImageForm from '~/components/ProductForm/ImageForm';
 import DataForm from '~/components/ProductForm/DataForm';
 import DescriptionForm from '~/components/ProductForm/DescriptionFormScreen';
+import api from '~/services/api';
 
 import { productVerifier } from '~/utils/EmptyObjectVerifier';
 import {
@@ -20,14 +21,14 @@ import {
   ButtonText,
   ForbidenText,
   FormView,
+  ObsText,
 } from './styles';
 
 export default function CreateProductPage({ navigation }) {
   const [screen, setScreen] = useState('image');
   const [imageState, setImage] = useState([]);
   const [formDataState, setformDataState] = useState([]);
-  const [descriptionState, setDescriptionState] = useState('');
-  const [forbidden, setForbidden] = useState(true);
+  const [forbidden, setForbidden] = useState(null);
   const [animationOne] = useState(new Animated.Value(0));
   const [animationTwo] = useState(new Animated.Value(600));
   const [animationThree] = useState(new Animated.Value(600));
@@ -78,9 +79,10 @@ export default function CreateProductPage({ navigation }) {
         'Escolha uma imagem',
         'Seu produto precisa obrigatoriamente de uma imagem.'
       );
+    } else {
+      setImage(image);
+      startAnimationOne();
     }
-    setImage(image);
-    startAnimationOne();
   };
 
   const handleDataForm = (formData) => {
@@ -102,26 +104,33 @@ export default function CreateProductPage({ navigation }) {
         'A descrição precisa ser maior que 50 caracteres.'
       );
     } else {
-      setDescriptionState(description);
-
       navigation.navigate('SendingInformations', {
         product: {
           image: imageState,
           product_name: formDataState.product_name,
           category: formDataState.category,
           quantity: formDataState.quantity,
-          description: descriptionState,
+          description,
           price: formDataState.price,
         },
       });
     }
   };
 
-  const checkingtheUser = () => {
-    if (profile.location !== null && profile.personal_data !== null) {
+  const checkingtheUser = async () => {
+    const response = await api.get('allowcreateproduct');
+
+    if (
+      profile.location !== null &&
+      profile.personal_data !== null &&
+      response.data
+    ) {
       setForbidden(false);
+    } else {
+      setForbidden(true);
     }
   };
+
   useEffect(() => {
     checkingtheUser();
   }, []);
@@ -129,36 +138,48 @@ export default function CreateProductPage({ navigation }) {
   return (
     <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
       <Background>
-        {!forbidden ? (
-          <ForbidenView>
-            <ForbidenText>
-              Antes de criar um anúncio, é necessário você ter sua localização e
-              informações pessoais cadastradas em nossa aplicação. EQUIPE C-KO,
-              agradece.
-            </ForbidenText>
-
-            <TouchableButton onPress={() => navigation.navigate('MyProfile')}>
-              <ButtonText>Ir para meu perfil</ButtonText>
-            </TouchableButton>
-          </ForbidenView>
-        ) : (
-          <FormView>
-            {screen === 'image' && (
-              <ImageForm onClickSubmit={handleImage} positionY={animationOne} />
+        {forbidden === null ? null : (
+          <>
+            {forbidden ? (
+              <ForbidenView>
+                <ForbidenText>
+                  Antes de criar um anúncio, é necessário você ter sua
+                  localização e informações pessoais cadastradas em nossa
+                  aplicação.
+                </ForbidenText>
+                <ObsText>
+                  Observação: Limite máximo de 20 produtos por usuário.
+                </ObsText>
+                <ForbidenText>Equipe C-KO, agradece.</ForbidenText>
+                <TouchableButton
+                  onPress={() => navigation.navigate('MyProfile')}
+                >
+                  <ButtonText>Ir para meu perfil</ButtonText>
+                </TouchableButton>
+              </ForbidenView>
+            ) : (
+              <FormView>
+                {screen === 'image' && (
+                  <ImageForm
+                    onClickSubmit={handleImage}
+                    positionY={animationOne}
+                  />
+                )}
+                {screen === 'dataform' && (
+                  <DataForm
+                    onClickSubmit={handleDataForm}
+                    positionY={animationTwo}
+                  />
+                )}
+                {screen === 'description' && (
+                  <DescriptionForm
+                    onClickSubmit={handleDescription}
+                    positionY={animationThree}
+                  />
+                )}
+              </FormView>
             )}
-            {screen === 'dataform' && (
-              <DataForm
-                onClickSubmit={handleDataForm}
-                positionY={animationTwo}
-              />
-            )}
-            {screen === 'description' && (
-              <DescriptionForm
-                onClickSubmit={handleDescription}
-                positionY={animationThree}
-              />
-            )}
-          </FormView>
+          </>
         )}
       </Background>
     </TouchableWithoutFeedback>
