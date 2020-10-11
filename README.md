@@ -20,6 +20,9 @@ Developing this app I used so many new libraries to handle with: credit-card, gr
 I styled the whole project with styled-components which is a handyl library.
 About dealing with storage on front-end, I used: redux, redux-persist redux-saga and others to make the application store some short period informations or some of a bit longer by using the redux-persist with ASYNC STORAGE.
 
+The back-end part is on this repository:
+[GitHub](https://github.com/lucascicco/POSTGRES-BACK-END-CKO-PROJECT)
+
 Please, check it out. 
 I am open minded about new suggestions.
 Thank your for reading.
