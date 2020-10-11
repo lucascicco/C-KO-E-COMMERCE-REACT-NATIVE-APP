@@ -25,6 +25,6 @@ The back-end part is on this repository:
 
 Please, check it out. 
 I am open minded about new suggestions.
-Thank your for reading.
+Thank you for reading.
 
 Created by Lucas Vitor.
