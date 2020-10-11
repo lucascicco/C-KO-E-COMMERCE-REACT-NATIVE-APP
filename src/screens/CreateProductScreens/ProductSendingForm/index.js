@@ -100,5 +100,7 @@ ProductSendingForm.propTypes = {
 
 ProductSendingForm.navigationOptions = () => ({
   title: 'Dimensões',
-  headerBackTitle: 'Voltar',
+  headerLeft: () => {
+    return null;
+  },
 });

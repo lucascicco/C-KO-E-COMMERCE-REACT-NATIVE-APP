@@ -29,6 +29,7 @@ export default function CreateProductPage({ navigation }) {
   const [imageState, setImage] = useState([]);
   const [formDataState, setformDataState] = useState([]);
   const [forbidden, setForbidden] = useState(null);
+  const [quantityPd, setQuantityPd] = useState('');
   const [animationOne] = useState(new Animated.Value(0));
   const [animationTwo] = useState(new Animated.Value(600));
   const [animationThree] = useState(new Animated.Value(600));
@@ -119,11 +120,12 @@ export default function CreateProductPage({ navigation }) {
 
   const checkingtheUser = async () => {
     const response = await api.get('allowcreateproduct');
+    setQuantityPd(response.data.quantity);
 
     if (
       profile.location !== null &&
       profile.personal_data !== null &&
-      response.data
+      response.data.allow
     ) {
       setForbidden(false);
     } else {
@@ -149,6 +151,7 @@ export default function CreateProductPage({ navigation }) {
                 </ForbidenText>
                 <ObsText>
                   Observação: Limite máximo de 20 produtos por usuário.
+                  Quantidade de produtos já criados por você: {quantityPd}
                 </ObsText>
                 <ForbidenText>Equipe C-KO, agradece.</ForbidenText>
                 <TouchableButton
