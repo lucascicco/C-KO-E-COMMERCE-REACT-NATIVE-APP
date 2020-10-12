@@ -45,7 +45,8 @@ export default function PurchasePage({ navigation }) {
   };
 
   const handleSubmit = async () => {
-    if (!Valid) {
+    console.log(Valid);
+    if (Valid) {
       Alert.alert(
         'Dados inválidos',
         'Por favor, verifique o número do cartão de crédito.'

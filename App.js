@@ -1,8 +1,10 @@
 /* eslint-disable prettier/prettier */
 import React, { useState } from 'react';
+import { LogBox } from 'react-native';
 import * as Font from 'expo-font';
 import { AppLoading } from 'expo';
 import Navigator from './src';
+
 
 const getFonts = async () => {
   // eslint-disable-next-line no-return-await

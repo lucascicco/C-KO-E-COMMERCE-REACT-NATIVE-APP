@@ -5,7 +5,8 @@
     "android": "expo start --android",
     "ios": "expo start --ios",
     "web": "expo start --web",
-    "eject": "expo eject"
+    "eject": "expo eject",
+    "test": "jest"
   },
   "dependencies": {
     "@expo/vector-icons": "^10.0.0",
@@ -72,6 +73,9 @@
   },
   "devDependencies": {
     "@babel/core": "^7.8.6",
+    "@testing-library/react-native": "^7.0.2",
+    "axios-mock-adapter": "^1.18.2",
+    "babel-jest": "^26.5.2",
     "babel-preset-expo": "~8.1.0",
     "eslint": "^7.9.0",
     "eslint-config-airbnb": "^18.2.0",
@@ -82,8 +86,27 @@
     "eslint-plugin-prettier": "^3.1.4",
     "eslint-plugin-react": "^7.21.2",
     "eslint-plugin-react-hooks": "^4.1.2",
+    "jest": "^26.5.3",
     "prettier": "^2.1.2",
-    "source-map-support": "^0.5.19"
+    "react-test-renderer": "^16.13.1",
+    "source-map-support": "^0.5.19",
+    "ts-jest": "^26.4.1"
+  },
+  "jest": {
+    "preset": "react-native",
+    "testMatch": [
+      "**/__tests__/**/*.test.js"
+    ],
+    "collectCoverageFrom": [
+      "!src/service/api.js"
+    ],
+    "coverageDirectory": "__tests__/coverage",
+    "moduleNameMapper": {
+      "^~/(.*)": "<rootDir>/src/$1"
+    },
+    "transform": {
+      "^.+\\.tsx?$'": "babel-jest"
+    }
   },
   "private": true
 }

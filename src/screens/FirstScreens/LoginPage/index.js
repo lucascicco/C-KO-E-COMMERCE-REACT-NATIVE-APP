@@ -68,6 +68,7 @@ export default function Login({ navigation }) {
 
         <Form>
           <FormInput
+            TestId="mail"
             icon="mail-outline"
             placeholder="Email"
             keyboardType="email-address"
@@ -82,6 +83,7 @@ export default function Login({ navigation }) {
           />
 
           <FormInput
+            TestId="password"
             icon="lock-outline"
             secureTextEntry
             placeholder="Senha"

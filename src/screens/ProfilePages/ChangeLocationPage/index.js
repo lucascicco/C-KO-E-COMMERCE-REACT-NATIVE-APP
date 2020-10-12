@@ -1,5 +1,6 @@
 import React from 'react';
-import { useDispatch, useSelector, Alert } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { Alert } from 'react-native';
 import PropTypes from 'prop-types';
 import LocationForm from '~/components/LocationForm';
 import Background from '~/components/Backgrounds/Background2';

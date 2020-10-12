@@ -94,7 +94,7 @@ export default function LocationPage({
             style={{ width: '47%' }}
             blurOnSubmit={false}
             value={City}
-            onChangeText={(text) => onChange_onlyTextandNumber(text, setCity)}
+            onChangeText={(text) => onChange_onlyText(text, setCity)}
             ref={CityRef}
             onSubmitEditing={() => NeighborhoodRef.current.focus()}
             editable={enable}

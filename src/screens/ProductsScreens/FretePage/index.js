@@ -71,34 +71,37 @@ export default function ChangeAddress({ navigation }) {
     setLocationState(response.data);
   };
 
-  const handleSubmit = (LocationData) => {
+  const handleSubmit = async (LocationData) => {
     if (locationVerifier(LocationData)) {
       Alert.alert('Erro', 'Preencha corretamente os campos de localização.');
     } else {
-      Keyboard.dismiss();
+      try {
+        await api.get('checkingCep', {
+          params: {
+            postcode: LocationData.postcode,
+          },
+        });
 
-      setLocationState(LocationData);
-      setEnable(false);
+        Keyboard.dismiss();
+
+        setLocationState(LocationData);
+        setEnable(false);
+      } catch (e) {
+        Alert.alert('Cep inválido', 'O cep informado é inválido.');
+      }
     }
   };
 
   const GoNextPart = () => {
-    if (locationState === null) {
-      Alert.alert(
-        'Endereço inválido',
-        'Antes de ir para a próxima parte, preencha sua localização corretamente.'
-      );
-    } else {
-      LayoutAnimation.configureNext(
-        LayoutAnimation.create(
-          300,
-          LayoutAnimation.Types.easeIn,
-          LayoutAnimation.Properties.opacity
-        )
-      );
+    LayoutAnimation.configureNext(
+      LayoutAnimation.create(
+        300,
+        LayoutAnimation.Types.easeIn,
+        LayoutAnimation.Properties.opacity
+      )
+    );
 
-      setTransitionState('SecondPart');
-    }
+    setTransitionState('SecondPart');
   };
 
   const GoBackPart = () => {
@@ -149,12 +152,14 @@ export default function ChangeAddress({ navigation }) {
                 changeAddress={() => setEnable(true)}
               />
 
-              <BackBottom
-                style={{ background: '#512da8' }}
-                onPress={GoNextPart}
-              >
-                Próximo
-              </BackBottom>
+              {!(locationState === null) && (
+                <BackBottom
+                  style={{ background: '#512da8' }}
+                  onPress={GoNextPart}
+                >
+                  Próximo
+                </BackBottom>
+              )}
             </ViewForm>
           )}
 

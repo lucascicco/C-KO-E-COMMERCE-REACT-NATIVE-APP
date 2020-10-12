@@ -58,7 +58,7 @@ export function* CreateLocationSaga({ payload }) {
   } catch (err) {
     Alert.alert(
       'Falha ao registrar',
-      'Houve um erro no registro da localização, verfique seus dados.'
+      'Houve um erro no registro da localização, verifique seus dados.'
     );
   }
 }
@@ -75,6 +75,12 @@ export function* UpdateLocationSaga({ payload }) {
       street_number,
     } = payload.data;
 
+    yield call(api.get, 'checkingCep', {
+      params: {
+        postcode,
+      },
+    });
+
     const response = yield call(api.put, 'location', {
       street,
       city,
@@ -89,7 +95,7 @@ export function* UpdateLocationSaga({ payload }) {
   } catch (err) {
     Alert.alert(
       'Falha ao atualizar',
-      'Houve um erro na atualização da localização, verfique seus dados.'
+      'Houve um erro na atualização da localização, verifique seus dados.'
     );
   }
 }

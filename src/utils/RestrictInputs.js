@@ -30,7 +30,7 @@ export const onChange_numberWeight = (text, callback) => {
 };
 
 export const onChange_onlyTextandNumber = (text, callback) => {
-  if (/^[a-zA-Z0-9,.]+$/.test(text) || text === '') {
+  if (/^[a-zA-Z0-9,. ]+$/.test(text) || text === '') {
     return callback(text);
   }
   return null;

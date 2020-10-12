@@ -40,6 +40,7 @@ export default function PersonalForm({ onClickSubmit, personal }) {
   );
 
   const handleSubmit = () => {
+    console.log(Profession);
     onClickSubmit({
       birthday: Birthday,
       gender: Gender,
@@ -127,13 +128,16 @@ export default function PersonalForm({ onClickSubmit, personal }) {
 
 PersonalForm.propTypes = {
   onClickSubmit: PropTypes.func.isRequired,
-  personal: PropTypes.shape({
-    birthday: PropTypes.string.isRequired,
-    identification: PropTypes.string.isRequired,
-    cellphone: PropTypes.string.isRequired,
-    profession: PropTypes.string.isRequired,
-    gender: PropTypes.string.isRequired,
-  }),
+  personal: PropTypes.oneOfType([
+    PropTypes.bool,
+    PropTypes.shape({
+      birthday: PropTypes.string.isRequired,
+      identification: PropTypes.string.isRequired,
+      cellphone: PropTypes.string.isRequired,
+      profession: PropTypes.string.isRequired,
+      gender: PropTypes.string.isRequired,
+    }),
+  ]),
 };
 
 PersonalForm.defaultProps = {

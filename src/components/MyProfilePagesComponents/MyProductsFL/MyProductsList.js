@@ -43,7 +43,7 @@ MyProductList.propTypes = {
         url: PropTypes.string,
         id: PropTypes.number,
         product_name: PropTypes.string,
-        category: PropTypes.string,
+        category: PropTypes.number,
         price: PropTypes.string,
         quantity: PropTypes.number,
         description: PropTypes.string,
