@@ -1,10 +1,9 @@
 // ACCOUNT ACTIONS
-export function updateAccountRequest(data, navigation) {
+export function updateAccountRequest(data) {
   // SAGA
   return {
     type: '@user/UPDATE_PROFILE_REQUEST',
     payload: { data },
-    navigation,
   };
 }
 export function updateAccountSuccess(profile) {
@@ -15,21 +14,19 @@ export function updateAccountSuccess(profile) {
 }
 
 // LOCATION ACTIONS
-export function createLocationRequest(data, navigation, page) {
+export function createLocationRequest(data) {
   // SAGA
   return {
     type: '@user/CREATE_LOCATION_REQUEST',
     payload: { data },
-    navigation: { navigation, page },
   };
 }
 
-export function updateLocationRequest(data, navigation) {
+export function updateLocationRequest(data) {
   // SAGA
   return {
     type: '@user/UPDATE_LOCATION_REQUEST',
     payload: { data },
-    navigation,
   };
 }
 
@@ -41,21 +38,19 @@ export function updateLocationSuccess(location) {
 }
 
 // PERSONAL DATA ACTIONS
-export function createPersonalDataRequest(data, navigation, page, params = {}) {
+export function createPersonalDataRequest(data) {
   // SAGA
   return {
     type: '@user/CREATE_PERSONAL_REQUEST',
     payload: { data },
-    navigation: { navigation, page, params },
   };
 }
 
-export function updatePersonalDataRequest(data, navigation) {
+export function updatePersonalDataRequest(data) {
   // SAGA
   return {
     type: '@user/UPDATE_PERSONAL_REQUEST',
     payload: { data },
-    navigation,
   };
 }
 

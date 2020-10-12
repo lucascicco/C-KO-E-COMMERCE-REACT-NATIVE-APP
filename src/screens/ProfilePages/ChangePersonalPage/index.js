@@ -18,16 +18,16 @@ export default function ChangePersonalPage({ navigation }) {
 
   const handleSubmit = (PersonalInfo) => {
     if (personalVerifier(PersonalInfo)) {
-      return Alert.alert(
+      Alert.alert(
         'Erro',
         'Preencha corretamente os campos de informações pessoais.'
       );
-    }
-
-    if (personal === null) {
-      dispatch(createPersonalDataRequest(PersonalInfo, navigation, 'GoBack'));
+    } else if (personal === null) {
+      dispatch(createPersonalDataRequest(PersonalInfo));
+      navigation.goBack();
     } else {
-      dispatch(updatePersonalDataRequest(PersonalInfo, navigation));
+      dispatch(updatePersonalDataRequest(PersonalInfo));
+      navigation.goBack();
     }
   };
 

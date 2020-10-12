@@ -10,7 +10,7 @@ import {
 
 import api from '~/services/api';
 
-export function* UpdateAccountSaga({ payload, navigation }) {
+export function* UpdateAccountSaga({ payload }) {
   try {
     const { name, email, password, oldPassword } = payload;
 
@@ -24,8 +24,6 @@ export function* UpdateAccountSaga({ payload, navigation }) {
     const { user } = response.data;
 
     yield put(updateAccountSuccess(user));
-
-    navigation.goBack();
   } catch (e) {
     Alert.alert(
       'Falha ao atualizar',
@@ -34,7 +32,7 @@ export function* UpdateAccountSaga({ payload, navigation }) {
   }
 }
 
-export function* CreateLocationSaga({ payload, navigation }) {
+export function* CreateLocationSaga({ payload }) {
   try {
     const {
       street,
@@ -57,12 +55,6 @@ export function* CreateLocationSaga({ payload, navigation }) {
     });
 
     yield put(updateLocationSuccess(response.data));
-
-    if (navigation.page === 'goBack') {
-      navigation.navigation.goBack();
-    } else {
-      navigation.navigation(navigation.page);
-    }
   } catch (err) {
     Alert.alert(
       'Falha ao registrar',
@@ -71,7 +63,7 @@ export function* CreateLocationSaga({ payload, navigation }) {
   }
 }
 
-export function* UpdateLocationSaga({ payload, navigation }) {
+export function* UpdateLocationSaga({ payload }) {
   try {
     const {
       street,
@@ -94,8 +86,6 @@ export function* UpdateLocationSaga({ payload, navigation }) {
     });
 
     yield put(updateLocationSuccess(response.data));
-
-    navigation.goBack();
   } catch (err) {
     Alert.alert(
       'Falha ao atualizar',
@@ -104,7 +94,7 @@ export function* UpdateLocationSaga({ payload, navigation }) {
   }
 }
 
-export function* CreatePersonalSaga({ payload, navigation }) {
+export function* CreatePersonalSaga({ payload }) {
   try {
     const {
       birthday,
@@ -123,12 +113,6 @@ export function* CreatePersonalSaga({ payload, navigation }) {
     });
 
     yield put(updatePersonalDataSuccess(response.data));
-
-    if (navigation.page === 'goBack') {
-      navigation.navigation.goBack();
-    } else {
-      navigation.navigation.navigate(navigation.page, navigation.params);
-    }
   } catch (err) {
     Alert.alert(
       'Falha ao registrar',
@@ -137,7 +121,7 @@ export function* CreatePersonalSaga({ payload, navigation }) {
   }
 }
 
-export function* UpdatePersonalSaga({ payload, navigation }) {
+export function* UpdatePersonalSaga({ payload }) {
   try {
     const {
       birthday,
@@ -156,8 +140,6 @@ export function* UpdatePersonalSaga({ payload, navigation }) {
     });
 
     yield put(updatePersonalDataSuccess(response.data));
-
-    navigation.goBack();
   } catch (err) {
     Alert.alert(
       'Falha ao atualizar',
@@ -167,24 +149,20 @@ export function* UpdatePersonalSaga({ payload, navigation }) {
 }
 
 export function* FavoriteSaga({ payload }) {
-  try {
-    const { itemNumber, favorite } = payload;
+  const { itemNumber, favorite } = payload;
 
-    if (favorite) {
-      yield call(api.put, 'Add_favoriteitem', {
-        item: itemNumber,
-      });
+  if (favorite) {
+    yield call(api.put, 'Add_favoriteitem', {
+      item: itemNumber,
+    });
 
-      yield put(addFavoriteItem(itemNumber));
-    } else {
-      yield call(api.put, 'Remove_favoriteitem', {
-        item: itemNumber,
-      });
+    yield put(addFavoriteItem(itemNumber));
+  } else {
+    yield call(api.put, 'Remove_favoriteitem', {
+      item: itemNumber,
+    });
 
-      yield put(removeFavoriteItem(itemNumber));
-    }
-  } catch (err) {
-    console.log('Favorite Error Saga');
+    yield put(removeFavoriteItem(itemNumber));
   }
 }
 

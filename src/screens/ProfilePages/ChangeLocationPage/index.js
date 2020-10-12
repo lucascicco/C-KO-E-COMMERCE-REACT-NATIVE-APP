@@ -17,16 +17,13 @@ export default function ChangeLocationPage({ navigation }) {
 
   const handleSubmit = (LocationData) => {
     if (locationVerifier(LocationData)) {
-      return Alert.alert(
-        'Erro',
-        'Preencha corretamente os campos de localização.'
-      );
-    }
-
-    if (location === null) {
-      dispatch(createLocationRequest(LocationData, navigation, 'GoBack'));
+      Alert.alert('Erro', 'Preencha corretamente os campos de localização.');
+    } else if (location === null) {
+      dispatch(createLocationRequest(LocationData));
+      navigation.goBack();
     } else {
-      dispatch(updateLocationRequest(LocationData, navigation));
+      dispatch(updateLocationRequest(LocationData));
+      navigation.goBack();
     }
   };
 

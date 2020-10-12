@@ -11,7 +11,6 @@ import Picker from '../Picker';
 import { Form, MultiInput, SubmitButton } from './styles';
 
 export default function PersonalForm({ onClickSubmit, personal }) {
-  let PersonalIDRef;
   let CellphoneRef;
 
   const typeOfPlatform = Platform.OS === 'ios';
@@ -87,7 +86,6 @@ export default function PersonalForm({ onClickSubmit, personal }) {
           blurOnSubmit={false}
           value={PersonalID}
           onChangeText={setPersonalID}
-          ref={(ref) => (PersonalIDRef = ref)}
           onSubmitEditing={() => CellphoneRef.getElement().focus()}
         />
         <MaskedInput

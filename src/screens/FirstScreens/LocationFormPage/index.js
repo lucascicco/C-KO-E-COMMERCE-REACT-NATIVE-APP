@@ -46,13 +46,11 @@ export default function LocationPage({ navigation }) {
 
   const handleSubmit = (Location) => {
     if (locationVerifier(Location)) {
-      return Alert.alert(
-        'Erro',
-        'Preencha corretamente os campos de localização.'
-      );
+      Alert.alert('Erro', 'Preencha corretamente os campos de localização.');
+    } else {
+      dispatch(createLocationRequest(Location));
+      navigation.navigate('App');
     }
-
-    return dispatch(createLocationRequest(Location, navigation, 'App'));
   };
 
   return (

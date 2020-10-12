@@ -46,15 +46,14 @@ export default function PersonalInformation({ navigation }) {
 
   const handleSubmit = (PersonalInfo) => {
     if (personalVerifier(PersonalInfo)) {
-      return Alert.alert(
+      Alert.alert(
         'Erro',
         'Preencha corretamente os campos de informações pessoais.'
       );
+    } else {
+      dispatch(createPersonalDataRequest(PersonalInfo));
+      navigation.navigate('LocationPage');
     }
-
-    return dispatch(
-      createPersonalDataRequest(PersonalInfo, navigation, 'LocationPage')
-    );
   };
 
   return (

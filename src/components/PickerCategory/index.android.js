@@ -8,6 +8,8 @@ export default function PickerCustomX({ style, ...rest }) {
   return (
     <ContainerAndroid style={style}>
       <Picker {...rest} style={{ color: '#fff' }}>
+        <Picker.Item label="Selecione uma categoria" value={null} />
+
         {Categorias.map((item) => {
           return (
             <Picker.Item

@@ -1,6 +1,6 @@
 import React from 'react';
 import { Alert } from 'react-native';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import PropTypes from 'prop-types';
 import Background from '~/components/Backgrounds/Background';
 import PersonalPage from '~/components/PersonalBuyForm';
@@ -14,31 +14,20 @@ export default function PersonalFormPurchase({ navigation }) {
   const product = navigation.getParam('product');
   const purchase_quantity = navigation.getParam('quantity');
 
-  const personal_info = useSelector(
-    (state) => state.user.profile.personal_data
-  );
-
   const handleSubmit = (personalInfo) => {
     if (personalVerifier(personalInfo)) {
-      return Alert.alert(
+      Alert.alert(
         'Erro',
         'Preencha corretamente os campos de informações pessoais.'
       );
-    }
+    } else {
+      dispatch(createPersonalDataRequest(personalInfo));
 
-    if (personalInfo === personal_info) {
-      return navigation.navigate('FretePage', {
+      navigation.navigate('FretePage', {
         product,
         quantity: purchase_quantity,
       });
     }
-
-    return dispatch(
-      createPersonalDataRequest(personalInfo, navigation, 'FretePage', {
-        product,
-        quantity: purchase_quantity,
-      })
-    );
   };
 
   return (
