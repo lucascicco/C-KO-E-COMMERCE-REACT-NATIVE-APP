@@ -66,7 +66,7 @@ export const Purchase_title = styled.Text`
 `;
 
 export const Purchase_small = styled.Text`
-  font-size: 16px;
+  font-size: 14px;
 `;
 
 export const Adress_text = styled.Text.attrs({

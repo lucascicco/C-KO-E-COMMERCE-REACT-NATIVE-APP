@@ -121,7 +121,7 @@ export default function ModalContact({
 
       <Submit_Button
         style={{ background: '#424242' }}
-        onPress={sell ? sendMessagetoSeller() : sendMessagetoBuyer()}
+        onPress={sell ? sendMessagetoSeller : sendMessagetoBuyer}
       >
         {text}
       </Submit_Button>

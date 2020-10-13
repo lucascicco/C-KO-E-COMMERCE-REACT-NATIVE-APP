@@ -39,7 +39,6 @@ export default function PurchasePage({ navigation }) {
   const payload = navigation.getParam('payload');
 
   const setCardValues = ({ values, valid }) => {
-    console.log(valid);
     setValid(valid);
     SetValue(values);
   };
