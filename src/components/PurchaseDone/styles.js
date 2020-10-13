@@ -130,3 +130,7 @@ export const Continue_Text = styled.Text`
   font-family: raleway;
   margin-right: 5px;
 `;
+
+export const ScrollDetails = styled.ScrollView`
+  flex: 1;
+`;

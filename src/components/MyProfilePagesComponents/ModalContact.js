@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Keyboard } from 'react-native';
+import { Keyboard, Alert } from 'react-native';
 import PropTypes from 'prop-types';
 import api from '~/services/api';
 
@@ -19,9 +19,16 @@ import {
   View_ModalTouch,
 } from './styles';
 
-export default function ModalContact({ sell, idPersonalnfo, name, email }) {
+export default function ModalContact({
+  sell,
+  purchaseCode,
+  idPersonalnfo,
+  name,
+  email,
+}) {
   const [message, setMessage] = useState('');
   const [cellphone, setCellphone] = useState('');
+  const [text, setText] = useState('Enviar mensagem');
 
   const loadCellphone = async () => {
     const response = await api.get('cellphone', {
@@ -31,6 +38,52 @@ export default function ModalContact({ sell, idPersonalnfo, name, email }) {
     });
 
     setCellphone(response.data);
+  };
+
+  const sendMessagetoSeller = async () => {
+    setText('Enviando mensagem...');
+    try {
+      if (message.length < 20) {
+        Alert.alert(
+          'Mensagem curta',
+          'Precisamos de uma mensagem maior para envia-la ao vendedor.'
+        );
+      } else {
+        await api.post('sendingEmailSeller', {
+          name,
+          email,
+          purchaseCode,
+          message,
+        });
+
+        setText('Mensagem enviada');
+      }
+    } catch (e) {
+      setText('Falha ao enviar');
+    }
+  };
+
+  const sendMessagetoBuyer = async () => {
+    setText('Enviando mensagem...');
+    try {
+      if (message.length < 20) {
+        Alert.alert(
+          'Mensagem curta',
+          'Precisamos de uma mensagem maior para envia-la ao comprador.'
+        );
+      } else {
+        await api.post('sendingEmailBuyer', {
+          name,
+          email,
+          purchaseCode,
+          message,
+        });
+
+        setText('Mensagem enviada');
+      }
+    } catch (e) {
+      setText('Falha ao enviar');
+    }
   };
 
   useEffect(() => {
@@ -47,7 +100,7 @@ export default function ModalContact({ sell, idPersonalnfo, name, email }) {
             autoCorrect
             numberOfLines={4}
             value={message}
-            onChangeText={(text) => setMessage(text)}
+            onChangeText={(textMessage) => setMessage(textMessage)}
             placeholder="Informações, reclamações, elogios e etc..."
             maxLength={350}
           />
@@ -57,7 +110,12 @@ export default function ModalContact({ sell, idPersonalnfo, name, email }) {
         </Email_Spacing>
       </Modal_View_Email>
 
-      <Submit_Button style={{ background: '#424242' }}>Enviar</Submit_Button>
+      <Submit_Button
+        style={{ background: '#424242' }}
+        onPress={sell ? sendMessagetoSeller() : sendMessagetoBuyer()}
+      >
+        {text}
+      </Submit_Button>
 
       <View_DimissKeyboard onPress={Keyboard.dismiss}>
         <View_ModalTouch>
@@ -86,4 +144,5 @@ ModalContact.propTypes = {
   idPersonalnfo: PropTypes.number.isRequired,
   name: PropTypes.string.isRequired,
   email: PropTypes.string.isRequired,
+  purchaseCode: PropTypes.string.isRequired,
 };

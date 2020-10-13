@@ -1,11 +1,30 @@
-export const locationVerifier = (obj) => {
+import api from '~/services/api';
+
+export const locationVerifier = async (obj) => {
   const emptyValue = Object.values(obj).some((element) => element === '');
   const nullValue = Object.values(obj).some((element) => element === null);
+
   const postcodeValue = obj.postcode.length < 7;
+
+  const response_cep = await api.get('checkingCep', {
+    params: {
+      postcode: obj.postcode,
+    },
+  });
+
+  const postcodeValidation = !response_cep.data;
+
   const addressValue = obj.street.length < 10;
   const stateValue = obj.state === 'Estado' || obj.state === undefined;
 
-  return emptyValue || nullValue || postcodeValue || addressValue || stateValue;
+  return (
+    emptyValue ||
+    nullValue ||
+    postcodeValue ||
+    addressValue ||
+    stateValue ||
+    postcodeValidation
+  );
 };
 
 export const personalVerifier = (obj) => {

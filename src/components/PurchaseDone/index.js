@@ -25,6 +25,7 @@ import {
   CKO_text,
   Continue_Button,
   Continue_Text,
+  ScrollDetails,
 } from './styles';
 
 export default function PurchaseDone({ continueBuying, item }) {
@@ -39,58 +40,60 @@ export default function PurchaseDone({ continueBuying, item }) {
 
   return (
     <Container>
-      <Title_View_Row>
-        <Purchase_Success>Compra realizada com sucesso!</Purchase_Success>
+      <ScrollDetails>
+        <Title_View_Row>
+          <Purchase_Success>Compra realizada com sucesso!</Purchase_Success>
 
-        <Code_View>
-          <Code_Bigger>Código do pedido</Code_Bigger>
-          <Code_Small>#{purchase.purchase_code}</Code_Small>
-        </Code_View>
-      </Title_View_Row>
+          <Code_View>
+            <Code_Bigger>Código do pedido</Code_Bigger>
+            <Code_Small>#{purchase.purchase_code}</Code_Small>
+          </Code_View>
+        </Title_View_Row>
 
-      <Purchase_data>
-        <Row_View>
-          <Column_View>
-            <Purchase_title>Data limite para entrega</Purchase_title>
-            <Purchase_small>{dateDeliver}</Purchase_small>
-          </Column_View>
+        <Purchase_data>
+          <Row_View>
+            <Column_View>
+              <Purchase_title>Data limite para entrega</Purchase_title>
+              <Purchase_small>{dateDeliver}</Purchase_small>
+            </Column_View>
 
-          <Column_View>
-            <Purchase_title>Total</Purchase_title>
-            <Purchase_small>{product_price}</Purchase_small>
-          </Column_View>
-        </Row_View>
-      </Purchase_data>
+            <Column_View>
+              <Purchase_title>Total</Purchase_title>
+              <Purchase_small>{product_price}</Purchase_small>
+            </Column_View>
+          </Row_View>
+        </Purchase_data>
 
-      <Seller_View>
-        <Title_Two>Dados do vendedor</Title_Two>
+        <Seller_View>
+          <Title_Two>Dados do vendedor</Title_Two>
 
-        <Row_View>
-          <Column_View>
-            <Purchase_title>Nome</Purchase_title>
-            <Seller_name>{seller_info.name}</Seller_name>
-          </Column_View>
+          <Row_View>
+            <Column_View>
+              <Purchase_title>Nome</Purchase_title>
+              <Seller_name>{seller_info.name}</Seller_name>
+            </Column_View>
 
-          <Column_View>
-            <Purchase_title>Telefone</Purchase_title>
-            <Purchase_small>{seller_info.cellphone}</Purchase_small>
-          </Column_View>
-        </Row_View>
+            <Column_View>
+              <Purchase_title>Telefone</Purchase_title>
+              <Purchase_small>{seller_info.cellphone}</Purchase_small>
+            </Column_View>
+          </Row_View>
 
-        <Column_View_Two>
-          <Purchase_title>Email para contato</Purchase_title>
-          <Adress_text>{seller_info.email}</Adress_text>
-        </Column_View_Two>
-      </Seller_View>
+          <Column_View_Two>
+            <Purchase_title>Email para contato</Purchase_title>
+            <Adress_text>{seller_info.email}</Adress_text>
+          </Column_View_Two>
+        </Seller_View>
 
-      <Normal_View>
-        <Image_CKO source={require('../../assets/Cko_logo.png')} />
-        <CKO_text>
-          Agradecemos pela sua confiança. Mas, agora é com a nossa equipe
-          trabalhar com qualidade para garantir que seu pedido seja um sucesso.
-          EQUIPE C-KO.
-        </CKO_text>
-      </Normal_View>
+        <Normal_View>
+          <Image_CKO source={require('../../assets/Cko_logo.png')} />
+          <CKO_text>
+            Agradecemos pela sua confiança. Mas, agora é com a nossa equipe
+            trabalhar com qualidade para garantir que seu pedido seja um
+            sucesso. EQUIPE C-KO.
+          </CKO_text>
+        </Normal_View>
+      </ScrollDetails>
 
       <Continue_Button onPress={continueBuying}>
         <Continue_Text>Continuar comprando</Continue_Text>

@@ -76,12 +76,6 @@ export function* UpdateLocationSaga({ payload }) {
       street_number,
     } = payload.data;
 
-    yield call(api.get, 'checkingCep', {
-      params: {
-        postcode,
-      },
-    });
-
     const response = yield call(api.put, 'location', {
       street,
       city,

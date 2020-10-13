@@ -128,6 +128,7 @@ export default function Flatlist_item({ item }) {
       >
         <ModalInfo
           sell
+          purchaseCode={purchase_code}
           idPersonalnfo={user_buyer.personal_info}
           name={user_buyer.name}
           email={user_buyer.email}
