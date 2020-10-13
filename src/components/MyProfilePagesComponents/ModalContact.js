@@ -42,7 +42,6 @@ export default function ModalContact({
   };
 
   const sendMessagetoSeller = async () => {
-    setText('Enviando mensagem...');
     try {
       if (message.length < 20) {
         Alert.alert(
@@ -50,6 +49,8 @@ export default function ModalContact({
           'Precisamos de uma mensagem maior para envia-la ao vendedor.'
         );
       } else {
+        setText('Enviando mensagem...');
+
         await api.post('sendingEmailSeller', {
           name,
           email,
@@ -69,7 +70,6 @@ export default function ModalContact({
   };
 
   const sendMessagetoBuyer = async () => {
-    setText('Enviando mensagem...');
     try {
       if (message.length < 20) {
         Alert.alert(
@@ -77,6 +77,8 @@ export default function ModalContact({
           'Precisamos de uma mensagem maior para envia-la ao comprador.'
         );
       } else {
+        setText('Enviando mensagem...');
+
         await api.post('sendingEmailBuyer', {
           name,
           email,
@@ -93,6 +95,13 @@ export default function ModalContact({
     } catch (e) {
       setText('Falha ao enviar');
     }
+  };
+
+  const ButtonPress = () => {
+    if (text === 'Enviar mensagem') {
+      return sell ? sendMessagetoSeller() : sendMessagetoBuyer();
+    }
+    return null;
   };
 
   useEffect(() => {
@@ -119,10 +128,7 @@ export default function ModalContact({
         </Email_Spacing>
       </Modal_View_Email>
 
-      <Submit_Button
-        style={{ background: '#424242' }}
-        onPress={sell ? sendMessagetoSeller : sendMessagetoBuyer}
-      >
+      <Submit_Button style={{ background: '#424242' }} onPress={ButtonPress}>
         {text}
       </Submit_Button>
 
