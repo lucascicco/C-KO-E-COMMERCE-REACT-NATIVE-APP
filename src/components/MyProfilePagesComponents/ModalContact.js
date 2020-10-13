@@ -22,6 +22,7 @@ import {
 export default function ModalContact({
   sell,
   purchaseCode,
+  closeModal,
   idPersonalnfo,
   name,
   email,
@@ -57,6 +58,10 @@ export default function ModalContact({
         });
 
         setText('Mensagem enviada');
+
+        setTimeout(() => {
+          closeModal();
+        }, 1500);
       }
     } catch (e) {
       setText('Falha ao enviar');
@@ -80,6 +85,10 @@ export default function ModalContact({
         });
 
         setText('Mensagem enviada');
+
+        setTimeout(() => {
+          closeModal();
+        }, 1500);
       }
     } catch (e) {
       setText('Falha ao enviar');
@@ -145,4 +154,5 @@ ModalContact.propTypes = {
   name: PropTypes.string.isRequired,
   email: PropTypes.string.isRequired,
   purchaseCode: PropTypes.string.isRequired,
+  closeModal: PropTypes.func.isRequired,
 };

@@ -127,11 +127,12 @@ export default function Flatlist_item({ item }) {
         onBackdropPress={() => setVisibility(false)}
       >
         <ModalInfo
-          sell
+          sell={false}
           purchaseCode={purchase_code}
           idPersonalnfo={user_buyer.personal_info}
           name={user_buyer.name}
           email={user_buyer.email}
+          closeModal={() => setVisibility(false)}
         />
       </Modal>
     </Item_View>

@@ -150,9 +150,11 @@ export default function Flatlist_item({ item, navigation }) {
       >
         <ModalInfo
           sell
+          purchaseCode={purchase_code}
           idPersonalnfo={user_seller.personal_info}
           name={user_seller.name}
           email={user_seller.email}
+          closeModal={() => setVisibility(false)}
         />
       </Modal>
     </Item_View>

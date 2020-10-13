@@ -10,6 +10,7 @@ import {
 import { RadioButton } from 'react-native-paper';
 import { useSelector } from 'react-redux';
 import PropTypes from 'prop-types';
+import { addDays } from 'date-fns';
 import Background from '~/components/Backgrounds/Background';
 import LocationForm from '~/components/LocationFrete';
 import api from '~/services/api';
@@ -124,6 +125,10 @@ export default function ChangeAddress({ navigation }) {
         },
       });
 
+      const daysSumUp = Number(freteApi.data.PrazoEntrega) + 2;
+
+      const daysMaxDeliver = addDays(new Date(), daysSumUp);
+
       navigation.navigate('PurchasePartOne', {
         product,
         purchase_quantity,
@@ -131,7 +136,7 @@ export default function ChangeAddress({ navigation }) {
         frete: {
           freteType: fretetype,
           fretePrice: freteApi.data.Valor,
-          freteDays: freteApi.data.PrazoEntrega,
+          freteDays: daysMaxDeliver,
         },
       });
 

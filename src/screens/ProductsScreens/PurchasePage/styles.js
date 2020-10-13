@@ -6,9 +6,7 @@ export const Container = styled.View`
   padding: 0 15px;
 `;
 
-export const SubmitButton = styled(Button)`
-  margin-top: 20px;
-`;
+export const SubmitButton = styled(Button)``;
 
 export const SecurityText = styled.Text`
   font-size: 20px;
