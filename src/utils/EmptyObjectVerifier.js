@@ -32,3 +32,24 @@ export const productVerifier = (obj) => {
 
   return emptyValue || invalidCategory;
 };
+
+export const AccountVerifierChange = (obj) => {
+  const nameValue = obj.name.length < 6;
+  const emailValue = !obj.email.includes('@') || obj.email.length < 7;
+  let checkingPasswords = false;
+
+  if (obj.password || obj.oldPassword) {
+    checkingPasswords = obj.password === obj.oldPassword || obj.password < 6;
+  }
+
+  return checkingPasswords || emailValue || nameValue;
+};
+
+export const AccountVerifierCreate = (obj) => {
+  const nameValue = obj.name.length < 7;
+  const emailValue = !obj.email.includes('@') || obj.email.length < 7;
+
+  const checkingPasswords = obj.password !== obj.secondPassword;
+
+  return checkingPasswords || emailValue || nameValue;
+};

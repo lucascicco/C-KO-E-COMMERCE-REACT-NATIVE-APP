@@ -111,30 +111,39 @@ export default function ChangeAddress({ navigation }) {
   const goNextScreen = async () => {
     setLoading(true);
 
-    if (location !== locationState) {
-      saveAddressDatabase();
+    try {
+      if (location !== locationState) {
+        saveAddressDatabase();
+      }
+
+      const freteApi = await api.get('frete', {
+        params: {
+          locationId: locationState.id,
+          product_id: product.id,
+          service: fretetype,
+        },
+      });
+
+      navigation.navigate('PurchasePartOne', {
+        product,
+        purchase_quantity,
+        location: locationState,
+        frete: {
+          freteType: fretetype,
+          fretePrice: freteApi.data.Valor,
+          freteDays: freteApi.data.PrazoEntrega,
+        },
+      });
+
+      setLoading(false);
+    } catch (e) {
+      Alert.alert(
+        'Erro no sistema',
+        'Aconteceu um erro ao calcular o frete. Por favor, tente mais tarde.'
+      );
+
+      navigation.navigate('HomePage');
     }
-
-    const freteApi = await api.get('frete', {
-      params: {
-        locationId: locationState.id,
-        product_id: product.id,
-        service: fretetype,
-      },
-    });
-
-    navigation.navigate('PurchasePartOne', {
-      product,
-      purchase_quantity,
-      location: locationState,
-      frete: {
-        freteType: fretetype,
-        fretePrice: freteApi.data.Valor,
-        freteDays: freteApi.data.PrazoEntrega,
-      },
-    });
-
-    setLoading(false);
   };
 
   return (

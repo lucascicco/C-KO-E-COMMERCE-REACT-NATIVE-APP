@@ -12,14 +12,15 @@ import api from '~/services/api';
 
 export function* UpdateAccountSaga({ payload }) {
   try {
-    const { name, email, password, oldPassword } = payload;
+    const { name, email, ...rest } = payload.data;
 
-    const response = yield call(api.put, 'users', {
+    const profile = {
       name,
       email,
-      oldPassword,
-      password,
-    });
+      ...(rest.oldPassword ? rest : {}),
+    };
+
+    const response = yield call(api.put, 'users', profile);
 
     const { user } = response.data;
 

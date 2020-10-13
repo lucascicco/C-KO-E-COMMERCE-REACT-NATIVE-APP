@@ -1,5 +1,4 @@
 import React, { useRef, useState } from 'react';
-import { Alert } from 'react-native';
 import PropTypes from 'prop-types';
 import { onChange_onlyText } from '~/utils/RestrictInputs';
 import { Form, FormInput, SubmitButton } from './styles';
@@ -15,18 +14,12 @@ export default function AccountInfoForm({ onClickSubmit }) {
   const [name, setName] = useState('');
 
   const handleSubmit = () => {
-    if (password !== secondPassword) {
-      Alert.alert(
-        'As senhas não encaixam',
-        'Verifique se as duas senhas foram escritas igualmente.'
-      );
-    } else {
-      onClickSubmit({
-        email,
-        password,
-        name,
-      });
-    }
+    onClickSubmit({
+      email,
+      password,
+      name,
+      secondPassword,
+    });
   };
 
   return (

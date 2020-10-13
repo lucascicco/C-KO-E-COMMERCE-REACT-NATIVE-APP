@@ -1,11 +1,11 @@
 import React, { useEffect } from 'react';
-import { Animated, Keyboard, Platform } from 'react-native';
+import { Animated, Keyboard, Platform, Alert } from 'react-native';
 import { useDispatch } from 'react-redux';
 import PropTypes from 'prop-types';
 import { ImageResizingEventOne } from '~/utils/KeyboardsEvents';
 import Background from '~/components/Backgrounds/Background2';
 import AccountForm from '~/components/CreateAccountComponent';
-
+import { AccountVerifierCreate } from '~/utils/EmptyObjectVerifier';
 import { signUpRequest } from '~/store/modules/auth/actions';
 
 import {
@@ -49,7 +49,14 @@ export default function CreateAccount({ navigation }) {
   }, []);
 
   const handleSubmit = (AccountInfo) => {
-    dispatch(signUpRequest(AccountInfo));
+    if (AccountVerifierCreate(AccountInfo)) {
+      Alert.alert(
+        'Preencha corretamente',
+        'Nome completo precisa de no mínimo 7 dítigos. As senhas precisam ser iguais. Email precisa ter no mínimo 7 dígitos.'
+      );
+    } else {
+      dispatch(signUpRequest(AccountInfo));
+    }
   };
 
   return (

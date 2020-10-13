@@ -68,7 +68,7 @@ function HomePage({ navigation, isFocused }) {
       dispatch(addFilter(categorySelected));
 
       const ProductsByCategory = products.filter((product) => {
-        return product.category === `${categoryIdSelected}`;
+        return product.category === categoryIdSelected;
       });
 
       setVisibleProducts(ProductsByCategory);
@@ -105,7 +105,7 @@ function HomePage({ navigation, isFocused }) {
     }
 
     const ProductsByCategory = products.filter((product) => {
-      return product.category === `${categoryIdSelected}`;
+      return product.category === categoryIdSelected;
     });
 
     setCategoryProducts(ProductsByCategory);

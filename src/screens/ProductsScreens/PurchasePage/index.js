@@ -13,7 +13,7 @@ import {
 import PropTypes from 'prop-types';
 import Modal from 'react-native-modal';
 import { addDays } from 'date-fns';
-import { CreditCardInput } from 'react-native-credit-card-input-ecotrade';
+import { CreditCardInput } from 'react-native-input-credit-card';
 
 import Background from '~/components/Backgrounds/Background3';
 import api from '~/services/api';
@@ -45,7 +45,6 @@ export default function PurchasePage({ navigation }) {
   };
 
   const handleSubmit = async () => {
-    console.log(Valid);
     if (Valid) {
       Alert.alert(
         'Dados inválidos',

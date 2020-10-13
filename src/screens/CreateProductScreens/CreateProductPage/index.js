@@ -8,6 +8,7 @@ import {
 } from 'react-native';
 import PropTypes from 'prop-types';
 import { useSelector } from 'react-redux';
+import { withNavigationFocus } from 'react-navigation';
 import Background from '~/components/Backgrounds/Background2';
 import ImageForm from '~/components/ProductForm/ImageForm';
 import DataForm from '~/components/ProductForm/DataForm';
@@ -24,7 +25,7 @@ import {
   ObsText,
 } from './styles';
 
-export default function CreateProductPage({ navigation }) {
+function CreateProductPage({ isFocused, navigation }) {
   const [screen, setScreen] = useState('image');
   const [imageState, setImage] = useState([]);
   const [formDataState, setformDataState] = useState([]);
@@ -134,8 +135,10 @@ export default function CreateProductPage({ navigation }) {
   };
 
   useEffect(() => {
-    checkingtheUser();
-  }, []);
+    if (isFocused) {
+      checkingtheUser();
+    }
+  }, [isFocused]);
 
   return (
     <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
@@ -189,11 +192,14 @@ export default function CreateProductPage({ navigation }) {
 }
 
 CreateProductPage.navigationOptions = () => ({
-  headerShown: false,
+  title: 'Anuncie seu produto',
 });
 
 CreateProductPage.propTypes = {
   navigation: PropTypes.shape({
     navigate: PropTypes.func.isRequired,
   }).isRequired,
+  isFocused: PropTypes.bool.isRequired,
 };
+
+export default withNavigationFocus(CreateProductPage);
