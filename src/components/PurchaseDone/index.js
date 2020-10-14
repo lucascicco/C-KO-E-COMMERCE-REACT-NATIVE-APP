@@ -2,6 +2,7 @@ import React from 'react';
 import { AntDesign } from '@expo/vector-icons';
 import { format } from 'date-fns';
 import PropTypes from 'prop-types';
+import CurrencyConverting from '~/utils/CurrencyConvert';
 
 import {
   Container,
@@ -33,10 +34,7 @@ export default function PurchaseDone({ continueBuying, item }) {
 
   const dateDeliver = format(new Date(purchase.deliver_date), 'dd/MM/yyyy');
 
-  const product_price = purchase.total_price.toLocaleString('pt-BR', {
-    style: 'currency',
-    currency: 'BRL',
-  });
+  const price_product = CurrencyConverting(purchase.total_price);
 
   return (
     <Container>
@@ -59,7 +57,7 @@ export default function PurchaseDone({ continueBuying, item }) {
 
             <Column_View>
               <Purchase_title>Total</Purchase_title>
-              <Purchase_small>{product_price}</Purchase_small>
+              <Purchase_small>{price_product}</Purchase_small>
             </Column_View>
           </Row_View>
         </Purchase_data>

@@ -4,6 +4,7 @@ import { RadioButton } from 'react-native-paper';
 import { FontAwesome } from '@expo/vector-icons';
 import PropTypes from 'prop-types';
 import Background from '~/components/Backgrounds/Background';
+import CurrencyConverting from '~/utils/CurrencyConvert';
 
 import {
   Container,
@@ -69,12 +70,7 @@ export default function PurchaseTotalPage({ navigation }) {
               <TextTitle>{product.product_name}</TextTitle>
 
               <BasicView>
-                <TextDetails>
-                  {product.price.toLocaleString('pt-BR', {
-                    style: 'currency',
-                    currency: 'BRL',
-                  })}
-                </TextDetails>
+                <TextDetails>{CurrencyConverting(product.price)}</TextDetails>
 
                 <TextIndent>
                   <NormalText>Quantidade:</NormalText>

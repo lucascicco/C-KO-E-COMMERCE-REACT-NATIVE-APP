@@ -76,6 +76,7 @@ export default function LocationPage({
 
           <Picker
             label="Selecione o estado"
+            labelAndroid="Estado"
             value="Estado"
             text={Label}
             data={BrazilianStates}
@@ -138,7 +139,9 @@ export default function LocationPage({
             style={{ width: '75%' }}
             blurOnSubmit={false}
             value={Address}
-            onChangeText={(text) => onChange_onlyText(text, setAddress)}
+            onChangeText={(text) =>
+              onChange_onlyTextandNumber(text, setAddress)
+            }
             ref={AddressRef}
             onSubmitEditing={() => AdNumberRef.current.focus()}
             editable={enable}

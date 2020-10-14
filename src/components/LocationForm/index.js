@@ -71,6 +71,7 @@ export default function LocationPage({ onClickSubmit, location }) {
 
           <Picker
             label="Selecione o estado"
+            labelAndroid="Estado"
             value="Estado"
             text={Label}
             data={BrazilianStates}

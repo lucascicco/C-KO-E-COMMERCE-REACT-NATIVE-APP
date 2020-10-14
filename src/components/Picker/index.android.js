@@ -3,10 +3,18 @@ import { Picker } from '@react-native-community/picker';
 import PropTypes from 'prop-types';
 import { ContainerAndroid } from './styles';
 
-export default function PickerCustomX({ style, data, ...rest }) {
+export default function PickerCustomX({
+  labelAndroid,
+  value,
+  style,
+  data,
+  ...rest
+}) {
   return (
     <ContainerAndroid style={style}>
       <Picker {...rest} style={{ color: '#fff' }}>
+        <Picker.Item label={labelAndroid} value={value} />
+
         {data.map((item, index) => {
           const labelName = `${item.sigla || index + 1} - ${item.nome}`;
           const labelInUse = item.nome ? labelName : `${item}`;
@@ -35,6 +43,8 @@ PickerCustomX.propTypes = {
   styleButton: PropTypes.objectOf(
     PropTypes.oneOfType([PropTypes.string, PropTypes.number])
   ),
+  labelAndroid: PropTypes.string.isRequired,
+  value: PropTypes.string.isRequired,
 };
 
 PickerCustomX.defaultProps = {

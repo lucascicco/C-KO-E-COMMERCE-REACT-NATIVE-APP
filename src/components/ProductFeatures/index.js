@@ -94,6 +94,7 @@ export default function ProductsFeature({ onClickSubmit, loading, enable }) {
         <MultiInput>
           <Picker
             label="Selecione o formato"
+            labelAndroid="Formato"
             value="Formato"
             text={Label}
             data={FormatosCorreios}

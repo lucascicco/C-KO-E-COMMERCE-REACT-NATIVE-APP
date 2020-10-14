@@ -50,6 +50,7 @@ export default function PersonalForm({ onClickSubmit }) {
 
         <Picker
           label="Selecione o gênero"
+          labelAndroid="Gênero"
           value="Gênero"
           style={{ width: '40%' }}
           text={LabelGender}
@@ -94,6 +95,7 @@ export default function PersonalForm({ onClickSubmit }) {
       <MultiInput>
         <Picker
           label="Selecione a profissão"
+          labelAndroid="Selecione a profissão"
           value="Profissão"
           style={{ width: '100%' }}
           text={LabelProfession}

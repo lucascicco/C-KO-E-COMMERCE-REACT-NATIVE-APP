@@ -12,9 +12,8 @@ export const MainContainer = styled.View`
 `;
 
 export const ContainerAndroid = styled.View`
-  width: 29%;
+  width: 100%;
   background: #546e7a;
-  height: 46px;
-  margin-right: 10px;
+  margin-bottom: 10px;
   border-radius: 4px;
 `;

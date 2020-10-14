@@ -8,9 +8,9 @@ export const Container = styled.View`
 `;
 
 export const TextNoProducts = styled.Text`
-  font-family: raleway;
+  font-family: raleway-bold;
   font-size: 25px;
   text-align: center;
   margin: 0 auto;
-  width: 80%;
+  width: 90%;
 `;

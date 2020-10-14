@@ -9,6 +9,7 @@ import Background from '~/components/Backgrounds/Background';
 import FavoriteProduct from '~/components/HeartIcon';
 import { RequestFavoriteItems } from '~/store/modules/user/actions';
 import api from '~/services/api';
+import CurrencyConverting from '~/utils/CurrencyConvert';
 
 import {
   Container,
@@ -114,12 +115,7 @@ function ProductPage({ navigation, isFocused }) {
 
               <FeaturesView>
                 <Details>
-                  <PriceText>
-                    {product.price.toLocaleString('pt-BR', {
-                      style: 'currency',
-                      currency: 'BRL',
-                    })}
-                  </PriceText>
+                  <PriceText>{CurrencyConverting(product.price)}</PriceText>
                   <DetailsTitle>Quantidade</DetailsTitle>
                   <NumericInput
                     onChange={(value) => setQuantity(value)}

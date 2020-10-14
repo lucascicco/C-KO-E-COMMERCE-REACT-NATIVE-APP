@@ -40,7 +40,6 @@ export default function PersonalForm({ onClickSubmit, personal }) {
   );
 
   const handleSubmit = () => {
-    console.log(Profession);
     onClickSubmit({
       birthday: Birthday,
       gender: Gender,
@@ -63,6 +62,7 @@ export default function PersonalForm({ onClickSubmit, personal }) {
 
         <Picker
           label="Selecione o gênero"
+          labelAndroid="Gênero"
           value="Gênero"
           style={{ width: '40%' }}
           text={LabelGender}
@@ -106,6 +106,7 @@ export default function PersonalForm({ onClickSubmit, personal }) {
       <MultiInput>
         <Picker
           label="Selecione a profissão"
+          labelAndroid="Selecione a profissão"
           value="Profissão"
           style={{ width: '100%' }}
           text={LabelProfession}

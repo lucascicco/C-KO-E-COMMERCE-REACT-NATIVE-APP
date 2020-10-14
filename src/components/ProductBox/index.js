@@ -1,6 +1,7 @@
 import React from 'react';
 import { StyleSheet } from 'react-native';
 import PropTypes from 'prop-types';
+import CurrencyConverting from '~/utils/CurrencyConvert';
 
 import {
   Container,
@@ -13,10 +14,7 @@ import {
 export default function ProductBox({ item, navigation }) {
   const { id, url, product_name, price } = item;
 
-  const price_product = price.toLocaleString('pt-BR', {
-    style: 'currency',
-    currency: 'BRL',
-  });
+  const price_product = CurrencyConverting(price);
 
   return (
     <Container

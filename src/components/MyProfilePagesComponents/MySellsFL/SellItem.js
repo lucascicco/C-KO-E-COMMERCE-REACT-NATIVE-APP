@@ -3,6 +3,7 @@ import { format } from 'date-fns';
 import PropTypes from 'prop-types';
 import Modal from 'react-native-modal';
 import ModalInfo from '../ModalContact';
+import CurrencyConverting from '~/utils/CurrencyConvert';
 
 import {
   Item_View,
@@ -46,10 +47,7 @@ export default function Flatlist_item({ item }) {
   const paymentForm =
     payment_form === 'cash' ? 'Dinheiro' : 'Cartão de crédito';
 
-  const price_product = total_price.toLocaleString('pt-BR', {
-    style: 'currency',
-    currency: 'BRL',
-  });
+  const price_product = CurrencyConverting(total_price);
 
   return (
     <Item_View>

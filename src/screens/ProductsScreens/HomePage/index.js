@@ -45,9 +45,11 @@ function HomePage({ navigation, isFocused }) {
   const products = useSelector((state) => state.products.products);
 
   const filter = useSelector((state) => state.products.filters.filter);
+
   const categoryIdSelected = useSelector(
     (state) => state.products.filters.categorySelectedId
   );
+
   const search = useSelector((state) => state.products.filters.searchText);
 
   const [visible, setVisibility] = useState(false);
@@ -61,10 +63,10 @@ function HomePage({ navigation, isFocused }) {
   const HandleFilterSubmit = () => {
     setVisibility(!visible);
 
-    if (
-      (categoryIdSelected !== 0 || categoryIdSelected !== undefined) &&
-      categorySelected !== null
-    ) {
+    console.log(categoryIdSelected);
+    console.log(categoryIdSelected !== 0);
+
+    if (categoryIdSelected !== 0) {
       dispatch(addFilter(categorySelected));
 
       const ProductsByCategory = products.filter((product) => {

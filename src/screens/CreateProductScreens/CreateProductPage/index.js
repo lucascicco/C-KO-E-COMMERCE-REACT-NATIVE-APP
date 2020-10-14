@@ -193,6 +193,7 @@ function CreateProductPage({ isFocused, navigation }) {
 
 CreateProductPage.navigationOptions = () => ({
   title: 'Anuncie seu produto',
+  headerTitleStyle: { alignSelf: 'center' },
 });
 
 CreateProductPage.propTypes = {
