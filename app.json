@@ -4,7 +4,7 @@
     "slug": "C-KO",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/icon.png",
+    "icon": "./src/assets/Cko_logo.png",
     "splash": {
       "image": "./src/assets/Cko_logo.png",
       "resizeMode": "contain",
