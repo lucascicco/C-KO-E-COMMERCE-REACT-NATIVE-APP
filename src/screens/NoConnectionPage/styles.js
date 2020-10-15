@@ -26,12 +26,6 @@ export const LoadingView = styled.View`
   width: 100px;
 `;
 
-export const ImageView = styled.View`
-  height: 100px;
-  flex-direction: row;
-  align-items: center;
-  justify-content: center;
-`;
 export const WarningText = styled.Text`
   font-size: 65px;
   color: black;

@@ -1558,6 +1558,11 @@
   resolved "https://registry.yarnpkg.com/@react-native-community/masked-view/-/masked-view-0.1.10.tgz#5dda643e19e587793bc2034dd9bf7398ad43d401"
   integrity sha512-rk4sWFsmtOw8oyx8SD3KSvawwaK7gRBSEIy2TAwURyGt+3TizssXP1r8nx3zY+R7v2vYYHXZ+k2/GULAT/bcaQ==
 
+"@react-native-community/netinfo@5.9.2":
+  version "5.9.2"
+  resolved "https://registry.yarnpkg.com/@react-native-community/netinfo/-/netinfo-5.9.2.tgz#0e9df9717f292cd54fa9de322205b6263a1cb8e2"
+  integrity sha512-YPN6Qi9Sf64GlE3muLi4u4p4LaFP/65PTS0xssiGEaBAwSmZoUhzihhW1AptNe66ZQK9PxXfKIJDiLnYveK1aw==
+
 "@react-native-community/picker@1.6.0":
   version "1.6.0"
   resolved "https://registry.yarnpkg.com/@react-native-community/picker/-/picker-1.6.0.tgz#ddb2b04ca251b79980e3052ece4e685b7abf0444"
@@ -6225,11 +6230,6 @@ mkdirp@^0.5.1:
   dependencies:
     minimist "^1.2.5"
 
-moment@^2.22.1:
-  version "2.27.0"
-  resolved "https://registry.yarnpkg.com/moment/-/moment-2.27.0.tgz#8bff4e3e26a236220dfe3e36de756b6ebaa0105d"
-  integrity sha512-al0MUK7cpIcglMv3YF13qSgdAIqxHTO7brRtaz3DlSULbqfazqkc5kEjNrLDOM7fsjshoFIihnU8snrP7zUvhQ==
-
 ms@2.0.0:
   version "2.0.0"
   resolved "https://registry.yarnpkg.com/ms/-/ms-2.0.0.tgz#5608aeadfc00be6c2901df5f9861788de0d597c8"
@@ -7057,12 +7057,10 @@ react-native-credit-card-input-ecotrade@^1.0.4:
     prop-types "^15.6.0"
     react-native-flip-card "^3.4.1"
 
-react-native-date-picker@^3.2.0:
-  version "3.2.0"
-  resolved "https://registry.yarnpkg.com/react-native-date-picker/-/react-native-date-picker-3.2.0.tgz#756364e95ed3c355d5b519a674c364f3c1544a8a"
-  integrity sha512-LFr6IDSqpIXig4ePsqZorZ4sjsSXwjI+L9wZ4iDnmLiq2HuWvFIE1YDASd1ffsVUITzo8HUjdmfaBkZyWGfchw==
-  dependencies:
-    moment "^2.22.1"
+react-native-date-picker@^3.2.4:
+  version "3.2.4"
+  resolved "https://registry.yarnpkg.com/react-native-date-picker/-/react-native-date-picker-3.2.4.tgz#59668e84c2477479f1794d9412280344feb4b1f3"
+  integrity sha512-2Krw7ul92D2lEKEK6hEXR71Gx/92Itct5yrHu9+0tUanja+h1Va+9xH1sA/530AD20YMDhhU8JDIjAdsXipN5A==
 
 react-native-flip-card@^3.4.1, react-native-flip-card@^3.5.6:
   version "3.5.6"

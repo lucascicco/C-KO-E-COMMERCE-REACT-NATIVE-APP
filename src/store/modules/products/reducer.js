@@ -3,7 +3,7 @@ import produce from 'immer';
 const INITIAL_STATE = {
   products: [],
   filters: {
-    categorySelectedId: '',
+    categorySelectedId: 0,
     filter: '',
     searchText: '',
   },
@@ -17,8 +17,7 @@ export default function products(state = INITIAL_STATE, action) {
         break;
       }
       case '@auth/SIGN_OUT': {
-        draft.products = [];
-        break;
+        return INITIAL_STATE;
       }
       case '@product/ADD_CATEGORY_SELECTED': {
         draft.filters.categorySelectedId = action.payload.categorySelected;

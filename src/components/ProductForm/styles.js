@@ -3,13 +3,6 @@ import styled from 'styled-components/native';
 import Input from '../TextInput';
 import Button from '../ButtonType1';
 
-export const Container = styled.View`
-  flex: 1;
-  align-items: center;
-  padding: 30px 15px;
-  margin-top: 10px;
-`;
-
 export const ContainerImage = styled.View`
   flex: 1;
   justify-content: center;
@@ -19,7 +12,6 @@ export const ContainerImage = styled.View`
 `;
 
 export const Form = styled.View`
-  margin-top: 10px;
   align-self: stretch;
 `;
 

@@ -1,9 +1,7 @@
 /* eslint-disable prettier/prettier */
 import React, { useState, useRef } from 'react';
-import { Platform } from 'react-native';
 import PropTypes from 'prop-types';
 import MaskedInput from '../TextInputMasked';
-import { onChange_onlyNumber } from '~/utils/RestrictInputs';
 
 import {
   Container,
@@ -15,11 +13,6 @@ import {
 } from './styles';
 
 export default function ProductForm({ onClickSubmit, productData }) {
-  const typeOfPlatform = Platform.OS === 'ios';
-  const typeOfkeyboardType = typeOfPlatform
-    ? 'numbers-and-punctuation'
-    : 'numeric';
-
   const QuantityRef = useRef();
   let moneyField;
   const DescriptionRef = useRef();
@@ -30,10 +23,12 @@ export default function ProductForm({ onClickSubmit, productData }) {
   const [Price, setPrice] = useState(productData.price);
 
   const HandleSubmit = () => {
+    const price = Price === productData.price ? productData.price : moneyField.getRawValue()
+
     onClickSubmit({
       quantity: Quantity,
       description: Description,
-      price: moneyField.getRawValue(),
+      price,
     });
   };
 
@@ -74,13 +69,13 @@ export default function ProductForm({ onClickSubmit, productData }) {
           <FormInput
             placeholder="Quantidade"
             maxLength={3}
-            keyboardType={typeOfkeyboardType}
+            keyboardType="number-pad"
             returnKeyType="next"
             style={{ width: '50%' }}
             blurOnSubmit={false}
             value={Quantity}
+            onChangeText={(number) => setQuantity(number)}
             textStyle={{ fontFamily: Quantity ? null : 'raleway' }}
-            onChangeText={(number) => onChange_onlyNumber(number, setQuantity)}
             ref={QuantityRef}
           />
         </MultiInput>

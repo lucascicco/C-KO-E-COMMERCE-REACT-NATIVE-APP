@@ -38,7 +38,7 @@ export default function DescriptionFormScreen({ onClickSubmit, positionY }) {
 const styles = StyleSheet.create({
   View: {
     flex: 1,
-    paddingVertical: 30,
+    paddingVertical: 10,
     paddingHorizontal: 15,
     marginTop: 10,
   },

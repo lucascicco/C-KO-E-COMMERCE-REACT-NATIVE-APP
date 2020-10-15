@@ -63,10 +63,10 @@ function HomePage({ navigation, isFocused }) {
   const HandleFilterSubmit = () => {
     setVisibility(!visible);
 
-    console.log(categoryIdSelected);
-    console.log(categoryIdSelected !== 0);
-
-    if (categoryIdSelected !== 0) {
+    if (
+      categoryIdSelected !== 0 &&
+      (categorySelected !== null || categorySelected !== undefined)
+    ) {
       dispatch(addFilter(categorySelected));
 
       const ProductsByCategory = products.filter((product) => {

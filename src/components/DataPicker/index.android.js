@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import DateTimePicker from '@react-native-community/datetimepicker';
+import DatePicker from '@react-native-community/datetimepicker';
 import { format } from 'date-fns';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import PropTypes from 'prop-types';
@@ -24,7 +24,7 @@ export default function DateInput({ date, onChange }) {
       </DateButton>
 
       {showDatePicker && (
-        <DateTimePicker
+        <DatePicker
           value={date}
           onChange={(event, dateValue) => {
             onChange(event, dateValue); // I need to fix this problem yet.
