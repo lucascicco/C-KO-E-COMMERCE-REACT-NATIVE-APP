@@ -4,14 +4,14 @@ import { MaterialIcons } from '@expo/vector-icons';
 
 import { Container, TextInputType1 } from './styles';
 
-function Input({ style, icon, textStyle, ...rest }, ref) {
+const Input = forwardRef(({ style, icon, textStyle, ...rest }, ref) => {
   return (
     <Container style={style}>
       {icon && <MaterialIcons name={icon} size={23} color="#fff" />}
       <TextInputType1 {...rest} ref={ref} style={textStyle} />
     </Container>
   );
-}
+});
 
 Input.propTypes = {
   icon: PropTypes.string,
@@ -27,4 +27,4 @@ Input.defaultProps = {
   textStyle: {},
 };
 
-export default forwardRef(Input);
+export default Input;

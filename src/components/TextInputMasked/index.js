@@ -6,22 +6,24 @@ import PropTypes from 'prop-types';
 
 import { Container } from './styles';
 
-function Input({ type, options, style, maskedStyle, icon, ...rest }, ref) {
-  return (
-    <Container style={style}>
-      {icon && <MaterialIcons name={icon} size={23} color="#fff" />}
+const Input = forwardRef(
+  ({ type, options, style, maskedStyle, icon, ...rest }, ref) => {
+    return (
+      <Container style={style}>
+        {icon && <MaterialIcons name={icon} size={23} color="#fff" />}
 
-      <TextInputMask
-        {...rest}
-        ref={ref}
-        style={[styles.TextInput, maskedStyle]}
-        placeholderTextColor="#FFF"
-        type={type}
-        options={options}
-      />
-    </Container>
-  );
-}
+        <TextInputMask
+          {...rest}
+          ref={ref}
+          style={[styles.TextInput, maskedStyle]}
+          placeholderTextColor="#FFF"
+          type={type}
+          options={options}
+        />
+      </Container>
+    );
+  }
+);
 
 const styles = StyleSheet.create({
   TextInput: {
@@ -48,4 +50,4 @@ Input.defaultProps = {
   options: null,
 };
 
-export default forwardRef(Input);
+export default Input;

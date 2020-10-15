@@ -91,7 +91,7 @@ MyAccountOptions.navigationOptions = () => ({
 });
 
 MyAccountOptions.propTypes = {
-  navigation: PropTypes.shape({
-    navigate: PropTypes.func.isRequired,
-  }).isRequired,
+  navigation: PropTypes.objectOf(
+    PropTypes.oneOfType([PropTypes.func, PropTypes.object])
+  ).isRequired,
 };

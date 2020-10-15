@@ -10,7 +10,7 @@ export default function FlatlistProducts({ data }) {
     <FlatList_View>
       <FlatList
         data={data}
-        keyExtractor={(item) => item.id}
+        keyExtractor={(item) => item.id.toString()}
         numColumns={1}
         renderItem={({ item }) => {
           return <FlatListItem item={item} />;
@@ -48,9 +48,9 @@ FlatlistProducts.propTypes = {
       purchase_code: PropTypes.string,
       purchase_location: PropTypes.number,
       purchase_product: PropTypes.shape({
-        category: PropTypes.string,
+        category: PropTypes.number,
         path: PropTypes.string,
-        price: PropTypes.string,
+        price: PropTypes.number,
         product_name: PropTypes.string,
         url: PropTypes.string,
       }),

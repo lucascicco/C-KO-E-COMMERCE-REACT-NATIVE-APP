@@ -169,5 +169,9 @@ LocationPage.propTypes = {
     street: PropTypes.string.isRequired,
     street_number: PropTypes.string.isRequired,
     postcode: PropTypes.string.isRequired,
-  }).isRequired,
+  }),
+};
+
+LocationPage.defaultProps = {
+  location: false,
 };

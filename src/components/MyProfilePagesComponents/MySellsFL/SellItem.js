@@ -164,7 +164,7 @@ Flatlist_item.propTypes = {
     purchase_code: PropTypes.string,
     purchase_location: PropTypes.number,
     purchase_product: PropTypes.shape({
-      category: PropTypes.string,
+      category: PropTypes.number,
       path: PropTypes.string,
       price: PropTypes.number,
       product_name: PropTypes.string,

@@ -166,7 +166,7 @@ Flatlist_item.propTypes = {
   title: PropTypes.string.isRequired,
   selldone: PropTypes.number.isRequired,
   status: PropTypes.string.isRequired,
-  category: PropTypes.string.isRequired,
+  category: PropTypes.number.isRequired,
   price: PropTypes.number.isRequired,
   quantity: PropTypes.number.isRequired,
   description: PropTypes.string.isRequired,

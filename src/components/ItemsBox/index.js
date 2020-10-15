@@ -29,5 +29,7 @@ ItemsBox.propTypes = {
       price: PropTypes.number.isRequired,
     })
   ).isRequired,
-  navigation: PropTypes.func.isRequired,
+  navigation: PropTypes.objectOf(
+    PropTypes.oneOfType([PropTypes.func, PropTypes.object])
+  ).isRequired,
 };

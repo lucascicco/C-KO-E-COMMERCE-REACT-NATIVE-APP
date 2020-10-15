@@ -10,7 +10,7 @@ export default function MyCartFlatList({ data, navigation, onDeleteProduct }) {
     <Cart_FlatListView>
       <FlatList
         data={data}
-        keyExtractor={(item) => item.id}
+        keyExtractor={(item) => item.id.toString()}
         numColumns={1}
         renderItem={({ item }) => {
           return (
@@ -31,34 +31,38 @@ export default function MyCartFlatList({ data, navigation, onDeleteProduct }) {
 }
 
 MyCartFlatList.propTypes = {
-  data: PropTypes.shape({
-    status_id: PropTypes.number,
-    purchasable: PropTypes.bool,
-    url: PropTypes.string,
-    id: PropTypes.number,
-    product_name: PropTypes.string,
-    category: PropTypes.number,
-    price: PropTypes.string,
-    quantity: PropTypes.number,
-    description: PropTypes.string,
-    status: PropTypes.string,
-    paused_at: PropTypes.oneOfType([
-      PropTypes.instanceOf(null),
-      PropTypes.string,
-    ]),
-    name: PropTypes.string,
-    path: PropTypes.string,
-    createdAt: PropTypes.oneOfType([
-      PropTypes.instanceOf(null),
-      PropTypes.string,
-    ]),
-    updatedAt: PropTypes.oneOfType([
-      PropTypes.instanceOf(null),
-      PropTypes.string,
-    ]),
-    seller: PropTypes.number,
-    features: PropTypes.number,
-  }).isRequired,
-  navigation: PropTypes.func.isRequired,
+  data: PropTypes.arrayOf(
+    PropTypes.shape({
+      status_id: PropTypes.number,
+      purchasable: PropTypes.bool,
+      url: PropTypes.string,
+      id: PropTypes.number,
+      product_name: PropTypes.string,
+      category: PropTypes.number,
+      price: PropTypes.number,
+      quantity: PropTypes.number,
+      description: PropTypes.string,
+      status: PropTypes.string,
+      paused_at: PropTypes.oneOfType([
+        PropTypes.instanceOf(null),
+        PropTypes.string,
+      ]),
+      name: PropTypes.string,
+      path: PropTypes.string,
+      createdAt: PropTypes.oneOfType([
+        PropTypes.instanceOf(null),
+        PropTypes.string,
+      ]),
+      updatedAt: PropTypes.oneOfType([
+        PropTypes.instanceOf(null),
+        PropTypes.string,
+      ]),
+      seller: PropTypes.number,
+      features: PropTypes.number,
+    }).isRequired
+  ).isRequired,
+  navigation: PropTypes.objectOf(
+    PropTypes.oneOfType([PropTypes.func, PropTypes.object])
+  ).isRequired,
   onDeleteProduct: PropTypes.func.isRequired,
 };

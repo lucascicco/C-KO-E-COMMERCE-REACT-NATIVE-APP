@@ -46,5 +46,7 @@ ChangePersonalPage.navigationOptions = () => ({
 });
 
 ChangePersonalPage.propTypes = {
-  navigation: PropTypes.func.isRequired,
+  navigation: PropTypes.objectOf(
+    PropTypes.oneOfType([PropTypes.func, PropTypes.object])
+  ).isRequired,
 };

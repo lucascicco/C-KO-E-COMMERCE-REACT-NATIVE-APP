@@ -223,5 +223,7 @@ ChangeAddress.navigationOptions = () => ({
 });
 
 ChangeAddress.propTypes = {
-  navigation: PropTypes.func.isRequired,
+  navigation: PropTypes.objectOf(
+    PropTypes.oneOfType([PropTypes.func, PropTypes.object]).isRequired
+  ).isRequired,
 };

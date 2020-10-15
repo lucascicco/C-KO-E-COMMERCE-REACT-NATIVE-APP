@@ -10,7 +10,7 @@ export default function MyProductList({ data, navigation }) {
     <Cart_FlatListView>
       <FlatList
         data={data}
-        keyExtractor={(item) => item.product.id}
+        keyExtractor={(item) => item.product.id.toString()}
         numColumns={1}
         renderItem={({ item }) => {
           return (
@@ -44,7 +44,7 @@ MyProductList.propTypes = {
         id: PropTypes.number,
         product_name: PropTypes.string,
         category: PropTypes.number,
-        price: PropTypes.string,
+        price: PropTypes.number,
         quantity: PropTypes.number,
         description: PropTypes.string,
         status: PropTypes.string,
