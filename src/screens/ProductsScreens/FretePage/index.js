@@ -73,23 +73,15 @@ export default function ChangeAddress({ navigation }) {
   };
 
   const handleSubmit = async (LocationData) => {
-    if (locationVerifier(LocationData)) {
+    const testing = await locationVerifier(LocationData);
+
+    if (testing) {
       Alert.alert('Erro', 'Preencha corretamente os campos de localização.');
     } else {
-      try {
-        await api.get('checkingCep', {
-          params: {
-            postcode: LocationData.postcode,
-          },
-        });
+      Keyboard.dismiss();
 
-        Keyboard.dismiss();
-
-        setLocationState(LocationData);
-        setEnable(false);
-      } catch (e) {
-        Alert.alert('Cep inválido', 'O cep informado é inválido.');
-      }
+      setLocationState(LocationData);
+      setEnable(false);
     }
   };
 

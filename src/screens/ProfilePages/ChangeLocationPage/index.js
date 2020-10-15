@@ -16,8 +16,10 @@ export default function ChangeLocationPage({ navigation }) {
   const dispatch = useDispatch();
   const location = useSelector((state) => state.user.profile.location);
 
-  const handleSubmit = (LocationData) => {
-    if (locationVerifier(LocationData)) {
+  const handleSubmit = async (LocationData) => {
+    const testing = await locationVerifier(LocationData);
+
+    if (testing) {
       Alert.alert('Erro', 'Preencha corretamente os campos de localização.');
     } else if (location === null) {
       dispatch(createLocationRequest(LocationData));

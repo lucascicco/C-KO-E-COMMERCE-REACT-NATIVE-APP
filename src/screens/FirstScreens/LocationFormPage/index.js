@@ -44,8 +44,10 @@ export default function LocationPage({ navigation }) {
     };
   }, []);
 
-  const handleSubmit = (Location) => {
-    if (locationVerifier(Location)) {
+  const handleSubmit = async (Location) => {
+    const testing = await locationVerifier(Location);
+
+    if (testing) {
       Alert.alert('Erro', 'Preencha corretamente os campos de localização.');
     } else {
       dispatch(createLocationRequest(Location));

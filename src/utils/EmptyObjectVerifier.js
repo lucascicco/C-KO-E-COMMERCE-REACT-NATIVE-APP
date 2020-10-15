@@ -4,8 +4,6 @@ export const locationVerifier = async (obj) => {
   const emptyValue = Object.values(obj).some((element) => element === '');
   const nullValue = Object.values(obj).some((element) => element === null);
 
-  const postcodeValue = obj.postcode.length < 7;
-
   const response_cep = await api.get('checkingCep', {
     params: {
       postcode: obj.postcode,
@@ -14,16 +12,11 @@ export const locationVerifier = async (obj) => {
 
   const postcodeValidation = !response_cep.data;
 
-  const addressValue = obj.street.length < 10;
+  const addressValue = obj.street.length < 7;
   const stateValue = obj.state === 'Estado' || obj.state === undefined;
 
   return (
-    emptyValue ||
-    nullValue ||
-    postcodeValue ||
-    addressValue ||
-    stateValue ||
-    postcodeValidation
+    emptyValue || nullValue || addressValue || stateValue || postcodeValidation
   );
 };
 
