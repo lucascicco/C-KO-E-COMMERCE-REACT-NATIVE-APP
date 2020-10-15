@@ -32,7 +32,7 @@ export default function PurchasePage({ navigation }) {
   const [CardView, setCardView] = useState(false);
   const [loading, setLoading] = useState(false);
   const [visible, setVisible] = useState(false);
-  const [purchase, setPurchase] = useState([]);
+  const [purchase, setPurchase] = useState(null);
 
   const OpacityViewSec = new Animated.Value(1);
 

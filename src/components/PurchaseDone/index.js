@@ -101,24 +101,28 @@ export default function PurchaseDone({ continueBuying, item }) {
 }
 
 PurchaseDone.propTypes = {
-  item: PropTypes.oneOfType([
-    PropTypes.shape({
-      purchase: PropTypes.shape({
-        purchase_code: PropTypes.string.isRequired,
-        createdAt: PropTypes.oneOfType([
-          PropTypes.instanceOf(Date),
-          PropTypes.string,
-        ]),
-        total_price: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-        deliver_date: PropTypes.instanceOf(Date).isRequired,
-      }).isRequired,
-      seller_info: PropTypes.shape({
-        name: PropTypes.string.isRequired,
-        cellphone: PropTypes.string.isRequired,
-        email: PropTypes.string.isRequired,
-      }).isRequired,
-    }),
-    PropTypes.array,
-  ]).isRequired,
+  item: PropTypes.shape({
+    purchase: PropTypes.shape({
+      purchase_code: PropTypes.string.isRequired,
+      createdAt: PropTypes.oneOfType([
+        PropTypes.instanceOf(Date),
+        PropTypes.string,
+      ]),
+      total_price: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+      deliver_date: PropTypes.oneOfType([
+        PropTypes.instanceOf(Date),
+        PropTypes.string,
+      ]),
+    }).isRequired,
+    seller_info: PropTypes.shape({
+      name: PropTypes.string.isRequired,
+      cellphone: PropTypes.string.isRequired,
+      email: PropTypes.string.isRequired,
+    }).isRequired,
+  }),
   continueBuying: PropTypes.func.isRequired,
+};
+
+PurchaseDone.defaultProps = {
+  item: {},
 };

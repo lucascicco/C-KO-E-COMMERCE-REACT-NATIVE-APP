@@ -13,18 +13,11 @@ export default function ProductSendingForm({ navigation }) {
   const [enable, setEnable] = useState(true);
   const product = navigation.getParam('product');
 
-  const handleSubmit = async ({
-    format,
-    width,
-    height,
-    length,
-    weight,
-    diameter,
-  }) => {
+  const handleSubmit = async (measures) => {
     setLoading(true);
 
     try {
-      if (!validationDate(format, width, height, length, weight, diameter)) {
+      if (!validationDate(measures)) {
         Alert.alert(
           'Erro na validação',
           'Respeite os limites das dimensões proposto. Dê uma olhada na tabela novamente.'
@@ -47,14 +40,7 @@ export default function ProductSendingForm({ navigation }) {
         formData.append('description', product.description);
         formData.append('price', product.price);
 
-        const response_one = await api.post('features', {
-          format,
-          width,
-          height,
-          length,
-          weight,
-          diameter,
-        });
+        const response_one = await api.post('features', measures);
 
         formData.append('features', response_one.data.id);
 
@@ -71,7 +57,7 @@ export default function ProductSendingForm({ navigation }) {
     } catch (e) {
       Alert.alert(
         'Erro ao criar produto',
-        'Verique se os campos foram preenchidos corretamente'
+        'Verifique se os campos foram preenchidos corretamente'
       );
     }
 

@@ -27,7 +27,7 @@ export default function DescriptionFormScreen({ onClickSubmit, positionY }) {
         maxLength={350}
         maxHeight={150}
         style={styles.DescriptionForm}
-        placeholderTextColor="FFF"
+        placeholderTextColor="#fff"
       />
 
       <SubmitButton style={{ background: '#283593' }} onPress={HandleSubmit}>

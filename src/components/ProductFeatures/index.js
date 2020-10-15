@@ -47,14 +47,20 @@ export default function ProductsFeature({ onClickSubmit, loading, enable }) {
   const [enableDiameter, setEnableDiameter] = useState(true);
 
   const handleSubmit = () => {
-    onClickSubmit({
+    const obj = {
       format,
       width,
       height,
       length,
       weight,
       diameter,
+    };
+
+    Object.keys(obj).forEach((key) => {
+      obj[key] = Number(obj[key]);
     });
+
+    onClickSubmit(obj);
   };
 
   const handlePickingFormat = (itemValue) => {
@@ -128,7 +134,7 @@ export default function ProductsFeature({ onClickSubmit, loading, enable }) {
             returnKeyType="next"
             style={{ width: '28%' }}
             blurOnSubmit={false}
-            value={height}
+            value={height === 0 ? '' : height}
             onChangeText={(text) => onChange_onlyNumber(text, setHeight)}
             textStyle={{ fontFamily: height ? null : 'raleway' }}
             ref={HeightRef}
@@ -145,7 +151,7 @@ export default function ProductsFeature({ onClickSubmit, loading, enable }) {
             returnKeyType="next"
             style={{ width: '30%' }}
             blurOnSubmit={false}
-            value={width}
+            value={width === 0 ? '' : width}
             onChangeText={(text) => onChange_onlyNumber(text, setWidth)}
             textStyle={{ fontFamily: width ? null : 'raleway' }}
             ref={WidthRef}
@@ -175,7 +181,7 @@ export default function ProductsFeature({ onClickSubmit, loading, enable }) {
             returnKeyType="next"
             style={{ width: '30%' }}
             blurOnSubmit={false}
-            value={diameter}
+            value={diameter === 0 ? '' : diameter}
             onChangeText={(text) => onChange_onlyNumber(text, setDiameter)}
             textStyle={{ fontFamily: diameter ? null : 'raleway' }}
             ref={DiameterRef}

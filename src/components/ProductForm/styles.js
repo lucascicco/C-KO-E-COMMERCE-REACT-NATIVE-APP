@@ -50,19 +50,5 @@ export const Strong = styled.Text`
   font-weight: bold;
 `;
 
-export const DescriptionForm = styled.TextInput.attrs({
-  placeholderTextColor: '#FFF',
-})`
-  font-size: 20px;
-  background: #546e7a;
-  border-radius: 4px;
-  padding: 10px;
-  color: #fff;
-  margin-bottom: 10px;
-  font-family: raleway;
-  height: 150px;
-  width: 100%;
-`;
-
 export const IMAGE_HEIGHT = 200;
 export const IMAGE_HEIGHT_SMALL = 100;

@@ -174,6 +174,9 @@ Flatlist_item.propTypes = {
     navigate: PropTypes.func.isRequired,
   }).isRequired,
   url: PropTypes.string.isRequired,
-  pausedAt: PropTypes.oneOfType([PropTypes.oneOf([null]), PropTypes.string])
-    .isRequired,
+  pausedAt: PropTypes.oneOfType([PropTypes.oneOf([null]), PropTypes.string]),
+};
+
+Flatlist_item.defaultProps = {
+  pausedAt: null,
 };
