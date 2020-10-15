@@ -176,5 +176,8 @@ PurchasePage.navigationOptions = () => ({
 });
 
 PurchasePage.propTypes = {
-  navigation: PropTypes.func.isRequired,
+  navigation: PropTypes.shape({
+    navigate: PropTypes.func.isRequired,
+    getParam: PropTypes.func.isRequired,
+  }).isRequired,
 };

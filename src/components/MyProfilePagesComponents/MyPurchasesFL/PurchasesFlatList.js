@@ -25,15 +25,15 @@ FlatlistProducts.propTypes = {
     PropTypes.shape({
       buyer: PropTypes.number,
       canceled_at: PropTypes.oneOfType([
-        PropTypes.instanceOf(null),
+        PropTypes.oneOf([null]),
         PropTypes.string,
       ]),
       createdAt: PropTypes.oneOfType([
-        PropTypes.instanceOf(null),
+        PropTypes.oneOf([null]),
         PropTypes.string,
       ]),
-      frete_price: PropTypes.string,
-      id: PropTypes.string,
+      frete_price: PropTypes.number,
+      id: PropTypes.number,
       location: PropTypes.shape({
         city: PropTypes.string,
         country: PropTypes.string,
@@ -56,20 +56,19 @@ FlatlistProducts.propTypes = {
       }),
       purchase_quantity: PropTypes.number,
       seller: PropTypes.number,
-      total_price: PropTypes.string,
+      total_price: PropTypes.number,
       updatedAt: PropTypes.oneOfType([
-        PropTypes.instanceOf(null),
+        PropTypes.oneOf([null]),
         PropTypes.string,
       ]),
       user_seller: PropTypes.shape({
-        personal_info: PropTypes.oneOfType([
-          PropTypes.instanceOf(null),
-          PropTypes.number,
-        ]),
+        personal_info: PropTypes.number,
         name: PropTypes.string,
         email: PropTypes.string,
       }),
     })
   ).isRequired,
-  navigation: PropTypes.func.isRequired,
+  navigation: PropTypes.objectOf(
+    PropTypes.oneOfType([PropTypes.func, PropTypes.object])
+  ).isRequired,
 };

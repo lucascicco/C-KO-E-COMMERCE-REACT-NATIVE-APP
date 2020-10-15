@@ -44,17 +44,17 @@ MyCartFlatList.propTypes = {
       description: PropTypes.string,
       status: PropTypes.string,
       paused_at: PropTypes.oneOfType([
-        PropTypes.instanceOf(null),
+        PropTypes.oneOf([null]),
         PropTypes.string,
       ]),
       name: PropTypes.string,
       path: PropTypes.string,
       createdAt: PropTypes.oneOfType([
-        PropTypes.instanceOf(null),
+        PropTypes.oneOf([null]),
         PropTypes.string,
       ]),
       updatedAt: PropTypes.oneOfType([
-        PropTypes.instanceOf(null),
+        PropTypes.oneOf([null]),
         PropTypes.string,
       ]),
       seller: PropTypes.number,

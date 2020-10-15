@@ -4,17 +4,18 @@ import { MaterialIcons } from '@expo/vector-icons';
 
 import { Container, TextInputType1 } from './styles';
 
-const Input = forwardRef(({ style, icon, textStyle, ...rest }, ref) => {
+const Input = forwardRef(({ style, icon, textStyle, value, ...rest }, ref) => {
   return (
     <Container style={style}>
       {icon && <MaterialIcons name={icon} size={23} color="#fff" />}
-      <TextInputType1 {...rest} ref={ref} style={textStyle} />
+      <TextInputType1 value={value} {...rest} ref={ref} style={textStyle} />
     </Container>
   );
 });
 
 Input.propTypes = {
   icon: PropTypes.string,
+  value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
   style: PropTypes.oneOfType([PropTypes.object, PropTypes.array]),
   textStyle: PropTypes.objectOf(
     PropTypes.oneOfType([PropTypes.string, PropTypes.number])

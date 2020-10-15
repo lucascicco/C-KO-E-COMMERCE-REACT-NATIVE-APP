@@ -128,5 +128,7 @@ const styles = StyleSheet.create({
 
 ProductForm.propTypes = {
   onClickSubmit: PropTypes.func.isRequired,
-  positionY: PropTypes.number.isRequired,
+  positionY: PropTypes.shape({
+    positionY: PropTypes.number
+  }).isRequired
 };

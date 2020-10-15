@@ -62,7 +62,6 @@ export const DescriptionForm = styled.TextInput.attrs({
   font-family: raleway;
   height: 150px;
   width: 100%;
-  textalignvertical: top;
 `;
 
 export const IMAGE_HEIGHT = 200;

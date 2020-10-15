@@ -41,7 +41,6 @@ export default function PurchaseDone({ continueBuying, item }) {
       <ScrollDetails>
         <Title_View_Row>
           <Purchase_Success>Compra realizada com sucesso!</Purchase_Success>
-
           <Code_View>
             <Code_Bigger>Código do pedido</Code_Bigger>
             <Code_Small>#{purchase.purchase_code}</Code_Small>
@@ -102,18 +101,24 @@ export default function PurchaseDone({ continueBuying, item }) {
 }
 
 PurchaseDone.propTypes = {
-  item: PropTypes.shape({
-    purchase: PropTypes.shape({
-      purchase_code: PropTypes.string.isRequired,
-      createdAt: PropTypes.instanceOf(Date).isRequired,
-      total_price: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-      deliver_date: PropTypes.instanceOf(Date).isRequired,
-    }).isRequired,
-    seller_info: PropTypes.shape({
-      name: PropTypes.string.isRequired,
-      cellphone: PropTypes.string.isRequired,
-      email: PropTypes.string.isRequired,
-    }).isRequired,
-  }).isRequired,
+  item: PropTypes.oneOfType([
+    PropTypes.shape({
+      purchase: PropTypes.shape({
+        purchase_code: PropTypes.string.isRequired,
+        createdAt: PropTypes.oneOfType([
+          PropTypes.instanceOf(Date),
+          PropTypes.string,
+        ]),
+        total_price: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+        deliver_date: PropTypes.instanceOf(Date).isRequired,
+      }).isRequired,
+      seller_info: PropTypes.shape({
+        name: PropTypes.string.isRequired,
+        cellphone: PropTypes.string.isRequired,
+        email: PropTypes.string.isRequired,
+      }).isRequired,
+    }),
+    PropTypes.array,
+  ]).isRequired,
   continueBuying: PropTypes.func.isRequired,
 };

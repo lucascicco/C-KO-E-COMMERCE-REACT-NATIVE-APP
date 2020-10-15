@@ -84,5 +84,7 @@ const styles = StyleSheet.create({
 
 ImageForm.propTypes = {
   onClickSubmit: PropTypes.func.isRequired,
-  positionY: PropTypes.number.isRequired
+  positionY: PropTypes.shape({
+    positionY: PropTypes.number
+  }).isRequired
 };

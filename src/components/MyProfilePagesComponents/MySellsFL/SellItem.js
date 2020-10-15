@@ -141,15 +141,12 @@ Flatlist_item.propTypes = {
   item: PropTypes.shape({
     buyer: PropTypes.number,
     canceled_at: PropTypes.oneOfType([
-      PropTypes.instanceOf(null),
+      PropTypes.oneOf([null]),
       PropTypes.string,
     ]),
-    createdAt: PropTypes.oneOfType([
-      PropTypes.instanceOf(null),
-      PropTypes.string,
-    ]),
-    frete_price: PropTypes.string,
-    id: PropTypes.string,
+    createdAt: PropTypes.oneOfType([PropTypes.oneOf([null]), PropTypes.string]),
+    frete_price: PropTypes.number,
+    id: PropTypes.number,
     location: PropTypes.shape({
       city: PropTypes.string,
       country: PropTypes.string,
@@ -173,13 +170,10 @@ Flatlist_item.propTypes = {
     purchase_quantity: PropTypes.number,
     seller: PropTypes.number,
     total_price: PropTypes.number,
-    updatedAt: PropTypes.oneOfType([
-      PropTypes.instanceOf(null),
-      PropTypes.string,
-    ]),
+    updatedAt: PropTypes.oneOfType([PropTypes.oneOf([null]), PropTypes.string]),
     user_buyer: PropTypes.shape({
       personal_info: PropTypes.oneOfType([
-        PropTypes.instanceOf(null),
+        PropTypes.oneOf([null]),
         PropTypes.number,
       ]),
       name: PropTypes.string,
