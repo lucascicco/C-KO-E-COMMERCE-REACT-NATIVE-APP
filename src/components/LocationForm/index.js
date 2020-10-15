@@ -173,5 +173,5 @@ LocationPage.propTypes = {
 };
 
 LocationPage.defaultProps = {
-  location: false,
+  location: null,
 };

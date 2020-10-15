@@ -49,25 +49,7 @@ export default function ChangeAddress({ navigation }) {
   const [transitionState, setTransitionState] = useState('FirstPart');
 
   const saveAddressDatabase = async () => {
-    const {
-      country,
-      state,
-      city,
-      neighborhood,
-      street,
-      street_number,
-      postcode,
-    } = locationState;
-
-    const response = await api.post('location_purchase', {
-      country,
-      state,
-      city,
-      neighborhood,
-      street,
-      street_number,
-      postcode,
-    });
+    const response = await api.post('location_purchase', locationState);
 
     setLocationState(response.data);
   };
@@ -85,7 +67,11 @@ export default function ChangeAddress({ navigation }) {
     }
   };
 
-  const GoNextPart = () => {
+  const GoNextPart = async () => {
+    if (location !== locationState) {
+      await saveAddressDatabase();
+    }
+
     LayoutAnimation.configureNext(
       LayoutAnimation.create(
         300,
@@ -105,10 +91,6 @@ export default function ChangeAddress({ navigation }) {
     setLoading(true);
 
     try {
-      if (location !== locationState) {
-        saveAddressDatabase();
-      }
-
       const freteApi = await api.get('frete', {
         params: {
           locationId: locationState.id,
