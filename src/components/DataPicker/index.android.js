@@ -9,7 +9,9 @@ export default function DateInput({ date, onChange }) {
   const [showDatePicker, setShowDatePicker] = useState(false);
 
   const CurrentData = format(new Date(), 'dd/MM/yyyy');
+
   const dateFormatted = format(date, 'dd/MM/yyyy');
+
   const TextOnScreen =
     dateFormatted === CurrentData ? 'Nascimento' : dateFormatted;
   const FontFamilyStyle = dateFormatted === CurrentData ? 'raleway' : 'Roboto';
@@ -27,7 +29,12 @@ export default function DateInput({ date, onChange }) {
         <DatePicker
           value={date}
           onChange={(event, dateValue) => {
-            onChange(event, dateValue); // I need to fix this problem yet.
+            if (event.type === 'dismissed') {
+              setShowDatePicker(false);
+              onChange(event, new Date());
+            } else {
+              onChange(event, dateValue);
+            }
           }}
           maximumDate={new Date()}
           mode="date"

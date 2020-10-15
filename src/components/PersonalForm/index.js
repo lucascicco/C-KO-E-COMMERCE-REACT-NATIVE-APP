@@ -55,7 +55,6 @@ export default function PersonalForm({ onClickSubmit, personal }) {
         <DatePicker
           date={Birthday}
           onChange={(event, date) => {
-            if (date === undefined) setBirthday(new Date());
             setBirthday(date);
           }}
         />
