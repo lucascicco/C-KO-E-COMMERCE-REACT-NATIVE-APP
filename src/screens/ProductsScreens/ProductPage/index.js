@@ -56,7 +56,7 @@ function ProductPage({ navigation, isFocused }) {
       },
     });
 
-    setProduct(response.data);
+    setProduct(response.data.product);
   };
 
   const Navigating = () => {

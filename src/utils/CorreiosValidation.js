@@ -27,5 +27,7 @@ export default ({ format, width, height, length, weight, diameter }) => {
         width <= 60 &&
         weight <= 1
       );
+    default:
+      return false;
   }
 };
