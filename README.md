@@ -17,11 +17,14 @@ The language used on the app is Portuguese.
 ## What I used to develop it ?
 
 Developing this app I used so many new libraries to handle with: credit-card, grabbing the album pictures from the user cellphone, asking for permissions from expo, number input and other libraries useful to style the application.
-I styled the whole project with styled-components which is a handyl library.
+I styled the whole project with styled-components which is a handy library.
 About dealing with storage on front-end, I used: redux, redux-persist redux-saga and others to make the application store some short period informations or some of a bit longer by using the redux-persist with ASYNC STORAGE.
 
 The back-end part is on this repository:
 [BACK-END C-KO E-COMMERCE](https://github.com/lucascicco/POSTGRES-BACK-END-CKO-PROJECT)
+
+The WEB APP is on this repository:
+[FRONT-END WEB C-CKO E-COMMERCE](https://github.com/lucascicco/C-KO-REACT)
 
 Please, check it out. 
 I am open minded about new suggestions.
